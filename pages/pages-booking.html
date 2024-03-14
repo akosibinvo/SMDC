@@ -128,31 +128,8 @@
 
                                     <form action="" class="px-4">
 
-                                        <div class="row mb-3 py-3" style="border-bottom: 1px solid #dee2e6;">
-                                            <div class="form-group col-md-3">
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    Account Type:
-                                                </label>
-                                            </div>
-
-                                            <div class="form-group col-md-3">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                                <label class="form-check-label" for="flexRadioDefault1"> Regular </label>
-                                            </div>
-
-                                            <div class="form-group col-md-3">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                                <label class="form-check-label" for="flexRadioDefault1"> SERP </label>
-                                            </div>
-
-                                            <div class="form-group col-md-3">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                                <label class="form-check-label" for="flexRadioDefault1"> Right to use</label>
-                                            </div>
-                                        </div>
-
                                         <div class="row mb-4">
-                                            <div class="form-group col-md-3">
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">First Name</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="user"></i></span>
@@ -160,7 +137,7 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="form-group col-md-3">
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Middle Name</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="user"></i></span>
@@ -168,7 +145,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group col-md-3">
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Last Name</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="user"></i></i></span>
@@ -176,23 +153,60 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group col-md-3">
+                                            <!-- <div class="form-group col-md-3">
                                                 <label class="form-label">Suffix</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="user"></i></i></span>
                                                     <input class="form-control" type="text" name="suffix" pattern="[A-Za-z\s]+" placeholder="Enter your suffix" required>
                                                 </div>
+                                            </div> -->
+                                            
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label">Date of Birth</label>
+                                                <input class="form-control" type="date" name="birthdate" pattern="[A-Za-z\s]+" placeholder="dd/mm/yyy" required>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label">Place of Birth</label>
+                                                <input class="form-control" type="text" name="birthplace" pattern="[A-Za-z\s]+" placeholder="Enter place of birth" required>
                                             </div>
                                         </div>
-                                        
-                                        <div class="row mb-3">
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label">Birthdate</label>
-                                                <input class="form-control" type="date" name="birthdate" pattern="[A-Za-z\s]+" placeholder="dd/mm/yyy" required>
 
+                                        <div class="row mb-4">
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Tin No: </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="user"></i></span>
+                                                    <input class="form-control" type="text" name="firstname" pattern="[A-Za-z\s]+" placeholder="Enter your TIN number" required>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Gender</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="user"></i></span>
+                                                    <select class="form-select" id="selectGender">
+                                                        <option value="">Select Gender</option>
+                                                        <option value="male">Male</option>
+                                                        <option value="female">Female</option>
+                                                        <option value="other">Other</option>
+                                                    </select>
+                                                </div>
+                                                
                                             </div>
 
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Civil Status</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="user"></i></span>
+                                                    <input class="form-control" type="text" name="firstname" pattern="[A-Za-z\s]+" placeholder="Enter your civil status" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-md-3">
                                                 <label class="form-label">Citizenship</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="home"></i></span>
@@ -203,7 +217,10 @@
                                                     </select>
                                                 </div>
                                             </div>
-
+                                            
+                                        </div>
+                                        
+                                        <div class="row mb-3">
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Email</label>
                                                 <div class="input-group">
@@ -211,9 +228,7 @@
                                                     <input class="form-control" type="email" name="email" pattern="[A-Za-z\s]+" placeholder="Enter your email" required>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row mb-5">
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Phone Number</label>
                                                 <div class="input-group">
@@ -221,7 +236,48 @@
                                                     <input class="form-control" type="text" name="phonenumber" pattern="[A-Za-z\s]+" placeholder="Enter your phone number" required>
                                                 </div>
                                             </div>
+
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label">Passport No:</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="phone"></i></span>
+                                                    <input class="form-control" type="text" name="passportnumber" pattern="[A-Za-z\s]+" placeholder="Enter your passport number" required>
+                                                </div>
+                                            </div>
                                         </div>
+
+                                        <div class="row mb-3">
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label">Present Address</label>
+                                                <textarea class="form-control" id="Address" rows="3"></textarea>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label">Permanent Address</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-5">
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label">Employer Name</label>
+                                                <input class="form-control" type="email" name="email" pattern="[A-Za-z\s]+" placeholder="Enter your employer name" required>
+
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label">Work Address</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                                            </div>
+
+                                        </div>
+
+
+
+
+
+
+
 
                                         <div class="container-fluid mb-4">
                                             <div class="row justify-content-center align-items-center " style="height: 30px; background-color: #0030FF; border-radius: .3em;">
@@ -231,153 +287,57 @@
                                             </div>
                                         </div>
 
-                                        <div class="row mb-4">
+                                        <div class="row mb-5">
                                             <label for="inputPassword" class="col-sm-2 col-form-label">Project Name</label>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <select class="form-select" id="selectProject">
                                                     <option value="">Select Project</option>
                                                     <option value="project1">Project 1</option>
                                                     <option value="project2">Project 2</option>
                                                 </select>
                                             </div>
-                                        </div>
 
-                                        <div class="row mb-4">
-                                            <div class="col-sm-1">
-                                                <label for="inputBuilding1" class="col-form-label">Building</label>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <select class="form-select" id="selectBuilding">
-                                                    <option value="">Select Building</option>
-                                                    <option value="building1">Building 1</option>
-                                                    <option value="building2">Building 2</option>
+                                            <label for="inputPassword" class="col-sm-1 col-form-label">Unit Code</label>
+                                            <div class="col-md-4">
+                                                <select class="form-select" id="selectUnitCode">
+                                                    <option value="">Select Unit Code</option>
+                                                    <option value="unitcode1">Project 1</option>
+                                                    <option value="unitcode2">Project 2</option>
                                                 </select>
                                             </div>
+                                        </div>
+
                                         
-                                            <div class="col-sm-1">
-                                                <label for="inputBuilding2" class="col-form-label">Unit Type</label>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <select class="form-select" id="selectUnitType">
-                                                    <option value="">Select Unit Type</option>
-                                                    <option value="unitType1">Unit Type 1</option>
-                                                    <option value="unitType2">Unit Type 2</option>
-                                                </select>
-                                            </div>
-                                        
-                                            <div class="col-sm-1">
-                                                <label for="inputBuilding3" class="col-form-label">Floor</label>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <select class="form-select" id="selectFloor">
-                                                    <option value="">Select Floor</option>
-                                                    <option value="floor1">Floor 1</option>
-                                                    <option value="floor2">Floor 2</option>
-                                                </select>
-                                            </div>
-                                        </div>
 
-                                        <div class="row mb-4">
-                                            <div class="col-sm-1">
-                                                <label for="inputBuilding3" class="col-form-label">Unit No.</label>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <select class="form-select" id="selectUnit">
-                                                    <option value="">Select Unit No.</option>
-                                                    <option value="unit1">1</option>
-                                                    <option value="unit2">2</option>
-                                                </select>
-                                            </div>
-                                        </div>
 
-                                        <div class="row mb-4">
-                                            <div class="col-md-6">
-                                                <div class="container-fluid mb-4">
-                                                    <div class="row justify-content-center align-items-center " style="height: 30px; background-color: #0030FF; border-radius: .3em;">
-                                                        <div class="col text-center">
-                                                            <p class="text-white p-1 text-uppercase font-weight-bold">Hold Units</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="table-responsive mb-4" style="max-height: 200px; overflow-y: auto;">
-                                                    <table class="table table-hover my-0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Unit Code</th>
-                                                                <th>Unit Type</th>
-                                                                <th>Price</th>
-                                                                <th>Unit Size</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Project Apollo</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                
-                                            </div>
-    
-                                            <div class="col-md-6">
-                                                <div class="container-fluid mb-4">
-                                                    <div class="row justify-content-center align-items-center " style="height: 30px; background-color: #0030FF; border-radius: .3em;">
-                                                        <div class="col text-center">
-                                                            <p class="text-white p-1 text-uppercase font-weight-bold">Available Units</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="table-responsive mb-4" style="max-height: 200px; overflow-y: auto;">
-                                                    <table class="table table-hover my-0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Unit Code</th>
-                                                                <th>Unit Type</th>
-                                                                <th>Price</th>
-                                                                <th>Unit Size</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Project Apollo</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-
-                                            </div>
-                                        </div>
                                         
                                         <div class="container-fluid mb-4">
                                             <div class="row justify-content-center align-items-center " style="height: 30px; background-color: #0030FF; border-radius: .3em;">
                                                 <div class="col text-center">
-                                                    <p class="text-white p-1 text-uppercase font-weight-bold">The Three(3) Documents</p>
+                                                    <p class="text-white p-1 text-uppercase font-weight-bold">The Four(4) Documents</p>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row mb-5">
                                             
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label">Document 1</label>
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Reservation Agreement</label>
                                                 <input class="form-control" type="file" required>
                                             </div>
 
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label">Document 2</label>
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Holding</label>
                                                 <input class="form-control" type="file" required>
                                             </div>
 
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label">Document 3</label>
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Reservation Fee</label>
+                                                <input class="form-control" type="file" required>
+                                            </div>
+
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Valid IDs with Specimen</label>
                                                 <input class="form-control" type="file" required>
                                             </div>
                                         </div>
