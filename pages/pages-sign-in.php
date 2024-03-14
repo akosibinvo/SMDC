@@ -1,3 +1,8 @@
+<?php
+require "php/connection.php"
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,12 +50,25 @@
 										</div>
 										<div class="mb-3">
 
-											<label class="form-label">Seller Status</label>
-                                                <select class="form-select" id="selectStatus">
-                                                    <option value="">Select Status</option>
-                                                    <option value="status1">SA1</option>
-                                                    <option value="status2">SA2</option>
-													<option value="status3">IMP</option>
+											<label class="form-label">Role</label>
+                                                <select class="form-select" id="role" name="role">
+												<?php
+													$sql_roles = "SELECT * FROM roles";
+													$res_roles = mysqli_query($conn, $sql_roles);
+
+													if($res_roles == TRUE){
+													$count_get = mysqli_num_rows($res_roles);
+													if($count_get > 0){
+														while($rows_roles = mysqli_fetch_assoc($res_roles)){
+															$roles = $rows_roles['roles'];   
+															?>
+															<option value="<?php echo $roles;?>"><?php echo $roles;?></option>
+															<?php
+														}
+													}
+													}
+
+												?>
                                                 </select>
 
 										</div>
