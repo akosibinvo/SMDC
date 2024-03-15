@@ -1,3 +1,7 @@
+<?php
+require "../php/connection.php"
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -166,56 +170,50 @@
                                         <div class="row mb-3">
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Date of Birth</label>
-                                                <input class="form-control" type="date" name="birthdate" pattern="[A-Za-z\s]+" placeholder="dd/mm/yyy" required>
+                                                <input class="form-control" type="date" name="birthdate" placeholder="dd/mm/yyy" required>
                                             </div>
 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Place of Birth</label>
-                                                <input class="form-control" type="text" name="birthplace" pattern="[A-Za-z\s]+" placeholder="Enter place of birth" required>
+                                                <input class="form-control" type="text" name="birthplace" placeholder="Enter place of birth" required>
                                             </div>
                                         </div>
 
                                         <div class="row mb-4">
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Tin No: </label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="user"></i></span>
-                                                    <input class="form-control" type="text" name="firstname" pattern="[A-Za-z\s]+" placeholder="Enter your TIN number" required>
-                                                </div>
+                                                <input class="form-control" type="text" name="firstname" placeholder="Enter your TIN number" required>
+                                                
                                             </div>
                                             
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Gender</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="user"></i></span>
-                                                    <select class="form-select" id="selectGender">
-                                                        <option value="">Select Gender</option>
-                                                        <option value="male">Male</option>
-                                                        <option value="female">Female</option>
-                                                        <option value="other">Other</option>
-                                                    </select>
-                                                </div>
-                                                
+                                                <select class="form-select" id="selectGender">
+                                                    <option value="">Select Gender</option>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="other">Other</option>
+                                                </select>
                                             </div>
 
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Civil Status</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="user"></i></span>
-                                                    <input class="form-control" type="text" name="firstname" pattern="[A-Za-z\s]+" placeholder="Enter your civil status" required>
-                                                </div>
+                                                    <select class="form-select" id="selectCivilStatus">
+                                                        <option value="">Select Civil Status</option>
+                                                        <option value="">Single</option>
+                                                        <option value="">Married</option>
+                                                        <option value="">Widowed</option>
+                                                        <option value="">Separated</option>
+                                                    </select>
                                             </div>
 
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Citizenship</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="home"></i></span>
                                                     <select class="form-select" id="selectCitizenship">
                                                         <option value="">Select Citizenship</option>
                                                         <option value="citizenship1">Citizenship 1</option>
                                                         <option value="citizenship2">Citizenship 2</option>
                                                     </select>
-                                                </div>
                                             </div>
                                             
                                         </div>
@@ -223,26 +221,17 @@
                                         <div class="row mb-3">
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Email</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="mail"></i></span>
-                                                    <input class="form-control" type="email" name="email" pattern="[A-Za-z\s]+" placeholder="Enter your email" required>
-                                                </div>
+                                                <input class="form-control" type="email" name="email" pattern="[A-Za-z\s]+" placeholder="Enter your email" required>
                                             </div>
 
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Phone Number</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="phone"></i></span>
-                                                    <input class="form-control" type="text" name="phonenumber" pattern="[A-Za-z\s]+" placeholder="Enter your phone number" required>
-                                                </div>
+                                                <input class="form-control" type="text" name="phonenumber" pattern="[A-Za-z\s]+" placeholder="Enter your phone number" required>
                                             </div>
 
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Passport No:</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="phone"></i></span>
-                                                    <input class="form-control" type="text" name="passportnumber" pattern="[A-Za-z\s]+" placeholder="Enter your passport number" required>
-                                                </div>
+                                                <input class="form-control" type="text" name="passportnumber" pattern="[A-Za-z\s]+" placeholder="Enter your passport number" required>
                                             </div>
                                         </div>
 
@@ -290,20 +279,49 @@
                                         <div class="row mb-5">
                                             <label for="inputPassword" class="col-sm-2 col-form-label">Project Name</label>
                                             <div class="col-md-4">
-                                                <select class="form-select" id="selectProject">
-                                                    <option value="">Select Project</option>
-                                                    <option value="project1">Project 1</option>
-                                                    <option value="project2">Project 2</option>
-                                                </select>
+                                            <select class="form-select" id="projectName" name="projectName">
+                                                <option value="">Select Project</option>
+                                                <?php
+													$sql_projectName = "SELECT * FROM unit_info";
+													$res_projectName = mysqli_query($conn, $sql_projectName);
+
+													if($res_projectName == TRUE){
+													$count_get = mysqli_num_rows($res_projectName);
+													if($count_get > 0){
+														while($rows_projectName = mysqli_fetch_assoc($res_projectName)){
+															$projectName = $rows_projectName['Project_name'];   
+															?>
+															<option value="<?php echo $projectNames;?>"><?php echo $projectName;?></option>
+															<?php
+														}
+													}
+													}
+												?>
+                                            </select>
+                                            
                                             </div>
 
                                             <label for="inputPassword" class="col-sm-1 col-form-label">Unit Code</label>
                                             <div class="col-md-4">
-                                                <select class="form-select" id="selectUnitCode">
-                                                    <option value="">Select Unit Code</option>
-                                                    <option value="unitcode1">Project 1</option>
-                                                    <option value="unitcode2">Project 2</option>
-                                                </select>
+                                            <select class="form-select" id="unitCode" name="unitCode">
+                                                <option value="">Select Unit Code</option>
+                                                <?php
+													$sql_unitCode = "SELECT * FROM unit_info";
+													$res_unitCode = mysqli_query($conn, $sql_projectName);
+
+													if($res_unitCode == TRUE){
+													$count_get = mysqli_num_rows($res_unitCode);
+													if($count_get > 0){
+														while($rows_unitCode = mysqli_fetch_assoc($res_unitCode)){
+															$unitCode = $rows_unitCode['Unit_code'];   
+															?>
+															<option value="<?php echo $unitCode;?>"><?php echo $unitCode;?></option>
+															<?php
+														}
+													}
+													}
+												?>
+                                            </select>
                                             </div>
                                         </div>
 
@@ -319,7 +337,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row mb-5">
+                                        <div class="row mb-6">
                                             
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Reservation Agreement</label>

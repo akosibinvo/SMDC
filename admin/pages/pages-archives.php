@@ -60,7 +60,7 @@
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="../admin-dashboard.html">
+				<a class="sidebar-brand" href="../admin-dashboard.php">
           			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../../img/icons/logo.png" alt=""> </span>
         		</a>
 
@@ -70,7 +70,7 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="../admin-dashboard.html">
+						<a class="sidebar-link" href="../admin-dashboard.php">
               			<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
             			</a>
 					</li>
@@ -80,7 +80,7 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-booking-approval.html">
+						<a class="sidebar-link" href="pages-booking-approval.php">
               				<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking Approval</span>
             			</a>
 					</li>
@@ -92,7 +92,7 @@
 					</li>
 
                     <li class="sidebar-item">
-						<a class="sidebar-link" href="pages-approved.html">
+						<a class="sidebar-link" href="pages-approved.php">
               				<i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Approved Bookings</span>
             			</a>
 					</li>
@@ -109,7 +109,7 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="">
+						<a class="sidebar-link" href="pages-settings.php">
               				<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
             			</a>
 					</li>

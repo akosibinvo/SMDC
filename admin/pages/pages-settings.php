@@ -1,5 +1,6 @@
-<?php
-require "../php/connection.php"
+
+<?php 
+   include '../include/modal.php';
 ?>
 
 <!DOCTYPE html>
@@ -11,12 +12,12 @@ require "../php/connection.php"
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="../img/icons/logo.png" />
+	<link rel="shortcut icon" href="../../img/icons/logo.png" />
 
-	<title>Statistics | SMDC JQB</title>
+	<title>Settings | SMDC JQB</title>
 
-	<link href="../css/app.css" rel="stylesheet">
-	<link href="../css/style.css" rel="stylesheet">
+	<link href="../../css/app.css" rel="stylesheet">
+    
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -24,8 +25,8 @@ require "../php/connection.php"
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="../index.php">
-          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../img/icons/logo.png" alt=""> </span>
+				<a class="sidebar-brand" href="../admin-dashboard.php">
+          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../../img/icons/logo.png" alt=""> </span>
         		</a>
 
 				<ul class="sidebar-nav">
@@ -34,14 +35,8 @@ require "../php/connection.php"
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="../index.php">
+						<a class="sidebar-link" href="../admin-dashboard.php">
               			<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="pages-statistics.php">
-              				<i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Statistics</span>
             			</a>
 					</li>
 
@@ -50,14 +45,20 @@ require "../php/connection.php"
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="#">
-              				<i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Sales</span>
+						<a class="sidebar-link" href="pages-booking-approval.php">
+              				<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking Approval</span>
             			</a>
 					</li>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-booking.php">
-              				<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking</span>
+                    <li class="sidebar-item">
+						<a class="sidebar-link" href="pages-archives.php">
+              				<i class="align-middle" data-feather="archive"></i> <span class="align-middle">Booking Archives</span>
+            			</a>
+					</li>
+
+                    <li class="sidebar-item">
+						<a class="sidebar-link" href="pages-approved.php">
+              				<i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Approved Bookings</span>
             			</a>
 					</li>
 
@@ -67,12 +68,12 @@ require "../php/connection.php"
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-profile.php">
+						<a class="sidebar-link" href="#">
               				<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
             			</a>
 					</li>
 
-					<li class="sidebar-item">
+					<li class="sidebar-item active">
 						<a class="sidebar-link" href="">
               				<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
             			</a>
@@ -111,46 +112,48 @@ require "../php/connection.php"
 				</div>
 			</nav>
 
+
+
 			<main class="content">
 				<div class="container-fluid p-0">
 
-					<h1 class="h3"><strong class="title-dashboard">Sales</strong> Dashboard</h1>
+					<h1 class="h3"><strong class="title-dashboard">Settings</strong></h1>
 
-					<div class="container mb-4">
+                    <div class="container mb-4">
 						<div class="row">
 							<div class="col text-end">
-								<a href="#" class="btn btn-primary btn-lg background-blue "><i class="align-middle me-1" data-feather="printer"></i>Print</a>
+                                <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#addProjectModal">
+                                    Add Project
+                                </button>
 							</div>
 						</div>
 					</div>
 
-                    <div class="row mb-3">
+					<div class="row">
 						<div class="col-12 col-md-12 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Sales Overview</h5>
+									<h5 class="card-title mb-0">List of Projects</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
 										<tr class="text-center">
-											<th>Sales Performance</th>
-											<th>Total Revenue</th>
-											<th>Units Sold</th>
-											<th>Average Selling Price</th>
-											<th>Seller</th>
+											<th>Project Name</th>
+											<th>Unit Code</th>
+											<th>Action</th>
+											
 										</tr>
 									</thead>
 									<tbody>
 										<tr class="text-center">
-											<td>Sample</td>
-											<td>Sample</td>
-											<td>1</td>
-											<td>1,000</td>
-											<td>Vanessa Tucker</td>
+											<td></td>
+											<td></td>
+											<td>
+                                                <button class="btn btn-success">Edit</button>
+                                                <button class="btn btn-danger">Remove</button>
+                                            </td>
 										</tr>
-
-                                        
 										
 										
 									</tbody>
@@ -160,17 +163,14 @@ require "../php/connection.php"
 						
 					</div>
 
-                    
-
 				</div>
 			</main>
-
 
 		</div>
 	</div>
 
-	<script src="../js/app.js"></script>
-	<script src="../js/script.js"></script>
+	<script src="../../js/app.js"></script>
+    
 
 
 </body>
