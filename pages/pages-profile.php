@@ -5,13 +5,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-	<meta name="author" content="AdminKit">
-	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 
-	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-profile.html" />
 
 	<title>Profile | SMDC JQB</title>
 
@@ -24,7 +20,7 @@
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="../index.html">
+				<a class="sidebar-brand" href="../index.php">
 					<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../img/icons/logo.png" alt=""> </span>
 			  	</a>
 
@@ -34,13 +30,13 @@
 			</li>
 
 			<li class="sidebar-item">
-				<a class="sidebar-link" href="../index.html">
+				<a class="sidebar-link" href="../index.php">
 				  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
 				</a>
 			</li>
 
 			<li class="sidebar-item">
-				<a class="sidebar-link" href="pages-statistics.html">
+				<a class="sidebar-link" href="pages-statistics.php">
 					  <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Statistics</span>
 				</a>
 			</li>
@@ -50,13 +46,13 @@
 			</li>
 
 			<li class="sidebar-item">
-				<a class="sidebar-link" href="pages-sales.html">
+				<a class="sidebar-link" href="pages-sales.php">
 					  <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Sales</span>
 				</a>
 			</li>
 
 			<li class="sidebar-item">
-				<a class="sidebar-link" href="pages-booking.html">
+				<a class="sidebar-link" href="pages-booking.php">
 					  <i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking</span>
 				</a>
 			</li>
@@ -67,7 +63,7 @@
 			</li>
 
 			<li class="sidebar-item active">
-				<a class="sidebar-link" href="pages-profile.html">
+				<a class="sidebar-link" href="pages-profile.php">
 					  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
 				</a>
 			</li>

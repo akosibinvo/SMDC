@@ -13,8 +13,6 @@ require "../php/connection.php"
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 
-	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-sign-in.html" />
-
 	<title>Admin Sign In | SDMC JQB</title>
 
 	<link href="../css/app.css" rel="stylesheet">
@@ -80,14 +78,14 @@ require "../php/connection.php"
 											</div>
 										</div>
 										<div class="d-grid gap-2 mt-3">
-											<a href="index.html" class="btn btn-lg btn-primary">Sign in</a>
+											<a href="../index.html" class="btn btn-lg btn-primary">Sign in</a>
 										</div>
 									</form>
 								</div>
 							</div>
 						</div>
 						<div class="text-center mb-3">
-							Don't have an account? <a href="pages-sign-up.html">Sign up</a>
+							Don't have an account? <a href="pages-sign-up.php">Sign up</a>
 						</div>
 					</div>
 				</div>

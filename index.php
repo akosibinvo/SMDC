@@ -20,7 +20,7 @@
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html">
+				<a class="sidebar-brand" href="index.php">
           			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="img/icons/logo.png" alt=""> </span>
         		</a>
 
@@ -30,13 +30,13 @@
 					</li>
 
 					<li class="sidebar-item active">
-						<a class="sidebar-link" href="index.html">
+						<a class="sidebar-link" href="index.php">
               			<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
             			</a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages/pages-statistics.html">
+						<a class="sidebar-link" href="pages/pages-statistics.php">
               				<i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Statistics</span>
             			</a>
 					</li>
@@ -46,13 +46,13 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages/pages-sales.html">
+						<a class="sidebar-link" href="pages/pages-sales.php">
               				<i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Sales</span>
             			</a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages/pages-booking.html">
+						<a class="sidebar-link" href="pages/pages-booking.php">
               				<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking</span>
             			</a>
 					</li>
@@ -63,7 +63,7 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages/pages-profile.html">
+						<a class="sidebar-link" href="pages/pages-profile.php">
               				<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
             			</a>
 					</li>
@@ -97,7 +97,7 @@
               				</a>
 
 							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
+								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#">Log out</a>
@@ -115,7 +115,7 @@
 					<div class="container mb-4">
 						<div class="row">
 							<div class="col text-end">
-								<a href="pages/pages-booking.html" class="btn btn-primary btn-lg background-blue">Book Now</a>
+								<a href="pages/pages-booking.php" class="btn btn-primary btn-lg background-blue">Book Now</a>
 							</div>
 						</div>
 					</div>

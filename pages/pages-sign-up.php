@@ -52,7 +52,7 @@
 										</div>
 
 										<div class="d-grid gap-2 mt-3">
-											<a href="../index.html" class="btn btn-lg btn-primary">Sign up</a>
+											<a href="pages-sign-in.php" class="btn btn-lg btn-primary">Sign up</a>
 										</div>
 									</form>
 								</div>
