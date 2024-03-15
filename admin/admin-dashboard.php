@@ -1,3 +1,8 @@
+
+<?php 
+   include '../php/connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,7 +74,7 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-settings.php">
+						<a class="sidebar-link" href="pages/pages-settings.php">
               				<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
             			</a>
 					</li>
@@ -107,123 +112,176 @@
 				</div>
 			</nav>
 
+
+
 			<main class="content">
 				<div class="container-fluid p-0">
 
 					<h1 class="h3"><strong class="title-dashboard">Overview</strong> Dashboard</h1>
 					
 					<div class="row d-flex justify-content-center">
-						<div class="col-md-6 col-lg-4 mx-auto mb-4">
+						<div class="col-md-6 col-lg-3 mx-auto mb-4">
 							<div class="card">
 								<div class="card-body">
 									<div class="row">
 										<div class="col mt-0">
-											<h5 class="card-title">Total Sales</h5>
+											<h5 class="card-title">Total SA1</h5>
 										</div>
 
 										<div class="col-auto">
 											<div class="stat text-primary">
-												<i class="align-middle" data-feather="dollar-sign"></i>
+												<i class="align-middle" data-feather="user"></i>
 											</div>
 										</div>
 									</div>
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"> 1,000,000 </h1>
+									<h1 class="mt-1 mb-3" style="font-weight: bold;"> 27 </h1>
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
-										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-md-6 col-lg-4 mx-auto mb-4">
+						<div class="col-md-6 col-lg-3 mx-auto mb-4">
 							<div class="card">
 								<div class="card-body">
 									<div class="row">
 										<div class="col mt-0">
-											<h5 class="card-title">Commissions</h5>
+											<h5 class="card-title">Total SA2</h5>
 										</div>
 
 										<div class="col-auto">
 											<div class="stat text-primary">
-												<i class="align-middle" data-feather="percent"></i>
+												<i class="align-middle" data-feather="user"></i>
 											</div>
 										</div>
 									</div>
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"> 1,000,000 </h1>
+									<h1 class="mt-1 mb-3" style="font-weight: bold;"> 3 </h1>
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
-										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-md-6 col-lg-4 mx-auto mb-4">
+						<div class="col-md-6 col-lg-3 mx-auto mb-4">
 							<div class="card">
 								<div class="card-body">
 									<div class="row">
 										<div class="col mt-0">
-											<h5 class="card-title">Points</h5>
+											<h5 class="card-title">Total IMP</h5>
 										</div>
 
 										<div class="col-auto">
 											<div class="stat text-primary">
-												<i class="align-middle" data-feather="star"></i>
+												<i class="align-middle" data-feather="user"></i>
 											</div>
 										</div>
 									</div>
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"> 6,000 </h1>
+									<h1 class="mt-1 mb-3" style="font-weight: bold;"> 2 </h1>
 									<div class="mb-0">
-										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
-										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
+										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
 									</div>
 								</div>
 							</div>
 						</div>
 
-						
-					</div>
+						<div class="col-md-6 col-lg-3 mx-auto mb-4">
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<h5 class="card-title">Approved Bookings</h5>
+										</div>
 
-					<!-- <div class="row">
-						<div class="col-12 col-md-12 d-flex ">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
-
-									<h5 class="card-title mb-0">Summary of sales</h5>
+										<div class="col-auto">
+											<div class="stat text-primary">
+												<i class="align-middle" data-feather="book"></i>
+											</div>
+										</div>
+									</div>
+									<h1 class="mt-1 mb-3" style="font-weight: bold;"> 6 </h1>
+									<div class="mb-0">
+										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
+									</div>
 								</div>
-
 							</div>
 						</div>
-					</div> -->
+					</div>
 
 					<div class="row">
 						<div class="col-12 col-md-12 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Latest Projects</h5>
+									<h5 class="card-title mb-0">Latest Clients</h5>
 								</div>
+
+								
+
 								<table class="table table-hover my-0">
 									<thead>
-										<tr>
+										<tr class="text-center">
 											<th>Name</th>
-											<th>Unit Code</th>
-											<th>Date</th>
-											<th>Status</th>
-											<th>Seller</th>
+											<th>Date of Birth</th>
+											<th>Tin No.</th>
+											<th>Gender</th>
+                                            <th>Civil Status</th>
+                                            <th>Citizenship</th>
+                                            <th>Email</th>
+											<th>Phone No.</th>
+                                            <th>Passport No.</th>
+                                            <th>Address</th>
+											<th>Employer Name</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>Sample</td>
-											<td>Unit 1</td>
-											<td>31/06/2023</td>
-											<td>Pending</td>
-											<td>Vanessa Tucker</td>
+									<?php
+									$sql_clientInfo = "SELECT * FROM client_info";
+									$res_clientInfo = mysqli_query($conn, $sql_clientInfo);
+
+									if($res_clientInfo == TRUE){
+									$count_get = mysqli_num_rows($res_clientInfo);
+									if($count_get > 0){
+										while($rows_clientInfo = mysqli_fetch_assoc($res_clientInfo)){
+											$firstname = $rows_clientInfo['FirstName'];
+											$middlename = $rows_clientInfo['MiddleName'];
+											$lastname = $rows_clientInfo['LastName'];
+											$fullname = $firstname.$lastname;
+											
+											$birthdate = $rows_clientInfo['Date_of_birth'];
+											$tinNo = $rows_clientInfo['Tin_no'];
+											$gender = $rows_clientInfo['Gender'];
+											$civilstatus = $rows_clientInfo['Civil_status'];
+											$citizenship = $rows_clientInfo['Citizenship'];
+											$email = $rows_clientInfo['Email'];
+
+											$phonenumber = $rows_clientInfo['Phone_no'];
+											$passportnumber = $rows_clientInfo['Passport_no'];
+											$address = $rows_clientInfo['Present_address'];
+											$employername = $rows_clientInfo['Employer_name'];
+											?>
+											
+											
+										<tr class="text-center">
+											<td><?php echo $fullname;?></td>
+											<td><?php echo $birthdate;?></td>
+											<td><?php echo $tinNo;?></td>
+											<td><?php echo $gender;?></td>
+                                            <td><?php echo $civilstatus;?></td>
+											<td><?php echo $citizenship;?></td>
+                                            <td><?php echo $email;?></td>
+                                            <td><?php echo $phonenumber;?></td>
+											<td><?php echo $passportnumber;?></td>
+											<td><?php echo $address;?></td>
+											<td><?php echo $employername;?></td>
 										</tr>
 										
-										
+										<?php
+										}
+									}
+									}
+								?>
 									</tbody>
 								</table>
 							</div>

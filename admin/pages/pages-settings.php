@@ -1,5 +1,5 @@
 
-<?php 
+<?php
    include '../include/modal.php';
 ?>
 
@@ -133,9 +133,10 @@
 						<div class="col-12 col-md-12 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
-
 									<h5 class="card-title mb-0">List of Projects</h5>
 								</div>
+
+
 								<table class="table table-hover my-0">
 									<thead>
 										<tr class="text-center">
@@ -146,17 +147,34 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr class="text-center">
-											<td></td>
-											<td></td>
-											<td>
+
+                                    <?php
+                                        $sql_unitInfo = "SELECT * FROM unit_info";
+                                        $res_unitInfo = mysqli_query($conn, $sql_unitInfo);
+
+                                        if ($res_unitInfo) {
+                                            while ($rows_unitInfo = mysqli_fetch_assoc($res_unitInfo)) {
+                                                $projectname = $rows_unitInfo['Project_name'];
+                                                $unitcode = $rows_unitInfo['Unit_code'];
+                                    ?>
+                                        <tr class="text-center">
+                                            <td><?php echo $projectname;?></td>
+                                            <td><?php echo $unitcode;?></td>
+                                            <td>
                                                 <button class="btn btn-success">Edit</button>
                                                 <button class="btn btn-danger">Remove</button>
                                             </td>
-										</tr>
-										
+                                        </tr>
+                                    <?php
+                                            }
+                                        } else {
+                                            // Handle error if query fails
+                                            echo "Error: " . mysqli_error($conn);
+                                        }
+                                    ?>
 										
 									</tbody>
+
 								</table>
 							</div>
 						</div>

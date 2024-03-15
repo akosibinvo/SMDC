@@ -21,15 +21,18 @@ require "../php/connection.php"
 </head>
 
 <body>
-	<main class="d-flex w-100">
+	<main class="d-flex w-100" style="background: linear-gradient(rgba(0, 48, 255, .15), rgba(0, 48, 255, .15)), url(&quot;../img/bg/bg.jpg&quot;);
+	background-size: cover;
+	background-position: center;">
+
 		<div class="container d-flex flex-column">
 			<div class="row vh-100">
 				<div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto d-table h-100">
 					<div class="d-table-cell align-middle">
 
 						<div class="text-center mt-4">
-							<h1 class="h2">Welcome Admin</h1>
-							<p class="lead">
+							<h1 class="h2 text-white">Welcome to <strong> SMDC JQB </strong> </h1>
+							<p class="lead text-white">
 								Sign in to your account to continue
 							</p>
 						</div>
@@ -58,7 +61,7 @@ require "../php/connection.php"
 													$count_get = mysqli_num_rows($res_roles);
 													if($count_get > 0){
 														while($rows_roles = mysqli_fetch_assoc($res_roles)){
-															$roles = $rows_roles['roles'];   
+															$roles = $rows_roles['role'];   
 															?>
 															<option value="<?php echo $roles;?>"><?php echo $roles;?></option>
 															<?php
@@ -84,8 +87,8 @@ require "../php/connection.php"
 								</div>
 							</div>
 						</div>
-						<div class="text-center mb-3">
-							Don't have an account? <a href="pages-sign-up.php">Sign up</a>
+						<div class="text-center mb-3 text-white">
+							Don't have an account? <a href="pages-sign-up.php" style="color: #0030ff;">Sign up</a>
 						</div>
 					</div>
 				</div>

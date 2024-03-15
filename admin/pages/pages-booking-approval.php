@@ -1,4 +1,8 @@
 
+<?php 
+   include '../../php/connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -162,6 +166,19 @@
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
+
+									<?php
+									$sql_clientInfo = "SELECT * FROM image_document";
+									$res_clientInfo = mysqli_query($conn, $sql_clientInfo);
+
+									if($res_clientInfo == TRUE){
+									$count_get = mysqli_num_rows($res_clientInfo);
+									if($count_get > 0){
+										while($rows_clientInfo = mysqli_fetch_assoc($res_clientInfo)){
+											$ra = $rows_clientInfo['RA'];
+
+											
+											?>
 										<tr class="text-center">
 											<th>Name</th>
 											<th>Unit Code</th>
@@ -181,7 +198,7 @@
 											<td>Sample</td>
 											<td>Unit 1</td>
 											<td>2,500,000</td>
-											<td class="text-center"><img src="../../img/icons/logo.png" alt="Candidate Image" style="width: 40px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/icons/logo.png')"></td>
+											<td class="text-center"><img src="img/<?php echo $ra['RA']; ?>" alt="Candidate Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('img/<?php echo $ra['RA']; ?>')"></td>
 											<td class="text-center"><img src="../../img/icons/logo.png" alt="Candidate Image" style="width: 40px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/icons/logo.png')"></td>
                                             <td class="text-center"><img src="../../img/icons/logo.png" alt="Candidate Image" style="width: 40px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/icons/logo.png')"></td>
                                             <td class="text-center"><img src="../../img/icons/logo.png" alt="Candidate Image" style="width: 40px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/icons/logo.png')"></td>
@@ -193,7 +210,12 @@
                                                 <button class="btn btn-danger">Reject</button>
                                             </td>
 										</tr>
-										
+
+										<?php
+										}
+									}
+									}
+								?>
 										
 									</tbody>
 								</table>

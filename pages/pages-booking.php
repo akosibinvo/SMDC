@@ -1,5 +1,8 @@
 <?php
-require "../php/connection.php"
+require "../php/connection.php";
+include "../admin/include/booking.php";
+include "../admin/include/imageHandler.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +133,7 @@ require "../php/connection.php"
                                         </div>
                                     </div>
 
-                                    <form action="" class="px-4">
+                                    <form action="" method="post" enctype="multipart/form-data" class="px-4">
 
                                         <div class="row mb-4">
                                             <div class="form-group col-md-4">
@@ -182,37 +185,37 @@ require "../php/connection.php"
                                         <div class="row mb-4">
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Tin No: </label>
-                                                <input class="form-control" type="text" name="firstname" placeholder="Enter your TIN number" required>
+                                                <input class="form-control" type="text" name="tinNo" placeholder="Enter your TIN number" required>
                                                 
                                             </div>
                                             
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Gender</label>
-                                                <select class="form-select" id="selectGender">
+                                                <select class="form-select" id="selectGender" name="gender" required>
                                                     <option value="">Select Gender</option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
-                                                    <option value="other">Other</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Other">Other</option>
                                                 </select>
                                             </div>
 
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Civil Status</label>
-                                                    <select class="form-select" id="selectCivilStatus">
+                                                    <select class="form-select" id="selectCivilStatus" name="civilstatus" required>
                                                         <option value="">Select Civil Status</option>
-                                                        <option value="">Single</option>
-                                                        <option value="">Married</option>
-                                                        <option value="">Widowed</option>
-                                                        <option value="">Separated</option>
+                                                        <option value="Single">Single</option>
+                                                        <option value="Married">Married</option>
+                                                        <option value="Widowed">Widowed</option>
+                                                        <option value="Separated">Separated</option>
                                                     </select>
                                             </div>
 
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Citizenship</label>
-                                                    <select class="form-select" id="selectCitizenship">
+                                                    <select class="form-select" id="selectCitizenship" name="citizenship" required>
                                                         <option value="">Select Citizenship</option>
-                                                        <option value="citizenship1">Citizenship 1</option>
-                                                        <option value="citizenship2">Citizenship 2</option>
+                                                        <option value="Filipino">Filipino</option>
+                                                        <option value="Chinese">Chinese</option>
                                                     </select>
                                             </div>
                                             
@@ -221,42 +224,42 @@ require "../php/connection.php"
                                         <div class="row mb-3">
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Email</label>
-                                                <input class="form-control" type="email" name="email" pattern="[A-Za-z\s]+" placeholder="Enter your email" required>
+                                                <input class="form-control" type="email" name="email" placeholder="Enter your email" required>
                                             </div>
 
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Phone Number</label>
-                                                <input class="form-control" type="text" name="phonenumber" pattern="[A-Za-z\s]+" placeholder="Enter your phone number" required>
+                                                <input class="form-control" type="text" name="phonenumber" placeholder="Enter your phone number" required>
                                             </div>
 
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Passport No:</label>
-                                                <input class="form-control" type="text" name="passportnumber" pattern="[A-Za-z\s]+" placeholder="Enter your passport number" required>
+                                                <input class="form-control" type="text" name="passportnumber" placeholder="Enter your passport number" required>
                                             </div>
                                         </div>
 
                                         <div class="row mb-3">
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Present Address</label>
-                                                <textarea class="form-control" id="Address" rows="3"></textarea>
+                                                <textarea class="form-control" id="presentAddress" name="presentAddress" rows="3" required></textarea>
                                             </div>
 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Permanent Address</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                <textarea class="form-control" id="permanentAddress" name="permanentAddress" rows="3" required></textarea>
                                             </div>
                                         </div>
 
                                         <div class="row mb-5">
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Employer Name</label>
-                                                <input class="form-control" type="email" name="email" pattern="[A-Za-z\s]+" placeholder="Enter your employer name" required>
+                                                <input class="form-control" type="text" name="employerName" placeholder="Enter your employer name" required>
 
                                             </div>
 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Work Address</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                                                <textarea class="form-control" id="presentAddress" name="workAddress" rows="1" required></textarea>
                                             </div>
 
                                         </div>
@@ -341,29 +344,29 @@ require "../php/connection.php"
                                             
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Reservation Agreement</label>
-                                                <input class="form-control" type="file" required>
+                                                <input class="form-control" type="file" name="RA">
                                             </div>
 
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Holding</label>
-                                                <input class="form-control" type="file" required>
+                                                <input class="form-control" type="file" name="Holding">
                                             </div>
 
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Reservation Fee</label>
-                                                <input class="form-control" type="file" required>
+                                                <input class="form-control" type="file" name="RF">
                                             </div>
 
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Valid IDs with Specimen</label>
-                                                <input class="form-control" type="file" required>
+                                                <input class="form-control" type="file" name="ID">
                                             </div>
                                         </div>
 
                                         <div class="container mb-4">
                                             <div class="row">
                                                 <div class="col text-center">
-                                                    <button type="button" class="btn btn-primary btn-lg background-blue">Submit</button>
+                                                    <button type="submit" name="book" class="btn btn-primary btn-lg background-blue">Submit</button>
                                                 </div>
                                             </div>
                                         </div>
