@@ -19,7 +19,7 @@ include "addProject.php";
    </head>
    <body>
 	
-      <!--======================================= POSITION MODAL ======================================= -->
+      <!--======================================= ADD PROJECT MODAL ======================================= -->
       <div class="modal fade" id="addProjectModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -32,12 +32,12 @@ include "addProject.php";
                   <form action="" method="post" enctype="multipart/form-data">
                      <div class="form-group mb-3">
                         <label class="form-label">Project Name</label>
-                        <input class="form-control" type="text" name="projectName" placeholder="Enter project name" required>
+                        <input class="form-control" type="text" name="projectname" placeholder="Enter project name" required>
                      </div>
 
                      <div class="form-group mb-3">
                         <label class="form-label">Unit Code</label>
-                        <input class="form-control" type="text" name="unitCode" placeholder="Enter unit code" required>
+                        <input class="form-control" type="text" name="unitcode" placeholder="Enter unit code" required>
                      </div>
 
                      <div class="modal-footer mt-5">
@@ -52,10 +52,46 @@ include "addProject.php";
          </div>
       </div>
 
+
+      <!--======================================= EDIT MODAL ======================================= -->
+      <div class="modal fade" id="editModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Project</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form action="../include/editModal.php" method="post" enctype="multipart/form-data">
+                     <input type="hidden" name="update_id" id="update_id">
+                     <div class="row mb-3">
+                        <div class="form-group col-md-6">
+                           <label class="form-label">Project Name</label>
+                           <input class="form-control" type="text" name="projectname" id="projectname" placeholder="Enter project name" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                           <label class="form-label">Unit Code</label>
+                           <input class="form-control" type="text" name="unitcode" id="unitcode" placeholder="Enter unit code" required>
+                        </div>
+                     </div>
+
+                     <div class="modal-footer">
+                        <div class="gap-2 mt-4">
+                           <button type="submit" name="updatedata" class="btn btn-primary">Update</button>
+                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+
     
 
       <!--======================================= DELETE MODAL ======================================= -->
-      <div class="modal fade" id="deleteCandidate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
@@ -67,32 +103,9 @@ include "addProject.php";
                   <p> Are you sure you want to delete? </p>
                </div>
                <div class="modal-footer">
-                  <form action="include/deleteCandidate.php" method="POST">
+                  <form action="include/delete.php" method="POST">
                      <input type="hidden" name="candidate_id" id="candidate_id">
-                     <button type="submit" name="deleteCandidate" class="btn btn-danger"> Delete </button>
-                  </form>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-               </div>
-            </div>
-         </div>
-      </div>
-
-      <!--======================================= DENY MODAL ======================================= -->
-      <div class="modal fade" id="denyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                  </button>
-               </div>
-               <div class="modal-body">
-                  <p> Are you sure you want to deny the account? </p>
-               </div>
-               <div class="modal-footer">
-                  <form action="include/denyVoters.php" method="POST">
-                     <input type="hidden" name="deny_id" id="deny_id">
-                     <button type="submit" name="denydata" class="btn btn-danger"> Deny </button>
+                     <button type="submit" name="delete" class="btn btn-danger"> Delete </button>
                   </form>
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                </div>
@@ -123,57 +136,6 @@ include "addProject.php";
          </div>
       </div>
 
-      <!--======================================= TITLE MODAL ======================================= -->
-      <div class="modal fade" id="titleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Title</h5>
-                  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-                  </button>
-               </div>
-               <div class="modal-body">
-                  <form action="include/update_config.php" method="post">
-                     <div class="form-group mb-3">
-                        <label class="form-label">Election Title</label>
-                        <input class="form-control" type="text" name="siteTitle" value="<?php echo $siteTitle; ?>" required>
-                     </div>
-                     <div class="modal-footer">
-                        <div class="gap-2 mt-4">
-                           <button type="submit" class="btn btn-primary">Update</button>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
-
-      <!--======================================= TIMER MODAL ======================================= -->
-      <div class="modal fade" id="timerModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Election Timer</h5>
-                  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-                  </button>
-               </div>
-               <div class="modal-body">
-                  <form action="include/setTimer.php" method="post">
-                     <div class="form-group mb-3">
-                        <label class="form-label">Set Timer</label>
-                        <input class="form-control" type="text" name="timerDate" value="<?php echo $timerDate; ?>" required>
-                     </div>
-                     <div class="modal-footer">
-                        <div class="gap-2 mt-4">
-                           <button type="submit" class="btn btn-primary">Update</button>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
 
 
    </body>

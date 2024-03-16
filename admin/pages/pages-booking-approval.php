@@ -21,10 +21,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 	<style>
-		.hidden {
-			display: none;
-		}
-	
 		.popUp{
 			position: fixed;
 			top: 0;
@@ -36,13 +32,15 @@
 			justify-content: center;
 			align-items: center;
 			z-index: 9999;
+			
 		}
 	
 		/* Pop-up Content */
 		.popUp-contents {
-			width: 500px;
-			height: 400px;
+			width: 1000px;
+			height: 500px;
 			z-index: 10000;
+			
 		}
 	
 		.closeBtn {
@@ -53,9 +51,14 @@
 			cursor: pointer;
 			color: white; 
 			border-radius: 50%;
-			padding: 5px;
+			padding: 0;
 			z-index: 10001;
 		}
+
+		.closeBtn:hover {
+			color: red;
+		}
+
 	</style>
 
 
@@ -65,7 +68,7 @@
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="../admin-dashboard.php">
+				<a class="sidebar-brand" href="../index.php">
           			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../../img/icons/logo.png" alt=""> </span>
         		</a>
 
@@ -75,7 +78,7 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="../admin-dashboard.php">
+						<a class="sidebar-link" href="../index.php">
               			<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
             			</a>
 					</li>
@@ -99,6 +102,12 @@
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-approved.php">
               				<i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Approved Bookings</span>
+            			</a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-add-projects.php">
+              				<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Add Projects</span>
             			</a>
 					</li>
 
@@ -167,58 +176,60 @@
 								<table class="table table-hover my-0">
 									<thead>
 
-									<?php
-									$sql_clientInfo = "SELECT * FROM image_document";
-									$res_clientInfo = mysqli_query($conn, $sql_clientInfo);
-
-									if($res_clientInfo == TRUE){
-									$count_get = mysqli_num_rows($res_clientInfo);
-									if($count_get > 0){
-										while($rows_clientInfo = mysqli_fetch_assoc($res_clientInfo)){
-											$ra = $rows_clientInfo['RA'];
-
-											
-											?>
 										<tr class="text-center">
 											<th>Name</th>
 											<th>Unit Code</th>
 											<th>Amount</th>
-											<th>Reservation Agreement</th>
+											<th>RA</th>
 											<th>Holding</th>
-                                            <th>Reservation Fee</th>
+                                            <th>RF</th>
                                             <th>ID</th>
                                             <th>Date</th>
-											<th>Agent Name</th>
+											<th>Agent</th>
                                             <th>Status</th>
                                             <th>Action</th>
 										</tr>
 									</thead>
 									<tbody>
+									<?php
+										$sql_booking = "SELECT * FROM transaction_booking";
+										$res_booking = mysqli_query($conn, $sql_booking);
+
+										if ($res_booking == TRUE) {
+											$count_get = mysqli_num_rows($res_booking);
+											if ($count_get > 0) {
+									?>
+									<?php
+            							while ($row = mysqli_fetch_assoc($res_booking)) {
+                					?>
 										<tr class="text-center">
+											<td> <?php echo $row['firstname']; ?> </td>
+											<td> <?php echo $row['Unit_code']; ?> </td>
+											<td>₱ 2,500,000</td>
+											<td class="text-center"> <img src="../../img/documents/<?php echo $row['RA']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['RA']; ?>')"></td>
+											<td class="text-center"> <img src="../../img/documents/<?php echo $row['Holding']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['Holding']; ?>')"></td>
+                                            <td class="text-center"> <img src="../../img/documents/<?php echo $row['RF']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['RF']; ?>')"></td>
+                                            <td class="text-center"> <img src="../../img/documents/<?php echo $row['ID']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['ID']; ?>')"></td>
+                                            <td><?php echo $row['Transaction_date']; ?></td>
 											<td>Sample</td>
-											<td>Unit 1</td>
-											<td>2,500,000</td>
-											<td class="text-center"><img src="img/<?php echo $ra['RA']; ?>" alt="Candidate Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('img/<?php echo $ra['RA']; ?>')"></td>
-											<td class="text-center"><img src="../../img/icons/logo.png" alt="Candidate Image" style="width: 40px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/icons/logo.png')"></td>
-                                            <td class="text-center"><img src="../../img/icons/logo.png" alt="Candidate Image" style="width: 40px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/icons/logo.png')"></td>
-                                            <td class="text-center"><img src="../../img/icons/logo.png" alt="Candidate Image" style="width: 40px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/icons/logo.png')"></td>
-                                            <td>31/06/2023</td>
-											<td>Sample</td>
-                                            <td>Pending</td>
+                                            <td class="<?php echo ($row['status'] == 'Pending') ? 'text-warning' : 'text-success'; ?>">
+												<?php echo $row['status']; ?>
+											</td>
                                             <td>
-                                                <button class="btn btn-success">Book</button>
+												<a href="../include/approve-booking.php?client_id=<?php echo $row['client_id']; ?>" class="btn btn-success">Book</a>
                                                 <button class="btn btn-danger">Reject</button>
                                             </td>
 										</tr>
 
-										<?php
-										}
-									}
-									}
-								?>
-										
-									</tbody>
-								</table>
+									<?php
+            							}
+            						?>
+            						</tbody>
+        						</table>
+        						<?php
+    							}
+					}
+					?>
 							</div>
 						</div>
 						

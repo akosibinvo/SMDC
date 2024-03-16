@@ -1,7 +1,8 @@
 <?php
 require "../php/connection.php";
-include "../admin/include/booking.php";
-include "../admin/include/imageHandler.php";
+// include "../admin/include/client_info.php";
+// include "../admin/include/imageHandler.php";
+include "../admin/include/transaction.php";
 
 ?>
 
@@ -138,26 +139,17 @@ include "../admin/include/imageHandler.php";
                                         <div class="row mb-4">
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">First Name</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="user"></i></span>
-                                                    <input class="form-control" type="text" name="firstname" pattern="[A-Za-z\s]+" placeholder="Enter your first name" required>
-                                                </div>
+                                                <input class="form-control" type="text" name="firstname" pattern="[A-Za-z\s]+" placeholder="Enter your first name" required>
                                             </div>
                                             
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Middle Name</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="user"></i></span>
-                                                    <input class="form-control" type="text" name="middlename" pattern="[A-Za-z\s]+" placeholder="Enter your middle name" required>
-                                                </div>
+                                                <input class="form-control" type="text" name="middlename" pattern="[A-Za-z\s]+" placeholder="Enter your middle name" required>
                                             </div>
 
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Last Name</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text background-blue"><i class="align-middle text-white" data-feather="user"></i></i></span>
-                                                    <input class="form-control" type="text" name="lastname" pattern="[A-Za-z\s]+" placeholder="Enter your last name" required>
-                                                </div>
+                                                <input class="form-control" type="text" name="lastname" pattern="[A-Za-z\s]+" placeholder="Enter your last name" required>
                                             </div>
 
                                             <!-- <div class="form-group col-md-3">

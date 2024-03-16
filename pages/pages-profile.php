@@ -388,7 +388,7 @@ require "../php/connection.php"
 															<th>Unit Code</th>
 															<th>Amount</th>
 															<th>Date</th>
-															<th>Account Type</th>
+															<th>Status</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -397,7 +397,7 @@ require "../php/connection.php"
 															<td>Unit 1</td>
 															<td>2,500,000</td>
 															<td>03/14/2024</td>
-															<td>Regular</td>
+															<td>Booked</td>
 														</tr>
 													</tbody>
 												</table>
