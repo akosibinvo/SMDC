@@ -143,7 +143,7 @@ require "../php/connection.php"
 						</div>
 					</div>
 
-                    <div class="row" >
+                    <!-- <div class="row" >
                         <div class="col-12 col-md-12 d-flex">
 
                             
@@ -162,7 +162,7 @@ require "../php/connection.php"
                             </div>
 						</div>
 
-                    </div>
+                    </div> -->
 
                     <div class="row mb-3">
 						<div class="col-12 col-md-12 d-flex">

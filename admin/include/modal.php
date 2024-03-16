@@ -40,6 +40,11 @@ include "addProject.php";
                         <input class="form-control" type="text" name="unitcode" placeholder="Enter unit code" required>
                      </div>
 
+                     <div class="form-group mb-3">
+                        <label class="form-label">Amount</label>
+                        <input class="form-control" type="number" name="amount" placeholder="Enter unit amount" required>
+                     </div>
+
                      <div class="modal-footer mt-5">
                         <button type="submit" name="submit" class="btn btn-primary">Add Project</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -66,14 +71,23 @@ include "addProject.php";
                   <form action="../include/editModal.php" method="post" enctype="multipart/form-data">
                      <input type="hidden" name="update_id" id="update_id">
                      <div class="row mb-3">
-                        <div class="form-group col-md-6">
+
+                        <div class="form-group mb-3">
                            <label class="form-label">Project Name</label>
                            <input class="form-control" type="text" name="projectname" id="projectname" placeholder="Enter project name" required>
                         </div>
-                        <div class="form-group col-md-6">
+
+                        <div class="form-group mb-3">
                            <label class="form-label">Unit Code</label>
                            <input class="form-control" type="text" name="unitcode" id="unitcode" placeholder="Enter unit code" required>
                         </div>
+                        
+
+                        <div class="form-group mb-3">
+                           <label class="form-label">Amount</label>
+                           <input class="form-control" type="number" name="amount" id="amount" placeholder="Enter unit amount" required>
+                        </div>
+
                      </div>
 
                      <div class="modal-footer">
@@ -82,6 +96,7 @@ include "addProject.php";
                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                      </div>
+
                   </form>
                </div>
             </div>

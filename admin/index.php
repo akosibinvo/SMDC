@@ -51,12 +51,6 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages/pages-archives.php">
-              				<i class="align-middle" data-feather="archive"></i> <span class="align-middle">Booking Archives</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages/pages-approved.php">
               				<i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Approved Bookings</span>
             			</a>

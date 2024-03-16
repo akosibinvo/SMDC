@@ -1,3 +1,7 @@
+<?php 
+   include '../../php/connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,12 +46,6 @@
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-booking-approval.php">
               				<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking Approval</span>
-            			</a>
-					</li>
-
-                    <li class="sidebar-item">
-						<a class="sidebar-link" href="pages-archives.php">
-              				<i class="align-middle" data-feather="archive"></i> <span class="align-middle">Booking Archives</span>
             			</a>
 					</li>
 
@@ -131,30 +129,49 @@
 											<th>Name</th>
 											<th>Unit Code</th>
 											<th>Amount</th>
-											<th>Holding</th>
-                                            <th>Reservation Agreement</th>
-                                            <th>ID(with speciment)</th>
+											<th>RA</th>
+                                            <th>Holding</th>
+                                            <th>RF</th>
+											<th>ID</th>
                                             <th>Date</th>
 											<th>Agent Name</th>
                                             <th>Status</th>
 										</tr>
 									</thead>
+									<?php
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked'";
+										$res_booking = mysqli_query($conn, $sql_booking);
+
+										if ($res_booking == TRUE) {
+											$count_get = mysqli_num_rows($res_booking);
+											if ($count_get > 0) {
+									?>
+									<?php
+            							while ($row = mysqli_fetch_assoc($res_booking)) {
+                					?>
 									<tbody>
 										<tr class="text-center">
+											<td> <?php echo $row['firstname']; ?> </td>
+											<td> <?php echo $row['Unit_code']; ?> </td>
+											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ' '); ?></td>
+											<td class="text-center"> <img src="../../img/documents/<?php echo $row['RA']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['RA']; ?>')"></td>
+											<td class="text-center"> <img src="../../img/documents/<?php echo $row['Holding']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['Holding']; ?>')"></td>
+                                            <td class="text-center"> <img src="../../img/documents/<?php echo $row['RF']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['RF']; ?>')"></td>
+                                            <td class="text-center"> <img src="../../img/documents/<?php echo $row['ID']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['ID']; ?>')"></td>
+                                            <td><?php echo $row['Transaction_date']; ?></td>
 											<td>Sample</td>
-											<td>Unit 1</td>
-											<td>2,500,000</td>
-											<td class="text-center"><img src="../../img/icons/logo.png" alt="Candidate Image" style="width: 40px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/icons/logo.png')"></td>
-                                            <td class="text-center"><img src="../../img/icons/logo.png" alt="Candidate Image" style="width: 40px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/icons/logo.png')"></td>
-                                            <td class="text-center"><img src="../../img/icons/logo.png" alt="Candidate Image" style="width: 40px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/icons/logo.png')"></td>
-                                            <td>31/06/2023</td>
-											<td>Sample</td>
-                                            <td class="fw-bold text-success">Booked</td>
+                                            <td class="text-success fw-bold"><?php echo $row['status']; ?></td>
 										</tr>
-										
-										
-									</tbody>
-								</table>
+
+									<?php
+            							}
+            						?>
+            						</tbody>
+        						</table>
+        						<?php
+    							}
+					}
+					?>
 							</div>
 						</div>
 						

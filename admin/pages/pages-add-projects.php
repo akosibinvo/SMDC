@@ -51,12 +51,6 @@
 					</li>
 
                     <li class="sidebar-item">
-						<a class="sidebar-link" href="pages-archives.php">
-              				<i class="align-middle" data-feather="archive"></i> <span class="align-middle">Booking Archives</span>
-            			</a>
-					</li>
-
-                    <li class="sidebar-item">
 						<a class="sidebar-link" href="pages-approved.php">
               				<i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Approved Bookings</span>
             			</a>
@@ -148,6 +142,7 @@
 										<tr class="text-center">
 											<th>Project Name</th>
 											<th>Unit Code</th>
+											<th>Amount</th>
 											<th>Action</th>
 											
 										</tr>
@@ -163,11 +158,13 @@
 												$project_id = $rows_unitInfo['id'];
                                                 $projectname = $rows_unitInfo['Project_name'];
                                                 $unitcode = $rows_unitInfo['Unit_code'];
+												$amount = $rows_unitInfo['Amount'];
                                     ?>
                                         <tr class="text-center">
 											<td class="d-none"> <?php echo $project_id; ?></td>
                                             <td><?php echo $projectname; ?></td>
                                             <td><?php echo $unitcode; ?></td>
+											<td><?php echo '₱' . ' ' . number_format($amount, 0, '.', ' '); ?></td>
                                             <td>
                                                 <button class="btn btn-success editbtn">Edit</button>
                                                 <button class="btn btn-danger">Remove</button>
@@ -215,6 +212,7 @@
                  $('#update_id').val(data[0]);
                  $('#projectname').val(data[1]);
                  $('#unitcode').val(data[2]);
+				 $('#amount').val(data[3]);
 
              });
 			 

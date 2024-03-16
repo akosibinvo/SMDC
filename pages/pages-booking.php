@@ -271,7 +271,7 @@ include "../admin/include/transaction.php";
                                             </div>
                                         </div>
 
-                                        <div class="row mb-5">
+                                        <div class="row mb-3">
                                             <label for="inputPassword" class="col-sm-2 col-form-label">Project Name</label>
                                             <div class="col-md-4">
                                             <select class="form-select" id="projectName" name="projectName">
@@ -318,7 +318,33 @@ include "../admin/include/transaction.php";
 												?>
                                             </select>
                                             </div>
-                                        </div>
+                                            </div> 
+
+                                            <div class="row mb-5">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">Amount</label>
+                                            <div class="col-md-4">
+                                            <select class="form-select" id="amount" name="amount">
+                                                <option value="">Select Unit Amount</option>
+                                                <?php
+													$sql_amount = "SELECT * FROM unit_info";
+													$res_amount = mysqli_query($conn, $sql_amount);
+
+													if($res_amount == TRUE){
+													$count_get = mysqli_num_rows($res_amount);
+													if($count_get > 0){
+														while($rows_amount = mysqli_fetch_assoc($res_amount)){
+															$amount = $rows_amount['Amount'];   
+															?>
+															<option value="<?php echo '₱' . ' ' . number_format($amount, 0, '.', ' '); ?>"><?php echo '₱' . ' ' . number_format($amount, 0, '.', ' '); ?></option>
+															<?php
+														}
+													}
+													}
+												?>
+                                            </select>
+                                            </div> 
+                                            </div>
+                                        
 
                                         
 

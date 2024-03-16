@@ -210,12 +210,12 @@ require "php/connection.php"
 						</div>
 					</div> -->
 
-					<div class="row">
+					<div class="row mb-3">
 						<div class="col-12 col-md-12 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Latest Transaction</h5>
+									<h5 class="card-title mb-0">Pending Bookings</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
@@ -224,19 +224,88 @@ require "php/connection.php"
 											<th>Unit Code</th>
 											<th>Amount</th>
 											<th>Date</th>
-											<th>Account Type</th>
+											<th>Status</th>
 										</tr>
 									</thead>
+									<?php
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending'";
+										$res_booking = mysqli_query($conn, $sql_booking);
+
+										if ($res_booking == TRUE) {
+											$count_get = mysqli_num_rows($res_booking);
+											if ($count_get > 0) {
+									?>
+									<?php
+            							while ($row = mysqli_fetch_assoc($res_booking)) {
+                					?>
 									<tbody>
 										<tr class="text-center">
-											<td>Sample</td>
-											<td>Unit 1</td>
-											<td>2,500,000</td>
-											<td>03/14/2024</td>
-											<td>Regular</td>
+											<td> <?php echo $row['firstname']; ?> </td>
+											<td> <?php echo $row['Unit_code']; ?> </td>
+											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ' '); ?></td>
+											<td><?php echo $row['Transaction_date']; ?></td>
+											<td class="text-warning fw-bold"><?php echo $row['status']; ?></td>
 										</tr>
-									</tbody>
-								</table>
+										<?php
+            							}
+            						?>
+            						</tbody>
+        						</table>
+        						<?php
+    							}
+								}
+								?>
+							</div>
+						</div>
+						
+					</div>
+
+
+					<div class="row mb-3">
+						<div class="col-12 col-md-12 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
+
+									<h5 class="card-title mb-0">Latest Bookings</h5>
+								</div>
+								<table class="table table-hover my-0">
+									<thead>
+										<tr class="text-center">
+											<th>Name</th>
+											<th>Unit Code</th>
+											<th>Amount</th>
+											<th>Date</th>
+											<th>Status</th>
+										</tr>
+									</thead>
+									<?php
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked'";
+										$res_booking = mysqli_query($conn, $sql_booking);
+
+										if ($res_booking == TRUE) {
+											$count_get = mysqli_num_rows($res_booking);
+											if ($count_get > 0) {
+									?>
+									<?php
+            							while ($row = mysqli_fetch_assoc($res_booking)) {
+                					?>
+									<tbody>
+										<tr class="text-center">
+											<td> <?php echo $row['firstname']; ?> </td>
+											<td> <?php echo $row['Unit_code']; ?> </td>
+											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ' '); ?></td>
+											<td><?php echo $row['Transaction_date']; ?></td>
+											<td class="text-success fw-bold"><?php echo $row['status']; ?></td>
+										</tr>
+										<?php
+            							}
+            						?>
+            						</tbody>
+        						</table>
+        						<?php
+    							}
+								}
+								?>
 							</div>
 						</div>
 						

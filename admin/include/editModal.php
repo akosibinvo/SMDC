@@ -9,13 +9,14 @@ if (isset($_POST['updatedata'])) {
     // Sanitize and retrieve form data
     $projectname = mysqli_real_escape_string($conn, $_POST['projectname']);
     $unitcode = mysqli_real_escape_string($conn, $_POST['unitcode']);
+    $amount = mysqli_real_escape_string($conn, $_POST['amount']);
 
     // Prepare and execute the SQL query
-    $query = "UPDATE unit_info SET Project_name=?, Unit_code=? WHERE id=?";
+    $query = "UPDATE unit_info SET Project_name=?, Unit_code=?, Amount=? WHERE id=?";
     $stmt = mysqli_prepare($conn, $query);
     
     if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "ssi", $projectname, $unitcode, $id);
+        mysqli_stmt_bind_param($stmt, "ssii", $projectname, $unitcode, $amount, $id);
 
         if (mysqli_stmt_execute($stmt)) {
             $_SESSION['edit'] = true;

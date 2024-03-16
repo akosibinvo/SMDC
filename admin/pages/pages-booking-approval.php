@@ -1,4 +1,3 @@
-
 <?php 
    include '../../php/connection.php';
 ?>
@@ -90,12 +89,6 @@
 					<li class="sidebar-item active">
 						<a class="sidebar-link" href="#">
               				<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking Approval</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-archives.php">
-              				<i class="align-middle" data-feather="archive"></i> <span class="align-middle">Booking Archives</span>
             			</a>
 					</li>
 
@@ -192,7 +185,7 @@
 									</thead>
 									<tbody>
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking";
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending'";
 										$res_booking = mysqli_query($conn, $sql_booking);
 
 										if ($res_booking == TRUE) {
@@ -205,19 +198,17 @@
 										<tr class="text-center">
 											<td> <?php echo $row['firstname']; ?> </td>
 											<td> <?php echo $row['Unit_code']; ?> </td>
-											<td>₱ 2,500,000</td>
+											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ' '); ?></td>
 											<td class="text-center"> <img src="../../img/documents/<?php echo $row['RA']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['RA']; ?>')"></td>
 											<td class="text-center"> <img src="../../img/documents/<?php echo $row['Holding']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['Holding']; ?>')"></td>
                                             <td class="text-center"> <img src="../../img/documents/<?php echo $row['RF']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['RF']; ?>')"></td>
                                             <td class="text-center"> <img src="../../img/documents/<?php echo $row['ID']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['ID']; ?>')"></td>
                                             <td><?php echo $row['Transaction_date']; ?></td>
 											<td>Sample</td>
-                                            <td class="<?php echo ($row['status'] == 'Pending') ? 'text-warning' : 'text-success'; ?>">
-												<?php echo $row['status']; ?>
-											</td>
+                                            <td class="text-warning fw-bold"><?php echo $row['status']; ?></td>
                                             <td>
 												<a href="../include/approve-booking.php?client_id=<?php echo $row['client_id']; ?>" class="btn btn-success">Book</a>
-                                                <button class="btn btn-danger">Reject</button>
+                                                <a href="../include/reject-booking.php?client_id=<?php echo $row['client_id']; ?>" class="btn btn-danger">Reject</a>
                                             </td>
 										</tr>
 
