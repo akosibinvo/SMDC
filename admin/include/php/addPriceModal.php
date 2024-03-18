@@ -16,10 +16,10 @@ if (isset($_POST['addprice'])) {
     $date = mysqli_real_escape_string($conn, $_POST['date']);
     $agent = mysqli_real_escape_string($conn, $_POST['agent']);
     $status = mysqli_real_escape_string($conn, $_POST['status']);
-    $amount = mysqli_real_escape_string($conn, $_POST['price']);
+    $amount = mysqli_real_escape_string($conn, $_POST['amount']);
 
     // Prepare and execute the SQL query
-    $query = "UPDATE transaction_booking SET Amount=? WHERE client_id=?";
+    $query = "UPDATE transaction_booking SET Amount=?, `status` = 'Booked' WHERE client_id=?";
     $stmt = mysqli_prepare($conn, $query);
     
     if ($stmt) {
@@ -27,7 +27,7 @@ if (isset($_POST['addprice'])) {
 
         if (mysqli_stmt_execute($stmt)) {
             $_SESSION['edit'] = true;
-            header("Location: ../pages/pages-add-projects.php");
+            header("Location: ../pages/pages-booking-approval.php");
             exit();
         } else {
             $_SESSION['edit'] = false;

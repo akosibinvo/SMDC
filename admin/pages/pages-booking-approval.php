@@ -1,6 +1,6 @@
 <?php 
    include '../../php/connection.php';
-   include '../include/modal.php';
+   include '../include/php/modal.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,12 +12,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="../../img/icons/logo.png" />
 
 	<title>Booking Approval | SMDC JQB</title>
 
 	<link href="../../css/app.css" rel="stylesheet">
-	<link href="../../css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 	<style>
@@ -202,16 +200,17 @@
 												$agent = $rows_booking['agent'];
 												$status = $rows_booking['status'];
 												$amount = $rows_booking['Amount'];
-                                    ?>
+                                    	?>
+
                                         <tr class="text-center">
 											<td class="d-none"> <?php echo $booking_id; ?></td>
                                             <td><?php echo $firstname; ?></td>
                                             <td><?php echo $unitcode; ?></td>
 											<td><?php echo '₱' . ' ' . number_format($amount, 0, '.', ' '); ?></td>
 											<td class="text-center"> <img src="../../img/documents/<?php echo $RA; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $RA; ?>')"></td>
-											<td class="text-center"> <img src="../../img/documents/<?php echo $Holding; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $Holding; ?>')"></td>
-											<td class="text-center"> <img src="../../img/documents/<?php echo $RF; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $RF; ?>')"></td>
-											<td class="text-center"> <img src="../../img/documents/<?php echo $ID; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $ID; ?>')"></td>
+											<td class="text-center"> <img src="../../img/documents/<?php echo $Holding; ?>" alt="Holding Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $Holding; ?>')"></td>
+											<td class="text-center"> <img src="../../img/documents/<?php echo $RF; ?>" alt="RF Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $RF; ?>')"></td>
+											<td class="text-center"> <img src="../../img/documents/<?php echo $ID; ?>" alt="ID Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $ID; ?>')"></td>
                                             <td><?php echo $date; ?></td>
 											<td><?php echo $agent; ?></td>
 											<td><?php echo $status; ?></td>
@@ -271,14 +270,15 @@
                  $('#addprice_id').val(data[0]);
                  $('#firstname').val(data[1]);
                  $('#unitcode').val(data[2]);
-				 $('#RA').val(data[3]);
-				 $('#Holding').val(data[4]);
-                 $('#RF').val(data[5]);
-				 $('#ID').val(data[6]);
-				 $('#date').val(data[7]);
-                 $('#agent').val(data[8]);
-				 $('#status').val(data[9]);
-				 $('#price').val(data[10]);
+				 $('#amount').val(data[3]);
+				 $('#RA').val(data[4]);
+				 $('#Holding').val(data[5]);
+                 $('#RF').val(data[6]);
+				 $('#ID').val(data[7]);
+				 $('#Transaction_date').val(data[8]);
+                 $('#agent').val(data[9]);
+				 $('#status').val(data[10]);
+				 
 
              });
 			 

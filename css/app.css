@@ -1889,10 +1889,10 @@ progress {
     }
 }
 .form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
-    background-color: rgba(0, 48, 255, .5);
+    background-color: #b3daff;
 }
 .form-control:hover:not(:disabled):not([readonly])::file-selector-button {
-    background-color: rgba(0, 48, 255, .5);
+    background-color: #b3daff;
 }
 .form-control-plaintext {
     background-color: transparent;
@@ -2595,7 +2595,7 @@ textarea.form-control-lg {
     --bs-btn-bg: #0030ff;
     --bs-btn-border-color: #0030ff;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: rgba(0, 48, 255, .5);
+    --bs-btn-hover-bg: #b3daff;
     --bs-btn-hover-border-color: none;
     --bs-btn-focus-shadow-rgb: 88, 145, 226;
     --bs-btn-active-color: #fff;
@@ -11244,7 +11244,7 @@ body {
     outline: 0
 }
 .sidebar-link:hover {
-    background: rgba(0, 48, 255, .3);
+    background: #b3daff;
     color: #fff;
     border-left-color: transparent;
 }
@@ -11252,7 +11252,7 @@ body {
     color: #fff;
 }
 .sidebar-item.active .sidebar-link:hover, .sidebar-item.active>.sidebar-link {
-    background: rgba(0, 48, 255, .5);
+    background: #b3daff;
     border-left: 5px solid #0030ff;
     color: #fff;
 }
@@ -11325,7 +11325,7 @@ body {
 }
 .stat {
     align-items: center;
-    background: rgba(0, 48, 255, .5);
+    background: #b3daff;
     border-radius: 50%;
     display: flex;
     height: 40px;

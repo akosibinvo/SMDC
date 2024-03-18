@@ -1,6 +1,7 @@
 
 <?php 
    include '../php/connection.php';
+   include 'include/php/modal.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="../img/icons/logo.png" />
+
 
 	<title>Admin Dashboard | SMDC JQB</title>
 
@@ -247,6 +248,9 @@
 									$count_get = mysqli_num_rows($res_clientInfo);
 									if($count_get > 0){
 										while($rows_clientInfo = mysqli_fetch_assoc($res_clientInfo)){
+
+											$details_id = $rows_clientInfo['ID'];
+
 											$firstname = $rows_clientInfo['FirstName'];
 											$middlename = $rows_clientInfo['MiddleName'];
 											$lastname = $rows_clientInfo['LastName'];
@@ -261,25 +265,32 @@
 
 											$phonenumber = $rows_clientInfo['Phone_no'];
 											$passportnumber = $rows_clientInfo['Passport_no'];
-											$address = $rows_clientInfo['Present_address'];
+											$presentAddress = $rows_clientInfo['Present_address'];
+											$permanentAddress = $rows_clientInfo['Permanent_address'];
 											$employername = $rows_clientInfo['Employer_name'];
+											$workAddress = $rows_clientInfo['Work_address'];
 											?>
 											
 											
 										<tr class="text-center">
+											<td class="d-none"> <?php echo $details_id; ?></td>
 											<td><?php echo $firstname;?></td>
 											<td><?php echo $middlename;?></td>
 											<td><?php echo $lastname;?></td>
 											<td><?php echo $birthdate;?></td>
-											<td><button class="btn btn-primary viewbtn">View Details</button></td>
+											<td><button class="btn btn-primary btn-sm viewbtn">View Details</button></td>
 
-                                            <!-- <td><?php echo $civilstatus;?></td>
-											<td><?php echo $citizenship;?></td>
-                                            <td><?php echo $email;?></td>
-                                            <td><?php echo $phonenumber;?></td>
-											<td><?php echo $passportnumber;?></td>
-											<td><?php echo $address;?></td>
-											<td><?php echo $employername;?></td> -->
+											<td class="d-none"><?php echo $tinNo;?></td>
+											<td class="d-none"><?php echo $gender;?></td>
+                                            <td class="d-none"><?php echo $civilstatus;?></td>
+											<td class="d-none"><?php echo $citizenship;?></td>
+                                            <td class="d-none"><?php echo $email;?></td>
+                                            <td class="d-none"><?php echo $phonenumber;?></td>
+											<td class="d-none"><?php echo $passportnumber;?></td>
+											<td class="d-none"><?php echo $presentAddress;?></td>
+											<td class="d-none"><?php echo $permanentAddress;?></td>
+											<td class="d-none"><?php echo $employername;?></td>
+											<td class="d-none"><?php echo $workAddress;?></td>
 										</tr>
 										
 										<?php
@@ -300,13 +311,14 @@
 		</div>
 	</div>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="../js/app.js"></script>
 	<script>
          $(document).ready(function () {
          
              $('.viewbtn').on('click', function () {
          
-                 $('#editModal').modal('show');
+                 $('#viewDetailsModal').modal('show');
          
                  $tr = $(this).closest('tr');
          
@@ -316,10 +328,28 @@
          
                  console.log(data);
          
-                 $('#update_id').val(data[0]);
-                 $('#projectname').val(data[1]);
-                 $('#unitcode').val(data[2]);
-				 $('#amount').val(data[3]);
+                 $('viewdetails_id').val(data[0]);
+                 $('#view_firstname').val(data[1]);
+                 $('#view_middlename').val(data[2]);
+				 $('#view_lastname').val(data[3]);
+
+				 $('#view_birthdate').val(data[4]);
+				 $('#view_birthplace').val(data[5]);
+
+				 $('#view_tin').val(data[6]);
+				 $('#view_gender').val(data[7]);
+				 $('#view_civil').val(data[8]);
+				 $('#view_citizenship').val(data[9]);
+
+				 $('#view_email').val(data[10]);
+				 $('#view_phone').val(data[11]);
+				 $('#view_passport').val(data[12]);
+				 
+				 $('#view_presentAddress').val(data[13]);
+				 $('#view_permanentAddress').val(data[14]);
+
+				 $('#view_employer').val(data[15]);
+				 $('#view_workAddress').val(data[16]);
 
              });
 			 

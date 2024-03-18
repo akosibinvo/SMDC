@@ -1,6 +1,7 @@
 
 <?php
-   include '../include/modal.php';
+   include '../../php/connection.php';
+   include '../include/php/modal.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +13,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="../../img/icons/logo.png" />
 
 	<title>Settings | SMDC JQB</title>
 

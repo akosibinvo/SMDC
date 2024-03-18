@@ -1,5 +1,8 @@
 <?php
-require "php/connection.php"
+require "php/connection.php";
+
+session_start();
+
 ?>
 
 
@@ -98,14 +101,31 @@ require "php/connection.php"
               				</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-            				<span class="text-dark">User</span>
+            				<span class="text-dark">
+							<?php
+								if (isset($_SESSION['user_id'])) {
+									$id = $_SESSION['user_id'];
+									$sql = "SELECT * FROM users WHERE ID = $id";
+									$result = $conn->query($sql);
+									if ($result->num_rows > 0) {
+										// Output data of each row
+										while ($row = $result->fetch_assoc()) {
+											echo $row["firstName"];
+										}
+									}
+								} else {
+									header("Location: pages/pages-sign-in.php");
+								}
+
+							?>
+							</span>
               				</a>
 
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
+								<a class="dropdown-item" href="php/logout.php">Log out</a>
 							</div>
 						</li>
 					</ul>
