@@ -475,14 +475,11 @@ include "../admin/include/php/transaction.php";
 	<script src="../js/app.js"></script>
 
     <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
         'use strict'
 
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
         var forms = document.querySelectorAll('.needs-validation')
 
-        // Loop over them and prevent submission
         Array.prototype.slice.call(forms)
             .forEach(function (form) {
             form.addEventListener('submit', function (event) {
@@ -495,7 +492,7 @@ include "../admin/include/php/transaction.php";
             }, false)
             })
         })()
-    </script>
+      </script>
 
     <script>
         fetch('https://restcountries.com/v3.1/all')

@@ -21,7 +21,7 @@
             </div>
             <div class="modal-body">
 
-               <form action="../include/php/addPriceModal.php" method="post" enctype="multipart/form-data" class="px-2">
+               <form action="../include/php/addPriceModal.php" method="post" enctype="multipart/form-data" class="px-2 needs-validation" novalidate>
                      <input type="hidden" name="addprice_id" id="addprice_id">
 
                   <div class="row mb-4">
@@ -81,13 +81,16 @@
                      <div class="form-group col-md-6">
                            <label class="form-label">Price</label>
                            <input class="form-control" type="text" pattern="[0-9]*" name="amount" id="amount" placeholder="Enter numbers only" required>
+                           <div class="invalid-feedback">
+                              Invalid price format. Please enter a valid price without spaces.
+                           </div>
                      </div>
                   </div>
                   
 
                   <div class="modal-footer mt-5">
                      <button type="submit" name="addprice" class="btn btn-primary">Complete Booking</button>
-                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                   </div>
 
                </form>
@@ -207,7 +210,7 @@
 
                   <div class="modal-footer mt-5">
                      <!-- <button type="submit" name="addprice" class="btn btn-primary">Complete Booking</button> -->
-                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                   </div>
 
                </form>
@@ -310,7 +313,25 @@
          </div>
       </div>
 
+      <script>
+         (function () {
+         'use strict'
+         
+         var forms = document.querySelectorAll('.needs-validation')
 
+         Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+               form.addEventListener('submit', function (event) {
+               if (!form.checkValidity()) {
+                  event.preventDefault()
+                  event.stopPropagation()
+               }
+
+               form.classList.add('was-validated')
+               }, false)
+            })
+         })()
+      </script>
 
    </body>
 </html>

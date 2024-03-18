@@ -1,5 +1,5 @@
 <?php
-require "../../php/connection.php";
+require "../../../php/connection.php";
 
 session_start();
 
@@ -27,7 +27,7 @@ if (isset($_POST['addprice'])) {
 
         if (mysqli_stmt_execute($stmt)) {
             $_SESSION['edit'] = true;
-            header("Location: ../pages/pages-booking-approval.php");
+            header("Location: ../../pages/pages-booking-approval.php");
             exit();
         } else {
             $_SESSION['edit'] = false;

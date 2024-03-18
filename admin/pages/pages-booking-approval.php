@@ -98,8 +98,8 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-add-projects.php">
-              				<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Add Projects</span>
+						<a class="sidebar-link" href="">
+              				<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Manage Sellers</span>
             			</a>
 					</li>
 
@@ -248,6 +248,19 @@
 	</div>
 	</div>
 
+	<script>
+		function enlargeImg(imgSrc) {
+			var modal = document.getElementById('imageModal');
+			var modalImg = document.getElementById('expandedImage');
+			modal.style.display = 'block';
+			modalImg.src = imgSrc;
+		}
+
+		document.getElementsByClassName('closeBtn')[0].onclick = function () {
+			document.getElementById('imageModal').style.display = 'none';
+		};
+	</script>
+
 
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -285,18 +298,7 @@
          });
       </script>
 
-	<script>
-		function enlargeImg(imgSrc) {
-			var modal = document.getElementById('imageModal');
-			var modalImg = document.getElementById('expandedImage');
-			modal.style.display = 'block';
-			modalImg.src = imgSrc;
-		}
 
-		document.getElementsByClassName('closeBtn')[0].onclick = function () {
-			document.getElementById('imageModal').style.display = 'none';
-		};
-	</script>
 
 </body>
 

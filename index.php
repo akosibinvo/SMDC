@@ -146,7 +146,7 @@ session_start();
 					</div>
 					
 					<div class="row d-flex justify-content-center">
-						<div class="col-md-6 col-lg-4 mx-auto mb-4">
+						<div class="col-md-6 col-lg-3 mx-auto mb-4">
 							<div class="card">
 								<div class="card-body">
 									<div class="row">
@@ -160,7 +160,21 @@ session_start();
 											</div>
 										</div>
 									</div>
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"> 1,000,000 </h1>
+
+									<?php
+										$sql_booking = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked'";
+										$res_booking = mysqli_query($conn, $sql_booking);
+
+										if ($res_booking) {
+											$row = mysqli_fetch_assoc($res_booking);
+											$total_amount = $row['total_amount'];
+									
+
+										} else {
+											echo "Error: " . mysqli_error($conn);
+										}
+									?>
+									<h1 class="mt-1 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_amount) ?></h1>
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
@@ -169,7 +183,7 @@ session_start();
 							</div>
 						</div>
 
-						<div class="col-md-6 col-lg-4 mx-auto mb-4">
+						<div class="col-md-6 col-lg-3 mx-auto mb-4">
 							<div class="card">
 								<div class="card-body">
 									<div class="row">
@@ -183,7 +197,7 @@ session_start();
 											</div>
 										</div>
 									</div>
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"> 1,000,000 </h1>
+									<h1 class="mt-1 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> 1,000,000 </h1>
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
 										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
@@ -192,7 +206,37 @@ session_start();
 							</div>
 						</div>
 
-						<div class="col-md-6 col-lg-4 mx-auto mb-4">
+						<div class="col-md-6 col-lg-3 mx-auto mb-4">
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<h5 class="card-title">Pending Bookings</h5>
+										</div>
+
+										<div class="col-auto">
+											<div class="stat text-primary">
+												<i class="align-middle" data-feather="book"></i>
+											</div>
+										</div>
+									</div>
+
+									<?php
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending'";
+										$res_booking = mysqli_query($conn, $sql_booking);
+										$count = mysqli_num_rows($res_booking);
+									?>
+
+									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count ?> </h1>
+									<div class="mb-0">
+										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
+										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6 col-lg-3 mx-auto mb-4">
 							<div class="card">
 								<div class="card-body">
 									<div class="row">
@@ -206,7 +250,14 @@ session_start();
 											</div>
 										</div>
 									</div>
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"> 3 </h1>
+
+									<?php
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked'";
+										$res_booking = mysqli_query($conn, $sql_booking);
+										$count = mysqli_num_rows($res_booking);
+									?>
+
+									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count ?> </h1>
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
@@ -247,6 +298,8 @@ session_start();
 											<th>Status</th>
 										</tr>
 									</thead>
+									
+									<tbody>
 									<?php
 										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending'";
 										$res_booking = mysqli_query($conn, $sql_booking);
@@ -258,7 +311,6 @@ session_start();
 									<?php
             							while ($row = mysqli_fetch_assoc($res_booking)) {
                 					?>
-									<tbody>
 										<tr class="text-center">
 											<td> <?php echo $row['firstname']; ?> </td>
 											<td> <?php echo $row['Unit_code']; ?> </td>
@@ -270,11 +322,12 @@ session_start();
             							}
             						?>
             						</tbody>
-        						</table>
-        						<?php
+									<?php
     							}
 								}
 								?>
+        						</table>
+        						
 							</div>
 						</div>
 						

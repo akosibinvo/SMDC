@@ -26,7 +26,7 @@
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="../index.php">
+				<a class="sidebar-brand" href="#">
           			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../img/icons/logo.png" alt=""> </span>
         		</a>
 
@@ -36,7 +36,7 @@
 					</li>
 
 					<li class="sidebar-item active">
-						<a class="sidebar-link" href="../index.php">
+						<a class="sidebar-link" href="#">
               			<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
             			</a>
 					</li>
@@ -58,8 +58,8 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages/pages-add-projects.php">
-              				<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Add Projects</span>
+						<a class="sidebar-link" href="">
+              				<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Manage Sellers</span>
             			</a>
 					</li>
 
@@ -120,7 +120,7 @@
 
 					<h1 class="h3"><strong class="title-dashboard">Overview</strong> Dashboard</h1>
 					
-					<div class="row d-flex justify-content-center">
+					<div class="row d-flex justify-content-center mt-3">
 						<div class="col-md-6 col-lg-3 mx-auto mb-4">
 							<div class="card">
 								<div class="card-body">
@@ -201,7 +201,14 @@
 											</div>
 										</div>
 									</div>
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"> 6 </h1>
+
+									<?php
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked'";
+										$res_booking = mysqli_query($conn, $sql_booking);
+										$count = mysqli_num_rows($res_booking);
+									?>
+
+									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count ?> </h1>
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 									</div>

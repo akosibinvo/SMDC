@@ -16,6 +16,48 @@
 
 	<link href="../../css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+	<style>
+		.popUp{
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.7);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 9999;
+			
+		}
+	
+		/* Pop-up Content */
+		.popUp-contents {
+			width: 1000px;
+			height: 500px;
+			z-index: 10000;
+			
+		}
+	
+		.closeBtn {
+			position: absolute;
+			top: 20px;
+			right: 50px;
+			font-size: 30px;
+			cursor: pointer;
+			color: white; 
+			border-radius: 50%;
+			padding: 0;
+			z-index: 10001;
+		}
+
+		.closeBtn:hover {
+			color: red;
+		}
+
+	</style>
+
 </head>
 
 <body>
@@ -54,8 +96,8 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-add-projects.php">
-              				<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Add Projects</span>
+						<a class="sidebar-link" href="">
+              				<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Manage Sellers</span>
             			</a>
 					</li>
 
@@ -180,6 +222,28 @@
 
 		</div>
 	</div>
+
+	<!-- Pop-up to display the expanded image -->
+	<div id="imageModal" class="popUp" style="display: none;">
+	<span class="closeBtn" onclick="closeModal()">&times;</span>
+	<div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+		<img class="popUp-contents" id="expandedImage">
+	</div>
+	</div>
+
+	<script>
+		function enlargeImg(imgSrc) {
+			var modal = document.getElementById('imageModal');
+			var modalImg = document.getElementById('expandedImage');
+			modal.style.display = 'block';
+			modalImg.src = imgSrc;
+		}
+
+		document.getElementsByClassName('closeBtn')[0].onclick = function () {
+			document.getElementById('imageModal').style.display = 'none';
+		};
+	</script>
+
 
 	<script src="../../js/app.js"></script>
 	<script src="../../js/script.js"></script>
