@@ -222,9 +222,12 @@
 								<table class="table table-hover my-0">
 									<thead>
 										<tr class="text-center">
-											<th>Name</th>
+											<th>First Name</th>
+											<th>Middle Name</th>
+											<th>Last Name</th>
 											<th>Date of Birth</th>
-											<th>Tin No.</th>
+											<th>Action</th>
+											<!-- <th>Tin No.</th>
 											<th>Gender</th>
                                             <th>Civil Status</th>
                                             <th>Citizenship</th>
@@ -232,7 +235,7 @@
 											<th>Phone No.</th>
                                             <th>Passport No.</th>
                                             <th>Address</th>
-											<th>Employer Name</th>
+											<th>Employer Name</th> -->
 										</tr>
 									</thead>
 									<tbody>
@@ -247,7 +250,7 @@
 											$firstname = $rows_clientInfo['FirstName'];
 											$middlename = $rows_clientInfo['MiddleName'];
 											$lastname = $rows_clientInfo['LastName'];
-											$fullname = $firstname.$lastname;
+
 											
 											$birthdate = $rows_clientInfo['Date_of_birth'];
 											$tinNo = $rows_clientInfo['Tin_no'];
@@ -264,17 +267,19 @@
 											
 											
 										<tr class="text-center">
-											<td><?php echo $fullname;?></td>
+											<td><?php echo $firstname;?></td>
+											<td><?php echo $middlename;?></td>
+											<td><?php echo $lastname;?></td>
 											<td><?php echo $birthdate;?></td>
-											<td><?php echo $tinNo;?></td>
-											<td><?php echo $gender;?></td>
-                                            <td><?php echo $civilstatus;?></td>
+											<td><button class="btn btn-primary viewbtn">View Details</button></td>
+
+                                            <!-- <td><?php echo $civilstatus;?></td>
 											<td><?php echo $citizenship;?></td>
                                             <td><?php echo $email;?></td>
                                             <td><?php echo $phonenumber;?></td>
 											<td><?php echo $passportnumber;?></td>
 											<td><?php echo $address;?></td>
-											<td><?php echo $employername;?></td>
+											<td><?php echo $employername;?></td> -->
 										</tr>
 										
 										<?php
@@ -296,7 +301,30 @@
 	</div>
 
 	<script src="../js/app.js"></script>
-	<script src="../js/script.js"></script>
+	<script>
+         $(document).ready(function () {
+         
+             $('.viewbtn').on('click', function () {
+         
+                 $('#editModal').modal('show');
+         
+                 $tr = $(this).closest('tr');
+         
+                 var data = $tr.children("td").map(function () {
+                     return $(this).text();
+                 }).get();
+         
+                 console.log(data);
+         
+                 $('#update_id').val(data[0]);
+                 $('#projectname').val(data[1]);
+                 $('#unitcode').val(data[2]);
+				 $('#amount').val(data[3]);
+
+             });
+			 
+         });
+      </script>
 
 
 </body>

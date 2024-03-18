@@ -9,7 +9,6 @@ if (isset($_POST['book'])) {
 
     $firstname = $_POST['firstname'];
     $unitcode = $_POST['unitCode'];
-    $amount = $_POST['amount'];
     $status = 'Pending';
 
     // Check if 'ra' file is uploaded
@@ -77,9 +76,9 @@ if (isset($_POST['book'])) {
     }
 
     // Database insertion logic using prepared statements
-    $sql = "INSERT INTO transaction_booking (firstname, Unit_code, Amount, RA, Holding, RF, ID, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO transaction_booking (firstname, Unit_code, RA, Holding, RF, ID, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssisssss", $firstname, $unitcode, $amount, $filename_ra, $filename_rf, $filename_holding, $filename_id, $status);
+    $stmt->bind_param("sssssss", $firstname, $unitcode, $filename_ra, $filename_rf, $filename_holding, $filename_id, $status);
 
     if ($stmt->execute()) {
         // Insertion successful

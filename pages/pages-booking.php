@@ -271,10 +271,12 @@ include "../admin/include/transaction.php";
                                             </div>
                                         </div>
 
-                                        <div class="row mb-3">
+                                        <div class="row mb-5">
+
                                             <label for="inputPassword" class="col-sm-2 col-form-label">Project Name</label>
                                             <div class="col-md-4">
-                                            <select class="form-select" id="projectName" name="projectName">
+                                            <input class="form-control" type="text" name="projectName" placeholder="Enter project name" required>
+                                            <!-- <select class="form-select" id="projectName" name="projectName">
                                                 <option value="">Select Project</option>
                                                 <?php
 													$sql_projectName = "SELECT * FROM unit_info";
@@ -292,13 +294,14 @@ include "../admin/include/transaction.php";
 													}
 													}
 												?>
-                                            </select>
+                                            </select> -->
                                             
                                             </div>
 
-                                            <label for="inputPassword" class="col-sm-1 col-form-label">Unit Code</label>
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">Unit Code</label>
                                             <div class="col-md-4">
-                                            <select class="form-select" id="unitCode" name="unitCode">
+                                            <input class="form-control" type="text" name="unitCode" placeholder="Enter unit code" required>
+                                            <!-- <select class="form-select" id="unitCode" name="unitCode">
                                                 <option value="">Select Unit Code</option>
                                                 <?php
 													$sql_unitCode = "SELECT * FROM unit_info";
@@ -316,34 +319,11 @@ include "../admin/include/transaction.php";
 													}
 													}
 												?>
-                                            </select>
+                                            </select> -->
                                             </div>
                                             </div> 
 
-                                            <div class="row mb-5">
-                                            <label for="inputPassword" class="col-sm-2 col-form-label">Amount</label>
-                                            <div class="col-md-4">
-                                            <select class="form-select" id="amount" name="amount">
-                                                <option value="">Select Unit Amount</option>
-                                                <?php
-													$sql_amount = "SELECT * FROM unit_info";
-													$res_amount = mysqli_query($conn, $sql_amount);
-
-													if($res_amount == TRUE){
-													$count_get = mysqli_num_rows($res_amount);
-													if($count_get > 0){
-														while($rows_amount = mysqli_fetch_assoc($res_amount)){
-															$amount = $rows_amount['Amount'];   
-															?>
-															<option value="<?php echo '₱' . ' ' . number_format($amount, 0, '.', ' '); ?>"><?php echo '₱' . ' ' . number_format($amount, 0, '.', ' '); ?></option>
-															<?php
-														}
-													}
-													}
-												?>
-                                            </select>
-                                            </div> 
-                                            </div>
+                                        
                                         
 
                                         

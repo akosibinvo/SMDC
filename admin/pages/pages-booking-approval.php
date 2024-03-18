@@ -1,5 +1,6 @@
 <?php 
    include '../../php/connection.php';
+   include '../include/modal.php';
 ?>
 
 <!DOCTYPE html>
@@ -185,42 +186,50 @@
 									</thead>
 									<tbody>
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending'";
-										$res_booking = mysqli_query($conn, $sql_booking);
+                                        $sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending' ";
+                                        $res_booking = mysqli_query($conn, $sql_booking);
 
-										if ($res_booking == TRUE) {
-											$count_get = mysqli_num_rows($res_booking);
-											if ($count_get > 0) {
-									?>
-									<?php
-            							while ($row = mysqli_fetch_assoc($res_booking)) {
-                					?>
-										<tr class="text-center">
-											<td> <?php echo $row['firstname']; ?> </td>
-											<td> <?php echo $row['Unit_code']; ?> </td>
-											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ' '); ?></td>
-											<td class="text-center"> <img src="../../img/documents/<?php echo $row['RA']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['RA']; ?>')"></td>
-											<td class="text-center"> <img src="../../img/documents/<?php echo $row['Holding']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['Holding']; ?>')"></td>
-                                            <td class="text-center"> <img src="../../img/documents/<?php echo $row['RF']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['RF']; ?>')"></td>
-                                            <td class="text-center"> <img src="../../img/documents/<?php echo $row['ID']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['ID']; ?>')"></td>
-                                            <td><?php echo $row['Transaction_date']; ?></td>
-											<td>Sample</td>
-                                            <td class="text-warning fw-bold"><?php echo $row['status']; ?></td>
-                                            <td>
-												<a href="../include/approve-booking.php?client_id=<?php echo $row['client_id']; ?>" class="btn btn-success">Book</a>
-                                                <a href="../include/reject-booking.php?client_id=<?php echo $row['client_id']; ?>" class="btn btn-danger">Reject</a>
+                                        if ($res_booking) {
+                                            while ($rows_booking = mysqli_fetch_assoc($res_booking)) {
+												$booking_id = $rows_booking['client_id'];
+                                                $firstname = $rows_booking['firstname'];
+                                                $unitcode = $rows_booking['Unit_code'];
+												$RA = $rows_booking['RA'];
+												$Holding = $rows_booking['Holding'];
+												$RF = $rows_booking['RF'];
+												$ID = $rows_booking['ID'];
+												$date = $rows_booking['Transaction_date'];
+												$agent = $rows_booking['agent'];
+												$status = $rows_booking['status'];
+												$amount = $rows_booking['Amount'];
+                                    ?>
+                                        <tr class="text-center">
+											<td class="d-none"> <?php echo $booking_id; ?></td>
+                                            <td><?php echo $firstname; ?></td>
+                                            <td><?php echo $unitcode; ?></td>
+											<td><?php echo '₱' . ' ' . number_format($amount, 0, '.', ' '); ?></td>
+											<td class="text-center"> <img src="../../img/documents/<?php echo $RA; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $RA; ?>')"></td>
+											<td class="text-center"> <img src="../../img/documents/<?php echo $Holding; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $Holding; ?>')"></td>
+											<td class="text-center"> <img src="../../img/documents/<?php echo $RF; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $RF; ?>')"></td>
+											<td class="text-center"> <img src="../../img/documents/<?php echo $ID; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $ID; ?>')"></td>
+                                            <td><?php echo $date; ?></td>
+											<td><?php echo $agent; ?></td>
+											<td><?php echo $status; ?></td>
+
+											<td>
+                                                <button class="btn btn-success bookbtn">Book</button>
+                                                <button class="btn btn-danger">Remove</button>
                                             </td>
-										</tr>
-
-									<?php
-            							}
-            						?>
+                                        </tr>
+                                    <?php
+                                            }
+                                        } else {
+                                            // Handle error if query fails
+                                            echo "Error: " . mysqli_error($conn);
+                                        }
+                                    ?>
             						</tbody>
         						</table>
-        						<?php
-    							}
-					}
-					?>
 							</div>
 						</div>
 						
@@ -234,28 +243,60 @@
 
 	<!-- Pop-up to display the expanded image -->
 	<div id="imageModal" class="popUp" style="display: none;">
-		<span class="closeBtn" onclick="closeModal()">&times;</span>
-		<div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-			<img class="popUp-contents" id="expandedImage">
-		</div>
-		</div>
-	
-		<script>
+	<span class="closeBtn" onclick="closeModal()">&times;</span>
+	<div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+		<img class="popUp-contents" id="expandedImage">
+	</div>
+	</div>
+
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="../../js/app.js"></script>
+	<script>
+         $(document).ready(function () {
+         
+             $('.bookbtn').on('click', function () {
+         
+                 $('#addPriceModal').modal('show');
+         
+                 $tr = $(this).closest('tr');
+         
+                 var data = $tr.children("td").map(function () {
+                     return $(this).text();
+                 }).get();
+         
+                 console.log(data);
+         
+                 $('#addprice_id').val(data[0]);
+                 $('#firstname').val(data[1]);
+                 $('#unitcode').val(data[2]);
+				 $('#RA').val(data[3]);
+				 $('#Holding').val(data[4]);
+                 $('#RF').val(data[5]);
+				 $('#ID').val(data[6]);
+				 $('#date').val(data[7]);
+                 $('#agent').val(data[8]);
+				 $('#status').val(data[9]);
+				 $('#price').val(data[10]);
+
+             });
+			 
+         });
+      </script>
+
+	<script>
 		function enlargeImg(imgSrc) {
 			var modal = document.getElementById('imageModal');
 			var modalImg = document.getElementById('expandedImage');
 			modal.style.display = 'block';
 			modalImg.src = imgSrc;
 		}
-	
+
 		document.getElementsByClassName('closeBtn')[0].onclick = function () {
 			document.getElementById('imageModal').style.display = 'none';
 		};
-		</script>
-
-	<script src="../../js/app.js"></script>
-	<script src="../../js/script.js"></script>
-
+	</script>
 
 </body>
 

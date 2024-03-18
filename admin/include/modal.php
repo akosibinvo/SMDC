@@ -1,8 +1,6 @@
 <?php
 
 require "../../php/connection.php";
-include "addProject.php";
-
 
 ?>
 
@@ -19,43 +17,91 @@ include "addProject.php";
    </head>
    <body>
 	
-      <!--======================================= ADD PROJECT MODAL ======================================= -->
-      <div class="modal fade" id="addProjectModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Add Project</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
-               </div>
-               <div class="modal-body">
+   <!--======================================= ADD PRICE MODAL ======================================= -->
+   <div class="modal fade" id="addPriceModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Booking Information</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+            </div>
+            <div class="modal-body">
 
-                  <form action="" method="post" enctype="multipart/form-data">
-                     <div class="form-group mb-3">
-                        <label class="form-label">Project Name</label>
-                        <input class="form-control" type="text" name="projectname" placeholder="Enter project name" required>
+               <form action="../include/addPriceModal.php" method="post" enctype="multipart/form-data" class="px-2">
+                     <input type="hidden" name="addprice_id" id="addprice_id">
+
+                  <div class="row mb-4">
+                     <div class="form-group col-md-6">
+                        <label class="form-label">Name</label>
+                        <input class="form-control" type="text" name="firstname" id="firstname" readonly>
                      </div>
 
-                     <div class="form-group mb-3">
+                     <div class="form-group col-md-6">
                         <label class="form-label">Unit Code</label>
-                        <input class="form-control" type="text" name="unitcode" placeholder="Enter unit code" required>
+                        <input class="form-control" type="text" name="unitcode" id="unitcode" readonly>
+                     </div>
+                  </div>
+                  
+                  <div class="row mb-4">
+                     <div class="form-group col-md-6">
+                        <label class="form-label">Reservation Agreement</label>
+                        <input class="form-control" type="file" name="RA" id="RA" readonly>
                      </div>
 
-                     <div class="form-group mb-3">
-                        <label class="form-label">Amount</label>
-                        <input class="form-control" type="number" name="amount" placeholder="Enter unit amount" required>
+                     <div class="form-group col-md-6">
+                        <label class="form-label">Holding</label>
+                        <input class="form-control" type="file" name="Holding" id="Holding" readonly>
+                     </div>
+                  </div>
+
+                  <div class="row mb-4">
+                     <div class="form-group col-md-6">
+                        <label class="form-label">Reservation Fee</label>
+                        <input class="form-control" type="file" name="RF" id="RF" readonly>
                      </div>
 
-                     <div class="modal-footer mt-5">
-                        <button type="submit" name="submit" class="btn btn-primary">Add Project</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                     <div class="form-group col-md-6">
+                        <label class="form-label">ID (with Specimen)</label>
+                        <input class="form-control" type="file" name="ID" id="ID" readonly>
+                     </div>
+                  </div>
+                  
+                  <div class="row mb-4">
+                     <div class="form-group col-md-6">
+                        <label class="form-label">Date</label>
+                        <input class="form-control" type="text" name="date" id="date" readonly>
                      </div>
 
-                  </form>
+                     <div class="form-group col-md-6">
+                        <label class="form-label">Agent</label>
+                        <input class="form-control" type="text" name="agent" id="agent" readonly>
+                     </div>
+                  </div>
+                  
+                  <div class="row mb-4">
+                     <div class="form-group col-md-6">
+                        <label class="form-label">Status</label>
+                        <input class="form-control" type="text" name="status" id="status" readonly>
+                     </div>
 
-               </div>
+                     <div class="form-group col-md-6">
+                           <label class="form-label">Price</label>
+                           <input class="form-control" type="number" name="price" id="price" required>
+                     </div>
+                  </div>
+                  
+
+                  <div class="modal-footer mt-5">
+                     <button type="submit" name="addprice" class="btn btn-primary">Complete Booking</button>
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+
+               </form>
+
             </div>
          </div>
       </div>
+   </div>
 
 
       <!--======================================= EDIT MODAL ======================================= -->
