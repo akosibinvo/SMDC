@@ -10,6 +10,7 @@
             // Output data of each row
             while ($row = $result->fetch_assoc()) {
                 $role = $row["role"];
+                $firstname = $row["firstName"];
                 $fullname = $row["firstName"] . " " . $row["lastName"];
             }
         }
@@ -25,7 +26,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
 </head>
 <body>
         <nav id="sidebar" class="sidebar js-sidebar">

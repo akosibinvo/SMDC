@@ -59,7 +59,7 @@
 								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
+								<a class="dropdown-item" href="../php/logout.php">Log out</a>
 							</div>
 						</li>
 					</ul>
@@ -80,9 +80,10 @@
 									<h5 class="card-title mb-0">Profile Details</h5>
 								</div>
 								<div class="card-body text-center">
-									<img src="../img/avatars/avatar-4.jpg" alt="Christina Mason" class="img-fluid rounded-circle mb-2" width="128" height="128" />
-									<h5 class="card-title mb-0">Vanessa Tucker</h5>
-									<div class="text-muted mb-2">SA1</div>
+									<img src="../img/avatars/default-profile-blue.png" alt="Default Profile" class="img-fluid rounded-circle mb-2" width="128" height="128" />
+
+									<h5 class="card-title mt-3 mb-2"><?php echo $fullname;?></h5>
+									<div class="text-muted mb-3"><?php echo $role;?></div>
 
 									<div>
 										<a class="btn btn-primary btn-sm px-2" href="#"><span data-feather="edit"></span> Edit</a>
@@ -117,7 +118,7 @@
 									<h5 class="card-title mb-0">Acount Status</h5>
 								<div class="card-body mb-0">
 									<div class="row">
-										<div class="col-md-6 col-lg-3 mx-auto">
+										<div class="col-md-6 col-lg-6 mx-auto">
 											<div class="card">
 												<div class="card-body">
 													<div class="row">
@@ -125,12 +126,27 @@
 															<h5 class="card-title" style="font-size: .9em;">Total Sales</h5>
 														</div>
 													</div>
-													<h1 class="mb-3 text-center" style="font-weight: bold;"> 1,000,000 </h1>
+
+													<?php
+														$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname' ";
+														$res_total_sales = mysqli_query($conn, $sql_total_sales);
+
+														if ($res_total_sales) {
+															$row = mysqli_fetch_assoc($res_total_sales);
+															$total_amount = $row['total_amount'];
+													
+
+														} else {
+															echo "Error: " . mysqli_error($conn);
+														}
+													?>
+
+													<h1 class="mt-1 mb-3 text-center" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_amount) ?></h1>
 												</div>
 											</div>
 										</div>
 
-										<div class="col-md-6 col-lg-3 mx-auto">
+										<div class="col-md-6 col-lg-6 mx-auto">
 											<div class="card">
 												<div class="card-body">
 													<div class="row">
@@ -143,7 +159,7 @@
 											</div>
 										</div>
 
-										<div class="col-md-6 col-lg-3 mx-auto">
+										<div class="col-md-6 col-lg-6 mx-auto">
 											<div class="card">
 												<div class="card-body">
 													<div class="row">
@@ -151,12 +167,20 @@
 															<h5 class="card-title" style="font-size: .9em;">Unit Sold</h5>
 														</div>
 													</div>
-													<h1 class="mb-3 text-center" style="font-weight: bold;"> 5 </h1>
+
+													<?php
+														$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname' ";
+														$res_booked = mysqli_query($conn, $sql_booked);
+														$count_booked = mysqli_num_rows($res_booked);
+													?>
+
+													<h1 class="mt-1 mb-3 text-center" style="font-weight: bold;"> <?php echo $count_booked ?> </h1>
+													
 												</div>
 											</div>
 										</div>
 
-										<div class="col-md-6 col-lg-3 mx-auto">
+										<div class="col-md-6 col-lg-6 mx-auto">
 											<div class="card">
 												<div class="card-body">
 													<div class="row">
@@ -164,7 +188,7 @@
 															<h5 class="card-title" style="font-size: .9em;">Status</h5>
 														</div>
 													</div>
-													<h1 class="mb-3 text-center" style="font-weight: bold;"> IMP </h1>
+													<h1 class="mb-3 text-center" style="font-weight: bold;"> <?php echo $role;?> </h1>
 												</div>
 											</div>
 										</div>

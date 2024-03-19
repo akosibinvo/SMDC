@@ -13,6 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="../img/icons/logo.png" />
 
 
 	<title>Profile | SMDC JQB</title>
@@ -178,7 +179,7 @@
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
 								<span class="text-dark">
 									<?php
-											echo $fullname
+										echo $fullname
 									?>
 								</span>
 							</a>
@@ -212,9 +213,7 @@
 								<div class="card-body text-center">
 									<img src="../img/avatars/default-profile-blue.png" alt="Default Profile" class="img-fluid rounded-circle mb-2" width="128" height="128" />
 
-									
-
-									<h5 class="card-title mt-3 mb-2"><?php echo $lastname;?></h5>
+									<h5 class="card-title mt-3 mb-2"><?php echo $fullname;?></h5>
 									<div class="text-muted mb-3"><?php echo $role;?></div>
 
 									<div>
@@ -254,7 +253,7 @@
 									<h5 class="card-title mb-0">Acount Status</h5>
 								<div class="card-body mb-0">
 									<div class="row mb-3">
-										<div class="col-md-3 col-lg-3 mx-auto">
+										<div class="col-md-3 col-lg-6 mx-auto">
 											<div class="card">
 												<div class="card-body">
 													<div class="row">
@@ -262,12 +261,26 @@
 															<h5 class="card-title" style="font-size: .9em;">Total Sales</h5>
 														</div>
 													</div>
-													<h1 class="mb-3 text-center" style="font-weight: bold;"> 1,000,000 </h1>
+													<?php
+														$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname' ";
+														$res_total_sales = mysqli_query($conn, $sql_total_sales);
+
+														if ($res_total_sales) {
+															$row = mysqli_fetch_assoc($res_total_sales);
+															$total_amount = $row['total_amount'];
+													
+
+														} else {
+															echo "Error: " . mysqli_error($conn);
+														}
+													?>
+
+													<h1 class="mt-1 mb-3 text-center" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_amount) ?></h1>
 												</div>
 											</div>
 										</div>
 
-										<div class="col-md-3 col-lg-3 mx-auto">
+										<div class="col-md-3 col-lg-6 mx-auto">
 											<div class="card">
 												<div class="card-body">
 													<div class="row">
@@ -280,7 +293,7 @@
 											</div>
 										</div>
 
-										<div class="col-md-3 col-lg-3 mx-auto">
+										<div class="col-md-3 col-lg-6 mx-auto">
 											<div class="card">
 												<div class="card-body">
 													<div class="row">
@@ -288,12 +301,20 @@
 															<h5 class="card-title" style="font-size: .9em;">Unit Sold</h5>
 														</div>
 													</div>
-													<h1 class="mb-3 text-center" style="font-weight: bold;"> 1 </h1>
+
+													<?php
+														$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname' ";
+														$res_booked = mysqli_query($conn, $sql_booked);
+														$count_booked = mysqli_num_rows($res_booked);
+													?>
+
+													<h1 class="mt-1 mb-3 text-center" style="font-weight: bold;"> <?php echo $count_booked ?> </h1>
+
 												</div>
 											</div>
 										</div>
 
-										<div class="col-md-3 col-lg-3 mx-auto">
+										<div class="col-md-3 col-lg-6 mx-auto">
 											<div class="card">
 												<div class="card-body">
 													<div class="row">
@@ -301,18 +322,41 @@
 															<h5 class="card-title" style="font-size: .9em;">Status</h5>
 														</div>
 													</div>
-													<h1 class="mb-3 text-center" style="font-weight: bold;"> SA1 </h1>
+													<h1 class="mb-3 text-center" style="font-weight: bold;"> <?php echo $role;?> </h1>
 												</div>
 											</div>
 										</div>
 
+												<?php
+													$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname'";
+													$res_total_sales = mysqli_query($conn, $sql_total_sales);
+
+													if ($res_total_sales) {
+														$row = mysqli_fetch_assoc($res_total_sales);
+														$total_amount = $row['total_amount'];
+
+														// Calculate progress percentage
+														$target_sales = 500000000; // Example target sales
+														$progress_percentage = ($total_amount / $target_sales) * 100;
+
+															// Update agent status if total amount is greater than or equal to target amount
+														if ($total_amount >= $target_sales) {
+															$sql_update_status = "UPDATE users SET role = 'SA2' WHERE firstname = '$firstname'";
+														} else {
+															mysqli_error($conn);
+														}
+													}
+												?>
+
 										<div class="col-md-12 col-xl-12 px-4">
 											<div class="col-md-12 rounded-pill mb-2" style="background: rgba(0, 48, 255, 0.5);">
 												<div class="progress" style="height: 12px;">
-													<div class="progress-bar px-2 rounded-pill text-white text-center" role="progressbar" style="width: 50%; height: 12px; font-size: .65em; background: #0030ff;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%</div>
+												
+														<div class="progress-bar px-2 rounded-pill text-white text-center" role="progressbar" style="width: <?php echo $progress_percentage; ?>%; height: 12px; font-size: .65em; background: #0030ff;" aria-valuenow="<?php echo $progress_percentage; ?>" aria-valuemin="0" aria-valuemax="100"><?php echo round($progress_percentage, 2); ?>%</div>
+											
 												</div>
 											</div>
-											<h5 class="text-center text-muted" style="font-size: .75em;"> 250,000,000 / 500,000,000 </h5>
+											<h5 class="text-center text-muted" style="font-size: .75em;"><?php echo number_format($total_amount); ?> / <?php echo number_format($target_sales); ?></h5>
 										</div>
 										
 

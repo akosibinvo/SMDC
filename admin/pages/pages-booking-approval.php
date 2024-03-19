@@ -36,8 +36,8 @@
 	
 		/* Pop-up Content */
 		.popUp-contents {
-			width: 1000px;
-			height: 500px;
+			width: 1200px;
+			height: 600px;
 			z-index: 10000;
 			
 		}

@@ -1,25 +1,5 @@
 <?php
 	require "../php/connection.php";
-
-	$query = "SELECT MONTH(Transaction_date) AS month, SUM(Amount) AS total_sales 
-				FROM transaction_booking 
-				WHERE status = 'Booked'
-				GROUP BY MONTH(Transaction_date)";
-
-		$result = mysqli_query($conn, $query);
-
-
-		$data = array_fill(1, 12, 0);
-
-		while ($row = mysqli_fetch_assoc($result)) {
-			$month = intval($row['month']);
-			$data[$month] = $row['total_sales'];
-		}
-
-
-		$data_json = json_encode(array_values($data));
-
-
 ?>
 
 
@@ -43,6 +23,7 @@
 
 <body>
 	<div class="wrapper">
+
 		<?php
 			include "sidebar.php";
 		?>
@@ -175,6 +156,27 @@
 		</div>
 	</div>
 
+
+	<?php
+
+		$query = "SELECT MONTH(Transaction_date) AS month, SUM(Amount) AS total_sales 
+		FROM transaction_booking 
+		WHERE status = 'Booked' AND agent = '$firstname'
+		GROUP BY MONTH(Transaction_date)";
+
+		$result = mysqli_query($conn, $query);
+
+
+		$data = array_fill(1, 12, 0);
+
+		while ($row = mysqli_fetch_assoc($result)) {
+		$month = intval($row['month']);
+		$data[$month] = $row['total_sales'];
+		}
+		
+		$data_json = json_encode(array_values($data));
+
+	?>
 
 	<script src="../js/app.js"></script>
 	<script src="../js/script.js"></script>

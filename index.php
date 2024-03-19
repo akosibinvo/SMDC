@@ -162,11 +162,11 @@ if (isset($_SESSION['user_id'])) {
 									</div>
 
 									<?php
-										$sql_booking = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked'";
-										$res_booking = mysqli_query($conn, $sql_booking);
+										$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname' ";
+										$res_total_sales = mysqli_query($conn, $sql_total_sales);
 
-										if ($res_booking) {
-											$row = mysqli_fetch_assoc($res_booking);
+										if ($res_total_sales) {
+											$row = mysqli_fetch_assoc($res_total_sales);
 											$total_amount = $row['total_amount'];
 									
 
@@ -175,7 +175,7 @@ if (isset($_SESSION['user_id'])) {
 										}
 									?>
 									
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_amount) ?></h1>
+									<h1 class="mt-3 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_amount) ?></h1>
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
@@ -198,7 +198,7 @@ if (isset($_SESSION['user_id'])) {
 											</div>
 										</div>
 									</div>
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> 1,000,000 </h1>
+									<h1 class="mt-3 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> 0</h1>
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
 										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
@@ -223,12 +223,12 @@ if (isset($_SESSION['user_id'])) {
 									</div>
 
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND agent = '$firstname'  ";
-										$res_booking = mysqli_query($conn, $sql_booking);
-										$count_pending = mysqli_num_rows($res_booking);
+										$sql_pending = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND agent = '$firstname'  ";
+										$res_pending = mysqli_query($conn, $sql_pending);
+										$count_pending = mysqli_num_rows($res_pending);
 									?>
 
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count_pending ?> </h1>
+									<h1 class="mt-3 mb-3" style="font-weight: bold;"> <?php echo $count_pending ?> </h1>
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
@@ -253,12 +253,12 @@ if (isset($_SESSION['user_id'])) {
 									</div>
 
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname' ";
-										$res_booking = mysqli_query($conn, $sql_booking);
-										$count_booked = mysqli_num_rows($res_booking);
+										$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname' ";
+										$res_booked = mysqli_query($conn, $sql_booked);
+										$count_booked = mysqli_num_rows($res_booked);
 									?>
 
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count_booked ?> </h1>
+									<h1 class="mt-3 mb-3" style="font-weight: bold;"> <?php echo $count_booked ?> </h1>
 
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
@@ -303,7 +303,7 @@ if (isset($_SESSION['user_id'])) {
 									
 									<tbody>
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending'";
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND agent = '$firstname' ";
 										$res_booking = mysqli_query($conn, $sql_booking);
 
 										if ($res_booking == TRUE) {
@@ -354,7 +354,7 @@ if (isset($_SESSION['user_id'])) {
 										</tr>
 									</thead>
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked'";
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname' ";
 										$res_booking = mysqli_query($conn, $sql_booking);
 
 										if ($res_booking == TRUE) {
