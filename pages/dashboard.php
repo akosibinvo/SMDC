@@ -1,5 +1,5 @@
 <?php
-require "../backend/connection.php"
+	session_start();
 ?>
 
 
@@ -19,6 +19,9 @@ require "../backend/connection.php"
 	<link href="../css/app.css" rel="stylesheet">
 	<link href="../css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+
 </head>
 
 <body>
@@ -105,7 +108,7 @@ require "../backend/connection.php"
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
+								<a class="dropdown-item" href="../backend/logout.php">Log out</a>
 							</div>
 						</li>
 					</ul>
@@ -250,7 +253,38 @@ require "../backend/connection.php"
 
 	<script src="../js/app.js"></script>
 	<script src="../js/script.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+	<script>
+		<?php
+			if(isset($_SESSION['success'])){
+                ?>
+                pushNotify('success', '<?= $_SESSION['success']; ?>', 'Welcome back Michael Miranda');
+                <?php
+                unset($_SESSION['success']);  
+            }
+		?>
+		//pushNotify();
+		function pushNotify(status, title, description) {
+			new Notify({
+				status: status,
+				title: title,
+				text: description,
+				effect: 'slide',
+				speed: 600,
+				customClass: null,
+				customIcon: null,
+				showIcon: true,
+				showCloseButton: true,
+				autoclose: true,
+				autotimeout: 1000,
+				gap: 20,
+				distance: 20,
+				type: 1,
+				position: 'x-center top'
+			});
 
+		}
+	</script>
 
 </body>
 

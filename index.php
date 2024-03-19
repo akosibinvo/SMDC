@@ -1,7 +1,6 @@
 <?php
-require "backend/connection.php"
+	session_start();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,8 +16,11 @@ require "backend/connection.php"
 	<title>Sign In | SDMC JQB</title>
 
 	<link href="css/app.css" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
+	<!-- <link href="css/style.css" rel="stylesheet"> -->
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+
 </head>
 
 <body>
@@ -45,19 +47,20 @@ require "backend/connection.php"
 									</div>
 								</div>
 								<div class="m-sm-3">
-									<form action="backend/login.php" method="post" class="needs-validation" novalidate>
+								<form action="backend/login.php" method="post" class="needs-validation" novalidate>
 										<div class="mb-3">
 											<label class="form-label">Email</label>
-											<input class="form-control form-control-lg" type="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>" placeholder="Enter your email" required>
+											<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" required>
+											<div id="validationEmailLogin" class="invalid-feedback">
+												Please enter your email.
+											</div>
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Password</label>
-											<input class="form-control form-control- <?php echo isset($errors) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Enter your password" required>
-											<?php if (isset($errors)): ?>
-												<div class="invalid-feedback">
-													<?php echo $errors[0]; ?>
-												</div>
-											<?php endif; ?>
+											<input class="form-control form-control-lg <?php echo isset($_SESSION['error']) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Enter your password" required>
+											<div id="validationEmailLogin" class="invalid-feedback">
+												Please enter your password.
+											</div>
 										</div>
 
 										<div class="row d-flex justify-content-between px-3">
@@ -84,32 +87,6 @@ require "backend/connection.php"
 												</a>
 											</div>
 										</div>
-
-										<!-- <div class="mb-3">
-
-											<label class="form-label">Role</label>
-                                                <select class="form-select" id="role" name="role">
-												<?php
-													$sql_roles = "SELECT * FROM roles";
-													$res_roles = mysqli_query($conn, $sql_roles);
-
-													if($res_roles == TRUE){
-													$count_get = mysqli_num_rows($res_roles);
-													if($count_get > 0){
-														while($rows_roles = mysqli_fetch_assoc($res_roles)){
-															$roles = $rows_roles['role'];   
-															?>
-															<option value="<?php echo $roles;?>"><?php echo $roles;?></option>
-															<?php
-														}
-													}
-													}
-
-												?>
-                                                </select>
-
-										</div> -->
-
 									</form>
 								</div>
 							</div>
@@ -121,6 +98,38 @@ require "backend/connection.php"
 	</main>
 
 	<script src="js/app.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+	<script>
+		<?php
+			if(isset($_SESSION['error'])){
+                ?>
+                pushNotify('error', '<?= $_SESSION['error']; ?>', 'Please insert a valid password.');
+                <?php
+                unset($_SESSION['error']);  
+            }
+		?>
+		//pushNotify();
+		function pushNotify(status, title, description) {
+			new Notify({
+				status: status,
+				title: title,
+				text: description,
+				effect: 'slide',
+				speed: 600,
+				customClass: null,
+				customIcon: null,
+				showIcon: true,
+				showCloseButton: true,
+				autoclose: true,
+				autotimeout: 1000,
+				gap: 20,
+				distance: 20,
+				type: 1,
+				position: 'x-center top'
+			});
+
+		}
+	</script>
 	<script>
 		// Example starter JavaScript for disabling form submissions if there are invalid fields
 		(() => {

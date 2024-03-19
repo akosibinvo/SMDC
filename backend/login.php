@@ -23,12 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Password is correct, start session
         $_SESSION['user_id'] = $user_id;
         $_SESSION['email'] = $email;
+        $_SESSION['success'] = 'Login Successful';
         // Redirect to dashboard or desired page
         header('Location: ../pages/dashboard.php');
         exit;
     } else {
         // Invalid username or password
-        $errors[] = "Invalid password";
+        $_SESSION['error'] = 'Invalid Password';
         header('Location: ../index.php');
     }
 }
