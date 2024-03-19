@@ -11,10 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     // Retrieve user from database
-    $stmt = $conn->prepare("SELECT ID, password FROM users WHERE email = ?");
+    $stmt = $conn->prepare("SELECT ID, firstName, password FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
-    $stmt->bind_result($user_id, $hashed_password);
+    $stmt->bind_result($user_id, $agent, $hashed_password);
     $stmt->fetch();
     $stmt->close();
 
@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Password is correct, start session
         $_SESSION['user_id'] = $user_id;
         $_SESSION['email'] = $email;
+        $_SESSION['agent'] = $agent;
         // Redirect to dashboard or desired page
         header('Location: ../index.php');
         exit;

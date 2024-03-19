@@ -1,5 +1,11 @@
 <?php
-require "../php/connection.php"
+session_start();
+
+require "../php/connection.php";
+include "../admin/include/php/modal.php";
+
+
+
 ?>
 
 
@@ -243,7 +249,25 @@ require "../php/connection.php"
 							</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-								<span class="text-dark">User</span>
+								<span class="text-dark">
+								<?php
+									if (isset($_SESSION['user_id'])) {
+										$id = $_SESSION['user_id'];
+										$sql = "SELECT * FROM users WHERE ID = $id";
+										$result = $conn->query($sql);
+										if ($result->num_rows > 0) {
+											// Output data of each row
+											while ($row = $result->fetch_assoc()) {
+												$lastname = $row["firstName"] . " " . $row["lastName"];
+												echo $lastname;
+												
+											}
+										}
+									} else {
+										header("Location: pages-sign-in.php");
+									}
+								?>
+								</span>
 							</a>
 
 							<div class="dropdown-menu dropdown-menu-end">
@@ -253,7 +277,7 @@ require "../php/connection.php"
 								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
+								<a class="dropdown-item" href="../php/logout.php">Log out</a>
 							</div>
 						</li>
 					</ul>
@@ -273,22 +297,29 @@ require "../php/connection.php"
 									<h5 class="card-title mb-0">Profile Details</h5>
 								</div>
 								<div class="card-body text-center">
-									<img src="../img/avatars/avatar-4.jpg" alt="Christina Mason" class="img-fluid rounded-circle mb-2" width="128" height="128" />
-									<h5 class="card-title mb-0">Vanessa Tucker</h5>
-									<div class="text-muted mb-2">SA1</div>
+									<img src="../img/avatars/default-profile-blue.png" alt="Default Profile" class="img-fluid rounded-circle mb-2" width="128" height="128" />
+
+									
+
+									<h5 class="card-title mt-3 mb-0"><?php echo $lastname;?></h5>
+									<div class="text-muted mb-3">SA1</div>
 
 									<div>
-										<a class="btn btn-primary btn-sm px-2" href="#"><span data-feather="edit"></span> Edit</a>
+										<button class="btn btn-primary btn-sm px-2 editProfile"><span data-feather="edit"></span> Edit</button>
 									</div>
+								</div>
+								<hr class="my-0" />
+								<div class="card-body">
+									<h5 class="h6 card-title">Bio</h5>
+									<textarea class="form-control non-resizable border-0 bg-white" id="permanentAddress" name="permanentAddress" rows="3" disabled></textarea>
 								</div>
 								<hr class="my-0" />
 								<div class="card-body">
 									<h5 class="h6 card-title">About</h5>
 									<ul class="list-unstyled mb-0">
+										<li class="mb-1"><span data-feather="phone" class="feather-sm me-1"></span> Contact <a href="#"> </a></li>
 										<li class="mb-1"><span data-feather="home" class="feather-sm me-1"></span> Lives in <a href="#">Pasig</a></li>
-
 										<li class="mb-1"><span data-feather="briefcase" class="feather-sm me-1"></span> Works at <a href="#">Easysell</a></li>
-										<li class="mb-1"><span data-feather="map-pin" class="feather-sm me-1"></span> From <a href="#">Philippines</a></li>
 									</ul>
 								</div>
 								<hr class="my-0" />
@@ -421,7 +452,28 @@ require "../php/connection.php"
 		</div>
 	</div>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="../js/app.js"></script>
+    <script>
+         $(document).ready(function () {
+         
+             $('.editProfile').on('click', function () {
+         
+                 $('#editProfileModal').modal('show');
+         
+				 var $cardBody = $(this).closest('.card-body');
+         
+				 var profileName = $cardBody.find('.card-title').text().trim();
+         
+                 console.log(data);
+         
+                 $('#firstname').val(data(profileName));
+
+             });
+			 
+         });
+      </script>
+
 
 </body>
 

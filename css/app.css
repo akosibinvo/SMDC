@@ -12392,14 +12392,16 @@ span.flatpickr-weekday {
     width: 18px
 }
 
-
-
 .referral-img {
     position: absolute;
     display: block;
     width: 350px; 
     top: 20px; 
     right: 0;
+}
+
+.non-resizable {
+    resize: none;
 }
 
 @media screen and (max-width: 1400px) {

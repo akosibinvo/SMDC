@@ -103,153 +103,141 @@
 
       <!--======================================= VIEW CLIENT DETAILS MODAL ======================================= -->
       <div class="modal fade" id="viewDetailsModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel">Clients Information</h5>
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
-            </div>
-            <div class="modal-body">
+         <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Clients Information</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+               </div>
+               <div class="modal-body">
 
-               <form action="" method="post" enctype="multipart/form-data" class="px-2">
-                     <input type="hidden" name="viewdetails_id" id="viewdetails_id">
+                  <form action="" method="post" enctype="multipart/form-data" class="px-2">
+                        <input type="hidden" name="viewdetails_id" id="viewdetails_id">
 
-                  <div class="row mb-3">
-                     <div class="form-group col-md-4">
-                        <label class="form-label">First Name</label>
-                        <input class="form-control mb-2" type="text" id="view_firstname" disabled>
+                     <div class="row mb-3">
+                        <div class="form-group col-md-4">
+                           <label class="form-label">First Name</label>
+                           <input class="form-control mb-2" type="text" id="view_firstname" disabled>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                           <label class="form-label">Middle Name</label>
+                           <input class="form-control mb-2" type="text" id="view_middlename" disabled>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                           <label class="form-label">Last Name</label>
+                           <input class="form-control mb-2" type="text" id="view_lastname" disabled>
+                        </div>
+                     </div>
+                     
+                     <div class="row mb-3">
+                        <div class="form-group col-md-6">
+                           <label class="form-label">Date of Birth</label>
+                           <input class="form-control mb-2" type="date" id="view_birthdate" disabled>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                           <label class="form-label">Place of Birth</label>
+                           <input class="form-control mb-2" type="date" id="view_birthplace" disabled>
+                        </div>
                      </div>
 
-                     <div class="form-group col-md-4">
-                        <label class="form-label">Middle Name</label>
-                        <input class="form-control mb-2" type="text" id="view_middlename" disabled>
+                     <div class="row mb-3">
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Tin No:</label>
+                           <input class="form-control mb-2" type="text" id="view_tin" disabled>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Gender</label>
+                           <input class="form-control mb-2" type="text" id="view_gender" disabled>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Civil Status</label>
+                           <input class="form-control mb-2" type="text" id="view_civil" disabled>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Citizenship</label>
+                           <input class="form-control mb-2" type="text" id="view_citizenship" disabled>
+                        </div>
+
+                     </div>
+                     
+                     <div class="row mb-3">
+                        <div class="form-group col-md-4">
+                           <label class="form-label">Email</label>
+                           <input class="form-control mb-2" type="text" id="view_email" disabled>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                           <label class="form-label">Phone No:</label>
+                           <input class="form-control mb-2" type="text" id="view_phone" disabled>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                           <label class="form-label">Passport No:</label>
+                           <input class="form-control mb-2" type="text" id="view_passport" disabled>
+                        </div>
+                     </div>
+                     
+                     <div class="row mb-3">
+                        <div class="form-group col-md-6">
+                           <label class="form-label">Present Address</label>
+                           <input class="form-control mb-2" type="text" id="view_presentAddress" disabled>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                           <label class="form-label">Permanent Address</label>
+                           <input class="form-control mb-2" type="text" id="view_permanentAddress" disabled>
+                        </div>
                      </div>
 
-                     <div class="form-group col-md-4">
-                        <label class="form-label">Last Name</label>
-                        <input class="form-control mb-2" type="text" id="view_lastname" disabled>
-                     </div>
-                  </div>
-                  
-                  <div class="row mb-3">
-                     <div class="form-group col-md-6">
-                        <label class="form-label">Date of Birth</label>
-                        <input class="form-control mb-2" type="date" id="view_birthdate" disabled>
-                     </div>
+                     <div class="row mb-3">
+                        <div class="form-group col-md-6">
+                           <label class="form-label">Employer Name</label>
+                           <input class="form-control mb-2" type="text" id="view_employer" disabled>
+                        </div>
 
-                     <div class="form-group col-md-6">
-                        <label class="form-label">Place of Birth</label>
-                        <input class="form-control mb-2" type="date" id="view_birthplace" disabled>
+                        <div class="form-group col-md-6">
+                           <label class="form-label">Work Address</label>
+                           <input class="form-control mb-2" type="text" id="view_workAddress" disabled>
+                        </div>
                      </div>
-                  </div>
+                     
 
-                  <div class="row mb-3">
-                     <div class="form-group col-md-3">
-                        <label class="form-label">Tin No:</label>
-                        <input class="form-control mb-2" type="text" id="view_tin" disabled>
+                     <div class="modal-footer mt-5">
+                        <!-- <button type="submit" name="addprice" class="btn btn-primary">Complete Booking</button> -->
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                      </div>
 
-                     <div class="form-group col-md-3">
-                        <label class="form-label">Gender</label>
-                        <input class="form-control mb-2" type="text" id="view_gender" disabled>
-                     </div>
+                  </form>
 
-                     <div class="form-group col-md-3">
-                        <label class="form-label">Civil Status</label>
-                        <input class="form-control mb-2" type="text" id="view_civil" disabled>
-                     </div>
-
-                     <div class="form-group col-md-3">
-                        <label class="form-label">Citizenship</label>
-                        <input class="form-control mb-2" type="text" id="view_citizenship" disabled>
-                     </div>
-
-                  </div>
-                  
-                  <div class="row mb-3">
-                     <div class="form-group col-md-4">
-                        <label class="form-label">Email</label>
-                        <input class="form-control mb-2" type="text" id="view_email" disabled>
-                     </div>
-
-                     <div class="form-group col-md-4">
-                        <label class="form-label">Phone No:</label>
-                        <input class="form-control mb-2" type="text" id="view_phone" disabled>
-                     </div>
-
-                     <div class="form-group col-md-4">
-                        <label class="form-label">Passport No:</label>
-                        <input class="form-control mb-2" type="text" id="view_passport" disabled>
-                     </div>
-                  </div>
-                  
-                  <div class="row mb-3">
-                     <div class="form-group col-md-6">
-                        <label class="form-label">Present Address</label>
-                        <input class="form-control mb-2" type="text" id="view_presentAddress" disabled>
-                     </div>
-
-                     <div class="form-group col-md-6">
-                        <label class="form-label">Permanent Address</label>
-                        <input class="form-control mb-2" type="text" id="view_permanentAddress" disabled>
-                     </div>
-                  </div>
-
-                  <div class="row mb-3">
-                     <div class="form-group col-md-6">
-                        <label class="form-label">Employer Name</label>
-                        <input class="form-control mb-2" type="text" id="view_employer" disabled>
-                     </div>
-
-                     <div class="form-group col-md-6">
-                        <label class="form-label">Work Address</label>
-                        <input class="form-control mb-2" type="text" id="view_workAddress" disabled>
-                     </div>
-                  </div>
-                  
-
-                  <div class="modal-footer mt-5">
-                     <!-- <button type="submit" name="addprice" class="btn btn-primary">Complete Booking</button> -->
-                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                  </div>
-
-               </form>
-
+               </div>
             </div>
          </div>
       </div>
-   </div>
 
       <!--======================================= EDIT MODAL ======================================= -->
-      <!-- <div class="modal fade" id="editModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="editProfileModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Edit Project</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                   </button>
                </div>
                <div class="modal-body">
-                  <form action="../include/editModal.php" method="post" enctype="multipart/form-data">
+                  <form action="../admin/include/php/editProfile.php" method="post" enctype="multipart/form-data">
                      <input type="hidden" name="update_id" id="update_id">
                      <div class="row mb-3">
 
                         <div class="form-group mb-3">
-                           <label class="form-label">Project Name</label>
-                           <input class="form-control" type="text" name="projectname" id="projectname" placeholder="Enter project name" required>
+                           <label class="form-label">Firstname</label>
+                           <input class="form-control" type="text" name="firstname" id="firstname" placeholder="Enter first name" required>
                         </div>
-
-                        <div class="form-group mb-3">
-                           <label class="form-label">Unit Code</label>
-                           <input class="form-control" type="text" name="unitcode" id="unitcode" placeholder="Enter unit code" required>
-                        </div>
-                        
-
-                        <div class="form-group mb-3">
-                           <label class="form-label">Amount</label>
-                           <input class="form-control" type="number" name="amount" id="amount" placeholder="Enter unit amount" required>
-                        </div>
-
                      </div>
 
                      <div class="modal-footer">
@@ -263,7 +251,7 @@
                </div>
             </div>
          </div>
-      </div> -->
+      </div>
 
     
 

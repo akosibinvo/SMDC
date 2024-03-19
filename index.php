@@ -1,7 +1,9 @@
 <?php
+session_start();
+
 require "php/connection.php";
 
-session_start();
+
 
 ?>
 
@@ -174,6 +176,7 @@ session_start();
 											echo "Error: " . mysqli_error($conn);
 										}
 									?>
+									
 									<h1 class="mt-1 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_amount) ?></h1>
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
