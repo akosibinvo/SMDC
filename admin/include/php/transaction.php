@@ -1,10 +1,12 @@
 <?php
-require "../php/connection.php";
+session_start();
 
-session_start(); // Start session at the beginning of the script
+require "../../../php/connection.php";
+
+
 
 if (isset($_POST['book'])) {
-    $target_directory = '../img/documents/';
+    $target_directory = '../../../img/documents/';
 
 
     $firstname = $_POST['firstname'];
@@ -84,6 +86,7 @@ if (isset($_POST['book'])) {
     if ($stmt->execute()) {
         // Insertion successful
         $_SESSION['insert'] = true;
+        header("Location: ../../../pages/pages-booking.php");
     } else {
         // Insertion failed
         $_SESSION['insert'] = false;

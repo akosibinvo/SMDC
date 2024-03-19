@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-
+      <link rel="shortcut icon" href="../img/icons/logo.png" />
 
 	<title>Admin Dashboard | SMDC JQB</title>
 
@@ -58,7 +58,7 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="">
+						<a class="sidebar-link" href="pages/pages-manage-sellers.php">
               				<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Manage Sellers</span>
             			</a>
 					</li>
@@ -135,7 +135,15 @@
 											</div>
 										</div>
 									</div>
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"> 27 </h1>
+
+									<?php
+										$sql_SA1 = "SELECT * FROM users WHERE role = 'SA1'";
+										$res_SA1 = mysqli_query($conn, $sql_SA1);
+										$count_SA1 = mysqli_num_rows($res_SA1);
+									?>
+
+									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count_SA1 ?> </h1>
+
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 									</div>
@@ -157,7 +165,15 @@
 											</div>
 										</div>
 									</div>
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"> 3 </h1>
+									
+									<?php
+										$sql_SA2 = "SELECT * FROM users WHERE role = 'SA2'";
+										$res_SA2 = mysqli_query($conn, $sql_SA2);
+										$count_SA2 = mysqli_num_rows($res_SA2);
+									?>
+
+									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count_SA2 ?> </h1>
+
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
 									</div>
@@ -179,7 +195,15 @@
 											</div>
 										</div>
 									</div>
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"> 2 </h1>
+									
+									<?php
+										$sql_IMP = "SELECT * FROM users WHERE role = 'IMP'";
+										$res_IMP = mysqli_query($conn, $sql_IMP);
+										$count_IMP = mysqli_num_rows($res_IMP);
+									?>
+
+									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count_IMP ?> </h1>
+
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
 									</div>
@@ -285,7 +309,7 @@
 											<td><?php echo $middlename;?></td>
 											<td><?php echo $lastname;?></td>
 											<td><?php echo $birthdate;?></td>
-											<td><button class="btn btn-primary btn-sm viewbtn">View Details</button></td>
+											<td><button class="btn btn-primary btn-sm viewbtn">Other Details</button></td>
 
 											<td class="d-none"><?php echo $tinNo;?></td>
 											<td class="d-none"><?php echo $gender;?></td>

@@ -15,6 +15,7 @@
 
 	<title>Booking Approval | SMDC JQB</title>
 
+
 	<link href="../../css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -98,7 +99,7 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="">
+						<a class="sidebar-link" href="pages-manage-sellers.php">
               				<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Manage Sellers</span>
             			</a>
 					</li>
@@ -206,7 +207,7 @@
 											<td class="d-none"> <?php echo $booking_id; ?></td>
                                             <td><?php echo $firstname; ?></td>
                                             <td><?php echo $unitcode; ?></td>
-											<td><?php echo '₱' . ' ' . number_format($amount, 0, '.', ' '); ?></td>
+											<td><?php echo '₱' . ' ' . number_format($amount, 0, '.', ','); ?></td>
 											<td class="text-center"> <img src="../../img/documents/<?php echo $RA; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $RA; ?>')"></td>
 											<td class="text-center"> <img src="../../img/documents/<?php echo $Holding; ?>" alt="Holding Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $Holding; ?>')"></td>
 											<td class="text-center"> <img src="../../img/documents/<?php echo $RF; ?>" alt="RF Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $RF; ?>')"></td>
@@ -217,7 +218,7 @@
 
 											<td>
                                                 <button class="btn btn-success bookbtn">Book</button>
-                                                <button class="btn btn-danger">Remove</button>
+                                                <button class="btn btn-danger removebtn">Remove</button>
                                             </td>
                                         </tr>
                                     <?php
@@ -265,6 +266,28 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="../../js/app.js"></script>
+
+	<script>
+         $(document).ready(function () {
+         
+             $('.removebtn').on('click', function () {
+         
+                 $('#rejectBookingModal').modal('show');
+         
+                 $tr = $(this).closest('tr');
+         
+                 var data = $tr.children("td").map(function () {
+                     return $(this).text();
+                 }).get();
+         
+                 console.log(data);
+         
+                 $('#delete_id').val(data[0]);
+         
+             });
+         });
+      </script>
+
 	<script>
          $(document).ready(function () {
          

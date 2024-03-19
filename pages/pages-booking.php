@@ -1,9 +1,7 @@
 <?php
-
-require "../php/connection.php";
-include "../admin/include/php/client_info.php";
-// include "../admin/include/php/imageHandler.php";
-include "../admin/include/php/transaction.php";
+    require "../php/connection.php";
+    include "../admin/include/php/client_info.php";
+    // include "../admin/include/php/imageHandler.php";
 
 ?>
 
@@ -27,65 +25,10 @@ include "../admin/include/php/transaction.php";
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="../index.php">
-          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../img/icons/logo.png" alt=""> </span>
-        		</a>
 
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Reports
-					</li>
-
-					<li class="sidebar-item" style="background-color: #b3daff;">
-						<a class="sidebar-link" href="../index.php">
-              			<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-statistics.php">
-              				<i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Statistics</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-header">
-						Manage
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-sales.php">
-              				<i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Sales</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="#">
-              				<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking</span>
-            			</a>
-					</li>
-
-
-					<li class="sidebar-header">
-						Settings
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-profile.php">
-              				<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="">
-              				<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
-            			</a>
-					</li>
-
-				</ul>
-			</div>
-		</nav>
+        <?php
+			include "sidebar.php";
+		?>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -103,22 +46,9 @@ include "../admin/include/php/transaction.php";
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
             				<span class="text-dark">
-                            <?php
-								if (isset($_SESSION['user_id'])) {
-									$id = $_SESSION['user_id'];
-									$sql = "SELECT * FROM users WHERE ID = $id";
-									$result = $conn->query($sql);
-									if ($result->num_rows > 0) {
-										// Output data of each row
-										while ($row = $result->fetch_assoc()) {
-											echo $row["firstName"];
-										}
-									}
-								} else {
-									header("Location: pages/pages-sign-in.php");
-								}
-
-							?>
+                                <?php
+									echo $fullname
+								?>
                             </span>
               				</a>
 
@@ -152,7 +82,7 @@ include "../admin/include/php/transaction.php";
                                         </div>
                                     </div>
 
-                                    <form action="" method="post" enctype="multipart/form-data" class="px-4 needs-validation" novalidate>
+                                    <form action="../admin/include/php/transaction.php" method="post" enctype="multipart/form-data" class="px-4 needs-validation" novalidate>
 
                                         <div class="row mb-3">
                                             <div class="form-group col-md-4">
@@ -210,7 +140,7 @@ include "../admin/include/php/transaction.php";
 
                                         <div class="row mb-4">
                                             <div class="form-group col-md-3">
-                                                <label class="form-label">Tin No: </label>
+                                                <label class="form-label">TIN No: </label>
                                                 <input class="form-control" type="text" name="tinNo" placeholder="Enter your TIN number" required>
                                                 <div class="invalid-feedback">
                                                     Please enter TIN Number.

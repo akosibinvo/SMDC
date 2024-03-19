@@ -3,6 +3,19 @@ session_start();
 
 require "php/connection.php";
 
+if (isset($_SESSION['user_id'])) {
+	$id = $_SESSION['user_id'];
+	$sql = "SELECT * FROM users WHERE ID = $id";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0) {
+		// Output data of each row
+		while ($row = $result->fetch_assoc()) {
+			$role = $row["role"];
+			$firstname = $row["firstName"];
+			$fullname = $row["firstName"] . " " . $row["lastName"];
+		}
+	}
+} 
 
 
 ?>
@@ -73,7 +86,7 @@ require "php/connection.php";
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages/pages-profile.php">
+						<a class="sidebar-link" href="<?php echo ($role === 'SA1' || $role === 'SA2') ? 'pages/pages-profile.php' : 'pages/pages-profile-imp.php'; ?>">
               				<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
             			</a>
 					</li>
@@ -104,22 +117,7 @@ require "php/connection.php";
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
             				<span class="text-dark">
-							<?php
-								if (isset($_SESSION['user_id'])) {
-									$id = $_SESSION['user_id'];
-									$sql = "SELECT * FROM users WHERE ID = $id";
-									$result = $conn->query($sql);
-									if ($result->num_rows > 0) {
-										// Output data of each row
-										while ($row = $result->fetch_assoc()) {
-											echo $row["firstName"];
-										}
-									}
-								} else {
-									header("Location: pages/pages-sign-in.php");
-								}
-
-							?>
+								<?php echo $fullname ?>
 							</span>
               				</a>
 
@@ -225,12 +223,12 @@ require "php/connection.php";
 									</div>
 
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending'";
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND agent = '$firstname'  ";
 										$res_booking = mysqli_query($conn, $sql_booking);
-										$count = mysqli_num_rows($res_booking);
+										$count_pending = mysqli_num_rows($res_booking);
 									?>
 
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count ?> </h1>
+									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count_pending ?> </h1>
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
@@ -255,12 +253,13 @@ require "php/connection.php";
 									</div>
 
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked'";
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname' ";
 										$res_booking = mysqli_query($conn, $sql_booking);
-										$count = mysqli_num_rows($res_booking);
+										$count_booked = mysqli_num_rows($res_booking);
 									?>
 
-									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count ?> </h1>
+									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count_booked ?> </h1>
+
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
@@ -317,7 +316,7 @@ require "php/connection.php";
 										<tr class="text-center">
 											<td> <?php echo $row['firstname']; ?> </td>
 											<td> <?php echo $row['Unit_code']; ?> </td>
-											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ' '); ?></td>
+											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ','); ?></td>
 											<td><?php echo $row['Transaction_date']; ?></td>
 											<td class="text-warning fw-bold"><?php echo $row['status']; ?></td>
 										</tr>

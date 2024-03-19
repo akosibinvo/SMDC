@@ -1,7 +1,9 @@
 <?php
+session_start();
+
 require "../../../php/connection.php";
 
-session_start();
+
 
 if (isset($_POST['addprice'])) {
     $addprice_id = $_POST['addprice_id'];
@@ -16,7 +18,23 @@ if (isset($_POST['addprice'])) {
     $date = mysqli_real_escape_string($conn, $_POST['date']);
     $agent = mysqli_real_escape_string($conn, $_POST['agent']);
     $status = mysqli_real_escape_string($conn, $_POST['status']);
-    $amount = mysqli_real_escape_string($conn, $_POST['amount']);
+
+    $inputAmount = $_POST['amount'];
+
+    // Check if the input amount contains the peso sign (₱)
+    if(strpos($inputAmount, '₱') !== false) {
+        // If the peso sign is found, remove it
+        $amount = str_replace('₱', '', $inputAmount);
+    } else {
+        // If no peso sign is found, use the input amount directly
+        $amount = $inputAmount;
+    }
+
+    // Remove commas from the amount
+    $amount = str_replace(',', '', $amount);
+
+    // Sanitize the input amount
+    $amount = mysqli_real_escape_string($conn, $amount);
 
     // Prepare and execute the SQL query
     $query = "UPDATE transaction_booking SET Amount=?, `status` = 'Booked' WHERE client_id=?";

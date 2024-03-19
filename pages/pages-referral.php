@@ -1,5 +1,5 @@
 <?php
-require "../php/connection.php"
+	require "../php/connection.php"
 ?>
 
 
@@ -23,71 +23,7 @@ require "../php/connection.php"
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="../index.php">
-          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../img/icons/logo.png" alt=""> </span>
-        		</a>
-
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Reports
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="../index.php">
-              			<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-statistics.php">
-              				<i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Statistics</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-header">
-						Manage
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="#">
-              				<i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Sales</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-booking.php">
-              				<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking</span>
-            			</a>
-					</li>
-
-					
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="pages-referral.php">
-							<i class="align-middle" data-feather="user-check"></i> <span class="align-middle">Referrals</span>
-						</a>
-					</li>
-					
-					<li class="sidebar-header">
-						Settings
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-profile.php">
-              				<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="">
-              				<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
-            			</a>
-					</li>
-
-				</ul>
-			</div>
-		</nav>
+		
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">

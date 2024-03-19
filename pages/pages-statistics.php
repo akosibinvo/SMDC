@@ -1,5 +1,25 @@
 <?php
-require "../php/connection.php"
+	require "../php/connection.php";
+
+	$query = "SELECT MONTH(Transaction_date) AS month, SUM(Amount) AS total_sales 
+				FROM transaction_booking 
+				WHERE status = 'Booked'
+				GROUP BY MONTH(Transaction_date)";
+
+		$result = mysqli_query($conn, $query);
+
+
+		$data = array_fill(1, 12, 0);
+
+		while ($row = mysqli_fetch_assoc($result)) {
+			$month = intval($row['month']);
+			$data[$month] = $row['total_sales'];
+		}
+
+
+		$data_json = json_encode(array_values($data));
+
+
 ?>
 
 
@@ -23,65 +43,9 @@ require "../php/connection.php"
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="../index.php">
-          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../img/icons/logo.png" alt=""> </span>
-        		</a>
-
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Reports
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="../index.php">
-              			<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="#">
-              				<i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Statistics</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-header">
-						Manage
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-sales.php">
-              				<i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Sales</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-booking.php">
-              				<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking</span>
-            			</a>
-					</li>
-
-
-					<li class="sidebar-header">
-						Settings
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-profile.php">
-              				<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-            			</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="">
-              				<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
-            			</a>
-					</li>
-
-				</ul>
-			</div>
-		</nav>
+		<?php
+			include "sidebar.php";
+		?>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -98,7 +62,11 @@ require "../php/connection.php"
               				</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-            				<span class="text-dark">User</span>
+            				<span class="text-dark">
+								<?php 
+									echo $fullname;
+								?>
+							</span>
               				</a>
 
 							<div class="dropdown-menu dropdown-menu-end">
@@ -207,6 +175,7 @@ require "../php/connection.php"
 		</div>
 	</div>
 
+
 	<script src="../js/app.js"></script>
 	<script src="../js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -218,18 +187,18 @@ require "../php/connection.php"
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
                     label: 'Sales',
-                    data: [0, 120, 140, 100, 20, 50, 220, 240, 260, 80, 300, 10],
+                    data: <?php echo $data_json; ?>,
                     backgroundColor: 'rgba(0, 48, 255, 0.2)',
                     borderColor: 'rgba(0, 48, 255, 1)',
                     borderWidth: 2,
-                    pointBackgroundColor: 'rgba(54, 162, 235, 1)', // Color of points
-                    pointBorderColor: 'rgba(255, 255, 255, 1)', // Border color of points
-                    pointBorderWidth: 2, // Border width of points
-                    pointRadius: 6, // Radius of points
-                    pointHoverRadius: 8, // Hover radius of points
-                    pointHitRadius: 10, // Hit radius of points
-                    pointHoverBackgroundColor: 'rgba(54, 162, 235, 1)', // Hover color of points
-                    pointHoverBorderColor: 'rgba(255, 255, 255, 1)' // Hover border color of points
+                    pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                    pointBorderColor: 'rgba(255, 255, 255, 1)',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    pointHitRadius: 10,
+                    pointHoverBackgroundColor: 'rgba(54, 162, 235, 1)',
+                    pointHoverBorderColor: 'rgba(255, 255, 255, 1)'
                 }]
             },
             options: {
@@ -242,36 +211,36 @@ require "../php/connection.php"
         });
     </script>
 
-<script>
-    var ctx = document.getElementById('pieChart').getContext('2d');
-    var myPieChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Red', 'Blue'],
-            datasets: [{
-                label: 'My First Dataset',
-                data: [12, 19, 3, 5, 2],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(0, 48, 255, 0.5)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(0, 48, 255, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'My Pie Chart'
-                }
-            }
-        }
-    });
-</script>
+	<script>
+		var ctx = document.getElementById('pieChart').getContext('2d');
+		var myPieChart = new Chart(ctx, {
+			type: 'pie',
+			data: {
+				labels: ['Red', 'Blue'],
+				datasets: [{
+					label: 'My First Dataset',
+					data: [12, 19, 3, 5, 2],
+					backgroundColor: [
+						'rgba(255, 99, 132, 0.5)',
+						'rgba(0, 48, 255, 0.5)'
+					],
+					borderColor: [
+						'rgba(255, 99, 132, 1)',
+						'rgba(0, 48, 255, 1)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				plugins: {
+					title: {
+						display: true,
+						text: 'My Pie Chart'
+					}
+				}
+			}
+		});
+	</script>
 
 
 </body>

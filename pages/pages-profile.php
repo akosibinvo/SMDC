@@ -1,10 +1,5 @@
 <?php
-session_start();
-
-require "../php/connection.php";
-include "../admin/include/php/modal.php";
-
-
+	require "../php/connection.php";
 
 ?>
 
@@ -29,78 +24,10 @@ include "../admin/include/php/modal.php";
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="../index.php">
-					<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../img/icons/logo.png" alt=""> </span>
-			  	</a>
-
-		<ul class="sidebar-nav">
-			<li class="sidebar-header">
-				Reports
-			</li>
-
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="../index.php">
-				  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-				</a>
-			</li>
-
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="pages-statistics.php">
-					  <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Statistics</span>
-				</a>
-			</li>
-
-			<li class="sidebar-header">
-				Manage
-			</li>
-
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="pages-sales.php">
-					  <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Sales</span>
-				</a>
-			</li>
-
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="pages-booking.php">
-					  <i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking</span>
-				</a>
-			</li>
-
-
-			<li class="sidebar-header">
-				Settings
-			</li>
-
-			<li class="sidebar-item active">
-				<a class="sidebar-link" href="pages-profile.php">
-					  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-				</a>
-			</li>
-
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="">
-					  <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
-				</a>
-			</li>
-
-		</ul>
-
-				<!-- <div class="sidebar-cta">
-					<div class="sidebar-cta-content">
-						<strong class="d-inline-block mb-2">Upgrade to SA2</strong>
-						<div class="mb-3 text-sm">
-							Lorem Ipsum
-						</div>
-						<div class="d-grid">
-							<a href="#" class="btn btn-primary">Learn More</a>
-						</div>
-					</div>
-				</div> -->
-
-			</div>
-		</nav>
+		
+		<?php
+			include "sidebar.php";
+		?>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -250,23 +177,9 @@ include "../admin/include/php/modal.php";
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
 								<span class="text-dark">
-								<?php
-									if (isset($_SESSION['user_id'])) {
-										$id = $_SESSION['user_id'];
-										$sql = "SELECT * FROM users WHERE ID = $id";
-										$result = $conn->query($sql);
-										if ($result->num_rows > 0) {
-											// Output data of each row
-											while ($row = $result->fetch_assoc()) {
-												$lastname = $row["firstName"] . " " . $row["lastName"];
-												echo $lastname;
-												
-											}
-										}
-									} else {
-										header("Location: pages-sign-in.php");
-									}
-								?>
+									<?php
+											echo $fullname
+									?>
 								</span>
 							</a>
 
@@ -301,8 +214,8 @@ include "../admin/include/php/modal.php";
 
 									
 
-									<h5 class="card-title mt-3 mb-0"><?php echo $lastname;?></h5>
-									<div class="text-muted mb-3">SA1</div>
+									<h5 class="card-title mt-3 mb-2"><?php echo $lastname;?></h5>
+									<div class="text-muted mb-3"><?php echo $role;?></div>
 
 									<div>
 										<button class="btn btn-primary btn-sm px-2 editProfile"><span data-feather="edit"></span> Edit</button>

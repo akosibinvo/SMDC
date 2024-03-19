@@ -5,7 +5,7 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link rel="preconnect" href="https://fonts.gstatic.com">
-      <link rel="shortcut icon" href="../img/icons/logo.png" />
+
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
    </head>
@@ -80,11 +80,12 @@
 
                      <div class="form-group col-md-6">
                            <label class="form-label">Price</label>
-                           <input class="form-control" type="text" pattern="[0-9]*" name="amount" id="amount" placeholder="Enter numbers only" required>
+                           <input class="form-control" type="text" name="amount" id="amount" placeholder="Enter numbers only" required>
                            <div class="invalid-feedback">
                               Invalid price format. Please enter a valid price without spaces.
                            </div>
                      </div>
+
                   </div>
                   
 
@@ -208,7 +209,7 @@
                      </div>
                      
 
-                     <div class="modal-footer mt-5">
+                     <div class="modal-footer mt-3">
                         <!-- <button type="submit" name="addprice" class="btn btn-primary">Complete Booking</button> -->
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                      </div>
@@ -220,7 +221,7 @@
          </div>
       </div>
 
-      <!--======================================= EDIT MODAL ======================================= -->
+      <!-- ======================================= EDIT MODAL =======================================
       <div class="modal fade" id="editProfileModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -251,12 +252,12 @@
                </div>
             </div>
          </div>
-      </div>
+      </div> -->
 
     
 
       <!--======================================= DELETE MODAL ======================================= -->
-      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="rejectBookingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
@@ -268,8 +269,8 @@
                   <p> Are you sure you want to delete? </p>
                </div>
                <div class="modal-footer">
-                  <form action="include/delete.php" method="POST">
-                     <input type="hidden" name="candidate_id" id="candidate_id">
+                  <form action="../include/php/rejectBooking.php" method="POST">
+                     <input type="hidden" name="delete_id" id="delete_id">
                      <button type="submit" name="delete" class="btn btn-danger"> Delete </button>
                   </form>
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -277,29 +278,37 @@
             </div>
          </div>
       </div>
+      
+      <script>
+         // Function to add commas to the input value for every three digits
+         function addCommas(input) {
+            // Check if input starts with the peso sign (₱)
+            let startsWithPeso = input.value.startsWith('₱');
 
-      <!--======================================= DELETE POSITION MODAL ======================================= -->
-      <div class="modal fade" id="deletePosition" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                  </button>
-               </div>
-               <div class="modal-body">
-                  <p> Are you sure you want to delete? </p>
-               </div>
-               <div class="modal-footer">
-                  <form action="include/deletePosition.php" method="POST">
-                     <input type="hidden" name="position_id" id="position_id">
-                     <button type="submit" name="deletePosition" class="btn btn-danger"> Delete </button>
-                  </form>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-               </div>
-            </div>
-         </div>
-      </div>
+            // Remove all non-numeric characters and the peso sign
+            let value = input.value.replace(/[^0-9]/g, '');
+
+            // Add commas every three digits
+            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+            // Add the peso sign back with a space if it was originally present
+            if (startsWithPeso) {
+                  value = '₱' + ' ' + value;
+            }
+
+            // Set the input value with commas
+            input.value = value;
+         }
+
+         // Get the input element
+         const amountInput = document.getElementById('amount');
+
+         // Add event listener for input
+         amountInput.addEventListener('input', function() {
+            // Call function to add commas
+            addCommas(this);
+         });
+      </script>
 
       <script>
          (function () {
