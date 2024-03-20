@@ -1,4 +1,5 @@
 <?php
+	include "../php/session.php";
     require "../php/connection.php";
     include "../admin/include/php/client_info.php";
     // include "../admin/include/php/imageHandler.php";
@@ -14,13 +15,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="../img/icons/logo.png" />
+	<link rel="shortcut icon" href="../img/icons/logo-square.png" />
 
 	<title>Booking | SMDC JQB</title>
 
 	<link href="../css/app.css" rel="stylesheet">
 	<link href="../css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+
 </head>
 
 <body>
@@ -404,7 +407,7 @@
 	</div>
 
 	<script src="../js/app.js"></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
     <script>
         (function () {
         'use strict'
@@ -446,6 +449,43 @@
             .catch(error => {
             console.error('Error fetching country data:', error);
         });
+    </script>
+
+    <?php
+        // Check if there is a notification in the session
+        if (isset($_SESSION['notification'])) {
+            // Get notification details
+            $title = $_SESSION['notification']['title'];
+            $status = $_SESSION['notification']['status'];
+            $description = $_SESSION['notification']['description'];
+            // Clear the notification from the session
+            unset($_SESSION['notification']);
+        }
+    ?>
+
+    <script>
+		
+        pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+
+        function pushNotify(status, title, description) {
+            new Notify({
+                status: status,
+                title: title,
+                text: description,
+                effect: 'slide',
+                speed: 800,
+                customClass: null,
+                customIcon: null,
+                showIcon: true,
+                showCloseButton: true,
+                autoclose: true,
+                autotimeout: 1500,
+                gap: 20,
+                distance: 20,
+                type: 1,
+                position: 'x-center top'
+            });
+        }
     </script>
 
 </body>

@@ -52,14 +52,14 @@
 												<label class="form-label">First Name</label>
 												<input type="text" class="form-control form-control-lg" name="firstname" placeholder="Enter your First name" aria-label="First name" required>
 												<div id="validationFirstName" class="invalid-feedback">
-													Please provide first name.
+													Please provide First Name.
 												</div>
 											</div>
 											<div class="col">
 												<label class="form-label">Last Name</label>
 												<input type="text" class="form-control form-control-lg" name="lastname" placeholder="Enter your Last name" aria-label="Last name" required>
 												<div id="validationLastName" class="invalid-feedback">
-													Please provide last name.
+													Please provide Last Name.
 												</div>
 											</div>
 										</div>
@@ -69,14 +69,14 @@
 												<label class="form-label">Email</label>
 												<input type="email" class="form-control form-control-lg" name="email" placeholder="Enter your Email Address" aria-label="email" required>
 												<div id="validationEmail" class="invalid-feedback">
-													Please provide email address.
+													Please provide E-mail Address.
 												</div>
 											</div>
 											<div class="col">
 												<label class="form-label">Contact No.</label>
 												<input type="tel" class="form-control form-control-lg" name="contact-number" placeholder="Enter your Contact Number" aria-label="Contact Number" required>
 												<div id="validationFContact" class="invalid-feedback">
-													Please provide contact number.
+													Please provide Contact Number.
 												</div>
 											</div>
 										</div>
@@ -86,14 +86,14 @@
 												<label class="form-label">Password</label>
 												<input type="password" class="form-control form-control-lg" name="password" placeholder="Enter your Password" aria-label="password" required>
 												<div id="validationPass" class="invalid-feedback">
-													Please provide password.
+													Please provide Password.
 												</div>
 											</div>
 											<div class="col">
 												<label class="form-label">Confirm Password</label>
 												<input type="password" class="form-control form-control-lg" name="confirm-password" placeholder="Confirm Password" aria-label="Confirm Password" required>
 												<div id="validationCPass" class="invalid-feedback">
-													Please confirm your password.
+													Please confirm your Password.
 												</div>
 											</div>
 										</div>
@@ -112,7 +112,7 @@
 										<div class="row d-flex justify-content-start mt-4">
 											<div class="col-auto d-flex justify-content-start">
 												<p class="me-2">Already have account?</p>
-												<a class="text-decoration-underline" href="pages-sign-in.php">
+												<a class="text-decoration-none" style="color: #0030ff;" href="pages-sign-in.php">
 													Sign in
 												</a>
 											</div>

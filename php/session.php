@@ -1,0 +1,19 @@
+<?php
+session_start();
+
+require "connection.php";
+
+if (isset($_SESSION['user_id'])) {
+    $id = $_SESSION['user_id'];
+    $sql = "SELECT * FROM users WHERE ID = $id";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        // Output data of each row
+        while ($row = $result->fetch_assoc()) {
+            $role = $row["role"];
+            $firstname = $row["firstName"];
+            $fullname = $row["firstName"] . " " . $row["lastName"];
+        }
+    }
+} 
+?>

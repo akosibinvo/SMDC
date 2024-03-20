@@ -106,7 +106,7 @@
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
+								<a class="dropdown-item" href="../php/logout.php">Log out</a>
 							</div>
 						</li>
 					</ul>
@@ -288,6 +288,7 @@
 
 											
 											$birthdate = $rows_clientInfo['Date_of_birth'];
+											$birthplace = $rows_clientInfo['Place_of_birth'];
 											$tinNo = $rows_clientInfo['Tin_no'];
 											$gender = $rows_clientInfo['Gender'];
 											$civilstatus = $rows_clientInfo['Civil_status'];
@@ -309,8 +310,10 @@
 											<td><?php echo $middlename;?></td>
 											<td><?php echo $lastname;?></td>
 											<td><?php echo $birthdate;?></td>
+											
 											<td><button class="btn btn-primary btn-sm viewbtn">Other Details</button></td>
 
+											<td class="d-none"><?php echo $birthplace;?></td>
 											<td class="d-none"><?php echo $tinNo;?></td>
 											<td class="d-none"><?php echo $gender;?></td>
                                             <td class="d-none"><?php echo $civilstatus;?></td>
@@ -365,22 +368,22 @@
 				 $('#view_lastname').val(data[3]);
 
 				 $('#view_birthdate').val(data[4]);
-				 $('#view_birthplace').val(data[5]);
+				 $('#view_birthplace').val(data[6]);
 
-				 $('#view_tin').val(data[6]);
-				 $('#view_gender').val(data[7]);
-				 $('#view_civil').val(data[8]);
-				 $('#view_citizenship').val(data[9]);
+				 $('#view_tin').val(data[7]);
+				 $('#view_gender').val(data[8]);
+				 $('#view_civil').val(data[9]);
+				 $('#view_citizenship').val(data[10]);
 
-				 $('#view_email').val(data[10]);
-				 $('#view_phone').val(data[11]);
-				 $('#view_passport').val(data[12]);
+				 $('#view_email').val(data[11]);
+				 $('#view_phone').val(data[12]);
+				 $('#view_passport').val(data[13]);
 				 
-				 $('#view_presentAddress').val(data[13]);
-				 $('#view_permanentAddress').val(data[14]);
+				 $('#view_presentAddress').val(data[14]);
+				 $('#view_permanentAddress').val(data[15]);
 
-				 $('#view_employer').val(data[15]);
-				 $('#view_workAddress').val(data[16]);
+				 $('#view_employer').val(data[16]);
+				 $('#view_workAddress').val(data[17]);
 
              });
 			 

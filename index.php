@@ -3,6 +3,12 @@ session_start();
 
 require "php/connection.php";
 
+if(isset($_SESSION['email'])){
+    $email = $_SESSION['email'];
+} else {
+    header("Location: pages/pages-sign-in.php");
+}
+
 if (isset($_SESSION['user_id'])) {
 	$id = $_SESSION['user_id'];
 	$sql = "SELECT * FROM users WHERE ID = $id";
@@ -30,12 +36,13 @@ if (isset($_SESSION['user_id'])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="img/icons/logo.png" />
+	<link rel="shortcut icon" href="img/icons/logo-square.png" />
 
 	<title>Seller Dashboard | SMDC JQB</title>
 
 	<link href="css/app.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -44,7 +51,7 @@ if (isset($_SESSION['user_id'])) {
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.php">
-          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="img/icons/logo.png" alt=""> </span>
+          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="img/icons/logo-blue.png" alt=""> </span>
         		</a>
 
 				<ul class="sidebar-nav">
@@ -393,7 +400,43 @@ if (isset($_SESSION['user_id'])) {
 	</div>
 
 	<script src="js/app.js"></script>
-	<script src="js/script.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <?php
+        // Check if there is a notification in the session
+        if (isset($_SESSION['notification'])) {
+            // Get notification details
+            $title = $_SESSION['notification']['title'];
+            $status = $_SESSION['notification']['status'];
+            $description = $_SESSION['notification']['description'];
+            // Clear the notification from the session
+            unset($_SESSION['notification']);
+        }
+    ?>
+
+    <script>
+
+        pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+
+        function pushNotify(status, title, description) {
+            new Notify({
+                status: status,
+                title: title,
+                text: description,
+                effect: 'slide',
+                speed: 800,
+                customClass: null,
+                customIcon: null,
+                showIcon: true,
+                showCloseButton: true,
+                autoclose: true,
+                autotimeout: 1500,
+                gap: 20,
+                distance: 20,
+                type: 1,
+                position: 'x-center top'
+            });
+        }
+    </script>
 
 
 </body>

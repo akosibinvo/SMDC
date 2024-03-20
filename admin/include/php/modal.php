@@ -6,7 +6,9 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link rel="preconnect" href="https://fonts.gstatic.com">
 
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <link rel="shortcut icon" href="../img/icons/logo-square.png" />
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
    </head>
    <body>
@@ -140,7 +142,7 @@
 
                         <div class="form-group col-md-6">
                            <label class="form-label">Place of Birth</label>
-                           <input class="form-control mb-2" type="date" id="view_birthplace" disabled>
+                           <input class="form-control mb-2" type="text" id="view_birthplace" disabled>
                         </div>
                      </div>
 
@@ -187,12 +189,12 @@
                      <div class="row mb-3">
                         <div class="form-group col-md-6">
                            <label class="form-label">Present Address</label>
-                           <input class="form-control mb-2" type="text" id="view_presentAddress" disabled>
+                           <textarea class="form-control non-resizable mb-2" id="view_presentAddress" rows="2" disabled></textarea>
                         </div>
 
                         <div class="form-group col-md-6">
                            <label class="form-label">Permanent Address</label>
-                           <input class="form-control mb-2" type="text" id="view_permanentAddress" disabled>
+                           <textarea class="form-control non-resizable mb-2" id="view_permanentAddress" rows="2" disabled></textarea>
                         </div>
                      </div>
 
@@ -204,7 +206,7 @@
 
                         <div class="form-group col-md-6">
                            <label class="form-label">Work Address</label>
-                           <input class="form-control mb-2" type="text" id="view_workAddress" disabled>
+                           <textarea class="form-control non-resizable mb-2" id="view_workAddress" rows="1" disabled></textarea>
                         </div>
                      </div>
                      
@@ -221,9 +223,9 @@
          </div>
       </div>
 
-      <!-- ======================================= EDIT MODAL =======================================
-      <div class="modal fade" id="editProfileModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog" role="document">
+      <!-- ======================================= EDIT MODAL ======================================= -->
+      <div class="modal fade" id="profileModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
@@ -231,19 +233,58 @@
                   </button>
                </div>
                <div class="modal-body">
-                  <form action="../admin/include/php/editProfile.php" method="post" enctype="multipart/form-data">
+                  <form action="../admin/include/php/imgUpload.php" method="post" enctype="multipart/form-data">
                      <input type="hidden" name="update_id" id="update_id">
+
                      <div class="row mb-3">
 
-                        <div class="form-group mb-3">
-                           <label class="form-label">Firstname</label>
-                           <input class="form-control" type="text" name="firstname" id="firstname" placeholder="Enter first name" required>
+                     <div class="col-sm-6 col-md-6">
+                        <div class="form-group text-center mb-3 p-4">
+                        <img src="../img/avatars/default-profile-blue.png" alt="Default Profile" class=" rounded-circle mb-3" id="imagePreview" width="205" height="205" style="object-fit: cover;" />
+
+                        <input class="form-control mt-3" type="file" name="profilePic" id="fileInput" required>
                         </div>
                      </div>
 
+                     <div class="col-sm-6 col-md-6 px-4">
+                        <div class="row">
+                           <div class="form-group mb-3">
+                              <label class="form-label" for="firstname">Firstname</label>
+                              <input class="form-control" type="text" name="firstname" id="firstname" placeholder="Enter first name">
+                           </div>
+                        </div>
+
+                        <div class="row">
+                           <div class="form-group mb-3">
+                              <label class="form-label">Lastname</label>
+                              <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Enter first name">
+                           </div>
+                        </div>
+
+                        <div class="row">
+                           <div class="form-group mb-3">
+                              <label class="form-label">E-mail</label>
+                              <input class="form-control" type="text" name="email" id="email" placeholder="Enter first name">
+                           </div>
+                        </div>
+
+                        <div class="row">
+                           <div class="form-group mb-3">
+                              <label class="form-label">Password</label>
+                              <input class="form-control" type="text" name="password" id="password" placeholder="Enter first name">
+                           </div>
+                        </div>
+                        
+                     </div>
+                        
+
+                     </div>
+
+                     
+
                      <div class="modal-footer">
                         <div class="gap-2 mt-4">
-                           <button type="submit" name="updatedata" class="btn btn-primary">Update</button>
+                           <button type="submit" name="update" class="btn btn-primary">Update</button>
                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                      </div>
@@ -252,7 +293,7 @@
                </div>
             </div>
          </div>
-      </div> -->
+      </div>
 
     
 
@@ -328,6 +369,22 @@
                }, false)
             })
          })()
+      </script>
+
+      <script>
+         const fileInput = document.getElementById('fileInput');
+         const imagePreview = document.getElementById('imagePreview');
+
+         fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                  imagePreview.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+         });
       </script>
 
    </body>

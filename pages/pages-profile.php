@@ -1,5 +1,7 @@
 <?php
+	include "../php/session.php";
 	require "../php/connection.php";
+	include "../admin/include/php/modal.php";
 
 ?>
 
@@ -13,7 +15,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="../img/icons/logo.png" />
+	<link rel="shortcut icon" href="../img/icons/logo-square.png" />
 
 
 	<title>Profile | SMDC JQB</title>
@@ -211,14 +213,38 @@
 									<h5 class="card-title mb-0">Profile Details</h5>
 								</div>
 								<div class="card-body text-center">
-									<img src="../img/avatars/default-profile-blue.png" alt="Default Profile" class="img-fluid rounded-circle mb-2" width="128" height="128" />
+
+								<?php
+										$sql_profile = "SELECT img FROM users WHERE firstName = '$firstname'";
+										$res_profile = mysqli_query($conn, $sql_profile);
+										
+										if ($res_profile && mysqli_num_rows($res_profile) > 0) {
+											$row = mysqli_fetch_assoc($res_profile);
+											$profile_img_path = $row['img'];
+										
+											// Check if profile image path is not empty
+											if (!empty($profile_img_path)) {
+												// Concatenate the filename to the path
+												$profile_img_path = "../img/avatars/" . $profile_img_path;
+											} else {
+												// Set default profile image path
+												$profile_img_path = "../img/avatars/default-profile-blue.png"; // Adjust the path to include the 'avatars' folder
+											}
+										} else {
+											// Handle case when no image is found
+											$profile_img_path = "../img/avatars/default-profile-blue.png"; // Set default profile image path
+										}
+								?>
+
+									<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="rounded-circle mb-2" width="128" height="128" />
 
 									<h5 class="card-title mt-3 mb-2"><?php echo $fullname;?></h5>
 									<div class="text-muted mb-3"><?php echo $role;?></div>
 
 									<div>
-										<button class="btn btn-primary btn-sm px-2 editProfile"><span data-feather="edit"></span> Edit</button>
+										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal"> Edit </button>
 									</div>
+									
 								</div>
 								<hr class="my-0" />
 								<div class="card-body">

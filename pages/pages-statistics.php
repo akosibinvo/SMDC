@@ -1,4 +1,5 @@
 <?php
+	include "../php/session.php";
 	require "../php/connection.php";
 ?>
 
@@ -12,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="../img/icons/logo.png" />
+	<link rel="shortcut icon" href="../img/icons/logo-square.png" />
 
 	<title>Statistics | SMDC JQB</title>
 
@@ -54,7 +55,7 @@
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
+								<a class="dropdown-item" href="../php/logout.php">Log out</a>
 							</div>
 						</li>
 					</ul>
@@ -158,7 +159,6 @@
 
 
 	<?php
-
 		$query = "SELECT MONTH(Transaction_date) AS month, SUM(Amount) AS total_sales 
 		FROM transaction_booking 
 		WHERE status = 'Booked' AND agent = '$firstname'
@@ -175,7 +175,6 @@
 		}
 		
 		$data_json = json_encode(array_values($data));
-
 	?>
 
 	<script src="../js/app.js"></script>
@@ -188,19 +187,19 @@
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
-                    label: 'Sales',
+                    label: ' Sales',
                     data: <?php echo $data_json; ?>,
-                    backgroundColor: 'rgba(0, 48, 255, 0.2)',
-                    borderColor: 'rgba(0, 48, 255, 1)',
+                    backgroundColor: '#2f6cff',
+                    borderColor: '#2f6cff',
                     borderWidth: 2,
-                    pointBackgroundColor: 'rgba(54, 162, 235, 1)',
-                    pointBorderColor: 'rgba(255, 255, 255, 1)',
-                    pointBorderWidth: 2,
+                    pointBackgroundColor: '#2f6cff',
+                    pointBorderColor: '#2f6cff',
+                    pointBorderWidth: 1,
                     pointRadius: 6,
                     pointHoverRadius: 8,
                     pointHitRadius: 10,
-                    pointHoverBackgroundColor: 'rgba(54, 162, 235, 1)',
-                    pointHoverBorderColor: 'rgba(255, 255, 255, 1)'
+                    pointHoverBackgroundColor: '#0030ff',
+                    pointHoverBorderColor: '#0030ff'
                 }]
             },
             options: {
@@ -223,14 +222,9 @@
 					label: 'My First Dataset',
 					data: [12, 19, 3, 5, 2],
 					backgroundColor: [
-						'rgba(255, 99, 132, 0.5)',
-						'rgba(0, 48, 255, 0.5)'
-					],
-					borderColor: [
-						'rgba(255, 99, 132, 1)',
-						'rgba(0, 48, 255, 1)'
-					],
-					borderWidth: 1
+						'#0030ff',
+						'#2f6cff'
+					]
 				}]
 			},
 			options: {

@@ -1,23 +1,5 @@
-
 <?php
-    session_start();
-
-    if (isset($_SESSION['user_id'])) {
-        $id = $_SESSION['user_id'];
-        $sql = "SELECT * FROM users WHERE ID = $id";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            // Output data of each row
-            while ($row = $result->fetch_assoc()) {
-                $role = $row["role"];
-                $firstname = $row["firstName"];
-                $fullname = $row["firstName"] . " " . $row["lastName"];
-            }
-        }
-    } 
-
     $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+1);
-
 ?>
 
 
@@ -32,7 +14,7 @@
         <nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="../index.php">
-          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../img/icons/logo.png" alt=""> </span>
+          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../img/icons/logo-blue.png" alt=""> </span>
         		</a>
 
 				<ul class="sidebar-nav">

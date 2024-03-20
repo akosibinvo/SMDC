@@ -1,4 +1,5 @@
 <?php
+	include "../php/session.php";
 	require "../php/connection.php";
 ?>
 
@@ -11,7 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="../img/icons/logo.png" />
+	<link rel="shortcut icon" href="../img/icons/logo-square.png" />
 
 	<title>Sales | SMDC JQB</title>
 
@@ -83,10 +84,10 @@
 								<table class="table table-hover my-0">
 									<thead>
 										<tr class="text-center">
-											<th>Sales Performance</th>
 											<th>Total Revenue</th>
 											<th>Units Sold</th>
 											<th>Average Selling Price</th>
+											<th>Sales Performance</th>
 											<th>Seller</th>
 										</tr>
 									</thead>

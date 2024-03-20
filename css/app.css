@@ -1889,10 +1889,10 @@ progress {
     }
 }
 .form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
-    background-color: rgba(0, 48, 255, .5);
+    background-color: #2f6cff;
 }
 .form-control:hover:not(:disabled):not([readonly])::file-selector-button {
-    background-color: rgba(0, 48, 255, .5);
+    background-color: #2f6cff;
 }
 .form-control-plaintext {
     background-color: transparent;
@@ -2592,18 +2592,18 @@ textarea.form-control-lg {
 }
 .btn-primary {
     --bs-btn-color: #fff;
-    --bs-btn-bg: #0030ff;
-    --bs-btn-border-color: #0030ff;
+    --bs-btn-bg: #2f6cff;
+    --bs-btn-border-color: #2f6cff;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: rgba(0, 48, 255, .5);
+    --bs-btn-hover-bg: #0c3cff;
     --bs-btn-hover-border-color: none;
     --bs-btn-focus-shadow-rgb: 88, 145, 226;
     --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #0030ff;
-    --bs-btn-active-border-color: #0030ff;
+    --bs-btn-active-bg: #2f6cff;
+    --bs-btn-active-border-color: #2f6cff;
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-    --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: #0030ff;
+    --bs-btn-disabled-color: #5696ff;
+    --bs-btn-disabled-bg: #d5ecff;
     --bs-btn-disabled-border-color: #3b7ddd;
 }
 .btn-secondary {
@@ -11244,7 +11244,7 @@ body {
     outline: 0
 }
 .sidebar-link:hover {
-    background: rgba(0, 48, 255, .3);
+    background: #2f6cff;
     color: #fff;
     border-left-color: transparent;
 }
@@ -11252,7 +11252,7 @@ body {
     color: #fff;
 }
 .sidebar-item.active .sidebar-link:hover, .sidebar-item.active>.sidebar-link {
-    background: rgba(0, 48, 255, .5);
+    background: #5696ff;
     border-left: 5px solid #0030ff;
     color: #fff;
 }
@@ -11260,7 +11260,7 @@ body {
     color: #fff;
 }
 .sidebar-brand {
-    color: #0030ff;
+    color: #0c3cff;
     display: block;
     font-size: 1.15rem;
     font-weight: 600;
@@ -11325,7 +11325,7 @@ body {
 }
 .stat {
     align-items: center;
-    background: rgba(0, 48, 255, .5);
+    background: #2f6cff;
     border-radius: 50%;
     display: flex;
     height: 40px;
@@ -12357,8 +12357,8 @@ span.flatpickr-weekday {
 }
 
 .smdc-logo {
-    width: 110px;
-    height: 30px;
+    width: 120px;
+    height: 60px;
 }
 
 .title-dashboard {
@@ -12366,7 +12366,13 @@ span.flatpickr-weekday {
 }
 
 .background-blue {
-    background-color: #0030ff;
+    background: rgb(47,108,255);
+    background: linear-gradient(90deg, rgba(47,108,255,1) 0%, rgba(12,60,255,1) 100%);
+}
+
+.background-blue:hover {
+    background: rgb(12,60,255);
+    background: linear-gradient(90deg, rgba(12,60,255,1) 0%, rgba(0,48,255,1) 100%);
 }
 
 .custom-bg {
@@ -12387,7 +12393,7 @@ span.flatpickr-weekday {
 }
 .custom-stat svg {
     stroke-width: 1.5;
-    color: #0030ff !important;
+    color: #2f6cff !important;
     height: 18px;
     width: 18px
 }

@@ -11,10 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     // Retrieve user from database
-    $stmt = $conn->prepare("SELECT ID, firstName, password FROM users WHERE email = ?");
+    $stmt = $conn->prepare("SELECT ID, firstName, lastName, password FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
-    $stmt->bind_result($user_id, $agent, $hashed_password);
+    $stmt->bind_result($user_id, $agent, $lastname, $hashed_password);
     $stmt->fetch();
     $stmt->close();
 
@@ -23,13 +23,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Password is correct, start session
         $_SESSION['user_id'] = $user_id;
         $_SESSION['email'] = $email;
+        $_SESSION['lastName'] = $lastname;
         $_SESSION['agent'] = $agent;
+        $_SESSION['notification'] = array(
+            'title' => 'Login successfully',
+            'status' => 'success',
+            'description' => 'Welcome,' . " " . $agent . " " . $lastname . "!"
+        );
         // Redirect to dashboard or desired page
         header('Location: ../index.php');
         exit;
-    } else {
+    }
+    //Admin Log In (Needs to be removed once configuration of admin is done)
+    else if ($email == "admin@gmail.com" && $password == "admin"){
+        header('Location: ../admin/index.php');
+    }
+    
+    else {
         // Invalid username or password
         $errors[] = "Invalid password";
+        $_SESSION['notification'] = array(
+            'title' => 'Account doesn\'t exist',
+            'status' => 'error',
+            'description' => 'Check your E-mail and Password'
+        );
         header('Location: ../pages/pages-sign-in.php');
     }
 }
