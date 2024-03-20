@@ -17,7 +17,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //validate password
     if ($password !== $confirm_password) {
-        $errors[] = "Passwords do not match";
+        $_SESSION['notification'] = array(
+            'title' => 'Password Mismatch',
+            'status' => 'error',
+            'description' => 'Passwords do not match'
+        );
+
+        // Redirect to signup page
+        header('Location: ../pages/pages-sign-up.php');
+        exit;
     }
 
     // Check if email already exists
@@ -29,15 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 
     if ($count > 0) {
-        $errors[] = "Username already exists";
-        echo "Username already exists";
+        $_SESSION['notification'] = array(
+            'title' => 'Invalid Email',
+            'status' => 'error',
+            'description' => 'Email address already registered'
+        );
         // Redirect to login page
-        header('Location: ../pages/pages-sign-up.php');
+        header('Location: ../pages/pages-sign-in.php');
         exit;
-    }
-
-    // If no errors, create account
-    if (empty($errors)) {
+    } else {
         // Hash password
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $role = "SA1";
@@ -47,6 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("sssss", $firstName, $lastName, $email, $hashed_password, $role);
         $stmt->execute();
         $stmt->close();
+
+        $_SESSION['notification'] = array(
+            'title' => 'Successfully Registered',
+            'status' => 'success',
+            'description' => 'You successfully registered. Please login'
+        );
 
         // Redirect to login page
         header('Location: ../pages/pages-sign-in.php');

@@ -1,7 +1,7 @@
 <?php
-include "../php/connection.php"
+    include "../php/connection.php";
+    session_start();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,13 +12,15 @@ include "../php/connection.php"
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="shortcut icon" href="../img/icons/logo-blue.png" />
+    <link rel="shortcut icon" href="../img/icons/logo-square.png" />
 
     <title>Sign In | SDMC JQB</title>
 
     <link href="../css/app.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- CSS Simple Notify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+
 </head>
 
 <body>
@@ -55,7 +57,7 @@ include "../php/connection.php"
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Password</label>
-                                            <input class="form-control form-control- <?php echo isset($errors) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Enter your password" required>
+                                            <input class="form-control form-control-lg <?php echo isset($errors) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Enter your password" required>
 											<div id="validationLastName" class="invalid-feedback">
 													Enter your password
 											</div>
@@ -90,32 +92,6 @@ include "../php/connection.php"
                                                 </a>
                                             </div>
                                         </div>
-
-                                        <!-- <div class="mb-3">
-
-											<label class="form-label">Role</label>
-                                                <select class="form-select" id="role" name="role">
-												<?php
-                                                $sql_roles = "SELECT * FROM roles";
-                                                $res_roles = mysqli_query($conn, $sql_roles);
-
-                                                if ($res_roles == TRUE) {
-                                                    $count_get = mysqli_num_rows($res_roles);
-                                                    if ($count_get > 0) {
-                                                        while ($rows_roles = mysqli_fetch_assoc($res_roles)) {
-                                                            $roles = $rows_roles['role'];
-                                                ?>
-															<option value="<?php echo $roles; ?>"><?php echo $roles; ?></option>
-															<?php
-                                                        }
-                                                    }
-                                                }
-
-                                                            ?>
-                                                </select>
-
-										</div> -->
-
                                     </form>
                                 </div>
                             </div>
@@ -125,10 +101,47 @@ include "../php/connection.php"
             </div>
         </div>
     </main>
+    
 
-    <script src="js/app.js"></script>
+    <script src="../js/app.js"></script>
+    <!-- Simple Notify -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <?php
+        // Check if there is a notification in the session
+        if (isset($_SESSION['notification'])) {
+            // Get notification details
+            $title = $_SESSION['notification']['title'];
+            $status = $_SESSION['notification']['status'];
+            $description = $_SESSION['notification']['description'];
+            // Clear the notification from the session
+            unset($_SESSION['notification']);
+        }
+    ?>
+
     <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+
+        function pushNotify(status, title, description) {
+            new Notify({
+                status: status,
+                title: title,
+                text: description,
+                effect: 'slide',
+                speed: 800,
+                customClass: null,
+                customIcon: null,
+                showIcon: true,
+                showCloseButton: true,
+                autoclose: true,
+                autotimeout: 1000,
+                gap: 20,
+                distance: 20,
+                type: 1,
+                position: 'x-center top'
+            });
+        }
+    </script>
+    <script>
         (() => {
             'use strict'
 
@@ -148,7 +161,7 @@ include "../php/connection.php"
             })
         })()
     </script>
-
+    
 </body>
 
 </html>

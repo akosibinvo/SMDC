@@ -11,13 +11,15 @@ require "../php/connection.php"
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="../img/icons/logo-blue.png" />
+	<link rel="shortcut icon" href="../img/icons/logo-square.png" />
 
 	<title>Sign Up | SMDC JQB</title>
 
 	<link href="../css/app.css" rel="stylesheet">
-	<link href="../css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+	<!-- Password Validator Css -->
+	<link rel="stylesheet" href="../css/jquery.passwordRequirements.css" />
 </head>
 
 <body>
@@ -46,7 +48,7 @@ require "../php/connection.php"
 							</div>
 							<div class="card-body">
 								<div class="m-sm-3 px-xl-3">
-									<form action="../php/signup.php" method="post" class="needs-validation" novalidate>
+									<form action="../php/signup.php" id="SignupForm" method="post" class="needs-validation" novalidate>
 										<div class="row g-4 my-3">
 											<div class="col">
 												<label class="form-label">First Name</label>
@@ -84,14 +86,14 @@ require "../php/connection.php"
 										<div class="row g-4 mb-3">
 											<div class="col">
 												<label class="form-label">Password</label>
-												<input type="password" class="form-control form-control-lg" name="password" placeholder="Enter your Password" aria-label="password" required>
+												<input id="password_signup" type="password" class="form-control form-control-lg pr-password" name="password" placeholder="Enter your Password" aria-describedby="validationPass" aria-label="password" required>
 												<div id="validationPass" class="invalid-feedback">
 													Please provide password.
 												</div>
 											</div>
 											<div class="col">
 												<label class="form-label">Confirm Password</label>
-												<input type="password" class="form-control form-control-lg" name="confirm-password" placeholder="Confirm Password" aria-label="Confirm Password" required>
+												<input id="confirm_password_signup" type="password" class="form-control form-control-lg" name="confirm-password" placeholder="Confirm Password" aria-label="Confirm Password" required>
 												<div id="validationCPass" class="invalid-feedback">
 													Please confirm your password.
 												</div>
@@ -106,7 +108,7 @@ require "../php/connection.php"
 										</div>
 
 										<div class="d-grid gap-2 mt-3">
-											<button type="submit" class="btn btn-lg btn-primary">Register</button>
+											<button id="submit_signup" type="submit" class="btn btn-lg btn-primary">Register</button>
 										</div>
 
 										<div class="row d-flex justify-content-start mt-4">
@@ -128,6 +130,10 @@ require "../php/connection.php"
 	</main>
 
 	<script src="../js/app.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<!-- Password Validator -->
+	<script src="../js/jquery.passwordRequirements.js"></script>
+
 	<script>
 		// Example starter JavaScript for disabling form submissions if there are invalid fields
 		(() => {
@@ -148,6 +154,11 @@ require "../php/connection.php"
 				}, false)
 			})
 		})()
+	</script>
+	<script>
+		$(function(){
+			$(".pr-password").passwordRequirements();
+		});
 	</script>
 
 </body>

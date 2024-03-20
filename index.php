@@ -15,13 +15,14 @@ session_start();
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="img/icons/logo.png" />
+	<link rel="shortcut icon" href="img/icons/logo-square.png" />
 
 	<title>Seller Dashboard | SMDC JQB</title>
 
 	<link href="css/app.css" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<!-- CSS Simple Notify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
 </head>
 
 <body>
@@ -29,7 +30,7 @@ session_start();
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.php">
-          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="img/icons/logo.png" alt=""> </span>
+          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="img/icons/logo-blue.png" alt=""> </span>
         		</a>
 
 				<ul class="sidebar-nav">
@@ -162,17 +163,17 @@ session_start();
 									</div>
 
 									<?php
-										$sql_booking = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked'";
-										$res_booking = mysqli_query($conn, $sql_booking);
+										// $sql_booking = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked'";
+										// $res_booking = mysqli_query($conn, $sql_booking);
 
-										if ($res_booking) {
-											$row = mysqli_fetch_assoc($res_booking);
-											$total_amount = $row['total_amount'];
+										// if ($res_booking) {
+										// 	$row = mysqli_fetch_assoc($res_booking);
+										// 	$total_amount = $row['total_amount'];
 									
 
-										} else {
-											echo "Error: " . mysqli_error($conn);
-										}
+										// } else {
+										// 	echo "Error: " . mysqli_error($conn);
+										// }
 									?>
 									<h1 class="mt-1 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_amount) ?></h1>
 									<div class="mb-0">
@@ -222,9 +223,9 @@ session_start();
 									</div>
 
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending'";
-										$res_booking = mysqli_query($conn, $sql_booking);
-										$count = mysqli_num_rows($res_booking);
+										// $sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending'";
+										// $res_booking = mysqli_query($conn, $sql_booking);
+										// $count = mysqli_num_rows($res_booking);
 									?>
 
 									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count ?> </h1>
@@ -252,9 +253,9 @@ session_start();
 									</div>
 
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked'";
-										$res_booking = mysqli_query($conn, $sql_booking);
-										$count = mysqli_num_rows($res_booking);
+										// $sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked'";
+										// $res_booking = mysqli_query($conn, $sql_booking);
+										// $count = mysqli_num_rows($res_booking);
 									?>
 
 									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count ?> </h1>
@@ -301,15 +302,15 @@ session_start();
 									
 									<tbody>
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending'";
-										$res_booking = mysqli_query($conn, $sql_booking);
+										// $sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending'";
+										// $res_booking = mysqli_query($conn, $sql_booking);
 
-										if ($res_booking == TRUE) {
-											$count_get = mysqli_num_rows($res_booking);
-											if ($count_get > 0) {
+										// if ($res_booking == TRUE) {
+										// 	$count_get = mysqli_num_rows($res_booking);
+										// 	if ($count_get > 0) {
 									?>
 									<?php
-            							while ($row = mysqli_fetch_assoc($res_booking)) {
+            							// while ($row = mysqli_fetch_assoc($res_booking)) {
                 					?>
 										<tr class="text-center">
 											<td> <?php echo $row['firstname']; ?> </td>
@@ -319,12 +320,12 @@ session_start();
 											<td class="text-warning fw-bold"><?php echo $row['status']; ?></td>
 										</tr>
 										<?php
-            							}
+            							// }
             						?>
             						</tbody>
 									<?php
-    							}
-								}
+    							// }
+								// }
 								?>
         						</table>
         						
@@ -352,15 +353,15 @@ session_start();
 										</tr>
 									</thead>
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked'";
-										$res_booking = mysqli_query($conn, $sql_booking);
+										// $sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked'";
+										// $res_booking = mysqli_query($conn, $sql_booking);
 
-										if ($res_booking == TRUE) {
-											$count_get = mysqli_num_rows($res_booking);
-											if ($count_get > 0) {
+										// if ($res_booking == TRUE) {
+										// 	$count_get = mysqli_num_rows($res_booking);
+										// 	if ($count_get > 0) {
 									?>
 									<?php
-            							while ($row = mysqli_fetch_assoc($res_booking)) {
+            							// while ($row = mysqli_fetch_assoc($res_booking)) {
                 					?>
 									<tbody>
 										<tr class="text-center">
@@ -371,13 +372,13 @@ session_start();
 											<td class="text-success fw-bold"><?php echo $row['status']; ?></td>
 										</tr>
 										<?php
-            							}
+            							// }
             						?>
             						</tbody>
         						</table>
         						<?php
-    							}
-								}
+    							// }
+								// }
 								?>
 							</div>
 						</div>
@@ -391,8 +392,45 @@ session_start();
 	</div>
 
 	<script src="js/app.js"></script>
-	<script src="js/script.js"></script>
+	<!-- Simple Notify -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <?php
+        // Check if there is a notification in the session
+        if (isset($_SESSION['notification'])) {
+            // Get notification details
+            $title = $_SESSION['notification']['title'];
+            $status = $_SESSION['notification']['status'];
+            $description = $_SESSION['notification']['description'];
+            // Clear the notification from the session
+            unset($_SESSION['notification']);
+        }
+    ?>
 
+    <script>
+		console.log('sdfdg');
+
+        pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+
+        function pushNotify(status, title, description) {
+            new Notify({
+                status: status,
+                title: title,
+                text: description,
+                effect: 'slide',
+                speed: 800,
+                customClass: null,
+                customIcon: null,
+                showIcon: true,
+                showCloseButton: true,
+                autoclose: true,
+                autotimeout: 1000,
+                gap: 20,
+                distance: 20,
+                type: 1,
+                position: 'x-center top'
+            });
+        }
+    </script>
 
 </body>
 
