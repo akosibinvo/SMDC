@@ -1,5 +1,6 @@
 <?php
     $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+1);
+
 ?>
 
 
@@ -49,14 +50,30 @@
               				<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking</span>
             			</a>
 					</li>
-                    
+
+					<?php
+						$user_role = $role;
+
+						// Check if the user's role is "imp"
+						if ($user_role === "IMP") {
+							// If the user's role is "imp", display the HTML code
+						?>
+							<li class="sidebar-item <?= $page == "pages-manage-affiliates.php" ? 'active' : ''; ?>">
+								<a class="sidebar-link" href="pages-manage-affiliates.php">
+									<i class="align-middle" data-feather="users"></i> <span class="align-middle">Manage Affiliates</span>
+								</a>
+							</li>
+						<?php
+						}
+					?>
+
 
 					<li class="sidebar-header">
 						Settings
 					</li>
 
 					<li class="sidebar-item <?= $page == "pages-profile.php" || $page == "pages-profile-imp.php" ? 'active':''; ?>">
-                    <a class="sidebar-link" href="<?php echo ($role === 'SA1' || $role === 'SA2') ? 'pages-profile.php' : 'pages-profile-imp.php'; ?>">
+                    	<a class="sidebar-link" href="<?php echo ($role === 'SA1' || $role === 'SA2') ? 'pages-profile.php' : 'pages-profile-imp.php'; ?>">
 
               				<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
             			</a>

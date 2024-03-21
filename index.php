@@ -2,6 +2,7 @@
 session_start();
 
 require "php/connection.php";
+include "admin/include/php/modal.php";
 
 if(isset($_SESSION['email'])){
     $email = $_SESSION['email'];
@@ -21,7 +22,27 @@ if (isset($_SESSION['user_id'])) {
 			$fullname = $row["firstName"] . " " . $row["lastName"];
 		}
 	}
-} 
+}
+
+$sql_profile = "SELECT img FROM users WHERE firstName = '$firstname'";
+$res_profile = mysqli_query($conn, $sql_profile);
+
+if ($res_profile && mysqli_num_rows($res_profile) > 0) {
+	$row = mysqli_fetch_assoc($res_profile);
+	$profile_img_path = $row['img'];
+
+	// Check if profile image path is not empty
+	if (!empty($profile_img_path)) {
+		// Concatenate the filename to the path
+		$profile_img_path = "img/avatars/" . $profile_img_path;
+	} else {
+		// Set default profile image path
+		$profile_img_path = "img/avatars/default-profile-blue.png"; // Adjust the path to include the 'avatars' folder
+	}
+} else {
+	// Handle case when no image is found
+	$profile_img_path = "img/avatars/default-profile-blue.png"; // Set default profile image path
+}
 
 
 ?>
@@ -87,6 +108,22 @@ if (isset($_SESSION['user_id'])) {
             			</a>
 					</li>
 
+					<?php
+						$user_role = $role;
+
+						// Check if the user's role is "imp"
+						if ($user_role === "IMP") {
+							// If the user's role is "imp", display the HTML code
+						?>
+							<li class="sidebar-item <?= $page == "pages-manage-affiliates.php" ? 'active' : ''; ?>">
+								<a class="sidebar-link" href="pages-manage-affiliates.php">
+									<i class="align-middle" data-feather="users"></i> <span class="align-middle">Manage Affiliates</span>
+								</a>
+							</li>
+						<?php
+						}
+					?>
+
 
 					<li class="sidebar-header">
 						Settings
@@ -118,21 +155,23 @@ if (isset($_SESSION['user_id'])) {
 					<ul class="navbar-nav navbar-align">
 
 						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                			<i class="align-middle" data-feather="settings"></i>
-              				</a>
-
+							<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="rounded-circle" width="25" height="25" />
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-            				<span class="text-dark">
-								<?php echo $fullname ?>
-							</span>
-              				</a>
+
+								<span class="text-dark">
+								
+									<?php
+										echo $fullname;
+									?>
+									
+								</span>
+							</a>
 
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="php/logout.php">Log out</a>
+								<a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#indexlogoutModal">Log out</a>
 							</div>
 						</li>
 					</ul>
@@ -169,7 +208,7 @@ if (isset($_SESSION['user_id'])) {
 									</div>
 
 									<?php
-										$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname' ";
+										$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
 										$res_total_sales = mysqli_query($conn, $sql_total_sales);
 
 										if ($res_total_sales) {
@@ -183,10 +222,12 @@ if (isset($_SESSION['user_id'])) {
 									?>
 									
 									<h1 class="mt-3 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_amount) ?></h1>
+									
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
 									</div>
+
 								</div>
 							</div>
 						</div>
@@ -205,7 +246,23 @@ if (isset($_SESSION['user_id'])) {
 											</div>
 										</div>
 									</div>
-									<h1 class="mt-3 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> 0</h1>
+									
+									<?php
+										$sql_total_coms = "SELECT SUM(Commissions) AS total_coms FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
+										$res_total_coms = mysqli_query($conn, $sql_total_coms);
+
+										if ($res_total_coms) {
+											$row = mysqli_fetch_assoc($res_total_coms);
+											$total_coms = $row['total_coms'];
+									
+
+										} else {
+											echo "Error: " . mysqli_error($conn);
+										}
+									?>
+									
+									<h1 class="mt-3 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_coms) ?></h1>
+
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
 										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
@@ -230,7 +287,7 @@ if (isset($_SESSION['user_id'])) {
 									</div>
 
 									<?php
-										$sql_pending = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND agent = '$firstname'  ";
+										$sql_pending = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND agent = '$fullname'  ";
 										$res_pending = mysqli_query($conn, $sql_pending);
 										$count_pending = mysqli_num_rows($res_pending);
 									?>
@@ -260,7 +317,7 @@ if (isset($_SESSION['user_id'])) {
 									</div>
 
 									<?php
-										$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname' ";
+										$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
 										$res_booked = mysqli_query($conn, $sql_booked);
 										$count_booked = mysqli_num_rows($res_booked);
 									?>
@@ -310,7 +367,7 @@ if (isset($_SESSION['user_id'])) {
 									
 									<tbody>
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND agent = '$firstname' ";
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND agent = '$fullname' ";
 										$res_booking = mysqli_query($conn, $sql_booking);
 
 										if ($res_booking == TRUE) {
@@ -356,12 +413,13 @@ if (isset($_SESSION['user_id'])) {
 											<th>Name</th>
 											<th>Unit Code</th>
 											<th>Amount</th>
+											<th>Commission</th>
 											<th>Date</th>
 											<th>Status</th>
 										</tr>
 									</thead>
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname' ";
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
 										$res_booking = mysqli_query($conn, $sql_booking);
 
 										if ($res_booking == TRUE) {
@@ -376,6 +434,7 @@ if (isset($_SESSION['user_id'])) {
 											<td> <?php echo $row['firstname']; ?> </td>
 											<td> <?php echo $row['Unit_code']; ?> </td>
 											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ' '); ?></td>
+											<td><?php echo '₱' . ' ' . number_format($row['Commissions'], 0, '.', ','); ?></td>
 											<td><?php echo $row['Transaction_date']; ?></td>
 											<td class="text-success fw-bold"><?php echo $row['status']; ?></td>
 										</tr>

@@ -12,6 +12,8 @@
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 
+	<link rel="shortcut icon" href="../../img/icons/logo-square.png" />
+
 	<title>Approved Bookings | SMDC JQB</title>
 
 	<link href="../../css/app.css" rel="stylesheet">
@@ -65,7 +67,7 @@
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="../index.php">
-          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../../img/icons/logo.png" alt=""> </span>
+          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../../img/icons/logo-blue.png" alt=""> </span>
         		</a>
 
 				<ul class="sidebar-nav">
@@ -199,7 +201,7 @@
                                             <td class="text-center"> <img src="../../img/documents/<?php echo $row['RF']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['RF']; ?>')"></td>
                                             <td class="text-center"> <img src="../../img/documents/<?php echo $row['ID']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['ID']; ?>')"></td>
                                             <td><?php echo $row['Transaction_date']; ?></td>
-											<td>Sample</td>
+											<td><?php echo $row['agent']; ?></td>
                                             <td class="text-success fw-bold"><?php echo $row['status']; ?></td>
 										</tr>
 
