@@ -1,62 +1,96 @@
 <?php
-session_start();
-
-require "../../../php/connection.php";
-
+require ("../../../php/session.php");
+require ("../../../php/connection.php");
 
 
 if (isset($_POST['addprice'])) {
-    $addprice_id = $_POST['addprice_id'];
+    // Check if all required fields are present
+    if(isset($_POST['addprice_id'], $_POST['amount'], $_POST['discount'])) {
+        $addprice_id = $_POST['addprice_id'];
+        $listPriceWithPeso = $_POST['amount'];
+        $inputDiscount = $_POST['discount'];
 
-    // Sanitize and retrieve form data
-    $firstname = mysqli_real_escape_string($conn, $_POST['firsname']);
-    $unitcode = mysqli_real_escape_string($conn, $_POST['unitcode']);
-    $RA = mysqli_real_escape_string($conn, $_POST['RA']);
-    $Holding = mysqli_real_escape_string($conn, $_POST['Holding']);
-    $RF = mysqli_real_escape_string($conn, $_POST['RF']);
-    $ID = mysqli_real_escape_string($conn, $_POST['ID']);
-    $date = mysqli_real_escape_string($conn, $_POST['date']);
-    $agent = mysqli_real_escape_string($conn, $_POST['agent']);
-    $status = mysqli_real_escape_string($conn, $_POST['status']);
+        $listPriceWithPeso = str_replace([' ', ','], '', $listPriceWithPeso);
+        $inputDiscount = str_replace([' ', ','], '', $inputDiscount);
 
-    $inputAmount = $_POST['amount'];
+        $listPrice = floatval(str_replace('₱', '', $listPriceWithPeso));
 
-    // Check if the input amount contains the peso sign (₱)
-    if(strpos($inputAmount, '₱') !== false) {
-        // If the peso sign is found, remove it
-        $amount = str_replace('₱', '', $inputAmount);
-    } else {
-        // If no peso sign is found, use the input amount directly
-        $amount = $inputAmount;
-    }
+        $inputDiscount = floatval($inputDiscount);
+        
+        // Discount
+        $discountDecimal = $inputDiscount / 100;
+        
+        // Computation for discount
+        $discountAmount = $listPrice * $discountDecimal;
 
-    // Remove commas from the amount
-    $amount = str_replace(',', '', $amount);
+        // For Sales
+        $netListPrice = $listPrice - $discountAmount;
 
-    // Sanitize the input amount
-    $amount = mysqli_real_escape_string($conn, $amount);
+        // Define commission rates
+        $commission_rates = [
+            'SA1' => 0.025,
+            'SA2' => 0.03,
+            'IMP' => 0.04
+        ];
 
-    // Prepare and execute the SQL query
-    $query = "UPDATE transaction_booking SET Amount=?, `status` = 'Booked' WHERE client_id=?";
-    $stmt = mysqli_prepare($conn, $query);
-    
-    if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "ii", $amount, $addprice_id);
-
-        if (mysqli_stmt_execute($stmt)) {
-            $_SESSION['edit'] = true;
-            header("Location: ../../pages/pages-booking-approval.php");
-            exit();
+        // Check if role exists in commission rates array
+        if(array_key_exists($role, $commission_rates)) {
+            $commission_rate = $commission_rates[$role];
         } else {
-            $_SESSION['edit'] = false;
-            // Handle error here if needed
+            // Handle the case where role's commission rate is not defined
+            // For example: set a default commission rate or display an error message
+            exit("Error: Commission rate for role '$role' is not defined");
         }
 
-        mysqli_stmt_close($stmt);
+        // Calculate commission
+        $coms = $netListPrice * $commission_rate;
+
+        // Value added tax = 12%
+        // $vat = 0.12;
+
+        // // Commissions multiplied by VAT
+        // $coms_vat = $coms * $vat;
+
+        // // Commissions received by sellers (excluding VAT)
+        // $total_coms = $coms - $coms_vat;
+
+
+        // Prepare and execute the SQL query
+        $query = "UPDATE transaction_booking SET Amount=?, Commissions=?, `status` = 'Booked' WHERE client_id=?";
+        $stmt = mysqli_prepare($conn, $query);
+
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "ddi", $netListPrice, $coms, $addprice_id);
+
+            if (mysqli_stmt_execute($stmt)) {
+
+                $_SESSION['notification'] = array(
+                    'title' => 'Success!!',
+                    'status' => 'success',
+                    'description' => 'Booking completed successfully.'
+                );
+
+                mysqli_stmt_close($stmt);
+                mysqli_close($conn);
+                header("Location: ../../pages/pages-booking-approval.php");
+                exit();
+            } else {
+                $_SESSION['edit'] = false;
+                // Handle execution error here if needed
+                exit("Error: " . mysqli_error($conn));
+            }
+        } else {
+            // Handle prepare error here if needed
+            $_SESSION['edit'] = false;
+            exit("Error: Prepare error - " . mysqli_error($conn));
+        }
     } else {
-        // Handle prepare error here if needed
-        $_SESSION['edit'] = false;
+        // Handle missing fields error here if needed
+        exit("Error: Required fields are missing");
     }
+} else {
+    // Handle case where 'addprice' is not set in POST
+    exit("Error: 'addprice' is not set in POST");
 }
 
 // Close the database connection

@@ -2,6 +2,7 @@
 	include "../php/session.php";
     require "../php/connection.php";
     include "../admin/include/php/client_info.php";
+    include "../admin/include/php/modal.php";
     // include "../admin/include/php/imageHandler.php";
 
 ?>
@@ -42,26 +43,10 @@
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 
-						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                			<i class="align-middle" data-feather="settings"></i>
-              				</a>
+                    <?php
+                        include "navbar.php";
+                    ?>
 
-							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-            				<span class="text-dark">
-                                <?php
-									echo $fullname
-								?>
-                            </span>
-              				</a>
-
-							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="../index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="../php/logout.php">Log out</a>
-							</div>
-						</li>
 					</ul>
 				</div>
 			</nav>
@@ -274,6 +259,7 @@
                                             <label for="inputPassword" class="col-sm-2 col-form-label">Project Name</label>
                                             <div class="col-md-4">
                                             <input class="form-control" type="text" name="projectName" placeholder="Enter project name" required>
+                                            
                                             <!-- <select class="form-select" id="projectName" name="projectName">
                                                 <option value="">Select Project</option>
                                                 <?php
@@ -293,6 +279,7 @@
 													}
 												?>
                                             </select> -->
+
                                             <div class="invalid-feedback">
                                                 Please enter a valid Project Name.
                                             </div>

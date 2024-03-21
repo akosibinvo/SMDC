@@ -27,7 +27,7 @@
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="#">
-          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../img/icons/logo.png" alt=""> </span>
+          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../img/icons/logo-blue.png" alt=""> </span>
         		</a>
 
 				<ul class="sidebar-nav">

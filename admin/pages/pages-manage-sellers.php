@@ -1,5 +1,9 @@
-<?php 
+<?php
+   include '../../php/session.php';
    include '../../php/connection.php';
+   include '../include/php/modal.php';
+
+
 ?>
 
 <!DOCTYPE html>
@@ -11,11 +15,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
+	
+	<link rel="shortcut icon" href="../../img/icons/logo-square.png" />
 
 	<title>Manage Sellers | SMDC JQB</title>
 
 	<link href="../../css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
 
 
 </head>
@@ -25,7 +32,7 @@
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="../index.php">
-          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../../img/icons/logo.png" alt=""> </span>
+          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../../img/icons/logo-blue.png" alt=""> </span>
         		</a>
 
 				<ul class="sidebar-nav">
@@ -120,8 +127,7 @@
 						<div class="col-12 col-md-12 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
-
-									<h5 class="card-title mb-0">Archives</h5>
+									<h5 class="card-title mb-0">Manage Sellers</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
@@ -129,9 +135,8 @@
 											<th>First Name</th>
 											<th>Last Name</th>
 											<th>E-mail</th>
+											<th>Date Joined</th>
 											<th>Role</th>
-                                            <th>Date Joined</th>
-                                            
                                             <th>Action</th>
 										</tr>
 									</thead>
@@ -143,6 +148,7 @@
 
                                         if ($res_sellers) {
                                             while ($rows_sellers = mysqli_fetch_assoc($res_sellers)) {
+												$sellers_id = $rows_sellers['ID'];
                                                 $firstname = $rows_sellers['firstName'];
                                                 $lastname = $rows_sellers['lastName'];
                                                 $email = $rows_sellers['email'];
@@ -151,12 +157,15 @@
 
                                     	?>
 										<tr class="text-center">
-											<td> <?php echo $firstname ?></td>
+											<td class="d-none"> <?php echo $sellers_id ?>  </td>
+											<td> <?php echo $firstname ?> </td>
 											<td> <?php echo $lastname ?> </td>
 											<td> <?php echo $email ?> </td>
-                                            <td> <?php echo $role ?> </td>
+                                            
 											<td> <?php echo $dateJoined ?> </td>
+											<td><?php echo $role ?></td>
                                             <td>
+												<button class="btn btn-success manageSellersbtn">Edit</button>
                                                 <button class="btn btn-danger">Remove</button>
                                             </td>
 										</tr>
@@ -181,9 +190,72 @@
 		</div>
 	</div>
 
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
 	<script src="../../js/app.js"></script>
-	<script src="../../js/script.js"></script>
+	
+
+	<script>
+         $(document).ready(function () {
+         
+             $('.manageSellersbtn').on('click', function () {
+         
+				$('#manageSellersModal').modal('show');
+		
+				$tr = $(this).closest('tr');
+		
+				var data = $tr.children("td").map(function () {
+					return $(this).text();
+				}).get();
+		
+				$('#update_sellers_id').val(data[0]);
+				$('#manage_edit_firstname').val(data[1]);
+				$('#manage_edit_lastname').val(data[2]);
+				$('#manage_edit_email').val(data[3]);
+				$('#manage_edit_date').val(data[4]);
+				$('#manage_edit_role').val(data[5]);
+
+             });
+			 
+         });
+      </script>
+
+<?php
+        // Check if there is a notification in the session
+        if (isset($_SESSION['notification'])) {
+            // Get notification details
+            $title = $_SESSION['notification']['title'];
+            $status = $_SESSION['notification']['status'];
+            $description = $_SESSION['notification']['description'];
+            // Clear the notification from the session
+            unset($_SESSION['notification']);
+        }
+    ?>
+
+    <script>
+		
+        pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+
+        function pushNotify(status, title, description) {
+            new Notify({
+                status: status,
+                title: title,
+                text: description,
+                effect: 'slide',
+                speed: 800,
+                customClass: null,
+                customIcon: null,
+                showIcon: true,
+                showCloseButton: true,
+                autoclose: true,
+                autotimeout: 1500,
+                gap: 20,
+                distance: 20,
+                type: 1,
+                position: 'x-center top'
+            });
+        }
+    </script>
 
 
 </body>

@@ -42,29 +42,10 @@
 					<ul class="navbar-nav navbar-align">
 						
 
-						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-								<i class="align-middle" data-feather="settings"></i>
-							</a>
+					<?php
+						include "navbar.php";
+					?>
 
-							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-								<span class="text-dark">
-									<?php
-										echo $fullname;
-									?>
-								</span>
-							</a>
-
-							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="../php/logout.php">Log out</a>
-							</div>
-						</li>
 					</ul>
 				</div>
 				
@@ -84,38 +65,15 @@
 								</div>
 								<div class="card-body text-center">
 
-									<?php
-										$sql_profile = "SELECT img FROM users WHERE firstName = '$firstname'";
-										$res_profile = mysqli_query($conn, $sql_profile);
-										
-										if ($res_profile && mysqli_num_rows($res_profile) > 0) {
-											$row = mysqli_fetch_assoc($res_profile);
-											$profile_img_path = $row['img'];
-										
-											// Check if profile image path is not empty
-											if (!empty($profile_img_path)) {
-												// Concatenate the filename to the path
-												$profile_img_path = "../img/avatars/" . $profile_img_path;
-											} else {
-												// Set default profile image path
-												$profile_img_path = "../img/avatars/default-profile-blue.png"; // Adjust the path to include the 'avatars' folder
-											}
-										} else {
-											// Handle case when no image is found
-											$profile_img_path = "../img/avatars/default-profile-blue.png"; // Set default profile image path
-										}
-									?>
-
 									<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="rounded-circle mb-2" width="128" height="128" />
 
 									<h5 class="card-title mt-3 mb-2"><?php echo $fullname;?></h5>
 									<div class="text-muted mb-3"><?php echo $role;?></div>
 
-									<div>
-										<!-- <a class="btn btn-primary btn-sm px-2" href="#"><span data-feather="edit"></span> Edit</a> -->
-										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal"> Edit </button>
-										
+									<div class="mb-3">
+										<button type="button" class="btn btn-primary col-12" data-bs-toggle="modal" data-bs-target="#profileModal"> Edit </button>
 									</div>
+
 								</div>
 								<hr class="my-0" />
 								<div class="card-body">
@@ -156,7 +114,7 @@
 													</div>
 
 													<?php
-														$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname' ";
+														$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
 														$res_total_sales = mysqli_query($conn, $sql_total_sales);
 
 														if ($res_total_sales) {
@@ -182,7 +140,36 @@
 															<h5 class="card-title" style="font-size: .9em;">Commissions</h5>
 														</div>
 													</div>
-													<h1 class="mb-3 text-center" style="font-weight: bold;"> 1,000,000 </h1>
+
+														<!-- <?php
+															
+															$commission_rates = [
+																'SA1' => 0.025,
+																'SA2' => 0.03,
+																'IMP' => 0.04
+															];
+
+															if(array_key_exists($role, $commission_rates)) {
+																$commission_rate = $commission_rates[$role];
+															} else {
+																
+															}
+
+															$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
+															$res_total_sales = mysqli_query($conn, $sql_total_sales);
+
+															if ($res_total_sales) {
+																$row = mysqli_fetch_assoc($res_total_sales);
+																$total_amount = $row['total_amount'];
+
+																// Calculate commission
+																$coms = $total_amount * $commission_rate;
+															} else {
+																echo "Error: " . mysqli_error($conn);
+															}
+														?> -->
+
+													<h1 class="mt-1 mb-3 text-center" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($coms) ?></h1>
 												</div>
 											</div>
 										</div>
@@ -197,7 +184,7 @@
 													</div>
 
 													<?php
-														$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$firstname' ";
+														$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
 														$res_booked = mysqli_query($conn, $sql_booked);
 														$count_booked = mysqli_num_rows($res_booked);
 													?>
