@@ -141,35 +141,21 @@
 														</div>
 													</div>
 
-														<!-- <?php
-															
-															$commission_rates = [
-																'SA1' => 0.025,
-																'SA2' => 0.03,
-																'IMP' => 0.04
-															];
+														<?php
+															$sql_total_coms = "SELECT SUM(Commissions) AS total_coms FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
+															$res_total_coms = mysqli_query($conn, $sql_total_coms);
 
-															if(array_key_exists($role, $commission_rates)) {
-																$commission_rate = $commission_rates[$role];
-															} else {
-																
-															}
+															if ($res_total_coms) {
+																$row = mysqli_fetch_assoc($res_total_coms);
+																$total_coms = $row['total_coms'];
+														
 
-															$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
-															$res_total_sales = mysqli_query($conn, $sql_total_sales);
-
-															if ($res_total_sales) {
-																$row = mysqli_fetch_assoc($res_total_sales);
-																$total_amount = $row['total_amount'];
-
-																// Calculate commission
-																$coms = $total_amount * $commission_rate;
 															} else {
 																echo "Error: " . mysqli_error($conn);
 															}
-														?> -->
+														?>
 
-													<h1 class="mt-1 mb-3 text-center" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($coms) ?></h1>
+													<h1 class="mt-1 mb-3 text-center" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_coms) ?></h1>
 												</div>
 											</div>
 										</div>

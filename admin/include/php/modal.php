@@ -465,28 +465,6 @@
          </div>
       </div>
 
-      <!--======================================= INDEX CONFIRMATION MODAL ======================================= -->
-      <div class="modal fade" id="indexlogoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                  </button>
-               </div>
-               <div class="modal-body">
-                  <p> Are you sure you want to log out? </p>
-               </div>
-               <div class="modal-footer">
-                  <form action="php/logout.php" method="POST">
-                     <input type="hidden" name="logout_id" id="logout_id">
-                     <button type="submit" name="logout" class="btn btn-primary"> Yes </button>
-                  </form>
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> No </button>
-               </div>
-            </div>
-         </div>
-      </div>
       
       <script>
          // Function to add commas to the input value for every three digits

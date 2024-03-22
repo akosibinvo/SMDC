@@ -1,14 +1,16 @@
 <?php
 session_start();
 
-require "php/connection.php";
-include "admin/include/php/modal.php";
-
 if(isset($_SESSION['email'])){
     $email = $_SESSION['email'];
 } else {
     header("Location: pages/pages-sign-in.php");
 }
+
+require "php/connection.php";
+include "admin/include/php/modal.php";
+
+
 
 if (isset($_SESSION['user_id'])) {
 	$id = $_SESSION['user_id'];
@@ -265,7 +267,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
-										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
+										<span class="text-muted" style="font-size: .85em;">VAT not included</span>
 									</div>
 								</div>
 							</div>
