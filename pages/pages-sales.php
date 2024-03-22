@@ -64,7 +64,7 @@
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Sales Overview</h5>
+									<h5 class="card-title mb-0 text-white">Sales Overview</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>

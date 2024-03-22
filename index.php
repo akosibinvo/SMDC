@@ -64,7 +64,6 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 	<title>Seller Dashboard | SMDC JQB</title>
 
 	<link href="css/app.css" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -111,6 +110,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 					</li>
 
 					<?php
+
 						$user_role = $role;
 
 						// Check if the user's role is "imp"
@@ -118,7 +118,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 							// If the user's role is "imp", display the HTML code
 						?>
 							<li class="sidebar-item <?= $page == "pages-manage-affiliates.php" ? 'active' : ''; ?>">
-								<a class="sidebar-link" href="pages-manage-affiliates.php">
+								<a class="sidebar-link" href="pages/pages-manage-affiliates.php">
 									<i class="align-middle" data-feather="users"></i> <span class="align-middle">Manage Affiliates</span>
 								</a>
 							</li>
@@ -354,7 +354,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Pending Bookings</h5>
+									<h5 class="card-title mb-0 text-white">Pending Bookings</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
@@ -407,7 +407,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Latest Bookings</h5>
+									<h5 class="card-title mb-0 text-white">Latest Bookings</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>

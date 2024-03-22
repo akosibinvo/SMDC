@@ -10,9 +10,15 @@ if (isset($_SESSION['user_id'])) {
     if ($result->num_rows > 0) {
         // Output data of each row
         while ($row = $result->fetch_assoc()) {
-            $role = $row["role"];
-            $firstname = $row["firstName"];
             $fullname = $row["firstName"] . " " . $row["lastName"];
+            $firstname = $row["firstName"];
+            $lastname = $row["lastName"];
+            $email = $row["email"];
+            $contact = $row["contactNo"];
+            $role = $row["role"];
+            $dateJoined = $row['dateJoined'];
+            $formatted_date = date("F j, Y", strtotime($dateJoined));
+            
         }
     }
 } 

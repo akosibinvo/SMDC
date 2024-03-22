@@ -1,7 +1,6 @@
 <?php
     session_start();
     include "../php/connection.php";
-
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +74,7 @@
                                                 <label class="form-check-label text-small" for="customControlInline">Remember me</label>
                                             </div>
                                             <div class="col-auto">
-                                                <a class="text-decoration-none" style="color: #2f6cff;">
+                                                <a href="pages-forgot-password.php" class="text-decoration-none" style="color: #2f6cff;">
                                                     Forgot Password?
                                                 </a>
                                             </div>

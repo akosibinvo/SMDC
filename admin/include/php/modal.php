@@ -255,83 +255,129 @@
       </div>
 
       <!-- ======================================= EDIT PROFILE MODAL ======================================= -->
-      <div class="modal fade" id="profileModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-lg" role="document">
+      <div class="modal fade" id="editProfileDetails" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Profile Details</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                   </button>
                </div>
                <div class="modal-body">
-                  <form action="../admin/include/php/imgUpload.php" method="post" enctype="multipart/form-data">
+                  <form action="../admin/include/php/edit-profile-details.php" method="post" enctype="multipart/form-data">
                      <input type="hidden" name="update_id" id="update_id">
 
+                     <div class="row">
+
+                        <div class="col-sm-12 col-md-12">
+                           <div class="form-group text-center mb-3 p-4">
+
+                           <?php
+
+                              $sql_profile = "SELECT img FROM users WHERE firstName = '$firstname'";
+                              $res_profile = mysqli_query($conn, $sql_profile);
+
+                              if ($res_profile && mysqli_num_rows($res_profile) > 0) {
+                                 $row = mysqli_fetch_assoc($res_profile);
+                                 $profile_img_path = $row['img'];
+
+                                 // Check if profile image path is not empty
+                                 if (!empty($profile_img_path)) {
+                                    // Concatenate the filename to the path
+                                    $profile_img_path = "../img/avatars/" . $profile_img_path;
+                                 } else {
+                                    // Set default profile image path
+                                    $profile_img_path = "../img/avatars/default-profile-blue.png"; // Adjust the path to include the 'avatars' folder
+                                 }
+                              } else {
+                                 // Handle case when no image is found
+                                 $profile_img_path = "../img/avatars/default-profile-blue.png"; // Set default profile image path
+                              }
+
+                           ?>
+
+                           <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class=" rounded-circle mb-3" id="imagePreview" width="205" height="205" style="object-fit: cover;" />
+
+                           <input class="form-control mt-3" type="file" name="profilePic" id="fileInput" required>
+                           </div>
+                        </div>
+
+                     </div>
+
+                     
+
+                     <div class="modal-footer">
+                        <div class="mt-3">
+                           <button type="submit" name="update" class="btn btn-primary">Update</button>
+                        </div>
+                     </div>
+
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- ======================================= EDIT PROFILE MODAL ======================================= -->
+      <div class="modal fade" id="editAccountDetails" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Account Details</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form action="../admin/include/php/edit-account-details.php" method="post" enctype="multipart/form-data">
+                     <input type="hidden" name="update_profile_id">
+
                      <div class="row mb-3">
-
-                     <div class="col-sm-6 col-md-6">
-                        <div class="form-group text-center mb-3 p-4">
-
+                     
                         <?php
-
-                           $sql_profile = "SELECT img FROM users WHERE firstName = '$firstname'";
+                           $sql_profile = "SELECT * FROM users WHERE firstName = '$firstname'";
                            $res_profile = mysqli_query($conn, $sql_profile);
 
                            if ($res_profile && mysqli_num_rows($res_profile) > 0) {
                               $row = mysqli_fetch_assoc($res_profile);
-                              $profile_img_path = $row['img'];
+                              $profile_firstname = $row['firstName'];
+                              $profile_lastname = $row['lastName'];
+                              $profile_join = $row['dateJoined'];
+                              $profile_contact = $row['contactNo'];
 
-                              // Check if profile image path is not empty
-                              if (!empty($profile_img_path)) {
-                                 // Concatenate the filename to the path
-                                 $profile_img_path = "../img/avatars/" . $profile_img_path;
-                              } else {
-                                 // Set default profile image path
-                                 $profile_img_path = "../img/avatars/default-profile-blue.png"; // Adjust the path to include the 'avatars' folder
-                              }
                            } else {
-                              // Handle case when no image is found
-                              $profile_img_path = "../img/avatars/default-profile-blue.png"; // Set default profile image path
+                              
                            }
 
                         ?>
 
-                        <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class=" rounded-circle mb-3" id="imagePreview" width="205" height="205" style="object-fit: cover;" />
+                        <div class="col-sm-12 col-md-12 px-4">
+                           <div class="row mb-3">
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="firstname">Firstname</label>
+                                 <input class="form-control" type="text" name="profile_firstname" value="<?php echo $profile_firstname ?>"> 
+                              </div>
 
-                        <input class="form-control mt-3" type="file" name="profilePic" id="fileInput" required>
-                        </div>
-                     </div>
-
-                     <div class="col-sm-6 col-md-6 px-4">
-                        <div class="row">
-                           <div class="form-group mb-3">
-                              <label class="form-label" for="firstname">Firstname</label>
-                              <input class="form-control" type="text" name="firstname" id="firstname" placeholder="Enter first name">
+                              <div class="form-group col-md-6">
+                                 <label class="form-label">Lastname</label>
+                                 <input class="form-control" type="text" name="profile_lastname" value="<?php echo $profile_lastname ?>">
+                              </div>
                            </div>
-                        </div>
 
-                        <div class="row">
-                           <div class="form-group mb-3">
-                              <label class="form-label">Lastname</label>
-                              <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Enter first name">
+                           <div class="row">
+                              <div class="form-group mb-3">
+                                 <label class="form-label">Contact</label>
+                                 <input class="form-control" type="text" name="profile_contact" value="<?php echo $profile_contact ?>">
+                              </div>
                            </div>
-                        </div>
 
-                        <div class="row">
-                           <div class="form-group mb-3">
-                              <label class="form-label">E-mail</label>
-                              <input class="form-control" type="text" name="email" id="email" placeholder="Enter first name">
+                           <div class="row">
+                              <div class="form-group mb-3">
+                                 <label class="form-label">Date Joined</label>
+                                 <input class="form-control" type="text" name="profile_join" value="<?php echo $profile_join ?>" readonly>
+                              </div>
                            </div>
+                
                         </div>
-
-                        <div class="row">
-                           <div class="form-group mb-3">
-                              <label class="form-label">Password</label>
-                              <input class="form-control" type="text" name="password" id="password" placeholder="Enter first name">
-                           </div>
-                        </div>
-                        
-                     </div>
                         
 
                      </div>
@@ -339,9 +385,8 @@
                      
 
                      <div class="modal-footer">
-                        <div class="gap-2 mt-4">
-                           <button type="submit" name="update" class="btn btn-primary">Update</button>
-                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <div class="mt-3">
+                           <button type="submit" name="update_profile" class="btn btn-primary">Update</button>
                         </div>
                      </div>
 
@@ -465,6 +510,28 @@
          </div>
       </div>
 
+      <!--======================================= INDEX CONFIRMATION MODAL ======================================= -->
+      <div class="modal fade" id="indexlogoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p> Are you sure you want to log out? </p>
+               </div>
+               <div class="modal-footer">
+                  <form action="php/logout.php" method="POST">
+                     <input type="hidden" name="logout_id" id="logout_id">
+                     <button type="submit" name="logout" class="btn btn-primary"> Yes </button>
+                  </form>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> No </button>
+               </div>
+            </div>
+         </div>
+      </div>
       
       <script>
          // Function to add commas to the input value for every three digits

@@ -60,14 +60,8 @@
                         <div class="row">
                             <div class="col-12 col-md-12 d-flex">
                                 <div class="card flex-fill">
-                                    <div class="card-header">
-                                        <div class="container-fluid">
-                                            <div class="row justify-content-center align-items-center " style="height: 30px; background-color: #0030FF; border-radius: .3em;">
-                                                <div class="col text-center">
-                                                    <p class="text-white p-1 text-uppercase font-weight-bold">Buyer Information</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="card-header mb-4">
+                                        <h5 class="card-title text-center mb-0 text-uppercase text-white">Buyer Information</h5>
                                     </div>
 
                                     <form action="../admin/include/php/transaction.php" method="post" enctype="multipart/form-data" class="px-4 needs-validation" novalidate>
@@ -247,9 +241,9 @@
 
 
                                         <div class="container-fluid mb-4">
-                                            <div class="row justify-content-center align-items-center " style="height: 30px; background-color: #0030FF; border-radius: .3em;">
-                                                <div class="col text-center">
-                                                    <p class="text-white p-1 text-uppercase font-weight-bold">Unit Information</p>
+                                            <div class="row justify-content-center align-items-center " style="height:35px; background-color: #2f6cff; border-radius: .3em;">
+                                                <div class="col">
+                                                    <p class="card-title text-center mb-0 text-uppercase text-white">Unit Information</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -320,10 +314,10 @@
 
 
                                         
-                                        <div class="container-fluid mb-4">
-                                            <div class="row justify-content-center align-items-center " style="height: 30px; background-color: #0030FF; border-radius: .3em;">
-                                                <div class="col text-center">
-                                                    <p class="text-white p-1 text-uppercase font-weight-bold">The Four(4) Documents</p>
+                                            <div class="container-fluid mb-4">
+                                            <div class="row justify-content-center align-items-center " style="height:35px; background-color: #2f6cff; border-radius: .3em;">
+                                                <div class="col">
+                                                    <p class="card-title text-center mb-0 text-uppercase text-white">The Four(4) Documents</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -379,10 +373,6 @@
                             </div>
                             
                         </div>
-                        
-                        
-					
-						
 					</div>
 
 

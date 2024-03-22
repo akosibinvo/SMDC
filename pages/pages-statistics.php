@@ -57,7 +57,7 @@
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Revenue</h5>
+									<h5 class="card-title mb-0 text-white">Revenue</h5>
 								</div>
 
 								<canvas class="p-2" id="myChart"></canvas>
@@ -69,7 +69,7 @@
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Total Sales Unit</h5>
+									<h5 class="card-title mb-0 text-white">Total Sales Unit</h5>
 								</div>
 
 								<canvas class="p-2" id="pieChart" ></canvas>
@@ -104,7 +104,7 @@
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Inventory Statistics</h5>
+									<h5 class="card-title mb-0 text-white">Inventory Statistics</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
