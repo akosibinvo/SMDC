@@ -52,7 +52,7 @@
 					</li>
 
 					<?php
-						$user_role = $role;
+						$user_role = $agent_role;
 
 						// Check if the user's role is "imp"
 						if ($user_role === "IMP") {
@@ -73,7 +73,7 @@
 					</li>
 
 					<li class="sidebar-item <?= $page == "pages-profile.php" || $page == "pages-profile-imp.php" ? 'active':''; ?>">
-                    	<a class="sidebar-link" href="<?php echo ($role === 'SA1' || $role === 'SA2') ? 'pages-profile.php' : 'pages-profile-imp.php'; ?>">
+                    	<a class="sidebar-link" href="<?php echo ($agent_role === 'SA1' || $agent_role === 'SA2') ? 'pages-profile.php' : 'pages-profile-imp.php'; ?>">
 
               				<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
             			</a>

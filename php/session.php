@@ -15,7 +15,7 @@ if (isset($_SESSION['user_id'])) {
             $lastname = $row["lastName"];
             $email = $row["email"];
             $contact = $row["contactNo"];
-            $role = $row["role"];
+            $agent_role = $row["role"];
             $dateJoined = $row['dateJoined'];
             $formatted_date = date("F j, Y", strtotime($dateJoined));
             

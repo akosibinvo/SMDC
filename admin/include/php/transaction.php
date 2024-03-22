@@ -1,6 +1,6 @@
 <?php
-session_start();
 
+include "../../../php/session.php";
 require "../../../php/connection.php";
 
 
@@ -34,14 +34,6 @@ if(isset($_POST['book'])){
 
     if (isset($_POST['book'])) {
         $target_directory = '../../../img/documents/';
-
-
-        $firstname = $_POST['firstname'];
-        $unitcode = $_POST['unitCode'];
-        $agent = $_SESSION['agent'];
-        $lastname = $_SESSION['lastName'];
-        $fullname = $agent . " " . $lastname;
-        $status = 'Pending';
 
         // Check if 'ra' file is uploaded
         if (isset($_FILES['RA']) && $_FILES['RA']['error'] === UPLOAD_ERR_OK) {
@@ -107,10 +99,19 @@ if(isset($_POST['book'])){
             }
         }
 
+
+        $firstname = $_POST['firstname'];
+        $unitcode = $_POST['unitCode'];
+        $agent = $_SESSION['agent'];
+        $lastname = $_SESSION['lastName'];
+        $agent_role = $_SESSION['role'];
+        $fullname = $agent . " " . $lastname;
+        $status = 'Pending';
+
         // Database insertion logic using prepared statements
-        $sql = "INSERT INTO transaction_booking (firstname, Unit_code, RA, Holding, RF, ID, agent, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO transaction_booking (firstname, Unit_code, RA, Holding, RF, ID, agent, agent_role, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssssss", $firstname, $unitcode, $filename_ra, $filename_rf, $filename_holding, $filename_id, $fullname, $status);
+        $stmt->bind_param("sssssssss", $firstname, $unitcode, $filename_ra, $filename_holding, $filename_rf, $filename_id, $fullname, $agent_role, $status);
 
         if ($stmt->execute()) {
             // Insertion successful

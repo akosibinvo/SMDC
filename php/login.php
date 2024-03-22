@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Include database connection
 require_once 'connection.php';
 
 // Check if the form is submitted
@@ -11,10 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     // Retrieve user from database
-    $stmt = $conn->prepare("SELECT ID, firstName, lastName, password FROM users WHERE email = ?");
+    $stmt = $conn->prepare("SELECT ID, firstName, lastName, role, password FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
-    $stmt->bind_result($user_id, $agent, $lastname, $hashed_password);
+    $stmt->bind_result($user_id, $agent, $lastname, $agent_role, $hashed_password);
     $stmt->fetch();
     $stmt->close();
 

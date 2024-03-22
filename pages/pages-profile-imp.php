@@ -68,7 +68,7 @@
 									<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="rounded-circle mb-2" width="130" height="130" />
 
 									<h5 class="card-title mt-3 mb-2"><?php echo $fullname;?></h5>
-									<div class="text-muted mb-3"><?php echo $role;?></div>
+									<div class="text-muted mb-3"><?php echo $agent_role;?></div>
 
 									<div class="mb-3">
 										<button type="button" class="btn btn-primary col-12" data-bs-toggle="modal" data-bs-target="#profileModal"> Edit </button>
@@ -145,7 +145,7 @@
 															<h5 class="card-title" style="font-size: .9em;">Status</h5>
 														</div>
 													</div>
-													<h1 class="mb-3 text-center" style="font-weight: bold;"> <?php echo $role;?> </h1>
+													<h1 class="mb-3 text-center" style="font-weight: bold;"> <?php echo $agent_role;?> </h1>
 												</div>
 											</div>
 										</div>

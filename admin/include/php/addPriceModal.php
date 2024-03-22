@@ -1,6 +1,6 @@
 <?php
-require ("../../../php/session.php");
-require ("../../../php/connection.php");
+include "../../../php/session.php";
+require "../../../php/connection.php";
 
 
 if (isset($_POST['addprice'])) {
@@ -9,6 +9,16 @@ if (isset($_POST['addprice'])) {
         $addprice_id = $_POST['addprice_id'];
         $listPriceWithPeso = $_POST['amount'];
         $inputDiscount = $_POST['discount'];
+
+        $sql_booking = "SELECT agent_role FROM transaction_booking WHERE client_id = $addprice_id";
+        $res_booking = mysqli_query($conn, $sql_booking);
+
+        if ($res_booking) {
+            while ($rows_booking = mysqli_fetch_assoc($res_booking)) {
+                $agent_role = $rows_booking['agent_role'];
+            }
+        }
+
 
         $listPriceWithPeso = str_replace([' ', ','], '', $listPriceWithPeso);
         $inputDiscount = str_replace([' ', ','], '', $inputDiscount);
@@ -34,12 +44,12 @@ if (isset($_POST['addprice'])) {
         ];
 
         // Check if role exists in commission rates array
-        if(array_key_exists($role, $commission_rates)) {
-            $commission_rate = $commission_rates[$role];
+        if(array_key_exists($agent_role, $commission_rates)) {
+            $commission_rate = $commission_rates[$agent_role];
         } else {
             // Handle the case where role's commission rate is not defined
             // For example: set a default commission rate or display an error message
-            exit("Error: Commission rate for role '$role' is not defined");
+            exit("Error: Commission rate for role '$agent_role' is not defined");
         }
 
         // Calculate commission

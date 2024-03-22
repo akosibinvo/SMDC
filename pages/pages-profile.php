@@ -68,7 +68,7 @@
 									<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="rounded-circle mb-2" width="160" height="160" />
 
 									<h1 class="h5 fw-bold mt-3 mb-2"><?php echo $fullname;?></h1>
-									<div class="text-muted fw-bold"><?php echo $role;?></div>
+									<div class="text-muted fw-bold"><?php echo $agent_role;?></div>
 
 									<!-- <div class="mb-3">
 										<button type="button" class="btn btn-primary col-12" data-bs-toggle="modal" data-bs-target="#profileModal"> Edit </button>
@@ -170,7 +170,7 @@
 															<h5 class="card-title text-white" style="font-size: .9em;">Status</h5>
 														</div>
 													</div>
-													<h1 class="mb-3 text-center text-white fw-bold"> <?php echo $role;?> </h1>
+													<h1 class="mb-3 text-center text-white fw-bold"> <?php echo $agent_role;?> </h1>
 												</div>
 											</div>
 										</div>
@@ -226,7 +226,7 @@
 										?>
 
 												<?php
-													if ($role == 'SA1') {
+													if ($agent_role == 'SA1') {
 												?>
 														<div class="col-md-12 col-xl-12 px-4 mt-3">
 															<h5 class="text-center text-muted" style="font-size: .75em;">Target sales to reach S2.</h5>
