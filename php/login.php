@@ -43,9 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Invalid username or password
         $errors[] = "Invalid password";
         $_SESSION['notification'] = array(
-            'title' => 'Account doesn\'t exist',
+            'title' => 'Password doesn\'t match',
             'status' => 'error',
-            'description' => 'Check your E-mail and Password'
+            'description' => 'Check your Password then try again'
         );
         header('Location: ../pages/pages-sign-in.php');
     }
