@@ -1,6 +1,6 @@
 <?php
-	include "../php/session.php";
-	require "../php/connection.php";
+include "../php/session.php";
+require "../php/connection.php";
 
 ?>
 
@@ -20,28 +20,29 @@
 
 	<link href="../css/app.css" rel="stylesheet">
 	<link href="../css/style.css" rel="stylesheet">
+
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 	<div class="wrapper">
-		
+
 		<?php
-			include "sidebar.php";
+		include "sidebar.php";
 		?>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-          			<i class="hamburger align-self-center"></i>
-        		</a>
+					<i class="hamburger align-self-center"></i>
+				</a>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 
-					<?php
+						<?php
 						include "navbar.php";
-					?>
+						?>
 
 					</ul>
 				</div>
@@ -52,7 +53,7 @@
 
 					<h1 class="h3 mb-3"><strong class="title-dashboard">Affiliates</strong> Dashboard</h1>
 
-                    <div class="row mb-0">
+					<div class="row mb-0">
 						<div class="col-12 col-md-12 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
@@ -67,7 +68,7 @@
 											<th>Amount</th>
 											<th>Role</th>
 											<th>Date</th>
-                                            <th>Override Commission</th>
+											<th>Override Commission</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -76,21 +77,21 @@
 											<td>1</td>
 											<td>1</td>
 											<td>1</td>
-                                            <td>1</td>
+											<td>1</td>
 											<td>1</td>
 										</tr>
 
-                                        
-										
-										
+
+
+
 									</tbody>
 								</table>
 							</div>
 						</div>
-						
+
 					</div>
 
-                    
+
 
 				</div>
 			</main>
