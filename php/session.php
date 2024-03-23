@@ -10,7 +10,10 @@ if (isset($_SESSION['user_id'])) {
     if ($result->num_rows > 0) {
         // Output data of each row
         while ($row = $result->fetch_assoc()) {
+            $user_id = $row["ID"];
+
             $fullname = $row["firstName"] . " " . $row["lastName"];
+
             $firstname = $row["firstName"];
             $lastname = $row["lastName"];
             $email = $row["email"];
@@ -18,8 +21,6 @@ if (isset($_SESSION['user_id'])) {
             $agent_role = $row["role"];
             $dateJoined = $row['dateJoined'];
             $formatted_date = date("F j, Y", strtotime($dateJoined));
-            
         }
     }
-} 
-?>
+}

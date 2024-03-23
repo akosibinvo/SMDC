@@ -53,7 +53,11 @@ $referrer_id = $_GET['ref'] ?? 0;
 							<div class="card-body">
 								<div class="m-sm-3 px-xl-3">
 									<form action="../php/signup.php" method="post" class="needs-validation" novalidate>
-										<input type="hidden" value="<?php echo $referrer_id; ?>" name="team" readonly>
+										<!--
+										<input type="hidden" value="" name="team" readonly>
+-->
+										<input type="hidden" id="referralInput" name="team">
+
 										<div class="row g-4 my-3">
 											<div class="col">
 												<label class="form-label">First Name</label>
@@ -192,6 +196,19 @@ $referrer_id = $_GET['ref'] ?? 0;
 				}, false)
 			})
 		})()
+
+		function getQueryParam(param) {
+			const urlParams = new URLSearchParams(window.location.search);
+			return urlParams.get(param);
+		}
+
+		const referralId = getQueryParam('ref');
+		if (referralId) {
+			// Remove the query parameter from the URL without reloading the page
+			window.history.replaceState({}, document.title, window.location.pathname);
+			// Set the value of the hidden input field
+			document.getElementById('referralInput').value = referralId;
+		}
 	</script>
 
 </body>
