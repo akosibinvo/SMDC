@@ -47,17 +47,17 @@
                                     </div>
                                 </div>
                                 <div class="m-sm-3">
-                                    <form action="../php/login.php" method="post" class="needs-validation" novalidate>
+                                    <form id="loginForm" action="../php/login.php" method="post" class="needs-validation" novalidate>
                                         <div class="mb-3">
                                             <label class="form-label">Email</label>
-                                            <input class="form-control form-control-lg" type="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>" placeholder="Enter your email" required>
+                                            <input id="emailUser" class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" required>
 											<div id="validationLastName" class="invalid-feedback">
 													Enter your email
 											</div>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Password</label>
-                                            <input class="form-control form-control-lg <?php echo isset($errors) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Enter your password" required>
+                                            <input id="passwordUser" class="form-control form-control-lg <?php echo isset($errors) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Enter your password" required>
 											<div id="validationLastName" class="invalid-feedback">
 													Enter your password
 											</div>
@@ -70,8 +70,8 @@
 
                                         <div class="row d-flex justify-content-between px-3">
                                             <div class="form-check col-auto">
-                                                <input id="customControlInline" type="checkbox" class="form-check-input" value="remember-me" name="remember-me" checked>
-                                                <label class="form-check-label text-small" for="customControlInline">Remember me</label>
+                                                <input id="rememberMe" type="checkbox" class="form-check-input" value="remember-me" name="remember-me">
+                                                <label class="form-check-label text-small" for="rememberMe">Remember me</label>
                                             </div>
                                             <div class="col-auto">
                                                 <a href="pages-forgot-password.php" class="text-decoration-none" style="color: #2f6cff;">
@@ -106,20 +106,23 @@
     <script src="../js/app.js"></script>
     <!-- Simple Notify -->
     <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
-    <?php
-        // Check if there is a notification in the session
-        if (isset($_SESSION['notification'])) {
-            // Get notification details
-            $title = $_SESSION['notification']['title'];
-            $status = $_SESSION['notification']['status'];
-            $description = $_SESSION['notification']['description'];
-            // Clear the notification from the session
-            unset($_SESSION['notification']);
-        }
-    ?>
 
     <script>
-        pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+        <?php
+            // Check if there is a notification in the session
+            if (isset($_SESSION['notification'])) {
+                // Get notification details
+                $title = $_SESSION['notification']['title'];
+                $status = $_SESSION['notification']['status'];
+                $description = $_SESSION['notification']['description'];
+                ?>
+                    //Display the notification
+                    pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+                <?php
+                // Clear the notification from the session
+                unset($_SESSION['notification']);
+            }
+        ?>
 
         function pushNotify(status, title, description) {
             new Notify({
@@ -145,22 +148,89 @@
         (() => {
             'use strict'
 
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            const forms = document.querySelectorAll('.needs-validation')
+            // Fetch the form element
+            const form = document.getElementById("loginForm");
 
-            // Loop over them and prevent submission
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
+            // Add event listener to the form for form submission
+            form.addEventListener("submit", function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                // Get username and password values
+                const username = document.getElementById("emailUser").value;
+                //const password = document.getElementById("passwordUser").value;
+
+                // If "Remember Me" checkbox is checked, set a cookie with the username
+                if (document.getElementById("rememberMe").checked) {
+                    setCookie("rememberedUsername", username, 30); // Cookie expires in 30 days
+                } else {
+                    // If "Remember Me" checkbox is not checked, delete the cookie
+                    document.cookie = "rememberedUsername=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                }
+
+                // Perform form validation
+                Array.from(form.elements).forEach(input => {
+                    // Skip the "Remember Me" checkbox
+                    if (input.type === 'checkbox' && input.id === 'rememberMe') {
+                        return;
                     }
 
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })()
+                    if (!input.checkValidity()) {
+                        input.classList.add('is-invalid')
+                        input.classList.remove('is-valid')
+                    } else {
+                        input.classList.remove('is-invalid')
+                        input.classList.add('is-valid')
+                    }
+                });
+
+                // Check if the form is valid
+                if (form.checkValidity()) {
+                    // Optionally, you can submit the form here if needed
+                    form.submit();
+                }
+            }, false);
+
+            // Function to set a cookie
+            function setCookie(name, value, days) {
+                var expires = "";
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+            }
+
+            // Function to get a cookie
+            function getCookie(name) {
+                var nameEQ = name + "=";
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i];
+                    while (cookie.charAt(0) == ' ') {
+                        cookie = cookie.substring(1, cookie.length);
+                    }
+                    if (cookie.indexOf(nameEQ) == 0) {
+                        return cookie.substring(nameEQ.length, cookie.length);
+                    }
+                }
+                return null;
+            }
+
+            // Function to check if the "Remember Me" cookie exists and set the username field accordingly
+            function checkRememberMe() {
+                var username = getCookie("rememberedUsername");
+                if (username) {
+                    document.getElementById("emailUser").value = username;
+                    document.getElementById("rememberMe").checked = true;
+                }
+            }
+
+            // Call checkRememberMe function on page load
+            checkRememberMe();
+        })();
     </script>
+
     
 </body>
 

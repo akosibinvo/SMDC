@@ -55,12 +55,12 @@ function sendEmailWithOTP($email, $otpCode) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'blockchainbased.evs@gmail.com';
-        $mail->Password = 'xnvxfrxgmcirirjm';
+        $mail->Username = 'smdcteamjqb@gmail.com';
+        $mail->Password = 'xobscbavxspyfuuw';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
     
-        $mail->setFrom('blockchainbased.evs@gmail.com');
+        $mail->setFrom('smdcteamjqb@gmail.com');
         $mail->addAddress($email);
         $mail->isHTML(true);
         $mail->Subject = $subject;
@@ -68,7 +68,7 @@ function sendEmailWithOTP($email, $otpCode) {
         // Send the email
         $mail->send();
     
-        $_SESSION['email'] = $email;
+        $_SESSION['email-forgot'] = $email;
         $_SESSION['otp'] = $otpCode;
     
         $_SESSION['notification'] = array(
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 //Resend OTP Code
 if ($_GET['action'] === 'resend') {
-    $email = $_SESSION['email'];
+    $email = $_SESSION['email-forgot'];
 
     // Generate new random 6-digit OTP code
     $otpCode = sprintf("%06d", mt_rand(0, 999999));

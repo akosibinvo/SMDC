@@ -4,11 +4,35 @@ session_start();
 // Include database connection
 require_once 'connection.php';
 
+// Function to generate a random token
+function generateToken($length = 32) {
+    return base64_encode(openssl_random_pseudo_bytes($length));
+}
+
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve input values
     $email = $_POST['email'];
     $password = $_POST['password'];
+
+    // Check if email already exists
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->bind_result($count);
+    $stmt->fetch();
+    $stmt->close();
+
+    if ($count == 0) {
+        $_SESSION['notification'] = array(
+            'title' => 'Invalid Email',
+            'status' => 'error',
+            'description' => 'Email address is not registered',
+        );
+        // Redirect to login page
+        header('Location: ../pages/pages-sign-in.php');
+        exit;
+    }
 
     // Retrieve user from database
     $stmt = $conn->prepare("SELECT ID, firstName, lastName, password FROM users WHERE email = ?");
