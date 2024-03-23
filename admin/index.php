@@ -247,7 +247,7 @@
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Latest Clients</h5>
+									<h5 class="card-title text-white mb-0">Latest Clients</h5>
 								</div>
 
 								

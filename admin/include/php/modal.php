@@ -296,9 +296,10 @@
 
                            ?>
 
-                           <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class=" rounded-circle mb-3" id="imagePreview" width="205" height="205" style="object-fit: cover;" />
+                           <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle mb-3" id="imagePreview" width="205" height="205" />
 
                            <input class="form-control mt-3" type="file" name="profilePic" id="fileInput" required>
+                           
                            </div>
                         </div>
 
@@ -318,7 +319,7 @@
          </div>
       </div>
 
-      <!-- ======================================= EDIT PROFILE MODAL ======================================= -->
+      <!-- ======================================= EDIT ACCOUNT DETAILS MODAL ======================================= -->
       <div class="modal fade" id="editAccountDetails" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -354,12 +355,12 @@
                            <div class="row mb-3">
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="firstname">Firstname</label>
-                                 <input class="form-control" type="text" name="profile_firstname" value="<?php echo $profile_firstname ?>"> 
+                                 <input class="form-control" type="text" pattern="[A-Za-z\s]+" name="profile_firstname" value="<?php echo $profile_firstname ?>"> 
                               </div>
 
                               <div class="form-group col-md-6">
                                  <label class="form-label">Lastname</label>
-                                 <input class="form-control" type="text" name="profile_lastname" value="<?php echo $profile_lastname ?>">
+                                 <input class="form-control" type="text" pattern="[A-Za-z\s]+"name="profile_lastname" value="<?php echo $profile_lastname ?>">
                               </div>
                            </div>
 

@@ -41,14 +41,31 @@ if (isset($_POST['update'])) {
         $stmt_role->close();
 
         if ($role === "SA1" || $role === "SA2") {
+
+            $_SESSION['notification'] = array(
+                'title' => 'Success!!',
+                'status' => 'success',
+                'description' => 'You\'ve successfully updated your profile.'
+            );
+
             header("Location: ../../../pages/pages-profile.php");
         } else {
+
+            $_SESSION['notification'] = array(
+                'title' => 'Success!!',
+                'status' => 'success',
+                'description' => 'You\'ve successfully updated your profile.'
+            );
+
             header("Location: ../../../pages/pages-profile-imp.php");
         }
 
     } else {
-        // Update failed
-        $_SESSION['insert'] = false;
+        $_SESSION['notification'] = array(
+            'title' => 'Error!!',
+            'status' => 'error',
+            'description' => 'Error in updating your profile.'
+        );
     }
     $stmt->close();
 }

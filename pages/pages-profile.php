@@ -3,6 +3,9 @@
 	require "../php/connection.php";
 	include "../admin/include/php/modal.php";
 
+
+
+
 ?>
 
 
@@ -65,10 +68,10 @@
 								</div>
 								<div class="card-body text-center">
 
-									<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="rounded-circle mb-2" width="160" height="160" />
+									<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle mb-2" width="160" height="160" />
 
 									<h1 class="h5 fw-bold mt-3 mb-2"><?php echo $fullname;?></h1>
-									<div class="text-muted fw-bold"><?php echo $agent_role;?></div>
+									<h1 class="h5 text-muted fw-bold mb-0"><?php echo $agent_role;?></h1>
 
 									<!-- <div class="mb-3">
 										<button type="button" class="btn btn-primary col-12" data-bs-toggle="modal" data-bs-target="#profileModal"> Edit </button>
@@ -151,7 +154,7 @@
 													</div>
 
 													<?php
-														$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
+														$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
 														$res_booked = mysqli_query($conn, $sql_booked);
 														$count_booked = mysqli_num_rows($res_booked);
 													?>
@@ -176,7 +179,7 @@
 										</div>
 
 										<?php
-											$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname'";
+											$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
 											$res_total_sales = mysqli_query($conn, $sql_total_sales);
 
 											if ($res_total_sales) {
@@ -194,30 +197,22 @@
 												if ($total_amount >= $sa1_target_sales) {
 													$sql_update_status1 = "UPDATE users SET role = 'SA2' WHERE firstName = '$firstname'";
 													if (mysqli_query($conn, $sql_update_status1)) {
-														$_SESSION['notification'] = array(
-															'title' => 'Congratulations!',
-															'status' => 'success',
-															'description' => 'You\'re now SA2. Keep up the hard work.'
-														);
+
 													} else {
-														echo "Error updating role: " . mysqli_error($conn);
+														
 													}
 
 												}  else if ($total_amount >= $sa2_target_sales) {
 													$sql_update_status2 = "UPDATE users SET role = 'IMP' WHERE firstName = '$firstname'";
 													if (mysqli_query($conn, $sql_update_status2)) {
-														$_SESSION['notification'] = array(
-															'title' => 'Congratulations!',
-															'status' => 'success',
-															'description' => 'You\'re now IMP. Keep up the hard work.'
-														);
+														
 													} else {
-														echo "Error updating role: " . mysqli_error($conn);
+														
 													}
 												}
 
 												else {
-													echo "Error";
+													
 												}
 												
 												
@@ -229,7 +224,7 @@
 													if ($agent_role == 'SA1') {
 												?>
 														<div class="col-md-12 col-xl-12 px-4 mt-3">
-															<h5 class="text-center text-muted" style="font-size: .75em;">Target sales to reach S2.</h5>
+															<h5 class="text-center text-muted" style="font-size: .75em;">Target sales to reach <span class="text-primary fw-bold">S2</span>.</h5>
 															<div class="col-md-12 rounded-pill mb-1" style="background: rgba(0, 48, 255, 0.5);">
 																<div class="progress" style="height: 12px;">
 																	<div class="progress-bar px-2 rounded-pill text-white text-center" role="progressbar" style="width: <?php echo $sa1_progress_percentage; ?>%; height: 12px; font-size: .65em; background: #0030ff;" aria-valuenow="<?php echo $sa1_progress_percentage; ?>" aria-valuemin="0" aria-valuemax="100"><?php echo round($sa1_progress_percentage, 2); ?>%</div>
@@ -241,7 +236,7 @@
 													} else {
 												?>
 														<div class="col-md-12 col-xl-12 px-4 mt-3">
-															<h5 class="text-center text-muted" style="font-size: .75em;">Target sales to reach IMP.</h5>
+															<h5 class="text-center text-muted" style="font-size: .75em;">Target sales to reach <span class="text-primary fw-bold">IMP</span>.</h5>
 															<div class="col-md-12 rounded-pill mb-1" style="background: rgba(0, 48, 255, 0.5);">
 																<div class="progress" style="height: 12px;">
 																	<div class="progress-bar px-2 rounded-pill text-white text-center" role="progressbar" style="width: <?php echo $sa2_progress_percentage; ?>%; height: 12px; font-size: .65em; background: #0030ff;" aria-valuenow="<?php echo $sa2_progress_percentage; ?>" aria-valuemin="0" aria-valuemax="100"><?php echo round($sa2_progress_percentage, 2); ?>%</div>
@@ -283,7 +278,7 @@
 											</thead>
 
 											<?php
-												$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
+												$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
 												$res_booking = mysqli_query($conn, $sql_booking);
 
 												if ($res_booking == TRUE) {
@@ -349,7 +344,7 @@
          });
       </script>
 
-<?php
+	<?php
         // Check if there is a notification in the session
         if (isset($_SESSION['notification'])) {
             // Get notification details

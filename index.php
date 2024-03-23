@@ -170,6 +170,9 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 							</a>
 
 							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item"  href="<?php echo ($role === 'SA1' || $role === 'SA2') ? 'pages/pages-profile.php' : 'pages/pages-profile-imp.php'; ?>"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+								<a class="dropdown-item" href="pages-statistics.php"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
 								<div class="dropdown-divider"></div>
@@ -210,7 +213,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 									</div>
 
 									<?php
-										$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
+										$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
 										$res_total_sales = mysqli_query($conn, $sql_total_sales);
 
 										if ($res_total_sales) {
@@ -250,7 +253,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 									</div>
 									
 									<?php
-										$sql_total_coms = "SELECT SUM(Commissions) AS total_coms FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
+										$sql_total_coms = "SELECT SUM(Commissions) AS total_coms FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
 										$res_total_coms = mysqli_query($conn, $sql_total_coms);
 
 										if ($res_total_coms) {
@@ -289,7 +292,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 									</div>
 
 									<?php
-										$sql_pending = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND agent = '$fullname'  ";
+										$sql_pending = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND user_id = '$id'  ";
 										$res_pending = mysqli_query($conn, $sql_pending);
 										$count_pending = mysqli_num_rows($res_pending);
 									?>
@@ -319,7 +322,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 									</div>
 
 									<?php
-										$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
+										$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
 										$res_booked = mysqli_query($conn, $sql_booked);
 										$count_booked = mysqli_num_rows($res_booked);
 									?>
@@ -369,7 +372,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 									
 									<tbody>
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND agent = '$fullname' ";
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND user_id = '$id' ";
 										$res_booking = mysqli_query($conn, $sql_booking);
 
 										if ($res_booking == TRUE) {
@@ -421,7 +424,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 										</tr>
 									</thead>
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent = '$fullname' ";
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
 										$res_booking = mysqli_query($conn, $sql_booking);
 
 										if ($res_booking == TRUE) {
@@ -435,7 +438,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 										<tr class="text-center">
 											<td> <?php echo $row['firstname']; ?> </td>
 											<td> <?php echo $row['Unit_code']; ?> </td>
-											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ' '); ?></td>
+											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ','); ?></td>
 											<td><?php echo '₱' . ' ' . number_format($row['Commissions'], 0, '.', ','); ?></td>
 											<td><?php echo $row['Transaction_date']; ?></td>
 											<td class="text-success fw-bold"><?php echo $row['status']; ?></td>

@@ -35,7 +35,7 @@
     
 <li class="nav-item dropdown">
     					
-    <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="rounded-circle" width="25" height="25" />
+    <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle" width="25" height="25" />
     <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
 
         <span class="text-dark">
@@ -48,11 +48,10 @@
     </a>
 
     <div class="dropdown-menu dropdown-menu-end">
-        <a class="dropdown-item"  href="<?php echo ($role === 'SA1' || $role === 'SA2') ? 'pages-profile.php' : 'pages-profile-imp.php'; ?>"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-        <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+        <a class="dropdown-item"  href="<?php echo ($agent_role === 'SA1' || $agent_role === 'SA2') ? 'pages-profile.php' : 'pages-profile-imp.php'; ?>"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+        <a class="dropdown-item" href="pages-statistics.php"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-        <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#logoutModal">Log out</a>
 

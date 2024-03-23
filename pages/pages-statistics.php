@@ -116,18 +116,37 @@
 											<th>Seller</th>
 										</tr>
 									</thead>
+
+									<?php
+										$sql_statistics = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+										$res_statistics = mysqli_query($conn, $sql_statistics);
+
+										if ($res_statistics == TRUE) {
+											$count_get = mysqli_num_rows($res_statistics);
+											if ($count_get > 0) {
+									?>
+
+									<?php
+										while ($row = mysqli_fetch_assoc($res_statistics)) {
+									?>
+
 									<tbody>
 										<tr class="text-center">
-											<td>Sample</td>
-											<td>Unit 1</td>
-											<td>31/06/2023</td>
-											<td>Pending</td>
-											<td>Vanessa Tucker</td>
+											<td><?php echo $row['firstname']; ?></td>
+											<td><?php echo $row['Unit_code']; ?></td>
+											<td><?php echo $row['Transaction_date']; ?></td>
+											<td class="text-success fw-bold"><?php echo $row['status']; ?></td>
+											<td><?php echo $row['agent']; ?></td>
 										</tr>
-										
-										
+									<?php
+										}
+											?>
 									</tbody>
-								</table>
+									</table>
+											<?php
+											}
+										}
+									?>
 							</div>
 						</div>
 						
@@ -146,7 +165,7 @@
 	<?php
 		$query = "SELECT MONTH(Transaction_date) AS month, SUM(Amount) AS total_sales 
 		FROM transaction_booking 
-		WHERE status = 'Booked' AND agent = '$firstname'
+		WHERE status = 'Booked' AND user_id = '$id'
 		GROUP BY MONTH(Transaction_date)";
 
 		$result = mysqli_query($conn, $query);
@@ -163,7 +182,6 @@
 	?>
 
 	<script src="../js/app.js"></script>
-	<script src="../js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');

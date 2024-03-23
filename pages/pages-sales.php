@@ -69,27 +69,41 @@
 								<table class="table table-hover my-0">
 									<thead>
 										<tr class="text-center">
-											<th>Total Revenue</th>
-											<th>Units Sold</th>
-											<th>Average Selling Price</th>
-											<th>Sales Performance</th>
-											<th>Seller</th>
+											<th>Unit Code</th>
+											<th>Amount</th>
+											<th>Commission</th>
+											<th>Date</th>
 										</tr>
 									</thead>
+									<?php
+										$sql_sales = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+										$res_sales = mysqli_query($conn, $sql_sales);
+
+										if ($res_sales == TRUE) {
+											$count_get = mysqli_num_rows($res_sales);
+											if ($count_get > 0) {
+									?>
+
+									<?php
+										while ($row = mysqli_fetch_assoc($res_sales)) {
+									?>
+
 									<tbody>
 										<tr class="text-center">
-											<td>Sample</td>
-											<td>Sample</td>
-											<td>1</td>
-											<td>1,000</td>
-											<td>Vanessa Tucker</td>
+											<td><?php echo $row['Unit_code']; ?></td>
+											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ','); ?></td>
+											<td><?php echo '₱' . ' ' . number_format($row['Commissions'], 0, '.', ','); ?></td>
+											<td><?php echo $row['Transaction_date']; ?></td>
 										</tr>
-
-                                        
-										
-										
+									<?php
+										}
+											?>
 									</tbody>
-								</table>
+									</table>
+											<?php
+											}
+										}
+									?>
 							</div>
 						</div>
 						

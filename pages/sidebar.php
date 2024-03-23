@@ -79,8 +79,8 @@
             			</a>
 					</li>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="">
+					<li class="sidebar-item <?= $page == "pages-profile-2.php" ? 'active':''; ?>">
+						<a class="sidebar-link" href="pages-profile-2.php">
               				<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
             			</a>
 					</li>

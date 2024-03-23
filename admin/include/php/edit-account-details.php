@@ -16,7 +16,7 @@ if (isset($_POST['update_profile'])) {
     // Database update logic using prepared statements
     $sql = "UPDATE users SET firstName = ?, lastName =?, contactNo = ? WHERE ID = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssi", $profile_firstname, $profile_lastname, $profile_contact, $id);
+    $stmt->bind_param("sssi", $profile_firstname, $profile_lastname, $profile_contact, $id);
 
     if ($stmt->execute()) {
 
@@ -29,16 +29,32 @@ if (isset($_POST['update_profile'])) {
         $stmt_role->close();
         
         if ($role === "SA1" || $role === "SA2") {
+            $_SESSION['notification'] = array(
+                'title' => 'Success!!',
+                'status' => 'success',
+                'description' => 'You\'ve successfully updated your account details'
+            );
+            
             header("Location: ../../../pages/pages-profile.php");
         } else if ($role === "IMP") {
+
+            $_SESSION['notification'] = array(
+                'title' => 'Success!!',
+                'status' => 'success',
+                'description' => 'You\'ve successfully updated your account details'
+            );
+
             header("Location: ../../../pages/pages-profile-imp.php");
         } else {
-            echo "Error";
+            unset($_SESSION['notification']);
         }
 
     } else {
-        // Update failed
-        $_SESSION['insert'] = false;
+        $_SESSION['notification'] = array(
+            'title' => 'Error!!',
+            'status' => 'error',
+            'description' => 'Error in updating your account details.'
+        );
     }
     $stmt->close();
 }

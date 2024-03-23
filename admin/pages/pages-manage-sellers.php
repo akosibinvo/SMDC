@@ -127,7 +127,7 @@
 						<div class="col-12 col-md-12 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
-									<h5 class="card-title mb-0">Manage Sellers</h5>
+									<h5 class="card-title text-white mb-0">Manage Sellers</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>

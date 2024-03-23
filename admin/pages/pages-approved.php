@@ -163,7 +163,7 @@
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">List of Approved Bookings</h5>
+									<h5 class="card-title text-white mb-0">List of Approved Bookings</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
@@ -195,7 +195,7 @@
 										<tr class="text-center">
 											<td> <?php echo $row['firstname']; ?> </td>
 											<td> <?php echo $row['Unit_code']; ?> </td>
-											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ' '); ?></td>
+											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ','); ?></td>
 											<td class="text-center"> <img src="../../img/documents/<?php echo $row['RA']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['RA']; ?>')"></td>
 											<td class="text-center"> <img src="../../img/documents/<?php echo $row['Holding']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['Holding']; ?>')"></td>
                                             <td class="text-center"> <img src="../../img/documents/<?php echo $row['RF']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['RF']; ?>')"></td>

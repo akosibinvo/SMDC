@@ -216,7 +216,7 @@
                                         <div class="row mb-5">
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Employer Name</label>
-                                                <input class="form-control" type="text" name="employerName" placeholder="Enter your employer name" required>
+                                                <input class="form-control" type="text" name="employerName" pattern="[A-Za-z\s]+" placeholder="Enter your employer name" required>
                                                 <div class="invalid-feedback">
                                                     Please enter Employer Name.
                                                 </div>
@@ -253,27 +253,6 @@
                                             <label for="inputPassword" class="col-sm-2 col-form-label">Project Name</label>
                                             <div class="col-md-4">
                                             <input class="form-control" type="text" name="projectName" placeholder="Enter project name" required>
-                                            
-                                            <!-- <select class="form-select" id="projectName" name="projectName">
-                                                <option value="">Select Project</option>
-                                                <?php
-													$sql_projectName = "SELECT * FROM unit_info";
-													$res_projectName = mysqli_query($conn, $sql_projectName);
-
-													if($res_projectName == TRUE){
-													$count_get = mysqli_num_rows($res_projectName);
-													if($count_get > 0){
-														while($rows_projectName = mysqli_fetch_assoc($res_projectName)){
-															$projectName = $rows_projectName['Project_name'];   
-															?>
-															<option value="<?php echo $projectNames;?>"><?php echo $projectName;?></option>
-															<?php
-														}
-													}
-													}
-												?>
-                                            </select> -->
-
                                             <div class="invalid-feedback">
                                                 Please enter a valid Project Name.
                                             </div>
@@ -282,37 +261,11 @@
                                             <label for="inputPassword" class="col-sm-2 col-form-label">Unit Code</label>
                                             <div class="col-md-4">
                                             <input class="form-control" type="text" name="unitCode" placeholder="Enter unit code" required>
-                                            <!-- <select class="form-select" id="unitCode" name="unitCode">
-                                                <option value="">Select Unit Code</option>
-                                                <?php
-													$sql_unitCode = "SELECT * FROM unit_info";
-													$res_unitCode = mysqli_query($conn, $sql_projectName);
-
-													if($res_unitCode == TRUE){
-													$count_get = mysqli_num_rows($res_unitCode);
-													if($count_get > 0){
-														while($rows_unitCode = mysqli_fetch_assoc($res_unitCode)){
-															$unitCode = $rows_unitCode['Unit_code'];   
-															?>
-															<option value="<?php echo $unitCode;?>"><?php echo $unitCode;?></option>
-															<?php
-														}
-													}
-													}
-												?>
-                                            </select> -->
                                             <div class="invalid-feedback">
                                                 Please enter a valid Unit Code.
                                             </div>
                                             </div>
                                             </div> 
-
-                                        
-                                        
-
-                                        
-
-
                                         
                                             <div class="container-fluid mb-4">
                                             <div class="row justify-content-center align-items-center " style="height:35px; background-color: #2f6cff; border-radius: .3em;">
