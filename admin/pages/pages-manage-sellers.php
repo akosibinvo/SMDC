@@ -1,5 +1,5 @@
 <?php
-   include '../../php/session.php';
+//    include '../../php/session.php';
    include '../../php/connection.php';
    include '../include/php/modal.php';
 
@@ -62,7 +62,7 @@
             			</a>
 					</li>
 
-					<li class="sidebar-item">
+					<li class="sidebar-item active">
 						<a class="sidebar-link" href="#">
               				<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Manage Sellers</span>
             			</a>

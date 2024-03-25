@@ -2598,7 +2598,7 @@ textarea.form-control-lg {
     --bs-btn-active-border-color: #2f6cff;
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
     --bs-btn-disabled-color: #5696ff;
-    --bs-btn-disabled-bg: #d5ecff;
+    --bs-btn-disabled-bg: #3b7ddd;
     --bs-btn-disabled-border-color: #3b7ddd;
 }
 .btn-secondary {
@@ -4025,8 +4025,8 @@ textarea.form-control-lg {
     --bs-list-group-disabled-color: var(--bs-secondary-color);
     --bs-list-group-disabled-bg: var(--bs-body-bg);
     --bs-list-group-active-color: #fff;
-    --bs-list-group-active-bg: #3b7ddd;
-    --bs-list-group-active-border-color: #3b7ddd;
+    --bs-list-group-active-bg: #5696ff;
+    --bs-list-group-active-border-color: #5696ff;
     border-radius: var(--bs-list-group-border-radius);
     display: flex;
     flex-direction: column;
@@ -4047,14 +4047,14 @@ textarea.form-control-lg {
     width: 100%
 }
 .list-group-item-action:focus, .list-group-item-action:hover {
-    background-color: var(--bs-list-group-action-hover-bg);
-    color: var(--bs-list-group-action-hover-color);
+    background-color: #2f6cff;
+    color: #fff;
     text-decoration: none;
     z-index: 1
 }
 .list-group-item-action:active {
     background-color: var(--bs-list-group-action-active-bg);
-    color: var(--bs-list-group-action-active-color)
+    color: var(--bs-list-group-action-active-color);
 }
 .list-group-item {
     background-color: var(--bs-list-group-bg);
@@ -4081,7 +4081,7 @@ textarea.form-control-lg {
     background-color: var(--bs-list-group-active-bg);
     border-color: var(--bs-list-group-active-border-color);
     color: var(--bs-list-group-active-color);
-    z-index: 2
+    z-index: 2;
 }
 .list-group-item+.list-group-item {
     border-top-width: 0
@@ -12472,19 +12472,18 @@ span.flatpickr-weekday {
     object-fit: cover;
 }
 
-.camera-container {
-    position: relative;
-    display: inline-block;
-}
 
-.camera-input {
+.camera-input-hide {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1;
+
 }
 
-.camera-icon {
+.camera-icon-hide {
+    opacity: 0;
     width: 50px;
     height: 50px;
     background-color: rgba(0, 0, 0, .5);
@@ -12493,10 +12492,45 @@ span.flatpickr-weekday {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2;
 }
 
-.camera-icon:hover {
+.camera-icon-hide:hover {
     background-color: rgba(0, 0, 0, .6);
+}
+
+.profile-pic-img{
+    margin: 0 auto;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    transition: background 0.5s ease;
+    cursor: pointer;
+}
+
+
+.profile-pic-img:hover .camera-icon-hide {
+    opacity: 1;
+
+}
+
+.upload_photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5em;
+    width: 80%;
+    cursor: pointer;
+    color: #fff;
+}
+
+.popover-header {
+    max-width: 700px !important;
+    background-color: #0d6efd !important;
+    color: white; /* Optionally change text color to white for better contrast */
+}
+.popover {
+    max-width: 700px;
 }
 
 

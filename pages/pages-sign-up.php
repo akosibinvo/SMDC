@@ -1,6 +1,7 @@
 <?php
-	require "../php/connection.php";
-	session_start();
+require "../php/connection.php";
+session_start();
+$referrer_id = $_GET['ref'] ?? 0;
 ?>
 
 <!DOCTYPE html>
@@ -47,9 +48,16 @@
 									</div>
 								</div>
 							</div>
+
+
 							<div class="card-body">
 								<div class="m-sm-3 px-xl-3">
 									<form action="../php/signup.php" method="post" class="needs-validation" novalidate>
+										<!--
+										<input type="hidden" value="" name="team" readonly>
+-->
+										<input type="hidden" id="referralInput" name="team">
+
 										<div class="row g-4 my-3">
 											<div class="col">
 												<label class="form-label">First Name</label>
@@ -132,42 +140,42 @@
 
 	<script src="../js/app.js"></script>
 	<!-- Simple Notify -->
-    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
-    <?php
-        // Check if there is a notification in the session
-        if (isset($_SESSION['notification'])) {
-            // Get notification details
-            $title = $_SESSION['notification']['title'];
-            $status = $_SESSION['notification']['status'];
-            $description = $_SESSION['notification']['description'];
-            // Clear the notification from the session
-            unset($_SESSION['notification']);
-        }
-    ?>
+	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+	<?php
+	// Check if there is a notification in the session
+	if (isset($_SESSION['notification'])) {
+		// Get notification details
+		$title = $_SESSION['notification']['title'];
+		$status = $_SESSION['notification']['status'];
+		$description = $_SESSION['notification']['description'];
+		// Clear the notification from the session
+		unset($_SESSION['notification']);
+	}
+	?>
 
-    <script>
-        pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+	<script>
+		pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
 
-        function pushNotify(status, title, description) {
-            new Notify({
-                status: status,
-                title: title,
-                text: description,
-                effect: 'slide',
-                speed: 800,
-                customClass: null,
-                customIcon: null,
-                showIcon: true,
-                showCloseButton: true,
-                autoclose: true,
-                autotimeout: 1500,
-                gap: 20,
-                distance: 20,
-                type: 1,
-                position: 'x-center top'
-            });
-        }
-    </script>
+		function pushNotify(status, title, description) {
+			new Notify({
+				status: status,
+				title: title,
+				text: description,
+				effect: 'slide',
+				speed: 800,
+				customClass: null,
+				customIcon: null,
+				showIcon: true,
+				showCloseButton: true,
+				autoclose: true,
+				autotimeout: 1500,
+				gap: 20,
+				distance: 20,
+				type: 1,
+				position: 'x-center top'
+			});
+		}
+	</script>
 	<script>
 		// Example starter JavaScript for disabling form submissions if there are invalid fields
 		(() => {
@@ -188,6 +196,29 @@
 				}, false)
 			})
 		})()
+
+		function getQueryParam(param) {
+			const urlParams = new URLSearchParams(window.location.search);
+			return urlParams.get(param);
+		}
+
+		const referralId = getQueryParam('ref');
+		if (referralId) {
+			// Remove the query parameter from the URL without reloading the page
+			window.history.replaceState({}, document.title, window.location.pathname);
+			// Set the value of the hidden input field
+			document.getElementById('referralInput').value = referralId;
+
+			// Store referralId in local storage
+			localStorage.setItem('referralId', referralId);
+		} else {
+			// Check if referralId is already stored in local storage
+			const storedReferralId = localStorage.getItem('referralId');
+			if (storedReferralId) {
+				// Set the value of the hidden input field from local storage
+				document.getElementById('referralInput').value = storedReferralId;
+			}
+		}
 	</script>
 
 </body>

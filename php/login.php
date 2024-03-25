@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['lastName'] = $lastname;
         $_SESSION['role'] = $agent_role;
         $_SESSION['agent'] = $agent;
+        $_SESSION['team_id'] = $team_id;
         $_SESSION['notification'] = array(
             'title' => 'Login successfully',
             'status' => 'success',

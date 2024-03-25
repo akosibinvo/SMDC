@@ -1,5 +1,5 @@
 <?php
-include "../../../php/session.php";
+session_start();
 require "../../../php/connection.php";
 
 

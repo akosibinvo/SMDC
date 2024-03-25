@@ -1,7 +1,17 @@
 <?php
-	include "../php/session.php";
-	require "../php/connection.php";
-	include "../admin/include/php/modal.php";
+include "../php/session.php";
+require "../php/connection.php";
+include "../admin/include/php/modal.php";
+
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+	$url = "https://";
+else
+	$url = "http://";
+// Append the host(domain name, ip) to the URL.   
+$url .= $_SERVER['HTTP_HOST'];
+
+// Append the requested resource location to the URL   
+$url .= "/SMDC/pages/pages-sign-up.php?ref=";
 
 ?>
 
@@ -24,15 +34,15 @@
 
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
-	
-	
+
+
 </head>
 
 <body>
 	<div class="wrapper">
 
 		<?php
-			include "sidebar.php";
+		include "sidebar.php";
 		?>
 
 		<div class="main">
@@ -43,15 +53,15 @@
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
-						
 
-					<?php
+
+						<?php
 						include "navbar.php";
-					?>
+						?>
 
 					</ul>
 				</div>
-				
+
 			</nav>
 
 			<main class="content">
@@ -62,20 +72,27 @@
 					</div>
 					<div class="row">
 						<div class="col-md-4 col-xl-4">
-						<div class="card mb-3">
+							<div class="card mb-3">
 								<div class="card-header d-flex justify-content-between">
 									<h5 class="card-title mb-0 text-white">Profile Details</h5>
-									<h5 class="mb-0" title="Edit Profile Details"><span data-feather="edit-3" class="feather-sm" style="color: #fff; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#editProfileDetails"></span></h5>
+									<!-- <h5 class="mb-0" title="Edit Profile Details"><span data-feather="edit-3" class="feather-sm" style="color: #fff; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#editProfileDetails"></span></h5> -->
 								</div>
 								<div class="card-body text-center">
 
-									<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle mb-2" width="160" height="160" />
+									<div class="profile-pic-img">
+										<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle" width="160" height="160" />
 
-									<h1 class="h5 fw-bold mt-3 mb-2"><?php echo $fullname;?></h1>
-									<h1 class="h5 text-muted fw-bold mb-0"><?php echo $agent_role;?></h1>
-									
+										<div class="camera-input-hide">
+											<label class="camera-icon-hide" style="cursor: pointer;" title="Add Photo" data-bs-toggle="modal" data-bs-target="#editProfileDetails">
+												<i class="align-middle" data-feather="camera"></i>
+											</label>
+										</div>
+									</div>
+
+									<h1 class="h5 fw-bold mt-4 mb-2"><?php echo $fullname; ?></h1>
+									<h1 class="h5 text-muted fw-bold mb-0"><?php echo $agent_role; ?></h1>
 								</div>
-								
+
 							</div>
 
 							<div class="card mb-3">
@@ -84,52 +101,52 @@
 									<h5 class="mb-0" title="Edit Account Details"><span data-feather="edit-3" class="feather-sm" style="color: #0030ff; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#editAccountDetails"></span></h5>
 								</div>
 								<div class="card-body">
-								<ul class="list-unstyled mb-0">
+									<ul class="list-unstyled mb-0">
 
-									<li class="mb-2">
-										<div class="row gx-2 mb-3">
-											<div class="col">
-												<span class="fw-bold" >First Name</span>
+										<li class="mb-2">
+											<div class="row gx-2 mb-3">
+												<div class="col">
+													<span class="fw-bold">First Name</span>
+												</div>
+												<div class="col">
+													<span><?php echo $firstname; ?></span>
+												</div>
 											</div>
-											<div class="col">
-												<span><?php echo $firstname;?></span>
-											</div>
-										</div>
 
-										<div class="row gx-2 mb-3">
-											<div class="col">
-												<span class="fw-bold">Last Name</span>
+											<div class="row gx-2 mb-3">
+												<div class="col">
+													<span class="fw-bold">Last Name</span>
+												</div>
+												<div class="col">
+													<span><?php echo $lastname; ?></span>
+												</div>
 											</div>
-											<div class="col">
-												<span><?php echo $lastname;?></span>
-											</div>
-										</div>
 
-										<div class="row gx-2 mb-3">
-											<div class="col">
-												<span class="fw-bold">Contact No.</span>
+											<div class="row gx-2 mb-3">
+												<div class="col">
+													<span class="fw-bold">Contact No.</span>
+												</div>
+												<div class="col">
+													<span><?php echo $contact; ?></span>
+												</div>
 											</div>
-											<div class="col">
-												<span><?php echo $contact;?></span>
-											</div>
-										</div>
 
-										<div class="row gx-2 mb-3">
-											<div class="col">
-												<span class="fw-bold">Joined</span>
+											<div class="row gx-2 mb-3">
+												<div class="col">
+													<span class="fw-bold">Joined</span>
+												</div>
+												<div class="col">
+													<span><?php echo $formatted_date; ?></span>
+												</div>
 											</div>
-											<div class="col">
-												<span><?php echo $formatted_date;?></span>
-											</div>
-										</div>
-											
-									</li>
-									
-								</ul>
 
-									
+										</li>
+
+									</ul>
+
+
 								</div>
-								
+
 							</div>
 						</div>
 
@@ -151,19 +168,17 @@
 														</div>
 													</div>
 
-														<?php
-															$sql_total_coms = "SELECT SUM(Commissions) AS total_coms FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
-															$res_total_coms = mysqli_query($conn, $sql_total_coms);
+													<?php
+													$sql_total_coms = "SELECT SUM(Commissions) AS total_coms FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+													$res_total_coms = mysqli_query($conn, $sql_total_coms);
 
-															if ($res_total_coms) {
-																$row = mysqli_fetch_assoc($res_total_coms);
-																$total_coms = $row['total_coms'];
-														
-
-															} else {
-																echo "Error: " . mysqli_error($conn);
-															}
-														?>
+													if ($res_total_coms) {
+														$row = mysqli_fetch_assoc($res_total_coms);
+														$total_coms = $row['total_coms'];
+													} else {
+														echo "Error: " . mysqli_error($conn);
+													}
+													?>
 
 													<h1 class="mt-1 mb-3 text-center text-white" style="font-weight: bold;">₱ <?php echo number_format($total_coms) ?></h1>
 												</div>
@@ -179,75 +194,119 @@
 															<h5 class="card-title text-white" style="font-size: .9em;">Status</h5>
 														</div>
 													</div>
-													<h1 class="mt-1 mb-3 text-center text-white" style="font-weight: bold;"> <?php echo $agent_role;?> </h1>
+													<h1 class="mt-1 mb-3 text-center text-white" style="font-weight: bold;"> <?php echo $agent_role; ?> </h1>
 												</div>
 											</div>
 										</div>
 
-										
+
 									</div>
 
 								</div>
 							</div>
 
-								<div class="col-md-12 col-xl-12">
-									<div class="card" style="position: relative;">
-										<div class="card-body" >
-											<div class="row">
-												<div class="col mt-0 mb-3">
-													<h1 class="h4 mb-3"><strong class="title-dashboard">Recruit</strong> Affiliates </h1>
-													<h4 class="fw-bold mb-3"> Earn Commission Based Points </h4>
-													<p class="mb-0" style="font-size: .85em;"> Earn 1.5% Commission for any affiliates under you.</p>
-													<p class="mb-4" style="font-size: .85em;"> As your affiliates generate sales or meet performance targets, you'll earn points based on <br> their success. </p>
-													<div class="container mb-4 p-0">
-														<div class="row">
-															<div class="col text-start">
-																<a href="#" class="btn btn-primary background-blue rounded-pill">Join the Affiliate Program</a>
+							<div class="col-md-12 col-xl-12">
+								<div class="card" style="position: relative;">
+									<div class="card-body">
+										<div class="row">
+											<div class="col mt-0 mb-3">
+												<h1 class="h4 mb-3"><strong class="title-dashboard">Recruit</strong> Affiliates </h1>
+												<h4 class="fw-bold mb-3"> Earn Commission Based Points </h4>
+												<p class="mb-0" style="font-size: .85em;"> Earn 1.5% Commission for any affiliates under you.</p>
+												<p class="mb-4" style="font-size: .85em;"> As your affiliates generate sales or meet performance targets, you'll earn points based on <br> their success. </p>
+												<div class="container mb-4 p-0">
+													<div class="row">
+														<div class="col text-start">
+															<div hidden>
+																<div data-name="popover-content" style="max-width: 750px;" id="popoverContent">
+																	<p>
+																		Copy and share your referral link to invite new affiliates!
+																	</p>
+
+																	<div class="input-group">
+
+																		<input type="text" class="form-control form-control-sm" id="referral_link" placeholder="Search" value="<?php echo $url . $id; ?>" name="search" style="max-width: 80%; width: 80%;" readonly>
+																		<div class="input-group-btn">
+
+																			<button class="btn btn-primary" onclick="copy()">
+
+																				<i class="align-middle" data-feather="copy"></i> <span class="align-middle">
+
+																			</button>
+
+																		</div>
+
+																	</div><br>
+																	<div id="copy_message" style="display:none">
+																		Copied to clipboard!
+																	</div>
+																</div>
 															</div>
+
+															<a id="example" tabindex="0" class="btn btn-primary background-blue rounded-pill" role="button" data-bs-toggle="popover" title="Recruit Affiliates!">Join the Affiliate Program</a>
 														</div>
 													</div>
-													<p class="mb-n3" style="font-size: .65em;"> Up to max 12% per affiliates. Join Now!  </p>
+												</div>
+												<p class="mb-n3" style="font-size: .65em;"> Up to max 12% per affiliates. Join Now! </p>
 
-													<div class="col text-end">
-														<img src="../img/photos/referral-2.png" alt="" class="referral-img">
-													</div>
+												<div class="col text-end">
+													<img src="../img/photos/referral-2.png" alt="" class="referral-img">
 												</div>
 											</div>
-											
 										</div>
+
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-12 col-md-12 d-flex">
+									<div class="card flex-fill">
+										<div class="card-header">
+											<h5 class="card-title mb-0 text-white">Manage Affiliates</h5>
+										</div>
+										<table class="table table-hover my-0">
+											<thead>
+												<tr class="text-center">
+													<th>Name</th>
+													<th>Status</th>
+													<th>Unit Sold</th>
+													<th>Date</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php
+												$sql_affiliates = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND team_id = '$id' ";
+												$res_affiliates = mysqli_query($conn, $sql_affiliates);
+												$count_booked = mysqli_num_rows($res_affiliates);
+
+												if ($res_affiliates == TRUE) {
+													$count_get = mysqli_num_rows($res_affiliates);
+													if ($count_get > 0) {
+												?>
+														<?php
+														while ($row = mysqli_fetch_assoc($res_affiliates)) {
+														?>
+															<tr class="text-center">
+																<td> <?php echo $row['agent']; ?> </td>
+																<td class="text-success fw-bold"><?php echo $row['status']; ?> </td>
+																<td> <?php echo $count_booked ?> </td>
+																<td><?php echo $row['Transaction_date']; ?></td>
+
+															</tr>
+														<?php
+														}
+														?>
+											</tbody>
+									<?php
+													}
+												}
+									?>
+										</table>
 									</div>
 								</div>
 
-								<div class="row">
-									<div class="col-12 col-md-12 d-flex">
-										<div class="card flex-fill">
-											<div class="card-header">
-												<h5 class="card-title mb-0 text-white">Manage Affiliates</h5>
-											</div>
-											<table class="table table-hover my-0">
-												<thead>
-													<tr class="text-center">
-														<th>Name</th>
-														<th>Status</th>
-														<th>Unit Sold</th>
-														<th>Date</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr class="text-center">
-														<td>Sample</td>
-														<td>Unit 1</td>
-														<td>31/06/2023</td>
-														<td>Vanessa Tucker</td>
-													</tr>
-													
-													
-												</tbody>
-											</table>
-										</div>
-									</div>
-									
-								</div>
+							</div>
 
 
 						</div>
@@ -261,43 +320,91 @@
 
 	<script src="../js/app.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 
 	<?php
-        // Check if there is a notification in the session
-        if (isset($_SESSION['notification'])) {
-            // Get notification details
-            $title = $_SESSION['notification']['title'];
-            $status = $_SESSION['notification']['status'];
-            $description = $_SESSION['notification']['description'];
-            // Clear the notification from the session
-            unset($_SESSION['notification']);
-        }
-    ?>
+	// Check if there is a notification in the session
+	if (isset($_SESSION['notification'])) {
+		// Get notification details
+		$title = $_SESSION['notification']['title'];
+		$status = $_SESSION['notification']['status'];
+		$description = $_SESSION['notification']['description'];
+		// Clear the notification from the session
+		unset($_SESSION['notification']);
+	}
+	?>
 
-    <script>
-		
-        pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+	<script>
+		pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
 
-        function pushNotify(status, title, description) {
-            new Notify({
-                status: status,
-                title: title,
-                text: description,
-                effect: 'slide',
-                speed: 800,
-                customClass: null,
-                customIcon: null,
-                showIcon: true,
-                showCloseButton: true,
-                autoclose: true,
-                autotimeout: 1500,
-                gap: 20,
-                distance: 20,
-                type: 1,
-                position: 'x-center top'
-            });
-        }
-    </script>
+		function pushNotify(status, title, description) {
+			new Notify({
+				status: status,
+				title: title,
+				text: description,
+				effect: 'slide',
+				speed: 800,
+				customClass: null,
+				customIcon: null,
+				showIcon: true,
+				showCloseButton: true,
+				autoclose: true,
+				autotimeout: 1500,
+				gap: 20,
+				distance: 20,
+				type: 1,
+				position: 'x-center top'
+			});
+		}
+	</script>
+
+	<script type='text/javascript'>
+		function copy() {
+			var copyText = document.getElementById("referral_link");
+			copyText.select();
+			copyText.setSelectionRange(0, 99999);
+			navigator.clipboard.writeText(copyText.value);
+
+			var copyMessage = document.getElementById('copy_message');
+			copyMessage.style.display = 'block';
+
+			setTimeout(function() {
+				copyMessage.style.display = 'none';
+			}, 2000);
+		}
+
+
+
+
+		$(document).ready(function() {
+			var options = {
+				html: true,
+				title: "Copy and share your referral link to invite new affiliates!",
+				content: $('#popoverContent') // Use the class name instead of data-name attribute
+			};
+
+			var exampleEl = document.getElementById('example');
+			var popover = new bootstrap.Popover(exampleEl, options);
+
+			// Function to handle click outside of anchor or popover
+			$(document).on('click', function(event) {
+				var target = $(event.target);
+				var anchor = $('#example');
+				var popoverContent = $('.popover-content');
+
+				// Check if the click is not inside the anchor or popover content
+				if (!target.is(anchor) && !target.closest(anchor).length && !target.closest(popoverContent).length) {
+					// Hide the popover
+					popover.hide();
+				}
+			});
+
+			// Function to prevent hiding the popover when clicking inside the popover content
+			$(document).on('click', '.popover', function(event) {
+				event.stopPropagation(); // Prevent event from bubbling up and closing the popover
+			});
+		});
+	</script>
 
 </body>
 

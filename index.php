@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-if(isset($_SESSION['email'])){
-    $email = $_SESSION['email'];
+if (isset($_SESSION['email'])) {
+	$email = $_SESSION['email'];
 } else {
-    header("Location: pages/pages-sign-in.php");
+	header("Location: pages/pages-sign-in.php");
 }
 
 require "php/connection.php";
@@ -73,8 +73,8 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.php">
-          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="img/icons/logo-blue.png" alt=""> </span>
-        		</a>
+					<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="img/icons/logo-blue.png" alt=""> </span>
+				</a>
 
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
@@ -83,14 +83,14 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 
 					<li class="sidebar-item active">
 						<a class="sidebar-link" href="index.php">
-              			<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-            			</a>
+							<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+						</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages/pages-statistics.php">
-              				<i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Statistics</span>
-            			</a>
+							<i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Statistics</span>
+						</a>
 					</li>
 
 					<li class="sidebar-header">
@@ -99,31 +99,38 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages/pages-sales.php">
-              				<i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Sales</span>
-            			</a>
+							<i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Sales</span>
+						</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages/pages-booking.php">
-              				<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking</span>
-            			</a>
+							<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking</span>
+						</a>
 					</li>
 
 					<?php
 
-						$user_role = $role;
+					$user_role = $role;
 
-						// Check if the user's role is "imp"
-						if ($user_role === "IMP") {
-							// If the user's role is "imp", display the HTML code
-						?>
-							<li class="sidebar-item <?= $page == "pages-manage-affiliates.php" ? 'active' : ''; ?>">
-								<a class="sidebar-link" href="pages/pages-manage-affiliates.php">
-									<i class="align-middle" data-feather="users"></i> <span class="align-middle">Manage Affiliates</span>
-								</a>
-							</li>
-						<?php
-						}
+					// Check if the user's role is "imp"
+					if ($user_role === "IMP") {
+						// If the user's role is "imp", display the HTML code
+					?>
+
+						<li class="sidebar-item <?= $page == "pages-team.php" ? 'active' : ''; ?>">
+							<a class="sidebar-link" href="pages/pages-team.php">
+								<i class="align-middle" data-feather="users"></i> <span class="align-middle">Team</span>
+							</a>
+						</li>
+
+						<li class="sidebar-item <?= $page == "pages-manage-affiliates.php" ? 'active' : ''; ?>">
+							<a class="sidebar-link" href="pages/pages-manage-affiliates.php">
+								<i class="align-middle" data-feather="users"></i> <span class="align-middle">Manage Affiliates</span>
+							</a>
+						</li>
+					<?php
+					}
 					?>
 
 
@@ -133,14 +140,14 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="<?php echo ($role === 'SA1' || $role === 'SA2') ? 'pages/pages-profile.php' : 'pages/pages-profile-imp.php'; ?>">
-              				<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-            			</a>
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+						</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="">
-              				<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
-            			</a>
+							<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
+						</a>
 					</li>
 
 				</ul>
@@ -150,8 +157,8 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-          			<i class="hamburger align-self-center"></i>
-        		</a>
+					<i class="hamburger align-self-center"></i>
+				</a>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
@@ -161,16 +168,16 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
 
 								<span class="text-dark">
-								
+
 									<?php
-										echo $fullname;
+									echo $fullname;
 									?>
-									
+
 								</span>
 							</a>
 
 							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item"  href="<?php echo ($role === 'SA1' || $role === 'SA2') ? 'pages/pages-profile.php' : 'pages/pages-profile-imp.php'; ?>"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+								<a class="dropdown-item" href="<?php echo ($role === 'SA1' || $role === 'SA2') ? 'pages/pages-profile.php' : 'pages/pages-profile-imp.php'; ?>"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
 								<a class="dropdown-item" href="pages-statistics.php"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
@@ -195,7 +202,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="row d-flex justify-content-center">
 						<div class="col-md-6 col-lg-3 mx-auto mb-4">
 							<div class="card">
@@ -213,24 +220,22 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 									</div>
 
 									<?php
-										$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
-										$res_total_sales = mysqli_query($conn, $sql_total_sales);
+									$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+									$res_total_sales = mysqli_query($conn, $sql_total_sales);
 
-										if ($res_total_sales) {
-											$row = mysqli_fetch_assoc($res_total_sales);
-											$total_amount = $row['total_amount'];
-									
-
-										} else {
-											echo "Error: " . mysqli_error($conn);
-										}
+									if ($res_total_sales) {
+										$row = mysqli_fetch_assoc($res_total_sales);
+										$total_amount = $row['total_amount'];
+									} else {
+										echo "Error: " . mysqli_error($conn);
+									}
 									?>
-									
+
 									<h1 class="mt-3 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_amount) ?></h1>
-									
+
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
-										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
+										<span class="text-muted" style="font-size: .85em; opacity: 0;">Last 24 hours </span>
 									</div>
 
 								</div>
@@ -251,26 +256,24 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 											</div>
 										</div>
 									</div>
-									
+
 									<?php
-										$sql_total_coms = "SELECT SUM(Commissions) AS total_coms FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
-										$res_total_coms = mysqli_query($conn, $sql_total_coms);
+									$sql_total_coms = "SELECT SUM(Commissions) AS total_coms FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+									$res_total_coms = mysqli_query($conn, $sql_total_coms);
 
-										if ($res_total_coms) {
-											$row = mysqli_fetch_assoc($res_total_coms);
-											$total_coms = $row['total_coms'];
-									
-
-										} else {
-											echo "Error: " . mysqli_error($conn);
-										}
+									if ($res_total_coms) {
+										$row = mysqli_fetch_assoc($res_total_coms);
+										$total_coms = $row['total_coms'];
+									} else {
+										echo "Error: " . mysqli_error($conn);
+									}
 									?>
-									
+
 									<h1 class="mt-3 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_coms) ?></h1>
 
 									<div class="mb-0">
-										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
-										<span class="text-muted" style="font-size: .85em;">VAT not included</span>
+										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
+										<span class="text-muted" style="font-size: .85em;">VAT included</span>
 									</div>
 								</div>
 							</div>
@@ -292,15 +295,15 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 									</div>
 
 									<?php
-										$sql_pending = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND user_id = '$id'  ";
-										$res_pending = mysqli_query($conn, $sql_pending);
-										$count_pending = mysqli_num_rows($res_pending);
+									$sql_pending = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND user_id = '$id'  ";
+									$res_pending = mysqli_query($conn, $sql_pending);
+									$count_pending = mysqli_num_rows($res_pending);
 									?>
 
 									<h1 class="mt-3 mb-3" style="font-weight: bold;"> <?php echo $count_pending ?> </h1>
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
-										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
+										<span class="text-muted" style="font-size: .85em; opacity: 0;">Last 24 hours </span>
 									</div>
 								</div>
 							</div>
@@ -322,22 +325,22 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 									</div>
 
 									<?php
-										$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
-										$res_booked = mysqli_query($conn, $sql_booked);
-										$count_booked = mysqli_num_rows($res_booked);
+									$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+									$res_booked = mysqli_query($conn, $sql_booked);
+									$count_booked = mysqli_num_rows($res_booked);
 									?>
 
 									<h1 class="mt-3 mb-3" style="font-weight: bold;"> <?php echo $count_booked ?> </h1>
 
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
-										<span class="text-muted" style="font-size: .85em;">Last 24 hours </span>
+										<span class="text-muted" style="font-size: .85em; opacity: 0;">Last 24 hours </span>
 									</div>
 								</div>
 							</div>
 						</div>
 
-						
+
 					</div>
 
 					<!-- <div class="row">
@@ -369,39 +372,39 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 											<th>Status</th>
 										</tr>
 									</thead>
-									
+
 									<tbody>
-									<?php
+										<?php
 										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND user_id = '$id' ";
 										$res_booking = mysqli_query($conn, $sql_booking);
 
 										if ($res_booking == TRUE) {
 											$count_get = mysqli_num_rows($res_booking);
 											if ($count_get > 0) {
-									?>
-									<?php
-            							while ($row = mysqli_fetch_assoc($res_booking)) {
-                					?>
-										<tr class="text-center">
-											<td> <?php echo $row['firstname']; ?> </td>
-											<td> <?php echo $row['Unit_code']; ?> </td>
-											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ','); ?></td>
-											<td><?php echo $row['Transaction_date']; ?></td>
-											<td class="text-warning fw-bold"><?php echo $row['status']; ?></td>
-										</tr>
-										<?php
-            							}
-            						?>
-            						</tbody>
-									<?php
-    							}
-								}
-								?>
-        						</table>
-        						
+										?>
+												<?php
+												while ($row = mysqli_fetch_assoc($res_booking)) {
+												?>
+													<tr class="text-center">
+														<td> <?php echo $row['firstname']; ?> </td>
+														<td> <?php echo $row['Unit_code']; ?> </td>
+														<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ','); ?></td>
+														<td><?php echo $row['Transaction_date']; ?></td>
+														<td class="text-warning fw-bold"><?php echo $row['status']; ?></td>
+													</tr>
+												<?php
+												}
+												?>
+									</tbody>
+							<?php
+											}
+										}
+							?>
+								</table>
+
 							</div>
 						</div>
-						
+
 					</div>
 
 
@@ -424,37 +427,37 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 										</tr>
 									</thead>
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
-										$res_booking = mysqli_query($conn, $sql_booking);
+									$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+									$res_booking = mysqli_query($conn, $sql_booking);
 
-										if ($res_booking == TRUE) {
-											$count_get = mysqli_num_rows($res_booking);
-											if ($count_get > 0) {
+									if ($res_booking == TRUE) {
+										$count_get = mysqli_num_rows($res_booking);
+										if ($count_get > 0) {
 									?>
-									<?php
-            							while ($row = mysqli_fetch_assoc($res_booking)) {
-                					?>
-									<tbody>
-										<tr class="text-center">
-											<td> <?php echo $row['firstname']; ?> </td>
-											<td> <?php echo $row['Unit_code']; ?> </td>
-											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ','); ?></td>
-											<td><?php echo '₱' . ' ' . number_format($row['Commissions'], 0, '.', ','); ?></td>
-											<td><?php echo $row['Transaction_date']; ?></td>
-											<td class="text-success fw-bold"><?php echo $row['status']; ?></td>
-										</tr>
-										<?php
-            							}
-            						?>
-            						</tbody>
-        						</table>
-        						<?php
-    							}
-								}
-								?>
+											<?php
+											while ($row = mysqli_fetch_assoc($res_booking)) {
+											?>
+												<tbody>
+													<tr class="text-center">
+														<td> <?php echo $row['firstname']; ?> </td>
+														<td> <?php echo $row['Unit_code']; ?> </td>
+														<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ','); ?></td>
+														<td><?php echo '₱' . ' ' . number_format($row['Commissions'], 0, '.', ','); ?></td>
+														<td><?php echo $row['Transaction_date']; ?></td>
+														<td class="text-success fw-bold"><?php echo $row['status']; ?></td>
+													</tr>
+												<?php
+											}
+												?>
+												</tbody>
+								</table>
+						<?php
+										}
+									}
+						?>
 							</div>
 						</div>
-						
+
 					</div>
 
 				</div>
@@ -465,42 +468,41 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 
 	<script src="js/app.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
-    <?php
-        // Check if there is a notification in the session
-        if (isset($_SESSION['notification'])) {
-            // Get notification details
-            $title = $_SESSION['notification']['title'];
-            $status = $_SESSION['notification']['status'];
-            $description = $_SESSION['notification']['description'];
-            // Clear the notification from the session
-            unset($_SESSION['notification']);
-        }
-    ?>
+	<?php
+	// Check if there is a notification in the session
+	if (isset($_SESSION['notification'])) {
+		// Get notification details
+		$title = $_SESSION['notification']['title'];
+		$status = $_SESSION['notification']['status'];
+		$description = $_SESSION['notification']['description'];
+		// Clear the notification from the session
+		unset($_SESSION['notification']);
+	}
+	?>
 
-    <script>
+	<script>
+		pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
 
-        pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
-
-        function pushNotify(status, title, description) {
-            new Notify({
-                status: status,
-                title: title,
-                text: description,
-                effect: 'slide',
-                speed: 800,
-                customClass: null,
-                customIcon: null,
-                showIcon: true,
-                showCloseButton: true,
-                autoclose: true,
-                autotimeout: 1500,
-                gap: 20,
-                distance: 20,
-                type: 1,
-                position: 'x-center top'
-            });
-        }
-    </script>
+		function pushNotify(status, title, description) {
+			new Notify({
+				status: status,
+				title: title,
+				text: description,
+				effect: 'slide',
+				speed: 800,
+				customClass: null,
+				customIcon: null,
+				showIcon: true,
+				showCloseButton: true,
+				autoclose: true,
+				autotimeout: 1500,
+				gap: 20,
+				distance: 20,
+				type: 1,
+				position: 'x-center top'
+			});
+		}
+	</script>
 
 
 </body>

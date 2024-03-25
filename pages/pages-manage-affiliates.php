@@ -1,6 +1,6 @@
 <?php
-	include "../php/session.php";
-	require "../php/connection.php";
+include "../php/session.php";
+require "../php/connection.php";
 
 ?>
 
@@ -14,9 +14,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="../img/icons/logo.png" />
+	<link rel="shortcut icon" href="../img/icons/logo-square.png" />
 
-	<title>Statistics | SMDC JQB</title>
+	<title>Manage Affiliates | SMDC JQB</title>
 
 	<link href="../css/app.css" rel="stylesheet">
 	<link href="../css/style.css" rel="stylesheet">
@@ -25,23 +25,23 @@
 
 <body>
 	<div class="wrapper">
-		
+
 		<?php
-			include "sidebar.php";
+		include "sidebar.php";
 		?>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-          			<i class="hamburger align-self-center"></i>
-        		</a>
+					<i class="hamburger align-self-center"></i>
+				</a>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 
-					<?php
+						<?php
 						include "navbar.php";
-					?>
+						?>
 
 					</ul>
 				</div>
@@ -52,7 +52,7 @@
 
 					<h1 class="h3 mb-3"><strong class="title-dashboard">Affiliates</strong> Dashboard</h1>
 
-                    <div class="row mb-0">
+					<div class="row mb-0">
 						<div class="col-12 col-md-12 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
@@ -67,30 +67,61 @@
 											<th>Amount</th>
 											<th>Role</th>
 											<th>Date</th>
-                                            <th>Override Commission</th>
+											<th>Override Commission</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr class="text-center">
-											<td>1</td>
-											<td>1</td>
-											<td>1</td>
-											<td>1</td>
-                                            <td>1</td>
-											<td>1</td>
-										</tr>
+										<?php
+										$sql_overcoms = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND team_id = '$id' ";
+										$res_overcoms = mysqli_query($conn, $sql_overcoms);
 
-                                        
-										
-										
+										if ($res_overcoms) {
+											while ($rows_overcoms = mysqli_fetch_assoc($res_overcoms)) {
+												$overcoms_name = $rows_overcoms['agent'];
+												$overcoms_ucode = $rows_overcoms['Unit_code'];
+												$overcoms_amount = $rows_overcoms['Amount'];
+												$overcoms_role = $rows_overcoms['agent_role'];
+												$overcoms_date = $rows_overcoms['Transaction_date'];
+
+												// Define commission rates
+												$overcoms_rates = [
+													'SA1' => 0.015,
+													'SA2' => 0.01
+												];
+
+												if (array_key_exists($overcoms_role, $overcoms_rates)) {
+													$overcoms_rate = $overcoms_rates[$overcoms_role];
+												} else {
+													exit("Error: Commission rate for role '$overcom_role' is not defined");
+												}
+
+												$overcoms_coms = $overcoms_amount * $overcoms_rate;
+
+										?>
+												<tr class="text-center">
+													<td><?php echo $overcoms_name; ?></td>
+													<td><?php echo $overcoms_ucode; ?></td>
+													<td><?php echo '₱' . ' ' . number_format($overcoms_amount, 0, '.', ','); ?></td>
+													<td><?php echo $overcoms_role; ?></td>
+													<td><?php echo $overcoms_date; ?></td>
+													<td><?php echo '₱' . ' ' . number_format($overcoms_coms, 0, '.', ','); ?></td>
+												</tr>
+										<?php
+											}
+										} else {
+											// Handle error if query fails
+											echo "Error: " . mysqli_error($conn);
+										}
+										?>
 									</tbody>
+
 								</table>
 							</div>
 						</div>
-						
+
 					</div>
 
-                    
+
 
 				</div>
 			</main>

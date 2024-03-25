@@ -1,7 +1,8 @@
 <?php
-   include '../../php/session.php';
-   include '../../php/connection.php';
-   include '../include/php/modal.php';
+	session_start();
+
+	include '../../php/connection.php';
+	include '../include/php/modal.php';
 ?>
 
 <!DOCTYPE html>

@@ -1,7 +1,7 @@
 <?php
-	include "../php/session.php";
-	require "../php/connection.php";
-	include "../admin/include/php/modal.php";
+include "../php/session.php";
+require "../php/connection.php";
+include "../admin/include/php/modal.php";
 
 ?>
 
@@ -18,20 +18,20 @@
 
 	<link rel="shortcut icon" href="../img/icons/logo-square.png" />
 
-	<title>Profile | SMDC JQB</title>
+	<title>Settings | SMDC JQB</title>
 
 	<link href="../css/app.css" rel="stylesheet">
 
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
-	
+
 </head>
 
 <body>
 	<div class="wrapper">
 
 		<?php
-			include "sidebar.php";
+		include "sidebar.php";
 		?>
 
 		<div class="main">
@@ -42,43 +42,43 @@
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
-						
 
-					<?php
+
+						<?php
 						include "navbar.php";
-					?>
+						?>
 
 					</ul>
 				</div>
-				
+
 			</nav>
 
 			<main class="content">
 				<div class="container-fluid p-0">
 
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-12 col-xl-3 mb-3">
-                                    <div class="list-group" id="list-tab" role="tablist">
-                                        <a class="list-group-item list-group-item-action active" id="list-a" data-bs-toggle="list" href="#a"> Personal Details </a>
-                                        <a class="list-group-item list-group-item-action" id="list-b" data-bs-toggle="list" href="#b"> Manage Password </a>
-                                    </div>
-                                </div>
+					<div class="row">
+						<div class="col-12">
+							<div class="row">
+								<div class="col-12 col-xl-3 mb-3">
+									<div class="list-group" id="list-tab" role="tablist">
+										<a class="list-group-item list-group-item-action active" id="list-personal-detail" data-bs-toggle="list" href="#personal-detail"> Personal Details </a>
+										<a class="list-group-item list-group-item-action" id="list-manage-password" data-bs-toggle="list" href="#manage-password"> Manage Password </a>
+									</div>
+								</div>
 
 
-                                <div class="col-12 col-xl-9">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="tab-content">
-                                                <div class="tab-pane fade show active" id="a" role="tabpanel">
-                                                    
-												<form action="../admin/include/php/edit-settings.php" method="post" enctype="multipart/form-data">
-													<input type="hidden" name="edit_id" id="edit_idt">
+								<div class="col-12 col-xl-9">
+									<div class="card">
+										<div class="card-body">
 
-													<div class="row">
+											<div class="tab-content">
+												<div class="tab-pane fade show active" id="personal-detail" role="tabpanel">
 
-														<?php
+													<form action="../admin/include/php/edit-settings.php" method="post" enctype="multipart/form-data" id="editForm">
+														<input type="hidden" name="edit_id" id="edit_idt">
+
+														<div class="row">
+															<?php
 															$sql_profile = "SELECT * FROM users WHERE firstName = '$firstname'";
 															$res_profile = mysqli_query($conn, $sql_profile);
 
@@ -89,72 +89,68 @@
 																$profile_join = $row['dateJoined'];
 																$profile_contact = $row['contactNo'];
 																$profile_email = $row['email'];
-
 															} else {
-																
+																// Handle error or default values
 															}
+															?>
 
-														?>
+															<div class="col-sm-12 col-md-12 px-4">
+																<h5 class="card-title mb-4">Personal Details</h5>
+																<div class="row mb-3">
+																	<div class="form-group col-md-6">
+																		<label class="form-label" for="firstname">Firstname</label>
+																		<input class="form-control" type="text" pattern="[A-Za-z\s]+" name="profile_firstname" value="<?php echo $profile_firstname ?>" id="profile_firstname">
+																	</div>
 
-														<div class="col-sm-12 col-md-12 px-4">
-															<div class="row mb-3">
-																<div class="form-group col-md-6">
-																	<label class="form-label" for="firstname">Firstname</label>
-																	<input class="form-control" type="text" pattern="[A-Za-z\s]+" name="profile_firstname" value="<?php echo $profile_firstname ?>"> 
+																	<div class="form-group col-md-6">
+																		<label class="form-label">Lastname</label>
+																		<input class="form-control" type="text" pattern="[A-Za-z\s]+" name="profile_lastname" value="<?php echo $profile_lastname ?>" id="profile_lastname">
+																	</div>
 																</div>
 
-																<div class="form-group col-md-6">
-																	<label class="form-label">Lastname</label>
-																	<input class="form-control" type="text" pattern="[A-Za-z\s]+"name="profile_lastname" value="<?php echo $profile_lastname ?>">
+																<div class="row">
+																	<div class="form-group mb-3">
+																		<label class="form-label">Contact No.</label>
+																		<input class="form-control" type="text" name="profile_contact" value="<?php echo $profile_contact ?>" id="profile_contact">
+																	</div>
 																</div>
+
+																<div class="row">
+																	<div class="form-group mb-3">
+																		<label class="form-label">Date Joined</label>
+																		<input class="form-control" type="text" name="profile_join" value="<?php echo $profile_join ?>" readonly>
+																	</div>
+																</div>
+
+																<div class="row mb-3">
+																	<div class="form-group mb-3">
+																		<label class="form-label">E-mail</label>
+																		<input class="form-control" type="text" name="profile_email" value="<?php echo $profile_email ?>" id="profile_email">
+																	</div>
+																</div>
+
 															</div>
 
-															<div class="row">
-																<div class="form-group mb-3">
-																	<label class="form-label">Contact No.</label>
-																	<input class="form-control" type="text" name="profile_contact" value="<?php echo $profile_contact ?>">
-																</div>
-															</div>
-
-															<div class="row">
-																<div class="form-group mb-3">
-																	<label class="form-label">Date Joined</label>
-																	<input class="form-control" type="text" name="profile_join" value="<?php echo $profile_join ?>" readonly>
-																</div>
-															</div>
-
-															<div class="row mb-3">
-																<div class="form-group mb-3">
-																	<label class="form-label">E-mail</label>
-																	<input class="form-control" type="text" name="profile_email" value="<?php echo $profile_email ?>">
-																</div>
-															</div>
-													
 														</div>
 
-													</div>
-
-													
-
-													<div class="modal-footer">
-														<div class="mt-3">
-															<button type="submit" name="edit_settings" class="btn btn-primary">Save</button>
+														<div class="modal-footer">
+															<div class="mt-3">
+																<button type="submit" name="edit_settings" class="btn btn-primary" id="saveButton">Save</button>
+															</div>
 														</div>
-													</div>
-
-												</form>
+													</form>
 
 
-                                                </div>
+												</div>
 
-                                                <div class="tab-pane fade" id="b" role="tabpanel">
+												<div class="tab-pane fade" id="manage-password" role="tabpanel">
 													<form action="" method="post" enctype="multipart/form-data">
 														<input type="hidden" name="update_id" id="update_id">
 
 														<div class="row">
 
 															<div class="col-sm-12 col-md-12 px-4">
-
+																<h5 class="card-title mb-4">Manage Password</h5>
 																<div class="row">
 																	<div class="form-group mb-3">
 																		<label class="form-label">Password</label>
@@ -162,36 +158,37 @@
 																	</div>
 																</div>
 
-																<div class="row">
+																<div class="row mb-3">
 																	<div class="form-group mb-3">
 																		<label class="form-label">Confirm Password</label>
-																		<input class="form-control" type="text" name="profile_cpassword" value="" >
+																		<input class="form-control" type="text" name="profile_cpassword" value="">
 																	</div>
 																</div>
 
-														
+
 															</div>
 
 														</div>
 
-														
+
 
 														<div class="modal-footer">
 															<div class="mt-3">
-															<button type="submit" name="update" class="btn btn-primary">Save</button>
+																<button type="submit" name="update" class="btn btn-primary">Save</button>
 															</div>
 														</div>
 
 													</form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
 
 				</div>
 			</main>
@@ -199,45 +196,99 @@
 		</div>
 	</div>
 
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="../js/app.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
 
 	<?php
-        // Check if there is a notification in the session
-        if (isset($_SESSION['notification'])) {
-            // Get notification details
-            $title = $_SESSION['notification']['title'];
-            $status = $_SESSION['notification']['status'];
-            $description = $_SESSION['notification']['description'];
-            // Clear the notification from the session
-            unset($_SESSION['notification']);
-        }
-    ?>
+	// Check if there is a notification in the session
+	if (isset($_SESSION['notification'])) {
+		// Get notification details
+		$title = $_SESSION['notification']['title'];
+		$status = $_SESSION['notification']['status'];
+		$description = $_SESSION['notification']['description'];
+		// Clear the notification from the session
+		unset($_SESSION['notification']);
+	}
+	?>
 
-    <script>
-		
-        pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+	<script>
+		pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
 
-        function pushNotify(status, title, description) {
-            new Notify({
-                status: status,
-                title: title,
-                text: description,
-                effect: 'slide',
-                speed: 800,
-                customClass: null,
-                customIcon: null,
-                showIcon: true,
-                showCloseButton: true,
-                autoclose: true,
-                autotimeout: 1500,
-                gap: 20,
-                distance: 20,
-                type: 1,
-                position: 'x-center top'
-            });
-        }
-    </script>
+		function pushNotify(status, title, description) {
+			new Notify({
+				status: status,
+				title: title,
+				text: description,
+				effect: 'slide',
+				speed: 800,
+				customClass: null,
+				customIcon: null,
+				showIcon: true,
+				showCloseButton: true,
+				autoclose: true,
+				autotimeout: 1500,
+				gap: 20,
+				distance: 20,
+				type: 1,
+				position: 'x-center top'
+			});
+		}
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			// Get the active tab from local storage if available
+			var activeTab = localStorage.getItem('activeTab');
+			if (activeTab) {
+				$('#list-tab a[href="' + activeTab + '"]').tab('show');
+			}
+
+			// Store the active tab in local storage when a new tab is shown
+			$('#list-tab a').on('shown.bs.tab', function(e) {
+				var tab = $(e.target).attr('href');
+				localStorage.setItem('activeTab', tab);
+			});
+		});
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			// Get initial values
+			var initialValues = {
+				profile_firstname: $('#profile_firstname').val(),
+				profile_lastname: $('#profile_lastname').val(),
+				profile_contact: $('#profile_contact').val(),
+				profile_email: $('#profile_email').val(),
+			};
+
+			// Function to check if there are changes
+			function checkChanges() {
+				var currentValues = {
+					profile_firstname: $('#profile_firstname').val(),
+					profile_lastname: $('#profile_lastname').val(),
+					profile_contact: $('#profile_contact').val(),
+					profile_email: $('#profile_email').val(),
+				};
+
+				return JSON.stringify(initialValues) === JSON.stringify(currentValues);
+			}
+
+			// Disable the button if there are no changes
+			$('#editForm input').on('input', function() {
+				if (checkChanges()) {
+					$('#saveButton').prop('disabled', true);
+				} else {
+					$('#saveButton').prop('disabled', false);
+				}
+			});
+
+			// Initially disable the button if there are no changes
+			if (checkChanges()) {
+				$('#saveButton').prop('disabled', true);
+			}
+		});
+	</script>
 
 
 

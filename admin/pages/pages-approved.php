@@ -115,7 +115,7 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-settings.php">
+						<a class="sidebar-link" href="#">
               				<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
             			</a>
 					</li>

@@ -9,11 +9,9 @@ if (isset($_POST['update'])) {
     // Retrieve the agent from session
     $agent = $_SESSION['agent'];
 
-    $profile_pic = null;
-
     // Check if 'profilePic' file is uploaded
     if (isset($_FILES['profilePic']) && $_FILES['profilePic']['error'] === UPLOAD_ERR_OK) {
-        $tmp_name_profile = $_FILES['profilePic']['tmp_name']; 
+        $tmp_name_profile = $_FILES['profilePic']['tmp_name'];
         $profile_pic = $_FILES['profilePic']['name'];
 
         // Move the uploaded 'profilePic' file to the target directory
@@ -21,8 +19,11 @@ if (isset($_POST['update'])) {
 
         if (!move_uploaded_file($tmp_name_profile, $target_path_profile)) {
             $_SESSION['insert'] = false;
-            exit();
+            exit(); // You may want to handle the error here
         }
+
+    } else {
+        echo "No file was uploaded.";
     }
 
     // Database update logic using prepared statements

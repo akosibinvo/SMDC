@@ -109,9 +109,9 @@ if(isset($_POST['book'])){
         $status = 'Pending';
 
         // Database insertion logic using prepared statements
-        $sql = "INSERT INTO transaction_booking (firstname, Unit_code, RA, Holding, RF, ID, agent, agent_role, user_id, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO transaction_booking (firstname, Unit_code, RA, Holding, RF, ID, agent, agent_role, user_id, team_id, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssssssis", $firstname, $unitcode, $filename_ra, $filename_holding, $filename_rf, $filename_id, $fullname, $agent_role, $id, $status);
+        $stmt->bind_param("ssssssssiis", $firstname, $unitcode, $filename_ra, $filename_holding, $filename_rf, $filename_id, $fullname, $agent_role, $id, $team_id, $status);
 
         if ($stmt->execute()) {
             // Insertion successful
