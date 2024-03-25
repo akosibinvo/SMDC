@@ -56,13 +56,13 @@ if (isset($_POST['addprice'])) {
         $coms = $netListPrice * $commission_rate;
 
         // Value added tax = 12%
-        // $vat = 0.12;
+        $vat = 0.12;
 
-        // // Commissions multiplied by VAT
-        // $coms_vat = $coms * $vat;
+        // Commissions multiplied by VAT
+        $coms_vat = $coms * $vat;
 
-        // // Commissions received by sellers (excluding VAT)
-        // $total_coms = $coms - $coms_vat;
+        // Commissions received by sellers (excluding VAT)
+        $total_coms = $coms - $coms_vat;
 
 
         // Prepare and execute the SQL query
@@ -70,7 +70,7 @@ if (isset($_POST['addprice'])) {
         $stmt = mysqli_prepare($conn, $query);
 
         if ($stmt) {
-            mysqli_stmt_bind_param($stmt, "ddi", $netListPrice, $coms, $addprice_id);
+            mysqli_stmt_bind_param($stmt, "ddi", $netListPrice, $total_coms, $addprice_id);
 
             if (mysqli_stmt_execute($stmt)) {
 

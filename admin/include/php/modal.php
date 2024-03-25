@@ -295,10 +295,25 @@
                               }
 
                            ?>
+                           
+                           <div class="camera-container">
+                              <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle mb-3" id="imagePreview" width="205" height="205" />
 
-                           <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle mb-3" id="imagePreview" width="205" height="205" />
+                              <div class="camera-input">
+                                 <input type="file" name="profilePic" id="fileInput" style="display: none;">
 
-                           <input class="form-control mt-3" type="file" name="profilePic" id="fileInput" required>
+                                 <label for="fileInput" class="camera-icon" style="cursor: pointer;" title="Add Photo">
+                                    <i class="align-middle" data-feather="camera"></i>
+                                 </label>
+
+                                 <div id="fileName"></div>
+                              </div>
+
+                           </div>
+
+                           
+
+                           <!-- <input class="form-control mt-3" type="file" name="profilePic" id="fileInput" required> -->
                            
                            </div>
                         </div>

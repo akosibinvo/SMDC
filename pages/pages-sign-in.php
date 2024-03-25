@@ -52,14 +52,14 @@
                                             <label class="form-label">Email</label>
                                             <input class="form-control form-control-lg" type="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>" placeholder="Enter your email" required>
 											<div id="validationLastName" class="invalid-feedback">
-													Enter your email
+													Enter your E-mail
 											</div>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Password</label>
                                             <input class="form-control form-control-lg <?php echo isset($errors) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Enter your password" required>
 											<div id="validationLastName" class="invalid-feedback">
-													Enter your password
+													Enter your Password
 											</div>
                                             <?php if (isset($errors)) : ?>
                                                 <div class="invalid-feedback">

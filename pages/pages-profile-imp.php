@@ -23,6 +23,9 @@
 	<link href="../css/app.css" rel="stylesheet">
 
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+	
+	
 </head>
 
 <body>
@@ -257,7 +260,44 @@
 	</div>
 
 	<script src="../js/app.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
 
+	<?php
+        // Check if there is a notification in the session
+        if (isset($_SESSION['notification'])) {
+            // Get notification details
+            $title = $_SESSION['notification']['title'];
+            $status = $_SESSION['notification']['status'];
+            $description = $_SESSION['notification']['description'];
+            // Clear the notification from the session
+            unset($_SESSION['notification']);
+        }
+    ?>
+
+    <script>
+		
+        pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+
+        function pushNotify(status, title, description) {
+            new Notify({
+                status: status,
+                title: title,
+                text: description,
+                effect: 'slide',
+                speed: 800,
+                customClass: null,
+                customIcon: null,
+                showIcon: true,
+                showCloseButton: true,
+                autoclose: true,
+                autotimeout: 1500,
+                gap: 20,
+                distance: 20,
+                type: 1,
+                position: 'x-center top'
+            });
+        }
+    </script>
 
 </body>
 

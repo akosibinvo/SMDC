@@ -157,7 +157,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 					<ul class="navbar-nav navbar-align">
 
 						<li class="nav-item dropdown">
-							<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="rounded-circle" width="25" height="25" />
+							<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle" width="25" height="25" />
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
 
 								<span class="text-dark">

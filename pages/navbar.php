@@ -51,7 +51,7 @@
         <a class="dropdown-item"  href="<?php echo ($agent_role === 'SA1' || $agent_role === 'SA2') ? 'pages-profile.php' : 'pages-profile-imp.php'; ?>"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
         <a class="dropdown-item" href="pages-statistics.php"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
+        <a class="dropdown-item" href="pages-settings.php"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#logoutModal">Log out</a>
 
