@@ -151,7 +151,7 @@ $url .= "/SMDC_JQB/pages/pages-sign-up.php?ref=";
 						</div>
 
 						<div class="col-md-8 col-xl-8">
-							<div class="card">
+							<div class="card mb-3">
 
 								<div class="card-header bg-white">
 									<h5 class="card-title mb-0">Acount Status</h5>

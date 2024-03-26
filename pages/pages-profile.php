@@ -145,7 +145,7 @@ include "../admin/include/php/modal.php";
 						</div>
 
 						<div class="col-md-8 col-xl-8">
-							<div class="card">
+							<div class="card mb-3">
 								<div class="card-header bg-white">
 									<h5 class="card-title mb-0">Account Status</h5>
 								</div>
@@ -167,7 +167,7 @@ include "../admin/include/php/modal.php";
 													$count_booked = mysqli_num_rows($res_booked);
 													?>
 
-													<h1 class="mt-1 mb-3 text-center text-white fw-bold"> <?php echo $count_booked ?> </h1>
+													<h1 class="mt-0 mb-3 text-center text-white fw-bold"> <?php echo $count_booked ?> </h1>
 
 												</div>
 											</div>
