@@ -1,23 +1,13 @@
 <?php
 session_start();
+include 'functions.php';
 
 // Include database connection
 require_once 'connection.php';
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Function to verify OTP
-    function verifyOTP($userOTP) {
-        // Check if OTP is stored in session or database (replace this with your implementation)
-        $storedOTP = isset($_SESSION['otp']) ? $_SESSION['otp'] : null;
-
-        if ($storedOTP === $userOTP) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
+    //OTP verification for forgot password
     if (isset($_POST['submit-otp'])) {
         $userOTP = $_POST['userOtp'];
 
@@ -43,6 +33,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             );
             // Redirect to dashboard or desired page
             header('Location: ../pages/pages-otp-code.php');
+            exit;
+        }
+    }
+
+    //OTP Verification for new user
+    if (isset($_POST['submit-otp-validate-email'])) {
+        $userOTP = $_POST['userOtp-signup-validation'];
+
+        if (verifyOTP($userOTP)) {
+            // Check if signup data is set in session
+            if (isset($_SESSION['signup_data'])) {
+                // Get signup data
+                $signup_data = $_SESSION['signup_data'];
+
+                // Unset the signup data to clear it after use
+                unset($_SESSION['signup_data']);
+
+                // Now you can access the signup data and use it as needed
+                $firstName = $signup_data['firstName'];
+                $lastName = $signup_data['lastName'];
+                $email = $signup_data['email'];
+                $password = $signup_data['password'];
+                $role = $signup_data['role'];
+
+                // Insert user into database
+                $stmt = $conn->prepare("INSERT INTO users (firstName, lastName, email, password, role) VALUES (?, ?, ?, ?, ?)");
+                $stmt->bind_param("sssss", $firstName, $lastName, $email, $password, $role);
+                $stmt->execute();
+                $stmt->close();
+            }
+
+            $_SESSION['notification'] = array(
+                'title' => 'OTP code validated',
+                'status' => 'success',
+                'description' => 'OTP verification success. Please sign in your account.',
+            );
+
+            //unset otp and email session
+            unset($_SESSION['otp']);
+            unset($_SESSION['email-verify']);
+
+            // Redirect to dashboard or desired page
+            header('Location: ../pages/pages-sign-in.php');
             exit;
         }
     }

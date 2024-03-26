@@ -87,20 +87,23 @@
 	<script src="../js/app.js"></script>
     <!-- Simple Notify -->
     <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
-    <?php
-        // Check if there is a notification in the session
-        if (isset($_SESSION['notification'])) {
-            // Get notification details
-            $title = $_SESSION['notification']['title'];
-            $status = $_SESSION['notification']['status'];
-            $description = $_SESSION['notification']['description'];
-            // Clear the notification from the session
-            unset($_SESSION['notification']);
-        }
-    ?>
 
     <script>
-        pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+        <?php
+            // Check if there is a notification in the session
+            if (isset($_SESSION['notification'])) {
+                // Get notification details
+                $title = $_SESSION['notification']['title'];
+                $status = $_SESSION['notification']['status'];
+                $description = $_SESSION['notification']['description'];
+                ?>
+                    //Display the notification
+                    pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+                <?php
+                // Clear the notification from the session
+                unset($_SESSION['notification']);
+            }
+        ?>
 
         function pushNotify(status, title, description) {
             new Notify({

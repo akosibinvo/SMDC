@@ -12,4 +12,3 @@ $conn = mysqli_connect($dbHost,$dbUser,$dbPass,$dbName);
 if(!$conn){
     die("Could not connect to the Database");
 }
-?>

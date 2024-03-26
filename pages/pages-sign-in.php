@@ -21,6 +21,9 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
 
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/ca3839150d.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -57,10 +60,15 @@
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Password</label>
-                                            <input id="passwordUser" class="form-control form-control-lg <?php echo isset($errors) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Enter your password" required>
-											<div id="validationLastName" class="invalid-feedback">
-													Enter your password
-											</div>
+                                            <div class="input-group">
+                                                <input id="passwordUser" class="form-control form-control-lg <?php echo isset($errors) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Enter your password" required>
+                                                <button type="button" class="btn btn-primary" id="togglePassword">
+                                                    <i class="fa-regular fa-eye"></i>
+                                                </button>
+                                            </div>
+                                            <div id="validationLastName" class="invalid-feedback">
+                                                Enter your password
+                                            </div>
                                             <?php if (isset($errors)) : ?>
                                                 <div class="invalid-feedback">
                                                     <?php echo $errors[0]; ?>
@@ -70,7 +78,7 @@
 
                                         <div class="row d-flex justify-content-between px-3">
                                             <div class="form-check col-auto">
-                                                <input id="rememberMe" type="checkbox" class="form-check-input" value="remember-me" name="remember-me">
+                                                <input id="rememberMe" type="checkbox" class="form-check-input" value="on" name="remember-me">
                                                 <label class="form-check-label text-small" for="rememberMe">Remember me</label>
                                             </div>
                                             <div class="col-auto">
@@ -81,7 +89,7 @@
                                         </div>
 
                                         <div class="row mt-3 mx-1">
-                                            <button type="submit" class="btn btn-lg btn-primary">Sign in</button>
+                                            <button type="submit" name="signin-btn" class="btn btn-lg btn-primary">Sign in</button>
                                         </div>
 
                                         <div class="row d-flex justify-content-start mt-4">
@@ -153,19 +161,7 @@
 
             // Add event listener to the form for form submission
             form.addEventListener("submit", function(event) {
-                event.preventDefault(); // Prevent form submission
-
-                // Get username and password values
-                const username = document.getElementById("emailUser").value;
-                //const password = document.getElementById("passwordUser").value;
-
-                // If "Remember Me" checkbox is checked, set a cookie with the username
-                if (document.getElementById("rememberMe").checked) {
-                    setCookie("rememberedUsername", username, 30); // Cookie expires in 30 days
-                } else {
-                    // If "Remember Me" checkbox is not checked, delete the cookie
-                    document.cookie = "rememberedUsername=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                }
+                event.preventDefault();
 
                 // Perform form validation
                 Array.from(form.elements).forEach(input => {
@@ -190,38 +186,27 @@
                 }
             }, false);
 
-            // Function to set a cookie
-            function setCookie(name, value, days) {
-                var expires = "";
-                if (days) {
-                    var date = new Date();
-                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                    expires = "; expires=" + date.toUTCString();
+            // Function to get a cookie
+            function getEmailFromCookie(name) {
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var cookieArray = decodedCookie.split(';');
+                for(var i = 0; i < cookieArray.length; i++) {
+                    var cookie = cookieArray[i].trim();
+                    if (cookie.indexOf(name) == 0) {
+                        return cookie.substring(name.length, cookie.length);
+                    }
                 }
-                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+                return "";
             }
 
-            // Function to get a cookie
-            function getCookie(name) {
-                var nameEQ = name + "=";
-                var cookies = document.cookie.split(';');
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = cookies[i];
-                    while (cookie.charAt(0) == ' ') {
-                        cookie = cookie.substring(1, cookie.length);
-                    }
-                    if (cookie.indexOf(nameEQ) == 0) {
-                        return cookie.substring(nameEQ.length, cookie.length);
-                    }
-                }
-                return null;
-            }
+            var userEmail = getEmailFromCookie();
+            console.log("User Email:", userEmail);
 
             // Function to check if the "Remember Me" cookie exists and set the username field accordingly
             function checkRememberMe() {
-                var username = getCookie("rememberedUsername");
-                if (username) {
-                    document.getElementById("emailUser").value = username;
+                var email = getEmailFromCookie("remember_me_cookie=");
+                if (email) {
+                    document.getElementById("emailUser").value = email;
                     document.getElementById("rememberMe").checked = true;
                 }
             }
@@ -229,6 +214,17 @@
             // Call checkRememberMe function on page load
             checkRememberMe();
         })();
+    </script>
+    
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('passwordUser');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.innerHTML = type === 'password' ? '<i class="fa-regular fa-eye"></i>' : '<i class="fa-regular fa-eye-slash"></i>';
+        });
     </script>
 
     
