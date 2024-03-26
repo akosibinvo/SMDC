@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ../pages/pages-reset-password.php');
             exit;
         } else {
-            $email = $_SESSION['email'];
+            $email = $_SESSION['email-forgot'];
             $password_hashed = password_hash($newPassword, PASSWORD_DEFAULT);
 
             $stmt = $conn->prepare("UPDATE users SET password = ? WHERE email = ?");
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             //unset email session
-            unset($_SESSION['email']);
+            unset($_SESSION['email-forgot']);
 
             // Redirect to appropriate page after password update
             header('Location: ../pages/pages-sign-in.php');

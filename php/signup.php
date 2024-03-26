@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'functions.php';
 
 // Include database connection
 require_once 'connection.php';
@@ -57,20 +58,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $role = "SA1";
 
+        // Store POST values in session
+        $_SESSION['signup_data'] = array(
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'email' => $email,
+            'password' => $hashed_password,
+            'role' => $role
+        );
+
         // Insert user into database
-        $stmt = $conn->prepare("INSERT INTO users (firstName, lastName, email, password, role) VALUES (?, ? ,?, ?, ?)");
-        $stmt->bind_param("sssss", $firstName, $lastName, $email, $hashed_password, $role);
-        $stmt->execute();
-        $stmt->close();
+        // $stmt = $conn->prepare("INSERT INTO users (firstName, lastName, email, password, role) VALUES (?, ? ,?, ?, ?)");
+        // $stmt->bind_param("sssss", $firstName, $lastName, $email, $hashed_password, $role);
+        // $stmt->execute();
+        // $stmt->close();
+
+        // Generate a random 6-digit OTP code
+        $otpCode = sprintf("%06d", mt_rand(0, 999999));
+        $_SESSION['email-verify'] = $email;
+    
+        if (sendEmailWithOTP($email, $otpCode)) {
+            $_SESSION['otp'] = $otpCode;
+        }
 
         $_SESSION['notification'] = array(
-            'title' => 'Registered successfully',
+            'title' => 'OTP successfully sent',
             'status' => 'success',
-            'description' => 'Please sign in your account',
+            'description' => 'Please verify your email to continue',
         );
 
         // Redirect to login page
-        header('Location: ../pages/pages-sign-in.php');
+        header('Location: ../pages/pages-validate-email.php');
         exit;
     }
 }
