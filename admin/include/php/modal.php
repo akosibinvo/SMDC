@@ -13,6 +13,10 @@
 
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+
 </head>
 
 <body>
@@ -262,8 +266,7 @@
          <div class="modal-content">
             <div class="modal-header">
                <h5 class="modal-title" id="exampleModalLabel">Add Photo</h5>
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-               </button>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                <form action="../admin/include/php/edit-profile-details.php" method="post" enctype="multipart/form-data">
@@ -301,7 +304,7 @@
                   </div>
                   <div class="modal-footer">
                      <div class="mt-3">
-                        <button type="submit" name="update" id="updateButton" class="btn btn-primary background-blue" disabled>Update</button>
+                        <button type="submit" name="update" id="updateButton" class="btn btn-primary background-blue" disabled>Save</button>
                      </div>
                   </div>
                </form>
@@ -320,13 +323,13 @@
                </button>
             </div>
             <div class="modal-body">
-               <form action="../admin/include/php/edit-account-details.php" method="post" enctype="multipart/form-data">
+               <form action="../admin/include/php/edit-account-details.php" method="post" enctype="multipart/form-data" id="editDetailsForm">
                   <input type="hidden" name="update_profile_id">
 
                   <div class="row mb-3">
 
                      <?php
-                     $sql_profile = "SELECT * FROM users WHERE firstName = '$firstname'";
+                     $sql_profile = "SELECT * FROM users WHERE ID = '$id'";
                      $res_profile = mysqli_query($conn, $sql_profile);
 
                      if ($res_profile && mysqli_num_rows($res_profile) > 0) {
@@ -344,19 +347,19 @@
                         <div class="row mb-3">
                            <div class="form-group col-md-6">
                               <label class="form-label" for="firstname">Firstname</label>
-                              <input class="form-control" type="text" pattern="[A-Za-z\s]+" name="profile_firstname" value="<?php echo $profile_firstname ?>">
+                              <input class="form-control" type="text" pattern="[A-Za-z\s]+" name="profile_firstname" id="profile_firstname" value="<?php echo $profile_firstname ?>">
                            </div>
 
                            <div class="form-group col-md-6">
                               <label class="form-label">Lastname</label>
-                              <input class="form-control" type="text" pattern="[A-Za-z\s]+" name="profile_lastname" value="<?php echo $profile_lastname ?>">
+                              <input class="form-control" type="text" pattern="[A-Za-z\s]+" name="profile_lastname" id="profile_lastname" value="<?php echo $profile_lastname ?>">
                            </div>
                         </div>
 
                         <div class="row">
                            <div class="form-group mb-3">
                               <label class="form-label">Contact</label>
-                              <input class="form-control" type="text" name="profile_contact" value="<?php echo $profile_contact ?>">
+                              <input class="form-control" type="text" name="profile_contact" id="profile_contact" value="<?php echo $profile_contact ?>">
                            </div>
                         </div>
 
@@ -376,7 +379,7 @@
 
                   <div class="modal-footer">
                      <div class="mt-3">
-                        <button type="submit" name="update_profile" class="btn btn-primary">Update</button>
+                        <button type="submit" name="update_profile" class="btn btn-primary" id="updateDetails">Update</button>
                      </div>
                   </div>
 
@@ -523,6 +526,49 @@
       </div>
    </div>
 
+   <!--======================================= CONGRATULATIONS SA1 MODAL ======================================= -->
+   <div class="modal fade" id="congratsSA1Modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+            <div class="modal-body text-center border-0">
+               <img src="../img/icons/congrats.png" alt="Congratulation Image" width="150" height="150">
+               <p class="fs-3 fw-bold mb-2"> Congratulations on achieving S2 status! </p>
+               <p class="mb-0"> Keep up the exceptional work, and may this milestone be just the beginning of even greater achievements ahead. Well done! </p>
+
+            </div>
+            <div class="modal-footer border-0 mx-auto mt-0 mb-3">
+               <form action="../admin/include/php/update-SA1-status.php" method="POST">
+                  <input type="hidden" name="congrats_SA1_id">
+                  <button type="submit" name="congrats_SA1" class="btn btn-primary background-blue"> Update Status </button>
+               </form>
+               <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> No </button> -->
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!--======================================= CONGRATULATIONS SA1 MODAL ======================================= -->
+   <div class="modal fade" id="congratsSA2Modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+            <div class="modal-body text-center border-0">
+               <img src="../img/icons/congrats.png" alt="Congratulation Image" width="150" height="150">
+               <p class="fs-3 fw-bold mb-2"> Congratulations on achieving IMP status! </p>
+               <p class="mb-0"> Keep up the exceptional work, and may this milestone be just the beginning of even greater achievements ahead. Well done! </p>
+
+            </div>
+            <div class="modal-footer border-0 mx-auto mt-0 mb-3">
+               <form action="../admin/include/php/update-SA2-status.php" method="POST">
+                  <input type="hidden" name="congrats_SA2_id">
+                  <button type="submit" name="congrats_SA2" class="btn btn-primary background-blue"> Update Status </button>
+               </form>
+               <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> No </button> -->
+            </div>
+         </div>
+      </div>
+   </div>
+
    <script>
       // Function to add commas to the input value for every three digits
       function addCommas(input) {
@@ -601,6 +647,44 @@
          }
       }
    </script>
+
+   <script>
+      $(document).ready(function() {
+         // Get initial values
+         var initialValues = {
+            profile_firstname: $('#profile_firstname').val(),
+            profile_lastname: $('#profile_lastname').val(),
+            profile_contact: $('#profile_contact').val(),
+         };
+
+         // Function to check if there are changes
+         function checkChanges() {
+            var currentValues = {
+               profile_firstname: $('#profile_firstname').val(),
+               profile_lastname: $('#profile_lastname').val(),
+               profile_contact: $('#profile_contact').val(),
+            };
+
+            return JSON.stringify(initialValues) === JSON.stringify(currentValues);
+         }
+
+         // Disable the button if there are no changes
+         $('#editDetailsForm input').on('input', function() {
+            if (checkChanges()) {
+               $('#updateDetails').prop('disabled', true);
+            } else {
+               $('#updateDetails').prop('disabled', false);
+            }
+         });
+
+         // Initially disable the button if there are no changes
+         if (checkChanges()) {
+            $('#updateDetails').prop('disabled', true);
+         }
+      });
+   </script>
+
+
 
 
 </body>

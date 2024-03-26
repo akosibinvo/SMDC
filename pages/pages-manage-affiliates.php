@@ -1,7 +1,10 @@
 <?php
 include "../php/session.php";
 require "../php/connection.php";
-
+if ($agent_role !== "IMP") {
+	header("Location: ../index.php");
+}
+include "../admin/include/php/modal.php";
 ?>
 
 
@@ -92,10 +95,15 @@ require "../php/connection.php";
 												if (array_key_exists($overcoms_role, $overcoms_rates)) {
 													$overcoms_rate = $overcoms_rates[$overcoms_role];
 												} else {
-													exit("Error: Commission rate for role '$overcom_role' is not defined");
+													exit("Error: Commission rate for role '$overcoms_role' is not defined");
 												}
 
+												$overcoms_vat = 0.12;
+
 												$overcoms_coms = $overcoms_amount * $overcoms_rate;
+												$deducted_overcoms =  $overcoms_coms * $overcoms_vat;
+
+												$accumulated_overcoms = $overcoms_coms - $deducted_overcoms;
 
 										?>
 												<tr class="text-center">
@@ -104,7 +112,7 @@ require "../php/connection.php";
 													<td><?php echo '₱' . ' ' . number_format($overcoms_amount, 0, '.', ','); ?></td>
 													<td><?php echo $overcoms_role; ?></td>
 													<td><?php echo $overcoms_date; ?></td>
-													<td><?php echo '₱' . ' ' . number_format($overcoms_coms, 0, '.', ','); ?></td>
+													<td><?php echo '₱' . ' ' . number_format($accumulated_overcoms, 0, '.', ','); ?></td>
 												</tr>
 										<?php
 											}

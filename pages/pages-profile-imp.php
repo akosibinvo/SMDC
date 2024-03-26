@@ -11,7 +11,7 @@ else
 $url .= $_SERVER['HTTP_HOST'];
 
 // Append the requested resource location to the URL   
-$url .= "/SMDC/pages/pages-sign-up.php?ref=";
+$url .= "/SMDC_JQB/pages/pages-sign-up.php?ref=";
 
 ?>
 
@@ -169,18 +169,52 @@ $url .= "/SMDC/pages/pages-sign-up.php?ref=";
 													</div>
 
 													<?php
-													$sql_total_coms = "SELECT SUM(Commissions) AS total_coms FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
-													$res_total_coms = mysqli_query($conn, $sql_total_coms);
+													// $sql_total_coms = "SELECT SUM(Commissions) AS total_coms FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+													// $res_total_coms = mysqli_query($conn, $sql_total_coms);
+													$sql_overcoms = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND team_id = '$id'";
+													$res_overcoms = mysqli_query($conn, $sql_overcoms);
 
-													if ($res_total_coms) {
-														$row = mysqli_fetch_assoc($res_total_coms);
-														$total_coms = $row['total_coms'];
+													if ($res_overcoms) {
+														// Initialize total commission variable
+														$total_overcoms_coms = 0;
+
+														while ($rows_overcoms = mysqli_fetch_assoc($res_overcoms)) {
+															$overcoms_role = $rows_overcoms['agent_role'];
+															$overcoms_amount = $rows_overcoms['Amount'];
+															$overcoms_date = $rows_overcoms['Transaction_date'];
+
+															// Define commission rates
+															$overcoms_rates = [
+																'SA1' => 0.015,
+																'SA2' => 0.01
+															];
+
+															if (array_key_exists($overcoms_role, $overcoms_rates)) {
+																$overcoms_rate = $overcoms_rates[$overcoms_role];
+															} else {
+																exit("Error: Commission rate for role '$overcoms_role' is not defined");
+															}
+
+															// Calculate individual commission
+															$overcoms_vat = 0.12;
+
+															$overcoms_coms = $overcoms_amount * $overcoms_rate;
+															$deducted_overcoms =  $overcoms_coms * $overcoms_vat;
+
+															$accumulated_overcoms = $overcoms_coms - $deducted_overcoms;
+
+
+															// Accumulate individual commission to total commission
+															$total_overcoms_coms += $accumulated_overcoms;
+														}
 													} else {
-														echo "Error: " . mysqli_error($conn);
+														// Handle query error
+														echo "Error in fetching data from database.";
 													}
+
 													?>
 
-													<h1 class="mt-1 mb-3 text-center text-white" style="font-weight: bold;">₱ <?php echo number_format($total_coms) ?></h1>
+													<h1 class="mt-1 mb-3 text-center text-white" style="font-weight: bold;">₱ <?php echo number_format($total_overcoms_coms) ?></h1>
 												</div>
 											</div>
 										</div>
@@ -259,54 +293,7 @@ $url .= "/SMDC/pages/pages-sign-up.php?ref=";
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="col-12 col-md-12 d-flex">
-									<div class="card flex-fill">
-										<div class="card-header">
-											<h5 class="card-title mb-0 text-white">Manage Affiliates</h5>
-										</div>
-										<table class="table table-hover my-0">
-											<thead>
-												<tr class="text-center">
-													<th>Name</th>
-													<th>Status</th>
-													<th>Unit Sold</th>
-													<th>Date</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-												$sql_affiliates = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND team_id = '$id' ";
-												$res_affiliates = mysqli_query($conn, $sql_affiliates);
-												$count_booked = mysqli_num_rows($res_affiliates);
 
-												if ($res_affiliates == TRUE) {
-													$count_get = mysqli_num_rows($res_affiliates);
-													if ($count_get > 0) {
-												?>
-														<?php
-														while ($row = mysqli_fetch_assoc($res_affiliates)) {
-														?>
-															<tr class="text-center">
-																<td> <?php echo $row['agent']; ?> </td>
-																<td class="text-success fw-bold"><?php echo $row['status']; ?> </td>
-																<td> <?php echo $count_booked ?> </td>
-																<td><?php echo $row['Transaction_date']; ?></td>
-
-															</tr>
-														<?php
-														}
-														?>
-											</tbody>
-									<?php
-													}
-												}
-									?>
-										</table>
-									</div>
-								</div>
-
-							</div>
 
 
 						</div>

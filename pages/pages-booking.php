@@ -1,9 +1,9 @@
 <?php
-	include "../php/session.php";
-    require "../php/connection.php";
-    include "../admin/include/php/client_info.php";
-    include "../admin/include/php/modal.php";
-    // include "../admin/include/php/imageHandler.php";
+include "../php/session.php";
+require "../php/connection.php";
+include "../admin/include/php/client_info.php";
+include "../admin/include/php/modal.php";
+// include "../admin/include/php/imageHandler.php";
 
 ?>
 
@@ -11,52 +11,52 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="../img/icons/logo-square.png" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="../img/icons/logo-square.png" />
 
-	<title>Booking | SMDC JQB</title>
+    <title>Booking | SMDC JQB</title>
 
-	<link href="../css/app.css" rel="stylesheet">
-	<link href="../css/style.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="../css/app.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
 
 </head>
 
 <body>
-	<div class="wrapper">
+    <div class="wrapper">
 
         <?php
-			include "sidebar.php";
-		?>
+        include "sidebar.php";
+        ?>
 
-		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle">
-          			<i class="hamburger align-self-center"></i>
-        		</a>
+        <div class="main">
+            <nav class="navbar navbar-expand navbar-light navbar-bg">
+                <a class="sidebar-toggle js-sidebar-toggle">
+                    <i class="hamburger align-self-center"></i>
+                </a>
 
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav navbar-align">
 
-                    <?php
+                        <?php
                         include "navbar.php";
-                    ?>
+                        ?>
 
-					</ul>
-				</div>
-			</nav>
+                    </ul>
+                </div>
+            </nav>
 
-			<main class="content">
-				<div class="container-fluid p-0">
+            <main class="content">
+                <div class="container-fluid p-0">
 
-					<h1 class="h3 mb-3 px-3"><strong class="title-dashboard">Book</strong> Now</h1>
+                    <h1 class="h3 mb-3 px-3"><strong class="title-dashboard">Book</strong> Now</h1>
 
-					<div class="row d-flex justify-content-center">
+                    <div class="row d-flex justify-content-center">
                         <div class="row">
                             <div class="col-12 col-md-12 d-flex">
                                 <div class="card flex-fill">
@@ -73,9 +73,9 @@
                                                 <div class="invalid-feedback">
                                                     Please enter First Name.
                                                 </div>
-                                                
+
                                             </div>
-                                            
+
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Middle Name</label>
                                                 <input class="form-control" type="text" name="middlename" pattern="[A-Za-z\s]+" placeholder="Enter your middle name" required>
@@ -99,7 +99,7 @@
                                                     <input class="form-control" type="text" name="suffix" pattern="[A-Za-z\s]+" placeholder="Enter your suffix" required>
                                                 </div>
                                             </div> -->
-                                            
+
                                         </div>
 
                                         <div class="row mb-3">
@@ -127,9 +127,9 @@
                                                 <div class="invalid-feedback">
                                                     Please enter TIN Number.
                                                 </div>
-                                                
+
                                             </div>
-                                            
+
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Gender</label>
                                                 <select class="form-select" id="selectGender" name="gender" required>
@@ -159,16 +159,16 @@
 
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Citizenship</label>
-                                                    <select class="form-select" id="selectCitizenship" name="citizenship" required>
-                                                        <option selected disabled value="">Select Citizenship</option>
-                                                    </select>
+                                                <select class="form-select" id="selectCitizenship" name="citizenship" required>
+                                                    <option selected disabled value="">Select Citizenship</option>
+                                                </select>
                                                 <div class="invalid-feedback">
                                                     Please select Citizenship.
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
-                                        
+
                                         <div class="row mb-3">
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">E-mail</label>
@@ -252,22 +252,22 @@
 
                                             <label for="inputPassword" class="col-sm-2 col-form-label">Project Name</label>
                                             <div class="col-md-4">
-                                            <input class="form-control" type="text" name="projectName" placeholder="Enter project name" required>
-                                            <div class="invalid-feedback">
-                                                Please enter a valid Project Name.
-                                            </div>
+                                                <input class="form-control" type="text" name="projectName" placeholder="Enter project name" required>
+                                                <div class="invalid-feedback">
+                                                    Please enter a valid Project Name.
+                                                </div>
                                             </div>
 
                                             <label for="inputPassword" class="col-sm-2 col-form-label">Unit Code</label>
                                             <div class="col-md-4">
-                                            <input class="form-control" type="text" name="unitCode" placeholder="Enter unit code" required>
-                                            <div class="invalid-feedback">
-                                                Please enter a valid Unit Code.
+                                                <input class="form-control" type="text" name="unitCode" placeholder="Enter unit code" required>
+                                                <div class="invalid-feedback">
+                                                    Please enter a valid Unit Code.
+                                                </div>
                                             </div>
-                                            </div>
-                                            </div> 
-                                        
-                                            <div class="container-fluid mb-4">
+                                        </div>
+
+                                        <div class="container-fluid mb-4">
                                             <div class="row justify-content-center align-items-center " style="height:35px; background-color: #2f6cff; border-radius: .3em;">
                                                 <div class="col">
                                                     <p class="card-title text-center mb-0 text-uppercase text-white">The Four(4) Documents</p>
@@ -276,10 +276,10 @@
                                         </div>
 
                                         <div class="row mb-6">
-                                            
+
                                             <div class="form-group col-md-3">
                                                 <label for="fileInput" class="form-label">Reservation Agreement</label>
-                                                <input class="form-control" type="file" name="RA" id="fileInput" required>
+                                                <input class="form-control" type="file" name="RA" id="fileInput" accept=".png, .jpg, .jpeg" required>
                                                 <div class="invalid-feedback">
                                                     Please select a file.
                                                 </div>
@@ -287,7 +287,7 @@
 
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Holding</label>
-                                                <input class="form-control" type="file" name="Holding" required>
+                                                <input class="form-control" type="file" name="Holding" accept=".png, .jpg, .jpeg" required>
                                                 <div class="invalid-feedback">
                                                     Please select a file.
                                                 </div>
@@ -295,7 +295,7 @@
 
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Reservation Fee</label>
-                                                <input class="form-control" type="file" name="RF" required>
+                                                <input class="form-control" type="file" name="RF" accept=".png, .jpg, .jpeg" required>
                                                 <div class="invalid-feedback">
                                                     Please select a file.
                                                 </div>
@@ -303,7 +303,7 @@
 
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Valid IDs with Specimen</label>
-                                                <input class="form-control" type="file" name="ID" required>
+                                                <input class="form-control" type="file" name="ID" accept=".png, .jpg, .jpeg" required>
                                                 <div class="invalid-feedback">
                                                     Please select a file.
                                                 </div>
@@ -324,77 +324,76 @@
 
                                 </div>
                             </div>
-                            
+
                         </div>
-					</div>
+                    </div>
 
 
 
-				</div>
-			</main>
+                </div>
+            </main>
 
-		</div>
-	</div>
+        </div>
+    </div>
 
-	<script src="../js/app.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
     <script>
-        (function () {
-        'use strict'
+        (function() {
+            'use strict'
 
-        var forms = document.querySelectorAll('.needs-validation')
+            var forms = document.querySelectorAll('.needs-validation')
 
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-                }
+            Array.prototype.slice.call(forms)
+                .forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
 
-                form.classList.add('was-validated')
-            }, false)
-            })
+                        form.classList.add('was-validated')
+                    }, false)
+                })
         })()
-      </script>
+    </script>
 
     <script>
         fetch('https://restcountries.com/v3.1/all')
             .then(response => response.json())
             .then(data => {
 
-            const countryNames = data.map(country => country.name.common);
+                const countryNames = data.map(country => country.name.common);
 
-            countryNames.sort();
+                countryNames.sort();
 
-            const selectCitizenship = document.getElementById('selectCitizenship');
+                const selectCitizenship = document.getElementById('selectCitizenship');
 
-            countryNames.forEach(countryName => {
-                const option = document.createElement('option');
-                option.value = countryName;
-                option.textContent = countryName;
-                selectCitizenship.appendChild(option);
-            });
+                countryNames.forEach(countryName => {
+                    const option = document.createElement('option');
+                    option.value = countryName;
+                    option.textContent = countryName;
+                    selectCitizenship.appendChild(option);
+                });
             })
             .catch(error => {
-            console.error('Error fetching country data:', error);
-        });
+                console.error('Error fetching country data:', error);
+            });
     </script>
 
     <?php
-        // Check if there is a notification in the session
-        if (isset($_SESSION['notification'])) {
-            // Get notification details
-            $title = $_SESSION['notification']['title'];
-            $status = $_SESSION['notification']['status'];
-            $description = $_SESSION['notification']['description'];
-            // Clear the notification from the session
-            unset($_SESSION['notification']);
-        }
+    // Check if there is a notification in the session
+    if (isset($_SESSION['notification'])) {
+        // Get notification details
+        $title = $_SESSION['notification']['title'];
+        $status = $_SESSION['notification']['status'];
+        $description = $_SESSION['notification']['description'];
+        // Clear the notification from the session
+        unset($_SESSION['notification']);
+    }
     ?>
 
     <script>
-		
         pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
 
         function pushNotify(status, title, description) {

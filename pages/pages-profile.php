@@ -27,6 +27,9 @@ include "../admin/include/php/modal.php";
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+
 </head>
 
 <body>
@@ -184,35 +187,73 @@ include "../admin/include/php/modal.php";
 										</div>
 
 										<?php
-										$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
-										$res_total_sales = mysqli_query($conn, $sql_total_sales);
+											$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+											$res_total_sales = mysqli_query($conn, $sql_total_sales);
 
-										if ($res_total_sales) {
-											$row = mysqli_fetch_assoc($res_total_sales);
-											$total_amount = $row['total_amount'];
+											if ($res_total_sales) {
+												$row = mysqli_fetch_assoc($res_total_sales);
+												$total_amount = $row['total_amount'];
 
-											// Calculate progress percentage for SA1
-											$sa1_target_sales = 500000000; // Example target sales for SA1
-											$sa1_progress_percentage = ($total_amount / $sa1_target_sales) * 100;
+												$sa1_target_sales = 500000000;
+												$sa1_progress_percentage = ($total_amount / $sa1_target_sales) * 100;
 
-											$sa2_target_sales = 1000000000; // Example target sales for SA1
-											$sa2_progress_percentage = ($total_amount / $sa2_target_sales) * 100;
-
-											// Update agent status if total amount is greater than or equal to target amount
-											if ($total_amount >= $sa1_target_sales) {
-												$sql_update_status1 = "UPDATE users SET role = 'SA2' WHERE firstName = '$firstname'";
-												if (mysqli_query($conn, $sql_update_status1)) {
-												} else {
-												}
-											} else if ($total_amount >= $sa2_target_sales) {
-												$sql_update_status2 = "UPDATE users SET role = 'IMP' WHERE firstName = '$firstname'";
-												if (mysqli_query($conn, $sql_update_status2)) {
-												} else {
-												}
-											} else {
 											}
-										}
-										?>
+
+											if ($agent_role == 'SA1' && $total_amount >= $sa1_target_sales) {
+												echo '
+
+												<script>
+													$(document).ready(function() {
+														$("#congratsSA1Modal").modal("show");
+														
+														$("#congratsSA1Modal").on("shown.bs.modal", function () {
+															const count = 200,
+															defaults = {
+																origin: { y: 0.7 },
+																zIndex: 1200,
+															};
+
+
+															function fire(particleRatio, opts) {
+															confetti(
+																Object.assign({}, defaults, opts, {
+																particleCount: Math.floor(count * particleRatio),
+																})
+															);
+															}
+
+															fire(0.25, {
+															spread: 26,
+															startVelocity: 55,
+															});
+
+															fire(0.2, {
+															spread: 60,
+															});
+
+															fire(0.35, {
+															spread: 100,
+															decay: 0.91,
+															scalar: 0.8,
+															});
+
+															fire(0.1, {
+															spread: 120,
+															startVelocity: 25,
+															decay: 0.92,
+															scalar: 1.2,
+															});
+
+															fire(0.1, {
+															spread: 120,
+															startVelocity: 45,
+															});
+														});
+
+													});
+												</script>';
+											}
+											?>
 
 										<?php
 										if ($agent_role == 'SA1') {
@@ -229,6 +270,77 @@ include "../admin/include/php/modal.php";
 										<?php
 										} else {
 										?>
+
+											<?php
+											$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+											$res_total_sales = mysqli_query($conn, $sql_total_sales);
+
+											if ($res_total_sales) {
+												$row = mysqli_fetch_assoc($res_total_sales);
+												$total_amount = $row['total_amount'];
+
+												$sa2_target_sales = 1000000000;
+												$sa2_progress_percentage = ($total_amount / $sa2_target_sales) * 100;
+
+											}
+
+											if ($agent_role == 'SA2' && $total_amount >= $sa2_target_sales) {
+												echo '
+
+												<script>
+													$(document).ready(function() {
+														$("#congratsSA2Modal").modal("show");
+														
+														$("#congratsSA2Modal").on("shown.bs.modal", function () {
+															const count = 200,
+															defaults = {
+																origin: { y: 0.7 },
+																zIndex: 1200,
+															};
+
+
+															function fire(particleRatio, opts) {
+															confetti(
+																Object.assign({}, defaults, opts, {
+																particleCount: Math.floor(count * particleRatio),
+																})
+															);
+															}
+
+															fire(0.25, {
+															spread: 26,
+															startVelocity: 55,
+															});
+
+															fire(0.2, {
+															spread: 60,
+															});
+
+															fire(0.35, {
+															spread: 100,
+															decay: 0.91,
+															scalar: 0.8,
+															});
+
+															fire(0.1, {
+															spread: 120,
+															startVelocity: 25,
+															decay: 0.92,
+															scalar: 1.2,
+															});
+
+															fire(0.1, {
+															spread: 120,
+															startVelocity: 45,
+															});
+														});
+
+													});
+												</script>';
+											}
+
+											?>
+
 											<div class="col-md-12 col-xl-12 px-4 mt-3">
 												<h5 class="text-center text-muted" style="font-size: .75em;">Target sales to reach <span class="text-primary fw-bold">IMP</span>.</h5>
 												<div class="col-md-12 rounded-pill mb-1" style="background: rgba(0, 48, 255, 0.5);">
@@ -238,6 +350,9 @@ include "../admin/include/php/modal.php";
 												</div>
 												<h5 class="text-center text-muted" style="font-size: .75em;"><?php echo number_format($total_amount); ?> / <?php echo number_format($sa2_target_sales); ?></h5>
 											</div>
+
+
+
 										<?php
 										}
 										?>
@@ -315,8 +430,7 @@ include "../admin/include/php/modal.php";
 		</div>
 	</div>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+
 	<script src="../js/app.js"></script>
 	<script>
 		$(document).ready(function() {

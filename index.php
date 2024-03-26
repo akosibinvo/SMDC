@@ -144,8 +144,8 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 						</a>
 					</li>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="">
+					<li class="sidebar-item <?= $page == "pages-settings.php" ? 'active' : ''; ?>">
+						<a class="sidebar-link" href="pages/pages-settings.php">
 							<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
 						</a>
 					</li>
@@ -180,7 +180,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 								<a class="dropdown-item" href="<?php echo ($role === 'SA1' || $role === 'SA2') ? 'pages/pages-profile.php' : 'pages/pages-profile-imp.php'; ?>"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
 								<a class="dropdown-item" href="pages-statistics.php"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
+								<a class="dropdown-item" href="pages/pages-settings.php"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#indexlogoutModal">Log out</a>
@@ -355,7 +355,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 						</div>
 					</div> -->
 
-					<div class="row mb-3">
+					<div class="row mb-0">
 						<div class="col-12 col-md-12 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
@@ -375,12 +375,27 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 
 									<tbody>
 										<?php
+										$results_per_page = 5;
 										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND user_id = '$id' ";
 										$res_booking = mysqli_query($conn, $sql_booking);
 
 										if ($res_booking == TRUE) {
-											$count_get = mysqli_num_rows($res_booking);
-											if ($count_get > 0) {
+											$total_results = mysqli_num_rows($res_booking);
+											$total_pages = ceil($total_results / $results_per_page);
+
+											// Check current page and set offset
+											if (!isset($_GET['page'])) {
+												$page = 1;
+											} else {
+												$page = $_GET['page'];
+											}
+											$offset = ($page - 1) * $results_per_page;
+
+											// Fetch data for the current page
+											$sql_booking .= " LIMIT $offset, $results_per_page";
+											$res_booking = mysqli_query($conn, $sql_booking);
+
+											if ($res_booking) {
 										?>
 												<?php
 												while ($row = mysqli_fetch_assoc($res_booking)) {
@@ -392,9 +407,8 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 														<td><?php echo $row['Transaction_date']; ?></td>
 														<td class="text-warning fw-bold"><?php echo $row['status']; ?></td>
 													</tr>
-												<?php
-												}
-												?>
+
+												<?php } ?>
 									</tbody>
 							<?php
 											}
@@ -407,8 +421,33 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 
 					</div>
 
+					<div class="row mt-n2 mb-3">
+						<div class="d-flex justify-content-end">
 
-					<div class="row mb-3">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+									<li class="page-item <?php if ($page <= 1) echo 'disabled'; ?>">
+										<a class="page-link" href="?page=<?php echo max(1, $page - 1); ?>" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+										<li class="page-item <?php if ($i == $page) echo 'active'; ?>">
+											<a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+										</li>
+									<?php } ?>
+									<li class="page-item <?php if ($page >= $total_pages) echo 'disabled'; ?>">
+										<a class="page-link" href="?page=<?php echo min($total_pages, $page + 1); ?>" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+
+						</div>
+					</div>
+
+					<div class="row mb-0">
 						<div class="col-12 col-md-12 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
@@ -427,12 +466,27 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 										</tr>
 									</thead>
 									<?php
+									$results_per_page = 5;
 									$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
 									$res_booking = mysqli_query($conn, $sql_booking);
 
 									if ($res_booking == TRUE) {
-										$count_get = mysqli_num_rows($res_booking);
-										if ($count_get > 0) {
+										$total_results = mysqli_num_rows($res_booking);
+										$total_pages = ceil($total_results / $results_per_page);
+
+										// Check current page and set offset
+										if (!isset($_GET['page'])) {
+											$page = 1;
+										} else {
+											$page = $_GET['page'];
+										}
+										$offset = ($page - 1) * $results_per_page;
+
+										// Fetch data for the current page
+										$sql_booking .= " LIMIT $offset, $results_per_page";
+										$res_booking = mysqli_query($conn, $sql_booking);
+
+										if ($res_booking) {
 									?>
 											<?php
 											while ($row = mysqli_fetch_assoc($res_booking)) {
@@ -458,6 +512,32 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 							</div>
 						</div>
 
+					</div>
+
+					<div class="row mt-n2 mb-3">
+						<div class="d-flex justify-content-end">
+
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+									<li class="page-item <?php if ($page <= 1) echo 'disabled'; ?>">
+										<a class="page-link" href="?page=<?php echo max(1, $page - 1); ?>" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+										<li class="page-item <?php if ($i == $page) echo 'active'; ?>">
+											<a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+										</li>
+									<?php } ?>
+									<li class="page-item <?php if ($page >= $total_pages) echo 'disabled'; ?>">
+										<a class="page-link" href="?page=<?php echo min($total_pages, $page + 1); ?>" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+
+						</div>
 					</div>
 
 				</div>

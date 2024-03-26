@@ -59,8 +59,9 @@ include "../admin/include/php/modal.php";
 					<div class="row">
 						<div class="col-12">
 							<div class="row">
+
 								<div class="col-12 col-xl-3 mb-3">
-									<div class="list-group" id="list-tab" role="tablist">
+									<div class="list-group d-flex list-responsive" id="list-tab" role="tablist">
 										<a class="list-group-item list-group-item-action active" id="list-personal-detail" data-bs-toggle="list" href="#personal-detail"> Personal Details </a>
 										<a class="list-group-item list-group-item-action" id="list-manage-password" data-bs-toggle="list" href="#manage-password"> Manage Password </a>
 									</div>
@@ -75,11 +76,11 @@ include "../admin/include/php/modal.php";
 												<div class="tab-pane fade show active" id="personal-detail" role="tabpanel">
 
 													<form action="../admin/include/php/edit-settings.php" method="post" enctype="multipart/form-data" id="editForm">
-														<input type="hidden" name="edit_id" id="edit_idt">
+														<input type="hidden" name="edit_id" id="edit_id">
 
 														<div class="row">
 															<?php
-															$sql_profile = "SELECT * FROM users WHERE firstName = '$firstname'";
+															$sql_profile = "SELECT * FROM users WHERE ID = '$id'";
 															$res_profile = mysqli_query($conn, $sql_profile);
 
 															if ($res_profile && mysqli_num_rows($res_profile) > 0) {
@@ -99,33 +100,26 @@ include "../admin/include/php/modal.php";
 																<div class="row mb-3">
 																	<div class="form-group col-md-6">
 																		<label class="form-label" for="firstname">Firstname</label>
-																		<input class="form-control" type="text" pattern="[A-Za-z\s]+" name="profile_firstname" value="<?php echo $profile_firstname ?>" id="profile_firstname">
+																		<input class="form-control" type="text" pattern="[A-Za-z\s]+" name="settings_firstname" value="<?php echo $profile_firstname ?>" id="settings_firstname">
 																	</div>
 
 																	<div class="form-group col-md-6">
 																		<label class="form-label">Lastname</label>
-																		<input class="form-control" type="text" pattern="[A-Za-z\s]+" name="profile_lastname" value="<?php echo $profile_lastname ?>" id="profile_lastname">
+																		<input class="form-control" type="text" pattern="[A-Za-z\s]+" name="settings_lastname" value="<?php echo $profile_lastname ?>" id="settings_lastname">
 																	</div>
 																</div>
 
 																<div class="row">
 																	<div class="form-group mb-3">
 																		<label class="form-label">Contact No.</label>
-																		<input class="form-control" type="text" name="profile_contact" value="<?php echo $profile_contact ?>" id="profile_contact">
-																	</div>
-																</div>
-
-																<div class="row">
-																	<div class="form-group mb-3">
-																		<label class="form-label">Date Joined</label>
-																		<input class="form-control" type="text" name="profile_join" value="<?php echo $profile_join ?>" readonly>
+																		<input class="form-control" type="text" name="settings_contact" value="<?php echo $profile_contact ?>" id="settings_contact">
 																	</div>
 																</div>
 
 																<div class="row mb-3">
 																	<div class="form-group mb-3">
 																		<label class="form-label">E-mail</label>
-																		<input class="form-control" type="text" name="profile_email" value="<?php echo $profile_email ?>" id="profile_email">
+																		<input class="form-control" type="text" name="settings_email" value="<?php echo $profile_email ?>" id="settings_email">
 																	</div>
 																</div>
 
@@ -236,12 +230,13 @@ include "../admin/include/php/modal.php";
 		}
 	</script>
 
-	<script>
+	<!-- <script>
 		$(document).ready(function() {
 			// Get the active tab from local storage if available
 			var activeTab = localStorage.getItem('activeTab');
 			if (activeTab) {
 				$('#list-tab a[href="' + activeTab + '"]').tab('show');
+				
 			}
 
 			// Store the active tab in local storage when a new tab is shown
@@ -250,25 +245,25 @@ include "../admin/include/php/modal.php";
 				localStorage.setItem('activeTab', tab);
 			});
 		});
-	</script>
+	</script> -->
 
 	<script>
 		$(document).ready(function() {
 			// Get initial values
 			var initialValues = {
-				profile_firstname: $('#profile_firstname').val(),
-				profile_lastname: $('#profile_lastname').val(),
-				profile_contact: $('#profile_contact').val(),
-				profile_email: $('#profile_email').val(),
+				settings_firstname: $('#settings_firstname').val(),
+				settings_lastname: $('#settings_lastname').val(),
+				settings_contact: $('#settings_contact').val(),
+				settings_email: $('#settings_email').val(),
 			};
 
 			// Function to check if there are changes
 			function checkChanges() {
 				var currentValues = {
-					profile_firstname: $('#profile_firstname').val(),
-					profile_lastname: $('#profile_lastname').val(),
-					profile_contact: $('#profile_contact').val(),
-					profile_email: $('#profile_email').val(),
+					settings_firstname: $('#settings_firstname').val(),
+					settings_lastname: $('#settings_lastname').val(),
+					settings_contact: $('#settings_contact').val(),
+					settings_email: $('#settings_email').val(),
 				};
 
 				return JSON.stringify(initialValues) === JSON.stringify(currentValues);

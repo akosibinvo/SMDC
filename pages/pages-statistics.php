@@ -64,7 +64,7 @@ include "../admin/include/php/modal.php";
 									<h5 class="card-title mb-0 text-white">Revenue</h5>
 								</div>
 
-								<canvas class="p-2" id="myChart"></canvas>
+								<canvas class="p-2" id="myChart" style="height: 450px;"></canvas>
 
 							</div>
 						</div>
@@ -123,7 +123,7 @@ include "../admin/include/php/modal.php";
 									<button class="btn btn-primary"> Compare Sales </button>
 								</div>
 
-								<canvas class="p-2" id="doughnutChart"></canvas>
+								<canvas class="p-2" id="doughnutChart" style="height: 450px;"></canvas>
 
 							</div>
 						</div>
@@ -193,24 +193,23 @@ include "../admin/include/php/modal.php";
 
 
 	<?php
-		$query = "SELECT MONTH(Transaction_date) AS month, SUM(Amount) AS total_sales 
+	$query = "SELECT MONTH(Transaction_date) AS month, SUM(Amount) AS total_sales 
 		FROM transaction_booking 
 		WHERE status = 'Booked' AND user_id = '$id'
 		GROUP BY MONTH(Transaction_date)";
 
-		$result = mysqli_query($conn, $query);
+	$result = mysqli_query($conn, $query);
 
 
-		$data = array_fill(1, 12, 0);
+	$data = array_fill(1, 12, 0);
 
 
 
-		while ($row = mysqli_fetch_assoc($result)) {
-			$month = intval($row['month']);
-			$data[$month] = $row['total_sales'];
-
-		}
-		$data_json = json_encode(array_values($data));
+	while ($row = mysqli_fetch_assoc($result)) {
+		$month = intval($row['month']);
+		$data[$month] = $row['total_sales'];
+	}
+	$data_json = json_encode(array_values($data));
 
 	?>
 

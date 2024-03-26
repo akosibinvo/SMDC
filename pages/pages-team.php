@@ -4,6 +4,7 @@ require "../php/connection.php";
 if ($agent_role !== "IMP") {
     header("Location: ../index.php");
 }
+include "../admin/include/php/modal.php";
 ?>
 
 

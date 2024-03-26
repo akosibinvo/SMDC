@@ -1,5 +1,7 @@
-<?php 
-   include '../../php/connection.php';
+<?php
+session_start();
+include '../../php/connection.php';
+include '../include/php/modal.php';
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +22,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 	<style>
-		.popUp{
+		.popUp {
 			position: fixed;
 			top: 0;
 			left: 0;
@@ -31,24 +33,24 @@
 			justify-content: center;
 			align-items: center;
 			z-index: 9999;
-			
+
 		}
-	
+
 		/* Pop-up Content */
 		.popUp-contents {
 			width: 1000px;
 			height: 500px;
 			z-index: 10000;
-			
+
 		}
-	
+
 		.closeBtn {
 			position: absolute;
 			top: 20px;
 			right: 50px;
 			font-size: 30px;
 			cursor: pointer;
-			color: white; 
+			color: white;
 			border-radius: 50%;
 			padding: 0;
 			z-index: 10001;
@@ -57,7 +59,6 @@
 		.closeBtn:hover {
 			color: red;
 		}
-
 	</style>
 
 </head>
@@ -67,8 +68,8 @@
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="../index.php">
-          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../../img/icons/logo-blue.png" alt=""> </span>
-        		</a>
+					<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../../img/icons/logo-blue.png" alt=""> </span>
+				</a>
 
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
@@ -77,8 +78,8 @@
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="../index.php">
-              			<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-            			</a>
+							<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+						</a>
 					</li>
 
 					<li class="sidebar-header">
@@ -87,20 +88,20 @@
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-booking-approval.php">
-              				<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking Approval</span>
-            			</a>
+							<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking Approval</span>
+						</a>
 					</li>
 
-                    <li class="sidebar-item active">
+					<li class="sidebar-item active">
 						<a class="sidebar-link" href="#">
-              				<i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Approved Bookings</span>
-            			</a>
+							<i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Approved Bookings</span>
+						</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-manage-sellers.php">
-              				<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Manage Sellers</span>
-            			</a>
+							<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Manage Sellers</span>
+						</a>
 					</li>
 
 
@@ -110,14 +111,14 @@
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="#">
-              				<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-            			</a>
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+						</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="#">
-              				<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
-            			</a>
+							<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
+						</a>
 					</li>
 
 				</ul>
@@ -127,20 +128,20 @@
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-          			<i class="hamburger align-self-center"></i>
-        		</a>
+					<i class="hamburger align-self-center"></i>
+				</a>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                			<i class="align-middle" data-feather="settings"></i>
-              				</a>
+								<i class="align-middle" data-feather="settings"></i>
+							</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-            				<span class="text-dark">User</span>
-              				</a>
+								<span class="text-dark">User</span>
+							</a>
 
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
@@ -167,56 +168,91 @@
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
+
 										<tr class="text-center">
 											<th>Name</th>
 											<th>Unit Code</th>
 											<th>Amount</th>
-											<th>RA</th>
-                                            <th>Holding</th>
-                                            <th>RF</th>
-											<th>ID</th>
-                                            <th>Date</th>
-											<th>Agent Name</th>
-                                            <th>Status</th>
+											<th>Date</th>
+											<th>Agent</th>
+											<th>Status</th>
 										</tr>
 									</thead>
-									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked'";
+									<tbody>
+										<?php
+
+										$results_per_page = 5;
+										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked' ";
 										$res_booking = mysqli_query($conn, $sql_booking);
 
 										if ($res_booking == TRUE) {
-											$count_get = mysqli_num_rows($res_booking);
-											if ($count_get > 0) {
-									?>
-									<?php
-            							while ($row = mysqli_fetch_assoc($res_booking)) {
-                					?>
-									<tbody>
-										<tr class="text-center">
-											<td> <?php echo $row['firstname']; ?> </td>
-											<td> <?php echo $row['Unit_code']; ?> </td>
-											<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ','); ?></td>
-											<td class="text-center"> <img src="../../img/documents/<?php echo $row['RA']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['RA']; ?>')"></td>
-											<td class="text-center"> <img src="../../img/documents/<?php echo $row['Holding']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['Holding']; ?>')"></td>
-                                            <td class="text-center"> <img src="../../img/documents/<?php echo $row['RF']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['RF']; ?>')"></td>
-                                            <td class="text-center"> <img src="../../img/documents/<?php echo $row['ID']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $row['ID']; ?>')"></td>
-                                            <td><?php echo $row['Transaction_date']; ?></td>
-											<td><?php echo $row['agent']; ?></td>
-                                            <td class="text-success fw-bold"><?php echo $row['status']; ?></td>
-										</tr>
+											$total_results = mysqli_num_rows($res_booking);
+											$total_pages = ceil($total_results / $results_per_page);
 
-									<?php
-            							}
-            						?>
-            						</tbody>
-        						</table>
-        						<?php
-    							}
-					}
-					?>
+											// Check current page and set offset
+											if (!isset($_GET['page'])) {
+												$page = 1;
+											} else {
+												$page = $_GET['page'];
+											}
+											$offset = ($page - 1) * $results_per_page;
+
+											// Fetch data for the current page
+											$sql_booking .= " LIMIT $offset, $results_per_page";
+											$res_booking = mysqli_query($conn, $sql_booking);
+
+											if ($res_booking) {
+										?>
+												<?php while ($rows_booking = mysqli_fetch_assoc($res_booking)) { ?>
+
+													<tr class="text-center">
+														<td class="d-none"><?php echo $rows_booking['client_id']; ?></td>
+														<td><?php echo $rows_booking['firstname']; ?></td>
+														<td><?php echo $rows_booking['Unit_code']; ?></td>
+														<td><?php echo '₱' . ' ' . number_format($rows_booking['Amount'], 0, '.', ','); ?></td>
+														<td><?php echo $rows_booking['Transaction_date']; ?></td>
+														<td><?php echo $rows_booking['agent']; ?></td>
+														<td class="text-success fw-bold"><?php echo $rows_booking['status']; ?></td>
+
+													</tr>
+												<?php } ?>
+									</tbody>
+							<?php
+											}
+										}
+							?>
+								</table>
+
 							</div>
 						</div>
-						
+
+					</div>
+
+
+					<div class="row mt-0">
+						<div class="d-flex justify-content-end">
+
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+									<li class="page-item <?php if ($page <= 1) echo 'disabled'; ?>">
+										<a class="page-link" href="?page=<?php echo max(1, $page - 1); ?>" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+										<li class="page-item <?php if ($i == $page) echo 'active'; ?>">
+											<a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+										</li>
+									<?php } ?>
+									<li class="page-item <?php if ($page >= $total_pages) echo 'disabled'; ?>">
+										<a class="page-link" href="?page=<?php echo min($total_pages, $page + 1); ?>" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+
+						</div>
 					</div>
 
 				</div>
@@ -227,10 +263,10 @@
 
 	<!-- Pop-up to display the expanded image -->
 	<div id="imageModal" class="popUp" style="display: none;">
-	<span class="closeBtn" onclick="closeModal()">&times;</span>
-	<div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-		<img class="popUp-contents" id="expandedImage">
-	</div>
+		<span class="closeBtn" onclick="closeModal()">&times;</span>
+		<div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+			<img class="popUp-contents" id="expandedImage">
+		</div>
 	</div>
 
 	<script>
@@ -241,14 +277,13 @@
 			modalImg.src = imgSrc;
 		}
 
-		document.getElementsByClassName('closeBtn')[0].onclick = function () {
+		document.getElementsByClassName('closeBtn')[0].onclick = function() {
 			document.getElementById('imageModal').style.display = 'none';
 		};
 	</script>
 
 
 	<script src="../../js/app.js"></script>
-	<script src="../../js/script.js"></script>
 
 
 </body>

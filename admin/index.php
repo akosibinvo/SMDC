@@ -1,9 +1,8 @@
-
 <?php
-	session_start();
+session_start();
 
-	include '../php/connection.php';
-	include 'include/php/modal.php';
+include '../php/connection.php';
+include 'include/php/modal.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,22 +14,24 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-      <link rel="shortcut icon" href="../img/icons/logo.png" />
+	<link rel="shortcut icon" href="../img/icons/logo.png" />
 
 	<title>Admin Dashboard | SMDC JQB</title>
 
 	<link href="../css/app.css" rel="stylesheet">
-	<link href="../css/style.css" rel="stylesheet">
+
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
+
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="#">
-          			<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../img/icons/logo-blue.png" alt=""> </span>
-        		</a>
+					<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../img/icons/logo-blue.png" alt=""> </span>
+				</a>
 
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
@@ -39,8 +40,8 @@
 
 					<li class="sidebar-item active">
 						<a class="sidebar-link" href="#">
-              			<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-            			</a>
+							<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+						</a>
 					</li>
 
 					<li class="sidebar-header">
@@ -49,20 +50,20 @@
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages/pages-booking-approval.php">
-              				<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking Approval</span>
-            			</a>
+							<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking Approval</span>
+						</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages/pages-approved.php">
-              				<i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Approved Bookings</span>
-            			</a>
+							<i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Approved Bookings</span>
+						</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages/pages-manage-sellers.php">
-              				<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Manage Sellers</span>
-            			</a>
+							<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Manage Sellers</span>
+						</a>
 					</li>
 
 
@@ -72,14 +73,14 @@
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="#">
-              				<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-            			</a>
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+						</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="#">
-              				<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
-            			</a>
+							<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
+						</a>
 					</li>
 
 				</ul>
@@ -89,20 +90,20 @@
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-          			<i class="hamburger align-self-center"></i>
-        		</a>
+					<i class="hamburger align-self-center"></i>
+				</a>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                			<i class="align-middle" data-feather="settings"></i>
-              				</a>
+								<i class="align-middle" data-feather="settings"></i>
+							</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-            				<span class="text-dark">User</span>
-              				</a>
+								<span class="text-dark">User</span>
+							</a>
 
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
@@ -121,7 +122,7 @@
 				<div class="container-fluid p-0">
 
 					<h1 class="h3"><strong class="title-dashboard">Overview</strong> Dashboard</h1>
-					
+
 					<div class="row d-flex justify-content-center mt-3">
 						<div class="col-md-6 col-lg-3 mx-auto mb-4">
 							<div class="card">
@@ -139,9 +140,9 @@
 									</div>
 
 									<?php
-										$sql_SA1 = "SELECT * FROM users WHERE role = 'SA1'";
-										$res_SA1 = mysqli_query($conn, $sql_SA1);
-										$count_SA1 = mysqli_num_rows($res_SA1);
+									$sql_SA1 = "SELECT * FROM users WHERE role = 'SA1'";
+									$res_SA1 = mysqli_query($conn, $sql_SA1);
+									$count_SA1 = mysqli_num_rows($res_SA1);
 									?>
 
 									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count_SA1 ?> </h1>
@@ -167,17 +168,17 @@
 											</div>
 										</div>
 									</div>
-									
+
 									<?php
-										$sql_SA2 = "SELECT * FROM users WHERE role = 'SA2'";
-										$res_SA2 = mysqli_query($conn, $sql_SA2);
-										$count_SA2 = mysqli_num_rows($res_SA2);
+									$sql_SA2 = "SELECT * FROM users WHERE role = 'SA2'";
+									$res_SA2 = mysqli_query($conn, $sql_SA2);
+									$count_SA2 = mysqli_num_rows($res_SA2);
 									?>
 
 									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count_SA2 ?> </h1>
 
 									<div class="mb-0">
-										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
+										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 									</div>
 								</div>
 							</div>
@@ -197,17 +198,17 @@
 											</div>
 										</div>
 									</div>
-									
+
 									<?php
-										$sql_IMP = "SELECT * FROM users WHERE role = 'IMP'";
-										$res_IMP = mysqli_query($conn, $sql_IMP);
-										$count_IMP = mysqli_num_rows($res_IMP);
+									$sql_IMP = "SELECT * FROM users WHERE role = 'IMP'";
+									$res_IMP = mysqli_query($conn, $sql_IMP);
+									$count_IMP = mysqli_num_rows($res_IMP);
 									?>
 
 									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count_IMP ?> </h1>
 
 									<div class="mb-0">
-										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>  </span>
+										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 									</div>
 								</div>
 							</div>
@@ -229,9 +230,9 @@
 									</div>
 
 									<?php
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked'";
-										$res_booking = mysqli_query($conn, $sql_booking);
-										$count = mysqli_num_rows($res_booking);
+									$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked'";
+									$res_booking = mysqli_query($conn, $sql_booking);
+									$count = mysqli_num_rows($res_booking);
 									?>
 
 									<h1 class="mt-1 mb-3" style="font-weight: bold;"> <?php echo $count ?> </h1>
@@ -243,7 +244,7 @@
 						</div>
 					</div>
 
-					<div class="row">
+					<div class="row mb-0">
 						<div class="col-12 col-md-12 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
@@ -251,7 +252,7 @@
 									<h5 class="card-title text-white mb-0">Latest Clients</h5>
 								</div>
 
-								
+
 
 								<table class="table table-hover my-0">
 									<thead>
@@ -261,87 +262,106 @@
 											<th>Last Name</th>
 											<th>Date of Birth</th>
 											<th>Action</th>
-											<!-- <th>Tin No.</th>
-											<th>Gender</th>
-                                            <th>Civil Status</th>
-                                            <th>Citizenship</th>
-                                            <th>Email</th>
-											<th>Phone No.</th>
-                                            <th>Passport No.</th>
-                                            <th>Address</th>
-											<th>Employer Name</th> -->
+											
 										</tr>
 									</thead>
-									<tbody>
 									<?php
+									// Pagination configuration
+									$results_per_page = 5;
 									$sql_clientInfo = "SELECT * FROM client_info";
 									$res_clientInfo = mysqli_query($conn, $sql_clientInfo);
 
-									if($res_clientInfo == TRUE){
-									$count_get = mysqli_num_rows($res_clientInfo);
-									if($count_get > 0){
-										while($rows_clientInfo = mysqli_fetch_assoc($res_clientInfo)){
+									if ($res_clientInfo == TRUE) {
+										$total_results = mysqli_num_rows($res_clientInfo);
+										$total_pages = ceil($total_results / $results_per_page);
 
-											$details_id = $rows_clientInfo['ID'];
+										// Check current page and set offset
+										if (!isset($_GET['page'])) {
+											$page = 1;
+										} else {
+											$page = $_GET['page'];
+										}
+										$offset = ($page - 1) * $results_per_page;
 
-											$firstname = $rows_clientInfo['FirstName'];
-											$middlename = $rows_clientInfo['MiddleName'];
-											$lastname = $rows_clientInfo['LastName'];
+										// Fetch data for the current page
+										$sql_clientInfo .= " LIMIT $offset, $results_per_page";
+										$res_clientInfo = mysqli_query($conn, $sql_clientInfo);
 
-											
-											$birthdate = $rows_clientInfo['Date_of_birth'];
-											$birthplace = $rows_clientInfo['Place_of_birth'];
-											$tinNo = $rows_clientInfo['Tin_no'];
-											$gender = $rows_clientInfo['Gender'];
-											$civilstatus = $rows_clientInfo['Civil_status'];
-											$citizenship = $rows_clientInfo['Citizenship'];
-											$email = $rows_clientInfo['Email'];
+										if ($res_clientInfo) {
+									?>
 
-											$phonenumber = $rows_clientInfo['Phone_no'];
-											$passportnumber = $rows_clientInfo['Passport_no'];
-											$presentAddress = $rows_clientInfo['Present_address'];
-											$permanentAddress = $rows_clientInfo['Permanent_address'];
-											$employername = $rows_clientInfo['Employer_name'];
-											$workAddress = $rows_clientInfo['Work_address'];
-											?>
-											
-											
-										<tr class="text-center">
-											<td class="d-none"> <?php echo $details_id; ?></td>
-											<td><?php echo $firstname;?></td>
-											<td><?php echo $middlename;?></td>
-											<td><?php echo $lastname;?></td>
-											<td><?php echo $birthdate;?></td>
-											
-											<td><button class="btn btn-primary btn-sm viewbtn">Other Details</button></td>
+											<tbody>
+												<?php while ($rows_clientInfo = mysqli_fetch_assoc($res_clientInfo)) { ?>
 
-											<td class="d-none"><?php echo $birthplace;?></td>
-											<td class="d-none"><?php echo $tinNo;?></td>
-											<td class="d-none"><?php echo $gender;?></td>
-                                            <td class="d-none"><?php echo $civilstatus;?></td>
-											<td class="d-none"><?php echo $citizenship;?></td>
-                                            <td class="d-none"><?php echo $email;?></td>
-                                            <td class="d-none"><?php echo $phonenumber;?></td>
-											<td class="d-none"><?php echo $passportnumber;?></td>
-											<td class="d-none"><?php echo $presentAddress;?></td>
-											<td class="d-none"><?php echo $permanentAddress;?></td>
-											<td class="d-none"><?php echo $employername;?></td>
-											<td class="d-none"><?php echo $workAddress;?></td>
-										</tr>
-										
-										<?php
+
+
+													<tr class="text-center">
+														<td class="d-none"><?php echo $rows_clientInfo['ID']; ?></td>
+														<td><?php echo $rows_clientInfo['FirstName']; ?></td>
+														<td><?php echo $rows_clientInfo['MiddleName']; ?></td>
+														<td><?php echo $rows_clientInfo['LastName']; ?></td>
+														<td><?php echo $rows_clientInfo['Date_of_birth']; ?></td>
+
+														<td><button class="btn btn-primary btn-sm viewbtn">Other Details</button></td>
+
+														<td class="d-none"><?php echo $rows_clientInfo['Place_of_birth']; ?></td>
+														<td class="d-none"><?php echo $rows_clientInfo['Tin_no']; ?></td>
+														<td class="d-none"><?php echo $rows_clientInfo['Gender']; ?></td>
+														<td class="d-none"><?php echo $rows_clientInfo['Civil_status']; ?></td>
+														<td class="d-none"><?php echo $rows_clientInfo['Citizenship']; ?></td>
+														<td class="d-none"><?php echo $rows_clientInfo['Email']; ?></td>
+														<td class="d-none"><?php echo $rows_clientInfo['Phone_no']; ?></td>
+														<td class="d-none"><?php echo $rows_clientInfo['Passport_no']; ?></td>
+														<td class="d-none"><?php echo $rows_clientInfo['Present_address']; ?></td>
+														<td class="d-none"><?php echo $rows_clientInfo['Permanent_address']; ?></td>
+														<td class="d-none"><?php echo $rows_clientInfo['Employer_name']; ?></td>
+														<td class="d-none"><?php echo $rows_clientInfo['Work_address']; ?></td>
+													</tr>
+
+
+												<?php } ?>
+											</tbody>
+
+									<?php
 										}
 									}
-									}
-								?>
-									</tbody>
+									?>
 								</table>
+
+
 							</div>
+
+
+
 						</div>
-						
+
 					</div>
 
-				</div>
+					<div class="row mt-0">
+						<div class="d-flex justify-content-end">
+
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+									<li class="page-item <?php if ($page <= 1) echo 'disabled'; ?>">
+										<a class="page-link" href="?page=<?php echo max(1, $page - 1); ?>" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+										<li class="page-item <?php if ($i == $page) echo 'active'; ?>">
+											<a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+										</li>
+									<?php } ?>
+									<li class="page-item <?php if ($page >= $total_pages) echo 'disabled'; ?>">
+										<a class="page-link" href="?page=<?php echo min($total_pages, $page + 1); ?>" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+
+						</div>
+					</div>
 			</main>
 
 		</div>
@@ -350,49 +370,52 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="../js/app.js"></script>
 	<script>
-         $(document).ready(function () {
-         
-             $('.viewbtn').on('click', function () {
-         
-                 $('#viewDetailsModal').modal('show');
-         
-                 $tr = $(this).closest('tr');
-         
-                 var data = $tr.children("td").map(function () {
-                     return $(this).text();
-                 }).get();
-         
-                 console.log(data);
-         
-                 $('viewdetails_id').val(data[0]);
-                 $('#view_firstname').val(data[1]);
-                 $('#view_middlename').val(data[2]);
-				 $('#view_lastname').val(data[3]);
+		$(document).ready(function() {
 
-				 $('#view_birthdate').val(data[4]);
-				 $('#view_birthplace').val(data[6]);
+			$('.viewbtn').on('click', function() {
 
-				 $('#view_tin').val(data[7]);
-				 $('#view_gender').val(data[8]);
-				 $('#view_civil').val(data[9]);
-				 $('#view_citizenship').val(data[10]);
+				$('#viewDetailsModal').modal('show');
 
-				 $('#view_email').val(data[11]);
-				 $('#view_phone').val(data[12]);
-				 $('#view_passport').val(data[13]);
-				 
-				 $('#view_presentAddress').val(data[14]);
-				 $('#view_permanentAddress').val(data[15]);
+				$tr = $(this).closest('tr');
 
-				 $('#view_employer').val(data[16]);
-				 $('#view_workAddress').val(data[17]);
+				var data = $tr.children("td").map(function() {
+					return $(this).text();
+				}).get();
 
-             });
-			 
-         });
-      </script>
+				console.log(data);
+
+				$('viewdetails_id').val(data[0]);
+				$('#view_firstname').val(data[1]);
+				$('#view_middlename').val(data[2]);
+				$('#view_lastname').val(data[3]);
+
+				$('#view_birthdate').val(data[4]);
+				$('#view_birthplace').val(data[6]);
+
+				$('#view_tin').val(data[7]);
+				$('#view_gender').val(data[8]);
+				$('#view_civil').val(data[9]);
+				$('#view_citizenship').val(data[10]);
+
+				$('#view_email').val(data[11]);
+				$('#view_phone').val(data[12]);
+				$('#view_passport').val(data[13]);
+
+				$('#view_presentAddress').val(data[14]);
+				$('#view_permanentAddress').val(data[15]);
+
+				$('#view_employer').val(data[16]);
+				$('#view_workAddress').val(data[17]);
+
+			});
+
+		});
+	</script>
+
+
 
 
 </body>
+
 
 </html>
