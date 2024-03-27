@@ -3,7 +3,6 @@ include "../php/session.php";
 require "../php/connection.php";
 include "../admin/include/php/client_info.php";
 include "../admin/include/php/modal.php";
-// include "../admin/include/php/imageHandler.php";
 
 ?>
 

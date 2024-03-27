@@ -75,7 +75,7 @@ include "../admin/include/php/modal.php";
 									</thead>
 									<tbody>
 										<?php
-										$sql_overcoms = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND team_id = '$id' ";
+										$sql_overcoms = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent_role != 'IMP' AND team_id = '$id' ";
 										$res_overcoms = mysqli_query($conn, $sql_overcoms);
 
 										if ($res_overcoms) {

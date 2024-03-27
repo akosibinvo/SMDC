@@ -4,13 +4,15 @@ require "../../../php/connection.php";
 
 
 if (isset($_POST['addprice'])) {
+    
     // Check if all required fields are present
+    
     if(isset($_POST['addprice_id'], $_POST['amount'], $_POST['discount'])) {
         $addprice_id = $_POST['addprice_id'];
         $listPriceWithPeso = $_POST['amount'];
         $inputDiscount = $_POST['discount'];
 
-        $sql_booking = "SELECT agent_role FROM transaction_booking WHERE client_id = $addprice_id";
+        $sql_booking = "SELECT agent_role FROM transaction_booking WHERE client_id = $addprice_id ";
         $res_booking = mysqli_query($conn, $sql_booking);
 
         if ($res_booking) {
@@ -47,9 +49,7 @@ if (isset($_POST['addprice'])) {
         if(array_key_exists($agent_role, $commission_rates)) {
             $commission_rate = $commission_rates[$agent_role];
         } else {
-            // Handle the case where role's commission rate is not defined
-            // For example: set a default commission rate or display an error message
-            exit("Error: Commission rate for role '$agent_role' is not defined");
+            exit("Error!");
         }
 
         // Calculate commission
@@ -61,13 +61,26 @@ if (isset($_POST['addprice'])) {
         // Commissions multiplied by VAT
         $coms_vat = $coms * $vat;
 
-        // Commissions received by sellers (excluding VAT)
+        // Commissions received by sellers (Including VAT)
         $total_coms = $coms - $coms_vat;
 
-
-        // Prepare and execute the SQL query
+        // Updating transaction booking amount and commissions
         $query = "UPDATE transaction_booking SET Amount=?, Commissions=?, `status` = 'Booked' WHERE client_id=?";
         $stmt = mysqli_prepare($conn, $query);
+
+        // Inserting into notifications table
+        $notif = "SELECT * FROM transaction_booking WHERE client_id = $addprice_id ";
+        $res_notif = mysqli_query($conn, $notif);
+
+        if ($res_notif) {
+            while ($rows_notif = mysqli_fetch_assoc($res_notif)) {
+                $notif_id = $rows_notif['user_id'];
+                $client_name = $rows_notif['firstname'];
+                $message = "Your transaction for $client_name has been approved by the admin.";
+            }
+        }
+        $notif_status = 0;
+
 
         if ($stmt) {
             mysqli_stmt_bind_param($stmt, "ddi", $netListPrice, $total_coms, $addprice_id);
@@ -81,28 +94,44 @@ if (isset($_POST['addprice'])) {
                 );
 
                 mysqli_stmt_close($stmt);
-                mysqli_close($conn);
-                header("Location: ../../pages/pages-booking-approval.php");
-                exit();
+
+
+                $insert_notif = "INSERT INTO notifications (user_id, message, read_status) VALUES (?, ?, ?)";
+                $notif_stmt = $conn->prepare($insert_notif);
+                $notif_stmt->bind_param("isi", $notif_id, $message, $notif_status);
+
+                if ($notif_stmt->execute()) {
+
+                    mysqli_stmt_close($notif_stmt);
+                    mysqli_close($conn);
+                    header("Location: ../../pages/pages-booking-approval.php");
+                } else {
+
+                    $_SESSION['notification'] = array(
+                        'title' => 'Error!!',
+                        'status' => 'error',
+                        'description' => 'Error in booking.'
+                    );
+
+                }
+                $stmt->close();
+
             } else {
-                $_SESSION['edit'] = false;
-                // Handle execution error here if needed
+
                 exit("Error: " . mysqli_error($conn));
             }
         } else {
-            // Handle prepare error here if needed
-            $_SESSION['edit'] = false;
+
             exit("Error: Prepare error - " . mysqli_error($conn));
         }
     } else {
-        // Handle missing fields error here if needed
+
         exit("Error: Required fields are missing");
     }
 } else {
-    // Handle case where 'addprice' is not set in POST
+
     exit("Error: 'addprice' is not set in POST");
 }
 
-// Close the database connection
 mysqli_close($conn);
 ?>

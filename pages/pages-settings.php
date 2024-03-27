@@ -75,7 +75,7 @@ include "../admin/include/php/modal.php";
 											<div class="tab-content">
 												<div class="tab-pane fade show active" id="personal-detail" role="tabpanel">
 
-													<form action="../admin/include/php/edit-settings.php" method="post" enctype="multipart/form-data" id="editForm">
+													<form action="../admin/include/php/edit-settings.php" method="post" enctype="multipart/form-data" id="editForm" class="needs-validation" novalidate>
 														<input type="hidden" name="edit_id" id="edit_id">
 
 														<div class="row">
@@ -99,20 +99,29 @@ include "../admin/include/php/modal.php";
 																<h5 class="card-title mb-4">Personal Details</h5>
 																<div class="row mb-3">
 																	<div class="form-group col-md-6">
-																		<label class="form-label" for="firstname">Firstname</label>
+																		<label class="form-label" for="firstname">First Name</label>
 																		<input class="form-control" type="text" pattern="[A-Za-z\s]+" name="settings_firstname" value="<?php echo $profile_firstname ?>" id="settings_firstname">
+																		<div class="invalid-feedback">
+																			Invalid First Name
+																		</div>
 																	</div>
 
 																	<div class="form-group col-md-6">
-																		<label class="form-label">Lastname</label>
+																		<label class="form-label">Last Name</label>
 																		<input class="form-control" type="text" pattern="[A-Za-z\s]+" name="settings_lastname" value="<?php echo $profile_lastname ?>" id="settings_lastname">
+																		<div class="invalid-feedback">
+																			Invalid Last Name
+																		</div>
 																	</div>
 																</div>
 
 																<div class="row">
 																	<div class="form-group mb-3">
 																		<label class="form-label">Contact No.</label>
-																		<input class="form-control" type="text" name="settings_contact" value="<?php echo $profile_contact ?>" id="settings_contact">
+																		<input class="form-control" type="text" name="settings_contact" pattern="[0-9]*" value="<?php echo $profile_contact ?>" id="settings_contact">
+																		<div class="invalid-feedback">
+																			Invalid Contact No.
+																		</div>
 																	</div>
 																</div>
 
@@ -138,7 +147,7 @@ include "../admin/include/php/modal.php";
 												</div>
 
 												<div class="tab-pane fade" id="manage-password" role="tabpanel">
-													<form action="" method="post" enctype="multipart/form-data">
+													<form action="" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
 														<input type="hidden" name="update_id" id="update_id">
 
 														<div class="row">
@@ -193,6 +202,26 @@ include "../admin/include/php/modal.php";
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="../js/app.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+
+	<script>
+		(function() {
+			'use strict'
+
+			var forms = document.querySelectorAll('.needs-validation')
+
+			Array.prototype.slice.call(forms)
+				.forEach(function(form) {
+					form.addEventListener('submit', function(event) {
+						if (!form.checkValidity()) {
+							event.preventDefault()
+							event.stopPropagation()
+						}
+
+						form.classList.add('was-validated')
+					}, false)
+				})
+		})()
+	</script>
 
 	<?php
 	// Check if there is a notification in the session

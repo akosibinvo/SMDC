@@ -37,6 +37,12 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
 					</a>
 				</li>
 
+				<li class="sidebar-item <?= $page == "pages-notifications.php" ? 'active' : ''; ?>">
+					<a class="sidebar-link" href="pages-notifications.php">
+						<i class="align-middle" data-feather="bell"></i> <span class="align-middle">Notifications</span>
+					</a>
+				</li>
+
 				<li class="sidebar-header">
 					Manage
 				</li>

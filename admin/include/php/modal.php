@@ -358,8 +358,8 @@
 
                         <div class="row">
                            <div class="form-group mb-3">
-                              <label class="form-label">Contact</label>
-                              <input class="form-control" type="text" name="profile_contact" id="profile_contact" value="<?php echo $profile_contact ?>">
+                              <label class="form-label">Contact No.</label>
+                              <input class="form-control" type="text" name="profile_contact" id="profile_contact" pattern="[0-9]*" value="<?php echo $profile_contact ?>">
                            </div>
                         </div>
 
@@ -457,7 +457,7 @@
       </div>
    </div>
 
-   <!--======================================= DELETE MODAL ======================================= -->
+   <!--======================================= REJECT BOOKING MODAL ======================================= -->
    <div class="modal fade" id="rejectBookingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
          <div class="modal-content">
@@ -470,7 +470,7 @@
                <p> Are you sure you want to delete? </p>
             </div>
             <div class="modal-footer">
-               <form action="../include/php/rejectBooking.php" method="POST">
+               <form action="../include/php/reject-booking.php" method="POST">
                   <input type="hidden" name="delete_id" id="delete_id">
                   <button type="submit" name="delete" class="btn btn-danger"> Delete </button>
                </form>
@@ -564,6 +564,29 @@
                   <button type="submit" name="congrats_SA2" class="btn btn-primary background-blue"> Update Status </button>
                </form>
                <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> No </button> -->
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!--======================================= DELETE NOTIFICATIONS MODAL ======================================= -->
+   <div class="modal fade" id="deleteNotificationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               </button>
+            </div>
+            <div class="modal-body">
+               <p> Are you sure you want to delete? </p>
+            </div>
+            <div class="modal-footer">
+               <form action="../admin/include/php/delete-notification.php" method="POST">
+                  <input type="hidden" name="delete_notif_id" id="delete_notif_id">
+                  <button type="submit" name="delete_notif" class="btn btn-danger"> Delete </button>
+               </form>
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
          </div>
       </div>

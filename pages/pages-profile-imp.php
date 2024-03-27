@@ -169,9 +169,8 @@ $url .= "/SMDC_JQB/pages/pages-sign-up.php?ref=";
 													</div>
 
 													<?php
-													// $sql_total_coms = "SELECT SUM(Commissions) AS total_coms FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
-													// $res_total_coms = mysqli_query($conn, $sql_total_coms);
-													$sql_overcoms = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND team_id = '$id'";
+													
+													$sql_overcoms = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent_role != 'IMP' AND team_id = '$id'";
 													$res_overcoms = mysqli_query($conn, $sql_overcoms);
 
 													if ($res_overcoms) {

@@ -93,6 +93,12 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 						</a>
 					</li>
 
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages/pages-notifications.php">
+							<i class="align-middle" data-feather="bell"></i> <span class="align-middle">Notifications</span>
+						</a>
+					</li>
+
 					<li class="sidebar-header">
 						Manage
 					</li>
@@ -163,6 +169,55 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 
+						<?php
+
+						$sql_notif = "SELECT *, DATE_FORMAT(timestamp, '%h:%i %p') AS time_only FROM notifications WHERE user_id = '$id' AND read_status = '0' LIMIT 5 ";
+						$res_notif  = mysqli_query($conn, $sql_notif);
+						$count_notif  = mysqli_num_rows($res_notif);
+
+						?>
+
+						<li class="nav-item dropdown mx-2">
+							<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+								<div class="position-relative">
+									<i class="align-middle" data-feather="bell"></i>
+									<span class="indicator"><?php echo $count_notif ?></span>
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
+								<div class="dropdown-menu-header">
+									<?php echo $count_notif ?> New Notifications
+								</div>
+
+								<div class="list-group">
+
+									<?php
+									while ($row_notif = mysqli_fetch_assoc($res_notif)) {
+									?>
+										<a href="" class="list-group-item" onclick="markAsRead(<?php echo $row_notif['notification_id']; ?>)">
+											<div class="row g-1 align-items-center">
+												<div class="col-2">
+													<i class="text-success" data-feather="check-circle"></i>
+												</div>
+												<div class="col-10">
+													<div class="text-dark">Approved Booking</div>
+													<div class="text-muted small mt-1"><?php echo $row_notif['message']; ?></div>
+													<div class="text-muted small mt-1"><?php echo $row_notif['time_only']; ?></div>
+												</div>
+											</div>
+										</a>
+
+									<?php
+									}
+									?>
+
+								</div>
+								<div class="dropdown-menu-footer">
+									<a href="pages/pages-notifications.php" class="text-muted">Show all notifications</a>
+								</div>
+							</div>
+						</li>
+
 						<li class="nav-item dropdown">
 							<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle" width="25" height="25" />
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
@@ -178,7 +233,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="<?php echo ($role === 'SA1' || $role === 'SA2') ? 'pages/pages-profile.php' : 'pages/pages-profile-imp.php'; ?>"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<a class="dropdown-item" href="pages-statistics.php"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+								<a class="dropdown-item" href="pages/pages-statistics.php"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="pages/pages-settings.php"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
@@ -186,6 +241,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 								<a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#indexlogoutModal">Log out</a>
 							</div>
 						</li>
+
 					</ul>
 				</div>
 			</nav>
@@ -548,20 +604,41 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 
 	<script src="js/app.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
-	<?php
-	// Check if there is a notification in the session
-	if (isset($_SESSION['notification'])) {
-		// Get notification details
-		$title = $_SESSION['notification']['title'];
-		$status = $_SESSION['notification']['status'];
-		$description = $_SESSION['notification']['description'];
-		// Clear the notification from the session
-		unset($_SESSION['notification']);
-	}
-	?>
 
 	<script>
-		pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+		function markAsRead(notificationId) {
+			// Send AJAX request to mark notification as read
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'admin/include/php/mark_as_read.php?notification_id=' + notificationId, true);
+			xhr.onload = function() {
+				if (xhr.status >= 200 && xhr.status < 300) {
+					// Redirect to the notifications page after marking as read
+					window.location.href = 'pages/pages-notifications.php';
+				} else {
+					// Handle errors if any
+					console.error('Error marking notification as read:', xhr.statusText);
+				}
+			};
+			xhr.send();
+		}
+	</script>
+
+	<script>
+		<?php
+		// Check if there is a notification in the session
+		if (isset($_SESSION['notification'])) {
+			// Get notification details
+			$title = $_SESSION['notification']['title'];
+			$status = $_SESSION['notification']['status'];
+			$description = $_SESSION['notification']['description'];
+		?>
+			//Display the notification
+			pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+		<?php
+			// Clear the notification from the session
+			unset($_SESSION['notification']);
+		}
+		?>
 
 		function pushNotify(status, title, description) {
 			new Notify({

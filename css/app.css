@@ -12464,15 +12464,15 @@ span.flatpickr-weekday {
     max-width: 700px;
 }
 
-.omg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate( -50%, -50%);
-    background-color: red;
-    width: 500px;
-    height: 400px;
+.trash-icon {
+    cursor: pointer;
 }
+
+.trash-icon:hover {
+    color: #dc3545;
+}
+
+
 
 
 @media screen and (max-width: 1400px) {
