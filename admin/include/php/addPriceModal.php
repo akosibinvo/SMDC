@@ -6,7 +6,7 @@ require "../../../php/connection.php";
 if (isset($_POST['addprice'])) {
     
     // Check if all required fields are present
-    
+
     if(isset($_POST['addprice_id'], $_POST['amount'], $_POST['discount'])) {
         $addprice_id = $_POST['addprice_id'];
         $listPriceWithPeso = $_POST['amount'];
@@ -105,6 +105,7 @@ if (isset($_POST['addprice'])) {
                     mysqli_stmt_close($notif_stmt);
                     mysqli_close($conn);
                     header("Location: ../../pages/pages-booking-approval.php");
+                    
                 } else {
 
                     $_SESSION['notification'] = array(
@@ -114,6 +115,7 @@ if (isset($_POST['addprice'])) {
                     );
 
                 }
+
                 $stmt->close();
 
             } else {

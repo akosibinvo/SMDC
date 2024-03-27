@@ -293,7 +293,7 @@
                         </div>
 
                         <div class="form-group text-center mt-0 mb-3 d-flex align-items-center justify-content-center">
-                           <input type="file" name="profilePic" id="fileInput" style="display: none;" onchange="checkFile()">
+                           <input type="file" name="profilePic" id="fileInput" style="display: none;" accept=".png, .jpg, .jpeg"  onchange="checkFile()">
                            <label for="fileInput" class="upload_photo btn btn-primary p-2 mb-4" title="Add Photo">
                               <i class="align-middle" data-feather="plus"></i>
                               Upload Photo

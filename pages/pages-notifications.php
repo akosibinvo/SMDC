@@ -19,7 +19,7 @@ include "../admin/include/php/modal.php";
     <title>Sales | SMDC JQB</title>
 
     <link href="../css/app.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -69,7 +69,7 @@ include "../admin/include/php/modal.php";
 
                                 <?php
 
-                                $sql_notif = "SELECT *, DATE_FORMAT(timestamp, '%h:%i %p') AS time_only FROM notifications WHERE user_id = '$id' AND (read_status = '0' OR read_status = '1')";
+                                $sql_notif = "SELECT *, DATE_FORMAT(timestamp, '%h:%i %p') AS time_only FROM notifications WHERE user_id = '$id' AND (read_status = '0' OR read_status = '1') ";
                                 $res_notif  = mysqli_query($conn, $sql_notif);
                                 $count_notif  = mysqli_num_rows($res_notif);
 

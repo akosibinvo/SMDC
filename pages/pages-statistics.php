@@ -1,7 +1,7 @@
 <?php
 include "../php/session.php";
 require "../php/connection.php";
-include "../admin/include/php/modal.php";
+
 ?>
 
 
@@ -19,13 +19,9 @@ include "../admin/include/php/modal.php";
 	<title>Statistics | SMDC JQB</title>
 
 	<link href="../css/app.css" rel="stylesheet">
-	<link href="../css/style.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-	<!-- Bootstrap Datepicker CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
-	<!-- Bootstrap Datepicker JS -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -58,7 +54,7 @@ include "../admin/include/php/modal.php";
 					<h1 class="h3 mb-3"><strong class="title-dashboard">Statistics</strong> Dashboard</h1>
 
 					<div class="row mb-0">
-						<div class="col-8 col-md-8 d-flex">
+						<div class="col-12 col-md-8 col-xl-8 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
 									<h5 class="card-title mb-0 text-white">Revenue</h5>
@@ -69,7 +65,7 @@ include "../admin/include/php/modal.php";
 							</div>
 						</div>
 
-						<div class="col-4 col-md-4 d-flex">
+						<div class="col-12 col-md-4 col-xl-4 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
 
@@ -78,7 +74,7 @@ include "../admin/include/php/modal.php";
 
 								<div class="row p-3">
 
-									<div class="col-md-6">
+									<div class="col-md-6 mb-1">
 										<select class="form-select" name="start_date" id="start_date" required>
 											<option value="">Start Date</option>
 											<?php
@@ -96,7 +92,7 @@ include "../admin/include/php/modal.php";
 										</select>
 									</div>
 
-									<div class="col-md-6">
+									<div class="col-md-6 mb-1">
 										<select class="form-select" name="end_date" id="end_date" required>
 											<option value="">End Date</option>
 											<?php
@@ -129,7 +125,7 @@ include "../admin/include/php/modal.php";
 						</div>
 
 
-						<div class="row mb-3">
+						<div class="row">
 							<div class="col-12 col-md-12 d-flex">
 								<div class="card flex-fill">
 									<div class="card-header">
@@ -148,12 +144,26 @@ include "../admin/include/php/modal.php";
 										</thead>
 
 										<?php
+										$results_per_page = 5;
 										$sql_statistics = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
 										$res_statistics = mysqli_query($conn, $sql_statistics);
 
 										if ($res_statistics == TRUE) {
-											$count_get = mysqli_num_rows($res_statistics);
-											if ($count_get > 0) {
+											$total_results = mysqli_num_rows($res_statistics);
+											$total_pages = ceil($total_results / $results_per_page);
+											// Check current page and set offset
+											if (!isset($_GET['page'])) {
+												$page = 1;
+											} else {
+												$page = $_GET['page'];
+											}
+											$offset = ($page - 1) * $results_per_page;
+
+											// Fetch data for the current page
+											$sql_statistics .= " LIMIT $offset, $results_per_page";
+											$res_statistics = mysqli_query($conn, $sql_statistics);
+
+											if ($res_statistics) {
 										?>
 
 												<?php
@@ -180,6 +190,32 @@ include "../admin/include/php/modal.php";
 								</div>
 							</div>
 
+						</div>
+
+						<div class="row mt-n2 mb-3">
+							<div class="d-flex justify-content-end">
+
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+										<li class="page-item <?php if ($page <= 1) echo 'disabled'; ?>">
+											<a class="page-link" href="?page=<?php echo max(1, $page - 1); ?>" aria-label="Previous">
+												<span aria-hidden="true">&laquo;</span>
+											</a>
+										</li>
+										<?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+											<li class="page-item <?php if ($i == $page) echo 'active'; ?>">
+												<a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+											</li>
+										<?php } ?>
+										<li class="page-item <?php if ($page >= $total_pages) echo 'disabled'; ?>">
+											<a class="page-link" href="?page=<?php echo min($total_pages, $page + 1); ?>" aria-label="Next">
+												<span aria-hidden="true">&raquo;</span>
+											</a>
+										</li>
+									</ul>
+								</nav>
+
+							</div>
 						</div>
 
 

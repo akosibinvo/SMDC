@@ -7,6 +7,8 @@ require_once 'connection.php';
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve input values
+    $referrer_id = $_POST['team'] ?? 0;
+
     $firstName = $_POST['firstname'];
     $lastName = $_POST['lastname'];
     $email = $_POST['email'];
@@ -50,7 +52,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ../pages/pages-sign-up.php');
         exit;
     }
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE ID = ?");
+    $stmt->bind_param("i", $referrer_id);
+    $stmt->execute();
+    $stmt->bind_result($referrer_count);
+    $stmt->fetch();
+    $stmt->close();
 
+    if ($referrer_count == 0) {
+        // Set $referrer_id to 0 if it doesn't match any existing user's ID
+        $referrer_id = 0;
+    }
     // If no errors, create account
     if (empty($errors)) {
         // Hash password
@@ -58,8 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $role = "SA1";
 
         // Insert user into database
-        $stmt = $conn->prepare("INSERT INTO users (firstName, lastName, email, password, contactNo, role) VALUES (?, ? ,?, ?, ?, ?)");
-        $stmt->bind_param("ssssss", $firstName, $lastName, $email, $hashed_password, $contactNo, $role);
+        $stmt = $conn->prepare("INSERT INTO users (firstName, lastName, email, password, contactNo, role , team_id) VALUES (?, ? ,?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssss", $firstName, $lastName, $email, $hashed_password, $contactNo, $role, $referrer_id);
         $stmt->execute();
         $stmt->close();
 
