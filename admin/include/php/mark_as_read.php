@@ -9,7 +9,7 @@ if (isset($_GET['notification_id'])) {
     $notification_id = mysqli_real_escape_string($conn, $_GET['notification_id']);
 
     // Update the read_status column to mark the notification as read
-    $sql = "UPDATE notifications SET read_status = 1 WHERE notification_id = '$notification_id'";
+    $sql = "UPDATE notifications SET read_status = '1' WHERE notification_id = '$notification_id'";
     if (!mysqli_query($conn, $sql)) {
         echo "Error updating notification: " . mysqli_error($conn);
     } 

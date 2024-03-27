@@ -107,6 +107,25 @@ $count_notif  = mysqli_num_rows($res_notif);
         </div>
     </li>
 
+
+    <script>
+        function markAsRead(notificationId) {
+            // Send AJAX request to mark notification as read
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '../admin/include/php/mark_as_read.php?notification_id=' + notificationId, true);
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // Redirect to the notifications page after marking as read
+                    window.location.href = 'pages-notifications.php';
+                } else {
+                    // Handle errors if any
+                    console.error('Error marking notification as read:', xhr.statusText);
+                }
+            };
+            xhr.send();
+        }
+    </script>
+
 </body>
 
 </html>
