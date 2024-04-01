@@ -187,20 +187,19 @@ include "../admin/include/php/modal.php";
 										</div>
 
 										<?php
-											$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
-											$res_total_sales = mysqli_query($conn, $sql_total_sales);
+										$sql_total_sales = "SELECT SUM(Amount) AS total_amount FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+										$res_total_sales = mysqli_query($conn, $sql_total_sales);
 
-											if ($res_total_sales) {
-												$row = mysqli_fetch_assoc($res_total_sales);
-												$total_amount = $row['total_amount'];
+										if ($res_total_sales) {
+											$row = mysqli_fetch_assoc($res_total_sales);
+											$total_amount = $row['total_amount'];
 
-												$sa1_target_sales = 500000000;
-												$sa1_progress_percentage = ($total_amount / $sa1_target_sales) * 100;
+											$sa1_target_sales = 500000000;
+											$sa1_progress_percentage = ($total_amount / $sa1_target_sales) * 100;
+										}
 
-											}
-
-											if ($agent_role == 'SA1' && $total_amount >= $sa1_target_sales) {
-												echo '
+										if ($agent_role == 'SA1' && $total_amount >= $sa1_target_sales) {
+											echo '
 
 												<script>
 													$(document).ready(function() {
@@ -252,8 +251,8 @@ include "../admin/include/php/modal.php";
 
 													});
 												</script>';
-											}
-											?>
+										}
+										?>
 
 										<?php
 										if ($agent_role == 'SA1') {
@@ -281,7 +280,6 @@ include "../admin/include/php/modal.php";
 
 												$sa2_target_sales = 1000000000;
 												$sa2_progress_percentage = ($total_amount / $sa2_target_sales) * 100;
-
 											}
 
 											if ($agent_role == 'SA2' && $total_amount >= $sa2_target_sales) {
@@ -387,16 +385,30 @@ include "../admin/include/php/modal.php";
 											</thead>
 
 											<?php
-											$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
-											$res_booking = mysqli_query($conn, $sql_booking);
+											$results_per_page = 3;
+											$sql_profile = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+											$res_profile = mysqli_query($conn, $sql_profile);
 
-											if ($res_booking == TRUE) {
-												$count_get = mysqli_num_rows($res_booking);
-												if ($count_get > 0) {
+											if ($res_profile == TRUE) {
+												$total_results = mysqli_num_rows($res_profile);
+												$total_pages = ceil($total_results / $results_per_page);
+												// Check current page and set offset
+												if (!isset($_GET['page'])) {
+													$page = 1;
+												} else {
+													$page = $_GET['page'];
+												}
+												$offset = ($page - 1) * $results_per_page;
+
+												// Fetch data for the current page
+												$sql_profile .= " LIMIT $offset, $results_per_page";
+												$res_profile = mysqli_query($conn, $sql_profile);
+
+												if ($res_profile) {
 											?>
 
 													<?php
-													while ($row = mysqli_fetch_assoc($res_booking)) {
+													while ($row = mysqli_fetch_assoc($res_profile)) {
 													?>
 														<tbody>
 															<tr class="text-center">
@@ -418,11 +430,37 @@ include "../admin/include/php/modal.php";
 								?>
 									</div>
 								</div>
+							</div>
 
+							<div class="row mt-n3 mb-3">
+								<div class="d-flex justify-content-end">
+
+									<nav aria-label="Page navigation example">
+										<ul class="pagination">
+											<li class="page-item <?php if ($page <= 1) echo 'disabled'; ?>">
+												<a class="page-link" href="?page=<?php echo max(1, $page - 1); ?>" aria-label="Previous">
+													<span aria-hidden="true">&laquo;</span>
+												</a>
+											</li>
+											<?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+												<li class="page-item <?php if ($i == $page) echo 'active'; ?>">
+													<a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+												</li>
+											<?php } ?>
+											<li class="page-item <?php if ($page >= $total_pages) echo 'disabled'; ?>">
+												<a class="page-link" href="?page=<?php echo min($total_pages, $page + 1); ?>" aria-label="Next">
+													<span aria-hidden="true">&raquo;</span>
+												</a>
+											</li>
+										</ul>
+									</nav>
+
+								</div>
 							</div>
 
 						</div>
 					</div>
+
 
 				</div>
 			</main>

@@ -280,7 +280,7 @@ $url .= "/SMDC_JQB/pages/pages-sign-up.php?ref=";
 														</div>
 													</div>
 												</div>
-												<p class="mb-n3" style="font-size: .65em;"> Up to max 12% per affiliates. Join Now! </p>
+												<p class="mb-n3" style="font-size: .85em;"> Up to max 12% per affiliates. Join Now! </p>
 
 												<div class="col text-end">
 													<img src="../img/photos/referral-2.png" alt="" class="referral-img">

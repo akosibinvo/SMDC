@@ -154,9 +154,17 @@ include "../admin/include/php/modal.php";
 
 															<div class="col-sm-12 col-md-12 px-4">
 																<h5 class="card-title mb-4">Manage Password</h5>
+
+																<div class="row mb-5">
+																	<div class="form-group">
+																		<label class="form-label">New Password</label>
+																		<input class="form-control" type="text" name="profile_password" value="">
+																	</div>
+																</div>
+
 																<div class="row">
 																	<div class="form-group mb-3">
-																		<label class="form-label">Password</label>
+																		<label class="form-label">Old Password</label>
 																		<input class="form-control" type="text" name="profile_password" value="">
 																	</div>
 																</div>

@@ -1,6 +1,7 @@
 <?php
 include "../php/session.php";
 require "../php/connection.php";
+include "../admin/include/php/modal.php";
 
 ?>
 
@@ -123,103 +124,99 @@ require "../php/connection.php";
 
 							</div>
 						</div>
+					</div>
 
+					<div class="row">
+						<div class="col-12 col-md-12 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
 
-						<div class="row">
-							<div class="col-12 col-md-12 d-flex">
-								<div class="card flex-fill">
-									<div class="card-header">
+									<h5 class="card-title mb-0 text-white">Inventory Statistics</h5>
+								</div>
+								<table class="table table-hover my-0">
+									<thead>
+										<tr class="text-center">
+											<th>Name</th>
+											<th>Unit Code</th>
+											<th>Date</th>
+											<th>Status</th>
+											<th>Seller</th>
+										</tr>
+									</thead>
 
-										<h5 class="card-title mb-0 text-white">Inventory Statistics</h5>
-									</div>
-									<table class="table table-hover my-0">
-										<thead>
-											<tr class="text-center">
-												<th>Name</th>
-												<th>Unit Code</th>
-												<th>Date</th>
-												<th>Status</th>
-												<th>Seller</th>
-											</tr>
-										</thead>
+									<?php
+									$results_per_page = 5;
+									$sql_statistics = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+									$res_statistics = mysqli_query($conn, $sql_statistics);
 
-										<?php
-										$results_per_page = 5;
-										$sql_statistics = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+									if ($res_statistics == TRUE) {
+										$total_results = mysqli_num_rows($res_statistics);
+										$total_pages = ceil($total_results / $results_per_page);
+										// Check current page and set offset
+										if (!isset($_GET['page'])) {
+											$page = 1;
+										} else {
+											$page = $_GET['page'];
+										}
+										$offset = ($page - 1) * $results_per_page;
+
+										// Fetch data for the current page
+										$sql_statistics .= " LIMIT $offset, $results_per_page";
 										$res_statistics = mysqli_query($conn, $sql_statistics);
 
-										if ($res_statistics == TRUE) {
-											$total_results = mysqli_num_rows($res_statistics);
-											$total_pages = ceil($total_results / $results_per_page);
-											// Check current page and set offset
-											if (!isset($_GET['page'])) {
-												$page = 1;
-											} else {
-												$page = $_GET['page'];
-											}
-											$offset = ($page - 1) * $results_per_page;
+										if ($res_statistics) {
+									?>
 
-											// Fetch data for the current page
-											$sql_statistics .= " LIMIT $offset, $results_per_page";
-											$res_statistics = mysqli_query($conn, $sql_statistics);
+											<?php
+											while ($row = mysqli_fetch_assoc($res_statistics)) {
+											?>
 
-											if ($res_statistics) {
-										?>
-
+												<tbody>
+													<tr class="text-center">
+														<td><?php echo $row['firstname']; ?></td>
+														<td><?php echo $row['Unit_code']; ?></td>
+														<td><?php echo $row['Transaction_date']; ?></td>
+														<td class="text-success fw-bold"><?php echo $row['status']; ?></td>
+														<td><?php echo $row['agent']; ?></td>
+													</tr>
 												<?php
-												while ($row = mysqli_fetch_assoc($res_statistics)) {
-												?>
-
-													<tbody>
-														<tr class="text-center">
-															<td><?php echo $row['firstname']; ?></td>
-															<td><?php echo $row['Unit_code']; ?></td>
-															<td><?php echo $row['Transaction_date']; ?></td>
-															<td class="text-success fw-bold"><?php echo $row['status']; ?></td>
-															<td><?php echo $row['agent']; ?></td>
-														</tr>
-													<?php
-												}
-													?>
-													</tbody>
-									</table>
-							<?php
 											}
+												?>
+												</tbody>
+								</table>
+						<?php
 										}
-							?>
-								</div>
-							</div>
-
-						</div>
-
-						<div class="row mt-n2 mb-3">
-							<div class="d-flex justify-content-end">
-
-								<nav aria-label="Page navigation example">
-									<ul class="pagination">
-										<li class="page-item <?php if ($page <= 1) echo 'disabled'; ?>">
-											<a class="page-link" href="?page=<?php echo max(1, $page - 1); ?>" aria-label="Previous">
-												<span aria-hidden="true">&laquo;</span>
-											</a>
-										</li>
-										<?php for ($i = 1; $i <= $total_pages; $i++) { ?>
-											<li class="page-item <?php if ($i == $page) echo 'active'; ?>">
-												<a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-											</li>
-										<?php } ?>
-										<li class="page-item <?php if ($page >= $total_pages) echo 'disabled'; ?>">
-											<a class="page-link" href="?page=<?php echo min($total_pages, $page + 1); ?>" aria-label="Next">
-												<span aria-hidden="true">&raquo;</span>
-											</a>
-										</li>
-									</ul>
-								</nav>
-
+									}
+						?>
 							</div>
 						</div>
 
+					</div>
 
+					<div class="row mt-n2 mb-3">
+						<div class="d-flex justify-content-end">
 
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+									<li class="page-item <?php if ($page <= 1) echo 'disabled'; ?>">
+										<a class="page-link" href="?page=<?php echo max(1, $page - 1); ?>" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+										<li class="page-item <?php if ($i == $page) echo 'active'; ?>">
+											<a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+										</li>
+									<?php } ?>
+									<li class="page-item <?php if ($page >= $total_pages) echo 'disabled'; ?>">
+										<a class="page-link" href="?page=<?php echo min($total_pages, $page + 1); ?>" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+
+						</div>
 					</div>
 			</main>
 

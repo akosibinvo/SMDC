@@ -57,8 +57,9 @@ $count_notif  = mysqli_num_rows($res_notif);
 
                 <?php
                 while ($row_notif = mysqli_fetch_assoc($res_notif)) {
+
                 ?>
-                    <a href="#" class="list-group-item" onclick="markAsRead(<?php echo $row_notif['notification_id']; ?>)">
+                    <div class="list-group-item" onclick="markAsRead(<?php echo $row_notif['notification_id']; ?>)">
                         <div class="row g-1 align-items-center">
                             <div class="col-2">
                                 <i class="text-success" data-feather="check-circle"></i>
@@ -69,7 +70,7 @@ $count_notif  = mysqli_num_rows($res_notif);
                                 <div class="text-muted small mt-1"><?php echo $row_notif['time_only']; ?></div>
                             </div>
                         </div>
-                    </a>
+                    </div>
 
                 <?php
                 }

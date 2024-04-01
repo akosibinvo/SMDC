@@ -254,7 +254,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 					<div class="container mb-4">
 						<div class="row">
 							<div class="col text-end">
-								<a href="pages/pages-booking.php" class="btn btn-primary btn-lg background-blue">Book Now</a>
+								<a href="pages/pages-booking.php" class="btn btn-primary background-blue">Book Now</a>
 							</div>
 						</div>
 					</div>
@@ -287,7 +287,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 									}
 									?>
 
-									<h1 class="mt-3 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_amount) ?></h1>
+									<h2 class="mt-3 mb-3 fw-bold"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_amount) ?></h2>
 
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
@@ -325,7 +325,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 									}
 									?>
 
-									<h1 class="mt-3 mb-3" style="font-weight: bold;"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_coms) ?></h1>
+									<h2 class="mt-3 mb-3 fw-bold"><strong class="title-dashboard">₱</strong> <?php echo number_format($total_coms) ?></h2>
 
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
@@ -356,7 +356,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 									$count_pending = mysqli_num_rows($res_pending);
 									?>
 
-									<h1 class="mt-3 mb-3" style="font-weight: bold;"> <?php echo $count_pending ?> </h1>
+									<h2 class="mt-3 mb-3 fw-bold"> <?php echo $count_pending ?> </h2>
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 										<span class="text-muted" style="font-size: .85em; opacity: 0;">Last 24 hours </span>
@@ -386,7 +386,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 									$count_booked = mysqli_num_rows($res_booked);
 									?>
 
-									<h1 class="mt-3 mb-3" style="font-weight: bold;"> <?php echo $count_booked ?> </h1>
+									<h2 class="mt-3 mb-3 fw-bold"> <?php echo $count_booked ?> </h2>
 
 									<div class="mb-0">
 										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>

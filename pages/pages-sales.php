@@ -53,7 +53,7 @@ include "../admin/include/php/modal.php";
 					<div class="container mb-4">
 						<div class="row">
 							<div class="col text-end">
-								<a href="#" class="btn btn-primary btn-lg background-blue "><i class="align-middle me-1" data-feather="printer"></i>Print</a>
+								<button class="btn btn-primary background-blue "><i class="align-middle me-1" data-feather="printer"></i>Print</button>
 							</div>
 						</div>
 					</div>

@@ -78,7 +78,7 @@ include "../admin/include/php/modal.php";
 										$sql_overcoms = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent_role != 'IMP' AND team_id = '$id' ";
 										$res_overcoms = mysqli_query($conn, $sql_overcoms);
 
-										if ($res_overcoms) {
+										if ($res_overcoms && mysqli_num_rows($res_overcoms) > 0) {
 											while ($rows_overcoms = mysqli_fetch_assoc($res_overcoms)) {
 												$overcoms_name = $rows_overcoms['agent'];
 												$overcoms_ucode = $rows_overcoms['Unit_code'];
@@ -117,8 +117,9 @@ include "../admin/include/php/modal.php";
 										<?php
 											}
 										} else {
-											// Handle error if query fails
-											echo "Error: " . mysqli_error($conn);
+											echo "<tr class='text-center'>";
+											echo "<td colspan='6' style='cursor: default'>You don't have any affiliates yet. Start referring now!</td>";
+											echo "</tr>";
 										}
 										?>
 									</tbody>

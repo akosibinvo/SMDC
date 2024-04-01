@@ -18,15 +18,18 @@ if (isset($_POST['updateSellers'])) {
     if ($stmt->execute()) {
 
         $_SESSION['notification'] = array(
-            'title' => 'Updated Successfully',
+            'title' => 'Success!',
             'status' => 'success',
             'description' => 'You\'ve successfully updated the role.'
         );
 
         header("Location: ../../pages/pages-manage-sellers.php");
     } else {
-        // Update failed
-        $_SESSION['insert'] = false;
+        $_SESSION['notification'] = array(
+            'title' => 'Error!',
+            'status' => 'error',
+            'description' => 'Error in updating the role.'
+        );
     }
     $stmt->close();
 }

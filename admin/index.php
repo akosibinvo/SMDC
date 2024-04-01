@@ -21,6 +21,8 @@ include 'include/php/modal.php';
 	<link href="../css/app.css" rel="stylesheet">
 
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+	
 </head>
 
 <body>
@@ -63,6 +65,16 @@ include 'include/php/modal.php';
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages/pages-manage-sellers.php">
 							<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Manage Sellers</span>
+						</a>
+					</li>
+
+					<li class="sidebar-header">
+						Archives
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages/pages-manage-sellers.php">
+							<i class="align-middle" data-feather="trash-2"></i> <span class="align-middle">Archives Booking</span>
 						</a>
 					</li>
 
@@ -262,7 +274,7 @@ include 'include/php/modal.php';
 											<th>Last Name</th>
 											<th>Date of Birth</th>
 											<th>Action</th>
-											
+
 										</tr>
 									</thead>
 									<?php
@@ -302,7 +314,10 @@ include 'include/php/modal.php';
 														<td><?php echo $rows_clientInfo['LastName']; ?></td>
 														<td><?php echo $rows_clientInfo['Date_of_birth']; ?></td>
 
-														<td><button class="btn btn-primary btn-sm viewbtn">Other Details</button></td>
+														<td>
+															<button class="btn btn-primary viewbtn">View</button>
+															<button class="btn btn-danger removeInfobtn">Remove</button>
+														</td>
 
 														<td class="d-none"><?php echo $rows_clientInfo['Place_of_birth']; ?></td>
 														<td class="d-none"><?php echo $rows_clientInfo['Tin_no']; ?></td>
@@ -369,6 +384,8 @@ include 'include/php/modal.php';
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="../js/app.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+
 	<script>
 		$(document).ready(function() {
 
@@ -412,7 +429,64 @@ include 'include/php/modal.php';
 		});
 	</script>
 
+	<script>
+		$(document).ready(function() {
 
+			$('.removeInfobtn').on('click', function() {
+
+				$('#removeInfoModal').modal('show');
+
+				$tr = $(this).closest('tr');
+
+				var data = $tr.children("td").map(function() {
+					return $(this).text();
+				}).get();
+
+				console.log(data);
+
+				$('#remove_info_id').val(data[0]);
+
+			});
+		});
+	</script>
+
+	<script>
+		<?php
+		// Check if there is a notification in the session
+		if (isset($_SESSION['notification'])) {
+			// Get notification details
+			$title = $_SESSION['notification']['title'];
+			$status = $_SESSION['notification']['status'];
+			$description = $_SESSION['notification']['description'];
+		?>
+			//Display the notification
+			pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+		<?php
+			// Clear the notification from the session
+			unset($_SESSION['notification']);
+		}
+		?>
+
+		function pushNotify(status, title, description) {
+			new Notify({
+				status: status,
+				title: title,
+				text: description,
+				effect: 'slide',
+				speed: 800,
+				customClass: null,
+				customIcon: null,
+				showIcon: true,
+				showCloseButton: true,
+				autoclose: true,
+				autotimeout: 1500,
+				gap: 20,
+				distance: 20,
+				type: 1,
+				position: 'x-center top'
+			});
+		}
+	</script>
 
 
 </body>

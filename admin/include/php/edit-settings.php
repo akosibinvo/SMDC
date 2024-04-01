@@ -22,7 +22,7 @@ if (isset($_POST['edit_settings'])) {
     if ($stmt->execute()) {
         
         $_SESSION['notification'] = array(
-            'title' => 'Updated Successfully',
+            'title' => 'Success!',
             'status' => 'success',
             'description' => 'You\'ve successfully updated your personal details.'
         );
@@ -31,7 +31,7 @@ if (isset($_POST['edit_settings'])) {
 
     } else {
         $_SESSION['notification'] = array(
-            'title' => 'Error!!',
+            'title' => 'Error!',
             'status' => 'error',
             'description' => 'Error in updating your personal details.'
         );

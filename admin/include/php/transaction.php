@@ -116,7 +116,7 @@ if(isset($_POST['book'])){
         if ($stmt->execute()) {
             // Insertion successful
             $_SESSION['notification'] = array(
-                'title' => 'Successfully Booked',
+                'title' => 'Success!',
                 'status' => 'success',
                 'description' => 'You\'ve successfully booked. Wait for the administrator to approve.'
             );

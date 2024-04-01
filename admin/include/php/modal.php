@@ -140,7 +140,6 @@
       </div>
    </div>
 
-
    <!--======================================= VIEW CLIENT DETAILS MODAL ======================================= -->
    <div class="modal fade" id="viewDetailsModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
@@ -293,7 +292,7 @@
                         </div>
 
                         <div class="form-group text-center mt-0 mb-3 d-flex align-items-center justify-content-center">
-                           <input type="file" name="profilePic" id="fileInput" style="display: none;" accept=".png, .jpg, .jpeg"  onchange="checkFile()">
+                           <input type="file" name="profilePic" id="fileInput" style="display: none;" accept=".png, .jpg, .jpeg" onchange="checkFile()">
                            <label for="fileInput" class="upload_photo btn btn-primary p-2 mb-4" title="Add Photo">
                               <i class="align-middle" data-feather="plus"></i>
                               Upload Photo
@@ -304,7 +303,7 @@
                   </div>
                   <div class="modal-footer">
                      <div class="mt-3">
-                        <button type="submit" name="update" id="updateButton" class="btn btn-primary background-blue" disabled>Save</button>
+                        <button type="submit" name="update" id="updateButton" class="btn btn-primary" disabled>Save</button>
                      </div>
                   </div>
                </form>
@@ -389,7 +388,6 @@
       </div>
    </div>
 
-
    <!-- ======================================= MANAGE SELLERS EDIT MODAL ======================================= -->
    <div class="modal fade" id="manageSellersModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -400,7 +398,7 @@
                </button>
             </div>
             <div class="modal-body">
-               <form action="../include/php/editSellers.php" method="post" enctype="multipart/form-data">
+               <form action="../include/php/edit-sellers.php" method="post" enctype="multipart/form-data">
 
                   <input type="hidden" name="update_id" id="update_sellers_id">
 
@@ -467,10 +465,33 @@
                </button>
             </div>
             <div class="modal-body">
-               <p> Are you sure you want to delete? </p>
+               <p> Are you sure you want to remove? </p>
             </div>
             <div class="modal-footer">
                <form action="../include/php/reject-booking.php" method="POST">
+                  <input type="hidden" name="reject_id" id="reject_id">
+                  <button type="submit" name="reject" class="btn btn-danger"> Remove </button>
+               </form>
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!--======================================= DELETE ARCHIVES MODAL ======================================= -->
+   <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               </button>
+            </div>
+            <div class="modal-body">
+               <p> Are you sure you want to remove? </p>
+            </div>
+            <div class="modal-footer">
+               <form action="../include/php/delete-booking.php" method="POST">
                   <input type="hidden" name="delete_id" id="delete_id">
                   <button type="submit" name="delete" class="btn btn-danger"> Delete </button>
                </form>
@@ -585,6 +606,99 @@
                <form action="../admin/include/php/delete-notification.php" method="POST">
                   <input type="hidden" name="delete_notif_id" id="delete_notif_id">
                   <button type="submit" name="delete_notif" class="btn btn-danger"> Delete </button>
+               </form>
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!--======================================= DELETE ALL NOTIFICATIONS MODAL ======================================= -->
+   <div class="modal fade" id="deleteAllModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               </button>
+            </div>
+            <div class="modal-body">
+               <p> Are you sure you want to delete all? </p>
+            </div>
+            <div class="modal-footer">
+               <form action="../admin/include/php/delete-all-notification.php" method="POST">
+                  <input type="hidden" name="delete_all_id" id="delete_all_id">
+                  <button type="submit" name="delete_all" class="btn btn-danger"> Delete </button>
+               </form>
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!--======================================= CONFIRMATION MODAL ======================================= -->
+   <div class="modal fade" id="restoreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               </button>
+            </div>
+            <div class="modal-body">
+               <p> Are you sure you want to restore this data? </p>
+            </div>
+            <div class="modal-footer">
+               <form action="../include/php/restore-booking.php" method="POST">
+                  <input type="hidden" name="restore_id" id="restore_id">
+                  <button type="submit" name="restore" class="btn btn-primary"> Yes </button>
+               </form>
+               <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> No </button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+   <!--======================================= REMOVE SELLERS MODAL ======================================= -->
+   <div class="modal fade" id="removeSellersModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               </button>
+            </div>
+            <div class="modal-body">
+               <p> Are you sure you want to remove? </p>
+            </div>
+            <div class="modal-footer">
+               <form action="../include/php/remove-sellers.php" method="POST">
+                  <input type="hidden" name="remove_sellers_id" id="remove_sellers_id">
+                  <button type="submit" name="remove_sellers" class="btn btn-danger"> Remove </button>
+               </form>
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!--======================================= REMOVE CLIENTS INFORMATION MODAL ======================================= -->
+   <div class="modal fade" id="removeInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               </button>
+            </div>
+            <div class="modal-body">
+               <p> Are you sure you want to remove? </p>
+            </div>
+            <div class="modal-footer">
+               <form action="../admin/include/php/remove-client-info.php" method="POST">
+                  <input type="hidden" name="remove_info_id" id="remove_info_id">
+                  <button type="submit" name="remove_info" class="btn btn-danger"> Remove </button>
                </form>
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>

@@ -11278,11 +11278,14 @@ body {
     cursor: pointer;
     display: flex;
     height: 26px;
-    width: 26px
+    width: 26px;
 }
+
 .sidebar.collapsed {
-    margin-left: -260px
+    margin-left: -260px;
 }
+
+
 @media(min-width:1px)and (max-width:1400px) {
     .sidebar {
         margin-left: -260px
@@ -12470,6 +12473,10 @@ span.flatpickr-weekday {
 
 .trash-icon:hover {
     color: #dc3545;
+}
+
+.bg-notif {
+    background: rgb(245, 245, 245);
 }
 
 

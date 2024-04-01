@@ -14,7 +14,7 @@ include "../php/connection.php";
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="../img/icons/logo-square.png" />
 
-    <title>OTP Code | SDMC JQB</title>
+    <title>Email Validation | SDMC JQB</title>
 
     <link href="../css/app.css" rel="stylesheet">
     <!-- <link href="css/style.css" rel="stylesheet"> -->
@@ -47,15 +47,15 @@ include "../php/connection.php";
                                         Check your Email
                                     </p>
                                     <p class="fs-6 lead">
-                                        Please enter the 6-digit OTP code we sent to <?= $_SESSION['email-forgot']; ?>
+                                        Please enter the 6-digit OTP code we sent to <?= $_SESSION['email-verify']; ?>
                                     </p>
                                 </div>
                                 <div class="pb-2 px-3">
                                     <form action="../php/otpVerify.php" method="post" class="needs-validation" novalidate>
                                         <div class="mt-3">
                                             <label class="form-label">OTP Code</label>
-                                            <input class="form-control form-control-lg" type="text" name="userOtp" placeholder="Enter your OTP Code" required>
-                                            <div id="validationCodeOTP" class="invalid-feedback">
+                                            <input class="form-control form-control-lg" type="text" name="userOtp-signup-validation" placeholder="Enter your OTP Code" required>
+                                            <div id="validationCodeOTPEmailSignup" class="invalid-feedback">
                                                 Please enter the OTP code.
                                             </div>
                                         </div>
@@ -63,14 +63,14 @@ include "../php/connection.php";
                                         <div class="row d-flex justify-content-center mt-3">
                                             <div class="col-auto d-flex justify-content-start">
                                                 <p class="me-2">Dont received the OTP?</p>
-                                                <a class="text-decoration-none" style="color: #0030ff;" href="../php/sendEmail.php?action=resend">
+                                                <a class="text-decoration-none" style="color: #0030ff;" href="../php/sendEmail.php?action=resend-email-verify">
                                                     Resend OTP
                                                 </a>
                                             </div>
                                         </div>
 
                                         <div class="my-3">
-                                            <button type="submit" name="submit-otp" class="btn btn-lg btn-primary w-100">Verify Code</button>
+                                            <button type="submit" name="submit-otp-validate-email" class="btn btn-lg btn-primary w-100">Verify Code</button>
                                         </div>
 
                                         <div class="row d-flex justify-content-start mt-4">
@@ -94,23 +94,20 @@ include "../php/connection.php";
     <script src="../js/app.js"></script>
     <!-- Simple Notify -->
     <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <?php
+    // Check if there is a notification in the session
+    if (isset($_SESSION['notification'])) {
+        // Get notification details
+        $title = $_SESSION['notification']['title'];
+        $status = $_SESSION['notification']['status'];
+        $description = $_SESSION['notification']['description'];
+        // Clear the notification from the session
+        unset($_SESSION['notification']);
+    }
+    ?>
 
     <script>
-        <?php
-        // Check if there is a notification in the session
-        if (isset($_SESSION['notification'])) {
-            // Get notification details
-            $title = $_SESSION['notification']['title'];
-            $status = $_SESSION['notification']['status'];
-            $description = $_SESSION['notification']['description'];
-        ?>
-            //Display the notification
-            pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
-        <?php
-            // Clear the notification from the session
-            unset($_SESSION['notification']);
-        }
-        ?>
+        pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
 
         function pushNotify(status, title, description) {
             new Notify({

@@ -21,6 +21,8 @@ include "../admin/include/php/modal.php";
     <link href="../css/app.css" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+
 </head>
 
 <body>
@@ -55,7 +57,7 @@ include "../admin/include/php/modal.php";
                     <div class="container mb-4">
                         <div class="row">
                             <div class="col text-end">
-                                <a href="#" class="btn btn-danger "><i class="align-middle me-1" data-feather="trash-2"></i>Clear All</a>
+                                <button class="btn btn-danger clearAll"><i class="align-middle me-1" data-feather="trash-2"></i>Clear All</button>
                             </div>
                         </div>
                     </div>
@@ -69,7 +71,7 @@ include "../admin/include/php/modal.php";
 
                                 <?php
 
-                                $sql_notif = "SELECT *, DATE_FORMAT(timestamp, '%h:%i %p') AS time_only FROM notifications WHERE user_id = '$id' AND (read_status = '0' OR read_status = '1') ";
+                                $sql_notif = "SELECT *, DATE_FORMAT(timestamp, '%h:%i %p') AS time_only FROM notifications WHERE user_id = '$id' AND (read_status = '0' OR read_status = '1') ORDER BY read_status ";
                                 $res_notif  = mysqli_query($conn, $sql_notif);
                                 $count_notif  = mysqli_num_rows($res_notif);
 
@@ -82,28 +84,32 @@ include "../admin/include/php/modal.php";
                                         if (mysqli_num_rows($res_notif) > 0) {
 
                                             while ($row_notif = mysqli_fetch_assoc($res_notif)) {
+                                                $listGroupClass = ($row_notif['read_status'] == 0) ? 'list-group-item bg-primary rounded-2 border-1' : 'list-group-item';
+                                                $textColor = ($row_notif['read_status'] == 0) ? 'text-white' : 'text-dark';
+                                                $iconColor = ($row_notif['read_status'] == 0) ? 'text-white' : 'text-success';
+                                                $onClickAttr = ($row_notif['read_status'] == 0) ? 'onclick="markAsRead(' . $row_notif['notification_id'] . ')"' : 'onclick="myFunction()"';
 
                                         ?>
-                                                <div class="list-group-item">
-                                                    <div class="row g-1 text-center">
+                                                <div class="<?php echo $listGroupClass; ?> mb-2 rounded-2 border-1" <?php echo $onClickAttr; ?> style="cursor: pointer;">
+                                                    <div class="row text-center">
                                                         <div class="col-1">
-                                                            <i class="text-success" data-feather="check-circle"></i>
+                                                            <i class="<?php echo $iconColor; ?>" data-feather="check-circle"></i>
                                                         </div>
                                                         <div class="col-2">
-                                                            <div class="text-dark">Approved Booking</div>
+                                                            <div class="<?php echo $textColor; ?>">Approved Booking</div>
 
                                                         </div>
 
                                                         <div class="col-7">
-                                                            <div class="text-muted small mt-1"><?php echo $row_notif['message']; ?></div>
+                                                            <div class="<?php echo $textColor; ?> small mt-1"><?php echo $row_notif['message']; ?></div>
                                                         </div>
 
                                                         <div class="col-1">
-                                                            <div class="text-muted small mt-1"><?php echo $row_notif['time_only']; ?></div>
+                                                            <div class="<?php echo $textColor; ?> small mt-1"><?php echo $row_notif['time_only']; ?></div>
                                                         </div>
 
                                                         <div class="col-1">
-                                                            <div class="text-muted small mt-1"><i class="align-middle me-1 trash-icon" data-feather="trash-2" data-bs-toggle="modal" data-bs-target="#deleteNotificationModal"></i></div>
+                                                            <div class="<?php echo $textColor; ?> mt-1"><i class="align-middle me-1 trash-icon" data-feather="trash-2" data-bs-toggle="modal" data-bs-target="#deleteNotificationModal"></i></div>
                                                             <span class="notification-id" style="display: none;"><?php echo $row_notif['notification_id']; ?></span>
                                                         </div>
 
@@ -138,7 +144,44 @@ include "../admin/include/php/modal.php";
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/app.js"></script>
-    <script src="../js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+
+    <?php
+    // Check if there is a notification in the session
+    if (isset($_SESSION['notification'])) {
+        // Get notification details
+        $title = $_SESSION['notification']['title'];
+        $status = $_SESSION['notification']['status'];
+        $description = $_SESSION['notification']['description'];
+        // Clear the notification from the session
+        unset($_SESSION['notification']);
+    }
+    ?>
+
+    <script>
+        pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+
+        function pushNotify(status, title, description) {
+            new Notify({
+                status: status,
+                title: title,
+                text: description,
+                effect: 'slide',
+                speed: 800,
+                customClass: null,
+                customIcon: null,
+                showIcon: true,
+                showCloseButton: true,
+                autoclose: true,
+                autotimeout: 1500,
+                gap: 20,
+                distance: 20,
+                type: 1,
+                position: 'x-center top'
+            });
+        }
+    </script>
+
 
     <script>
         $(document).ready(function() {
@@ -149,6 +192,35 @@ include "../admin/include/php/modal.php";
                 $('#delete_notif_id').val(notificationId);
             });
         });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.clearAll').on('click', function() {
+                $('#deleteAllModal').modal('show');
+
+                var notificationId = $(this).closest('.list-group-item').find('.notification-id').text();
+                $('#delete_all_id').val(notificationId);
+            });
+        });
+    </script>
+
+    <script>
+        function markAsRead(notificationId) {
+            // Send AJAX request to mark notification as read
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '../admin/include/php/mark_as_read.php?notification_id=' + notificationId, true);
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // Redirect to the notifications page after marking as read
+                    window.location.href = 'pages-notifications.php';
+                } else {
+                    // Handle errors if any
+                    console.error('Error marking notification as read:', xhr.statusText);
+                }
+            };
+            xhr.send();
+        }
     </script>
 
 </body>

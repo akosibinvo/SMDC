@@ -23,18 +23,18 @@ if (isset($_POST['congrats_SA2'])) {
 
         if ($role === "SA1" || $role === "SA2") {
             $_SESSION['notification'] = array(
-                'title' => 'Success!!',
+                'title' => 'Success!',
                 'status' => 'success',
-                'description' => 'You\'ve successfully updated your account details'
+                'description' => 'Congratulations, you are now a SA2.'
             );
 
             header("Location: ../../../pages/pages-profile.php");
         } else if ($role === "IMP") {
 
             $_SESSION['notification'] = array(
-                'title' => 'Success!!',
+                'title' => 'Success!',
                 'status' => 'success',
-                'description' => 'You\'ve successfully updated your account details'
+                'description' => 'Congratulations, you are now a IMP.'
             );
 
             header("Location: ../../../pages/pages-profile-imp.php");

@@ -100,7 +100,7 @@ include "../admin/include/php/modal.php";
                                                 }
                                             } else {
                                                 echo "<tr class='text-center'>";
-                                                echo "<td colspan='4'>Your team is currently empty. Start referring now to build your network!</td></tr>";
+                                                echo "<td colspan='4' style='cursor: default'>Your team is currently empty. Start referring now to build your network!</td></tr>";
                                             }
 
                                             // Close the prepared statement and database connection

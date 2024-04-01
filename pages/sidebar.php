@@ -27,7 +27,7 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
 
 				<li class="sidebar-item <?= $page == "index.php" ? 'active' : ''; ?>">
 					<a class="sidebar-link" href="../index.php">
-						<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+						<i class="align-middle" data-feather="sliders"></i> <span class="align-middle titles">Dashboard</span>
 					</a>
 				</li>
 

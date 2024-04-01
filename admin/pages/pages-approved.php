@@ -65,65 +65,10 @@ include '../include/php/modal.php';
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="../index.php">
-					<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../../img/icons/logo-blue.png" alt=""> </span>
-				</a>
 
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Reports
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="../index.php">
-							<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-						</a>
-					</li>
-
-					<li class="sidebar-header">
-						Manage
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-booking-approval.php">
-							<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking Approval</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="#">
-							<i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Approved Bookings</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-manage-sellers.php">
-							<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Manage Sellers</span>
-						</a>
-					</li>
-
-
-					<li class="sidebar-header">
-						Settings
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="#">
-							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="#">
-							<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
-						</a>
-					</li>
-
-				</ul>
-			</div>
-		</nav>
+		<?php
+		include "admin-sidebar.php";
+		?>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -175,6 +120,7 @@ include '../include/php/modal.php';
 											<th>Amount</th>
 											<th>Date</th>
 											<th>Agent</th>
+											<th> Role </th>
 											<th>Status</th>
 										</tr>
 									</thead>
@@ -201,7 +147,7 @@ include '../include/php/modal.php';
 											$sql_booking .= " LIMIT $offset, $results_per_page";
 											$res_booking = mysqli_query($conn, $sql_booking);
 
-											if ($res_booking) {
+											if ($res_booking && mysqli_num_rows($res_booking) > 0) {
 										?>
 												<?php while ($rows_booking = mysqli_fetch_assoc($res_booking)) { ?>
 
@@ -212,12 +158,17 @@ include '../include/php/modal.php';
 														<td><?php echo '₱' . ' ' . number_format($rows_booking['Amount'], 0, '.', ','); ?></td>
 														<td><?php echo $rows_booking['Transaction_date']; ?></td>
 														<td><?php echo $rows_booking['agent']; ?></td>
+														<td><?php echo $rows_booking['agent_role']; ?></td>
 														<td class="text-success fw-bold"><?php echo $rows_booking['status']; ?></td>
 
 													</tr>
 												<?php } ?>
 									</tbody>
 							<?php
+											} else {
+												echo "<tr class='text-center'>";
+												echo "<td colspan='12' style='cursor: default'>No approved bookings yet.</td>";
+												echo "</tr>";
 											}
 										}
 							?>

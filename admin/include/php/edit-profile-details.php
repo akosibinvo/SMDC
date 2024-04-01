@@ -54,7 +54,7 @@ if (isset($_POST['update'])) {
         if ($role === "SA1" || $role === "SA2") {
 
             $_SESSION['notification'] = array(
-                'title' => 'Success!!',
+                'title' => 'Success!',
                 'status' => 'success',
                 'description' => 'You\'ve successfully updated your profile.'
             );
@@ -63,7 +63,7 @@ if (isset($_POST['update'])) {
         } else {
 
             $_SESSION['notification'] = array(
-                'title' => 'Success!!',
+                'title' => 'Success!',
                 'status' => 'success',
                 'description' => 'You\'ve successfully updated your profile.'
             );
@@ -73,7 +73,7 @@ if (isset($_POST['update'])) {
 
     } else {
         $_SESSION['notification'] = array(
-            'title' => 'Error!!',
+            'title' => 'Error!',
             'status' => 'error',
             'description' => 'Error in updating your profile.'
         );

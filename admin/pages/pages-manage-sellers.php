@@ -1,4 +1,5 @@
 <?php
+session_start();
 //    include '../../php/session.php';
 include '../../php/connection.php';
 include '../include/php/modal.php';
@@ -29,65 +30,10 @@ include '../include/php/modal.php';
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="../index.php">
-					<span class="d-flex align-middle justify-content-center"> <img class="smdc-logo" src="../../img/icons/logo-blue.png" alt=""> </span>
-				</a>
 
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Reports
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="../index.php">
-							<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-						</a>
-					</li>
-
-					<li class="sidebar-header">
-						Manage
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-booking-approval.php">
-							<i class="align-middle" data-feather="book"></i> <span class="align-middle">Booking Approval</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-approved.php">
-							<i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Approved Bookings</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="#">
-							<i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Manage Sellers</span>
-						</a>
-					</li>
-
-
-					<li class="sidebar-header">
-						Settings
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="#">
-							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-settings.php">
-							<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
-						</a>
-					</li>
-
-				</ul>
-			</div>
-		</nav>
+		<?php
+		include "admin-sidebar.php";
+		?>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -187,7 +133,7 @@ include '../include/php/modal.php';
 														<td><?php echo $role ?></td>
 														<td>
 															<button class="btn btn-success manageSellersbtn">Edit</button>
-															<button class="btn btn-danger">Remove</button>
+															<button class="btn btn-danger removeSellersbtn">Remove</button>
 														</td>
 													</tr>
 												<?php } ?>
@@ -238,6 +184,43 @@ include '../include/php/modal.php';
 	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
 	<script src="../../js/app.js"></script>
 
+	<script>
+		<?php
+		// Check if there is a notification in the session
+		if (isset($_SESSION['notification'])) {
+			// Get notification details
+			$title = $_SESSION['notification']['title'];
+			$status = $_SESSION['notification']['status'];
+			$description = $_SESSION['notification']['description'];
+		?>
+			//Display the notification
+			pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+		<?php
+			// Clear the notification from the session
+			unset($_SESSION['notification']);
+		}
+		?>
+
+		function pushNotify(status, title, description) {
+			new Notify({
+				status: status,
+				title: title,
+				text: description,
+				effect: 'slide',
+				speed: 800,
+				customClass: null,
+				customIcon: null,
+				showIcon: true,
+				showCloseButton: true,
+				autoclose: true,
+				autotimeout: 1500,
+				gap: 20,
+				distance: 20,
+				type: 1,
+				position: 'x-center top'
+			});
+		}
+	</script>
 
 	<script>
 		$(document).ready(function() {
@@ -264,40 +247,25 @@ include '../include/php/modal.php';
 		});
 	</script>
 
-	<?php
-	// Check if there is a notification in the session
-	if (isset($_SESSION['notification'])) {
-		// Get notification details
-		$title = $_SESSION['notification']['title'];
-		$status = $_SESSION['notification']['status'];
-		$description = $_SESSION['notification']['description'];
-		// Clear the notification from the session
-		unset($_SESSION['notification']);
-	}
-	?>
-
 	<script>
-		pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+		$(document).ready(function() {
 
-		function pushNotify(status, title, description) {
-			new Notify({
-				status: status,
-				title: title,
-				text: description,
-				effect: 'slide',
-				speed: 800,
-				customClass: null,
-				customIcon: null,
-				showIcon: true,
-				showCloseButton: true,
-				autoclose: true,
-				autotimeout: 1500,
-				gap: 20,
-				distance: 20,
-				type: 1,
-				position: 'x-center top'
+			$('.removeSellersbtn').on('click', function() {
+
+				$('#removeSellersModal').modal('show');
+
+				$tr = $(this).closest('tr');
+
+				var data = $tr.children("td").map(function() {
+					return $(this).text();
+				}).get();
+
+				console.log(data);
+
+				$('#remove_sellers_id').val(data[0]);
+
 			});
-		}
+		});
 	</script>
 
 
