@@ -58,7 +58,7 @@
                <div class="row mb-4">
                   <div class="form-group col-md-6">
                      <label class="form-label">Reservation Fee</label>
-                     <input class="form-control" type="file" name="ra" id="rf" disabled>
+                     <input class="form-control" type="file" name="rf" id="rf" disabled>
                   </div>
 
                   <div class="form-group col-md-6">
@@ -494,6 +494,29 @@
                <form action="../include/php/delete-booking.php" method="POST">
                   <input type="hidden" name="delete_id" id="delete_id">
                   <button type="submit" name="delete" class="btn btn-danger"> Delete </button>
+               </form>
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!--======================================= DELETE ALL ARCHIVES MODAL ======================================= -->
+   <div class="modal fade" id="clearArchivesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               </button>
+            </div>
+            <div class="modal-body">
+               <p> Are you sure you want to delete all? </p>
+            </div>
+            <div class="modal-footer">
+               <form action="../include/php/delete-all-archives.php" method="POST">
+                  <input type="hidden" name="clear_all_id" id="clear_all_id">
+                  <button type="submit" name="clear_all" class="btn btn-danger"> Delete </button>
                </form>
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>

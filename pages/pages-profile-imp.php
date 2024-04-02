@@ -169,7 +169,7 @@ $url .= "/SMDC_JQB/pages/pages-sign-up.php?ref=";
 													</div>
 
 													<?php
-													
+
 													$sql_overcoms = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent_role != 'IMP' AND team_id = '$id'";
 													$res_overcoms = mysqli_query($conn, $sql_overcoms);
 
@@ -308,19 +308,20 @@ $url .= "/SMDC_JQB/pages/pages-sign-up.php?ref=";
 	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
 	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 
-	<?php
-	// Check if there is a notification in the session
-	if (isset($_SESSION['notification'])) {
-		// Get notification details
-		$title = $_SESSION['notification']['title'];
-		$status = $_SESSION['notification']['status'];
-		$description = $_SESSION['notification']['description'];
-		// Clear the notification from the session
-		unset($_SESSION['notification']);
-	}
-	?>
-
 	<script>
+		<?php
+		// Check if there is a notification in the session
+		if (isset($_SESSION['notification'])) {
+			// Get notification details
+			$title = $_SESSION['notification']['title'];
+			$status = $_SESSION['notification']['status'];
+			$description = $_SESSION['notification']['description'];
+			// Clear the notification from the session
+			unset($_SESSION['notification']);
+		}
+		?>
+
+
 		pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
 
 		function pushNotify(status, title, description) {
@@ -329,7 +330,7 @@ $url .= "/SMDC_JQB/pages/pages-sign-up.php?ref=";
 				title: title,
 				text: description,
 				effect: 'slide',
-				speed: 800,
+				speed: 600,
 				customClass: null,
 				customIcon: null,
 				showIcon: true,

@@ -67,7 +67,7 @@ include "../admin/include/php/modal.php";
                                         <div class="row mb-3">
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">First Name</label>
-                                                <input class="form-control" type="text" name="firstname" pattern="[A-Za-z\s]+" placeholder="Enter your first name" required>
+                                                <input class="form-control" type="text" name="firstname" minlength="2" pattern="[A-Za-z\s]+" placeholder="Enter your first name" required>
                                                 <div class="invalid-feedback">
                                                     Please enter First Name.
                                                 </div>
@@ -76,7 +76,7 @@ include "../admin/include/php/modal.php";
 
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Middle Name</label>
-                                                <input class="form-control" type="text" name="middlename" pattern="[A-Za-z\s]+" placeholder="Enter your middle name" required>
+                                                <input class="form-control" type="text" name="middlename" minlength="2" pattern="[A-Za-z\s]+" placeholder="Enter your middle name" required>
                                                 <div class="invalid-feedback">
                                                     Please enter Middle Name.
                                                 </div>
@@ -84,7 +84,7 @@ include "../admin/include/php/modal.php";
 
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Last Name</label>
-                                                <input class="form-control" type="text" name="lastname" pattern="[A-Za-z\s]+" placeholder="Enter your last name" required>
+                                                <input class="form-control" type="text" name="lastname" minlength="2" pattern="[A-Za-z\s]+" placeholder="Enter your last name" required>
                                                 <div class="invalid-feedback">
                                                     Please enter Last Name.
                                                 </div>
@@ -178,7 +178,7 @@ include "../admin/include/php/modal.php";
 
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Phone Number</label>
-                                                <input class="form-control" type="text" name="phonenumber" placeholder="Enter your phone number" required>
+                                                <input class="form-control" type="text" name="phonenumber" minlength="11" pattern="[0-9]*" placeholder="Enter your phone number" required>
                                                 <div class="invalid-feedback">
                                                     Please enter Phone Number.
                                                 </div>
@@ -186,7 +186,7 @@ include "../admin/include/php/modal.php";
 
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Passport No:</label>
-                                                <input class="form-control" type="text" name="passportnumber" placeholder="Enter your passport number" required>
+                                                <input class="form-control" type="text" name="passportnumber" pattern="[0-9]*" placeholder="Enter your passport number" required>
                                                 <div class="invalid-feedback">
                                                     Please enter Passport Number.
                                                 </div>
@@ -214,7 +214,7 @@ include "../admin/include/php/modal.php";
                                         <div class="row mb-5">
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Employer Name</label>
-                                                <input class="form-control" type="text" name="employerName" pattern="[A-Za-z\s]+" placeholder="Enter your employer name" required>
+                                                <input class="form-control" type="text" name="employerName" minlength="2" pattern="[A-Za-z\s]+" placeholder="Enter your employer name" required>
                                                 <div class="invalid-feedback">
                                                     Please enter Employer Name.
                                                 </div>
@@ -379,19 +379,19 @@ include "../admin/include/php/modal.php";
             });
     </script>
 
-    <?php
-    // Check if there is a notification in the session
-    if (isset($_SESSION['notification'])) {
-        // Get notification details
-        $title = $_SESSION['notification']['title'];
-        $status = $_SESSION['notification']['status'];
-        $description = $_SESSION['notification']['description'];
-        // Clear the notification from the session
-        unset($_SESSION['notification']);
-    }
-    ?>
-
     <script>
+        <?php
+        // Check if there is a notification in the session
+        if (isset($_SESSION['notification'])) {
+            // Get notification details
+            $title = $_SESSION['notification']['title'];
+            $status = $_SESSION['notification']['status'];
+            $description = $_SESSION['notification']['description'];
+            // Clear the notification from the session
+            unset($_SESSION['notification']);
+        }
+        ?>
+
         pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
 
         function pushNotify(status, title, description) {
@@ -400,7 +400,7 @@ include "../admin/include/php/modal.php";
                 title: title,
                 text: description,
                 effect: 'slide',
-                speed: 800,
+                speed: 600,
                 customClass: null,
                 customIcon: null,
                 showIcon: true,

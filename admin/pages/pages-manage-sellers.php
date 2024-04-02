@@ -130,7 +130,7 @@ include '../include/php/modal.php';
 														<td> <?php echo $email ?> </td>
 
 														<td> <?php echo $dateJoined ?> </td>
-														<td><?php echo $role ?></td>
+														<td class="text-primary fw-bold"><?php echo $role ?></td>
 														<td>
 															<button class="btn btn-success manageSellersbtn">Edit</button>
 															<button class="btn btn-danger removeSellersbtn">Remove</button>

@@ -76,9 +76,11 @@ if (isset($_POST['addprice'])) {
             while ($rows_notif = mysqli_fetch_assoc($res_notif)) {
                 $notif_id = $rows_notif['user_id'];
                 $client_name = $rows_notif['firstname'];
-                $message = "Your transaction for $client_name has been approved by the admin.";
+                $agent_name = $rows_notif['agent'];
+                $message = "Hello, $agent_name. Your transaction for $client_name has been approved by the admin.";
             }
         }
+
         $notif_status = 0;
 
 

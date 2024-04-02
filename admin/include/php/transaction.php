@@ -9,6 +9,7 @@ if(isset($_POST['book'])){
     $firstname = $_POST['firstname'];
     $middlename = $_POST['middlename'];
     $lastname = $_POST['lastname'];
+
     $birthdate = $_POST['birthdate'];
     $birthplace = $_POST['birthplace'];
     $tinNo = $_POST['tinNo'];
@@ -40,8 +41,15 @@ if(isset($_POST['book'])){
             $tmp_name_ra = $_FILES['RA']['tmp_name']; 
             $filename_ra = $_FILES['RA']['name'];
 
+            $filename = pathinfo($filename_ra, PATHINFO_FILENAME);
+            $extension = pathinfo($filename_ra, PATHINFO_EXTENSION);
+
+            $fullname = $firstname . $lastname;
+
+            $unique_ra = $filename . '_' . $fullname . '_' . 'RA' . '.' . $extension;
+            
             // Move the uploaded 'ra' file to the target directory
-            $target_path_ra = $target_directory . $filename_ra;
+            $target_path_ra = $target_directory . $unique_ra;
 
             if (!move_uploaded_file($tmp_name_ra, $target_path_ra)) {
                 // File upload failed for RA
@@ -56,8 +64,14 @@ if(isset($_POST['book'])){
             $tmp_name_rf = $_FILES['RF']['tmp_name']; 
             $filename_rf = $_FILES['RF']['name'];
 
-            // Move the uploaded 'rf' file to the target directory
-            $target_path_rf = $target_directory . $filename_rf;
+            $filename = pathinfo($filename_rf, PATHINFO_FILENAME);
+            $extension = pathinfo($filename_rf, PATHINFO_EXTENSION);
+
+            $fullname = $firstname . $lastname;
+
+            $unique_rf = $filename . '_' . $fullname . '_' . 'RF' . '.' . $extension;
+
+            $target_path_rf = $target_directory . $unique_rf;
 
             if (!move_uploaded_file($tmp_name_rf, $target_path_rf)) {
                 // File upload failed for RF
@@ -72,8 +86,15 @@ if(isset($_POST['book'])){
             $tmp_name_holding = $_FILES['Holding']['tmp_name']; 
             $filename_holding = $_FILES['Holding']['name'];
 
+            $filename = pathinfo($filename_holding, PATHINFO_FILENAME);
+            $extension = pathinfo($filename_holding, PATHINFO_EXTENSION);
+
+            $fullname = $firstname . $lastname;
+
+            $unique_holding = $filename . '_' . $fullname . '_' . 'HOLDING' . '.' . $extension;
+
             // Move the uploaded 'rf' file to the target directory
-            $target_path_holding = $target_directory . $filename_holding;
+            $target_path_holding = $target_directory .  $unique_holding;
 
             if (!move_uploaded_file($tmp_name_holding, $target_path_holding)) {
                 // File upload failed for RF
@@ -88,14 +109,20 @@ if(isset($_POST['book'])){
             $tmp_name_id = $_FILES['ID']['tmp_name']; 
             $filename_id = $_FILES['ID']['name'];
 
-            // Move the uploaded 'rf' file to the target directory
-            $target_path_id = $target_directory . $filename_id;
+            $filename = pathinfo($filename_id, PATHINFO_FILENAME);
+            $extension = pathinfo($filename_id, PATHINFO_EXTENSION);
+
+            $fullname = $firstname . $lastname;
+
+            $unique_id = $filename . '_' . $fullname . '_' . 'ID' . '.' . $extension;
+
+            $target_path_id = $target_directory . $unique_id;
 
             if (!move_uploaded_file($tmp_name_id, $target_path_id)) {
-                // File upload failed for RF
+
                 $_SESSION['insert'] = false;
-                // Redirect or handle error as needed
-                exit(); // Exit script if file upload fails
+
+                exit();
             }
         }
 
@@ -111,7 +138,7 @@ if(isset($_POST['book'])){
         // Database insertion logic using prepared statements
         $sql = "INSERT INTO transaction_booking (firstname, Unit_code, RA, Holding, RF, ID, agent, agent_role, user_id, team_id, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssssssiis", $firstname, $unitcode, $filename_ra, $filename_holding, $filename_rf, $filename_id, $fullname, $agent_role, $id, $team_id, $status);
+        $stmt->bind_param("ssssssssiis", $firstname, $unitcode, $unique_ra, $unique_holding, $unique_rf, $unique_id, $fullname, $agent_role, $id, $team_id, $status);
 
         if ($stmt->execute()) {
             // Insertion successful

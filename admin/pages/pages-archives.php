@@ -106,11 +106,18 @@ include '../include/php/modal.php';
 
                     <h1 class="h3 mb-3"><strong class="title-dashboard">Booking</strong> Archives</h1>
 
+                    <div class="container mb-4">
+                        <div class="row">
+                            <div class="col text-end">
+                                <button class="btn btn-danger clearAll"><i class="align-middle me-1" data-feather="trash-2"></i>Clear All</button>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-12 col-md-12 d-flex">
                             <div class="card flex-fill">
                                 <div class="card-header">
-
                                     <h5 class="card-title text-white mb-0">Archives List</h5>
                                 </div>
                                 <table class="table table-hover my-0">
@@ -339,6 +346,22 @@ include '../include/php/modal.php';
 
             });
 
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.clearAll').on('click', function() {
+                $('#clearArchivesModal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
+                
+                $('#clear_all_id').val(notificationId);
+            });
         });
     </script>
 

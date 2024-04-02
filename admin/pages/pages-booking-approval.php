@@ -172,7 +172,7 @@ include '../include/php/modal.php';
 														<td class="text-center"> <img src="../../img/documents/<?php echo $rows_booking['ID']; ?>" alt="ID Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $rows_booking['ID']; ?>')"></td>
 														<td><?php echo $rows_booking['Transaction_date']; ?></td>
 														<td><?php echo $rows_booking['agent']; ?></td>
-														<td><?php echo $rows_booking['status']; ?></td>
+														<td class="text-warning fw-bold"><?php echo $rows_booking['status']; ?></td>
 
 														<td>
 															<button class="btn btn-success bookbtn">Book</button>
@@ -288,6 +288,7 @@ include '../include/php/modal.php';
 					return $(this).text();
 				}).get();
 
+				
 				$('#addprice_id').val(data[0]);
 				$('#firstname').val(data[1]);
 				$('#unitcode').val(data[2]);

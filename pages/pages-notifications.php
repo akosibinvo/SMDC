@@ -167,7 +167,7 @@ include "../admin/include/php/modal.php";
                 title: title,
                 text: description,
                 effect: 'slide',
-                speed: 800,
+                speed: 600,
                 customClass: null,
                 customIcon: null,
                 showIcon: true,

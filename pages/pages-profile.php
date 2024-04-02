@@ -490,19 +490,21 @@ include "../admin/include/php/modal.php";
 		});
 	</script>
 
-	<?php
-	// Check if there is a notification in the session
-	if (isset($_SESSION['notification'])) {
-		// Get notification details
-		$title = $_SESSION['notification']['title'];
-		$status = $_SESSION['notification']['status'];
-		$description = $_SESSION['notification']['description'];
-		// Clear the notification from the session
-		unset($_SESSION['notification']);
-	}
-	?>
 
 	<script>
+		<?php
+		// Check if there is a notification in the session
+		if (isset($_SESSION['notification'])) {
+			// Get notification details
+			$title = $_SESSION['notification']['title'];
+			$status = $_SESSION['notification']['status'];
+			$description = $_SESSION['notification']['description'];
+			// Clear the notification from the session
+			unset($_SESSION['notification']);
+		}
+		?>
+
+
 		pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
 
 		function pushNotify(status, title, description) {
@@ -511,7 +513,7 @@ include "../admin/include/php/modal.php";
 				title: title,
 				text: description,
 				effect: 'slide',
-				speed: 800,
+				speed: 600,
 				customClass: null,
 				customIcon: null,
 				showIcon: true,

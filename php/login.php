@@ -47,8 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($hashed_password && password_verify($password, $hashed_password)) {
         // Password is correct, start session
 
-
-
         // Set a cookie if "Remember Me" is checked
         if (isset($_POST['remember-me']) && $_POST['remember-me'] == 'on') {
             // Set a cookie to remember the user for 30 days (2592000 seconds)
