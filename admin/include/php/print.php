@@ -5,12 +5,17 @@ require "../../../php/connection.php";
 
 
 $user_id = $_SESSION['user_id'];
+$agent_name = $_SESSION['agent'];
+$agent_lname = $_SESSION['lastName'];
+
+$fullname = $agent_name.$agent_lname;
 
 
 // SQL query to get candidate votes
 $sql = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
-
 $result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
 
 class CustomPDF extends TCPDF
 {
@@ -23,7 +28,7 @@ class CustomPDF extends TCPDF
         $logoY1 = 15;
         $this->Image($logoImagePath1, $logoX1, $logoY1, $logoWidth1, $logoHeight1);
 
-        $logoImagePath2 = '../../../img/bg/logo-square.jpg';
+        $logoImagePath2 = '../../../img/bg/jqb.jpg';
         $logoWidth2 = 25;
         $logoHeight2 = 25;
         $logoX2 = $this->getPageWidth() - $logoWidth2 - 20;
@@ -33,7 +38,7 @@ class CustomPDF extends TCPDF
     }
 }
 
-if (mysqli_num_rows($result) > 0) {
+
     // Create new PDF document
     $pdf = new CustomPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -41,7 +46,7 @@ if (mysqli_num_rows($result) > 0) {
     $pdf->AddPage();
 
     // Set the top margin
-    $pdf->SetMargins(5, 5, 5);
+    $pdf->SetMargins(7, 30, 7,);
 
     $html .= '<div style="text-align: center;">';
     $html .= '<h1>Sales Report</h1>';
@@ -49,12 +54,12 @@ if (mysqli_num_rows($result) > 0) {
     $html .= '</div>';
 
     $html .= '<div>';
-    $html .= '<table cellpadding="5" style="font-family: Arial, Helvetica, sans-serif; border-collapse: collapse;">';
-    $html .= '<tr>';
-    $html .= '<th style="background-color: #0030ff; color: #fff; text-align: center;" >Unit Code</th>';
-    $html .= '<th style="background-color: #0030ff; color: #fff; text-align: center; " >Amount</th>';
-    $html .= '<th style="background-color: #0030ff; color: #fff; text-align: center; " >Commission</th>';
-    $html .= '<th style="background-color: #0030ff; color: #fff; text-align: center; " >Date</th>';
+    $html .= '<table cellpadding="10" style="font-family: Arial, Helvetica, sans-serif; ">';
+    $html .= '<tr style="background-color: #0030ff; color: #fff; text-align: center;">';
+    $html .= '<th>Unit Code</th>';
+    $html .= '<th>Amount</th>';
+    $html .= '<th>Commission</th>';
+    $html .= '<th>Date</th>';
     $html .= '</tr>';
 
     // Loop through data and add to the HTML table
@@ -66,10 +71,10 @@ if (mysqli_num_rows($result) > 0) {
 
         // Add table row and data for each record
         $html .= '<tr>';
-        $html .= '<td style="border-bottom: 1px solid #ddd; text-align: center;">' . $unitcode . '</td>';
-        $html .= '<td style="border-bottom: 1px solid #ddd; text-align: center;"> ' . $amount . '</td>';
-        $html .= '<td style="border-bottom: 1px solid #ddd; text-align: center;">' . $commission . '</td>';
-        $html .= '<td style="border-bottom: 1px solid #ddd; text-align: center;">' . $date . '</td>';
+        $html .= '<td style="border-bottom: .5px solid #ddd; text-align: center;">' . $unitcode . '</td>';
+        $html .= '<td style="border-bottom: .5px solid #ddd; text-align: center;"> ' . $amount . '</td>';
+        $html .= '<td style="border-bottom: .5px solid #ddd; text-align: center;">' . $commission . '</td>';
+        $html .= '<td style="border-bottom: .5px solid #ddd; text-align: center;">' . $date . '</td>';
         $html .= '</tr>';
     }
 
@@ -78,10 +83,17 @@ if (mysqli_num_rows($result) > 0) {
     // Write HTML to PDF
     $pdf->writeHTML($html, true, false, true, false, '');
 
-    // Output the PDF
     ob_clean();
-    $pdf->Output('sales-report.pdf', 'D');
+    $pdf->Output("sales-report-{$fullname}.pdf", 'D');
     ob_end_clean();
+} else {
+    $_SESSION['notification'] = array(
+        'title' => 'Error!',
+        'status' => 'error',
+        'description' => 'There\'s no sales to print right now.'
+    );
+
+    header("Location: ../../../pages/pages-sales.php");
 }
 
 // Close the database connection

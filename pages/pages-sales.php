@@ -19,6 +19,7 @@ include "../admin/include/php/modal.php";
 
 	<link href="../css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
 </head>
 
 <body>
@@ -94,7 +95,7 @@ include "../admin/include/php/modal.php";
 										$sql_sales .= " LIMIT $offset, $results_per_page";
 										$res_sales = mysqli_query($conn, $sql_sales);
 
-										if ($res_sales) {
+										if ($res_sales && mysqli_num_rows($res_sales) > 0) {
 									?>
 
 											<?php
@@ -111,12 +112,17 @@ include "../admin/include/php/modal.php";
 												<?php
 											}
 												?>
-												</tbody>
-								</table>
-						<?php
+
+										<?php
+										} else {
+											echo "<tr class='text-center'>";
+											echo "<td colspan='6' style='cursor: default'>You don't have any sales yet. Start booking now!</td>";
+											echo "</tr>";
 										}
 									}
-						?>
+										?>
+											</tbody>
+								</table>
 							</div>
 						</div>
 
@@ -158,8 +164,43 @@ include "../admin/include/php/modal.php";
 	</div>
 
 	<script src="../js/app.js"></script>
-	<script src="../js/script.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
 
+	<script>
+		<?php
+		// Check if there is a notification in the session
+		if (isset($_SESSION['notification'])) {
+			// Get notification details
+			$title = $_SESSION['notification']['title'];
+			$status = $_SESSION['notification']['status'];
+			$description = $_SESSION['notification']['description'];
+			// Clear the notification from the session
+			unset($_SESSION['notification']);
+		}
+		?>
+
+		pushNotify("<?php echo $status; ?>", "<?php echo $title; ?>", "<?php echo $description; ?>");
+
+		function pushNotify(status, title, description) {
+			new Notify({
+				status: status,
+				title: title,
+				text: description,
+				effect: 'slide',
+				speed: 600,
+				customClass: null,
+				customIcon: null,
+				showIcon: true,
+				showCloseButton: true,
+				autoclose: true,
+				autotimeout: 1500,
+				gap: 20,
+				distance: 20,
+				type: 1,
+				position: 'x-center top'
+			});
+		}
+	</script>
 
 </body>
 
