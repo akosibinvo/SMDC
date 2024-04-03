@@ -84,9 +84,9 @@ include "../admin/include/php/modal.php";
                                         if (mysqli_num_rows($res_notif) > 0) {
 
                                             while ($row_notif = mysqli_fetch_assoc($res_notif)) {
-                                                $listGroupClass = ($row_notif['read_status'] == 0) ? 'list-group-item bg-primary rounded-2 border-1' : 'list-group-item';
-                                                $textColor = ($row_notif['read_status'] == 0) ? 'text-white' : 'text-dark';
-                                                $iconColor = ($row_notif['read_status'] == 0) ? 'text-white' : 'text-success';
+                                                $listGroupClass = ($row_notif['read_status'] == 0) ? 'list-group-item custom-notif-bg rounded-2 border-0' : 'list-group-item';
+                                                $textColor = ($row_notif['read_status'] == 0) ? 'custom-notif-color' : 'text-dark';
+                                                $iconColor = ($row_notif['read_status'] == 0) ? 'custom-notif-color' : 'text-success';
                                                 $onClickAttr = ($row_notif['read_status'] == 0) ? 'onclick="markAsRead(' . $row_notif['notification_id'] . ')"' : 'onclick="myFunction()"';
 
                                         ?>

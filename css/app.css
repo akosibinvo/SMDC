@@ -12479,6 +12479,15 @@ span.flatpickr-weekday {
     background: rgb(245, 245, 245);
 }
 
+.custom-notif-bg {
+    background-color: #d5ecff;    
+}
+
+.custom-notif-color {
+    color: #10319f;
+}
+
+
 .custom-ul {
     padding: .5px 0;
 }
