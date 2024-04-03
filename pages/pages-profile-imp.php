@@ -68,8 +68,9 @@ $url .= "/SMDC_JQB/pages/pages-sign-up.php?ref=";
 				<div class="container-fluid p-0">
 
 					<div class="mb-3">
-						<h1 class="h3 d-inline align-middle">Profile</h1>
+						<h1 class="h3 d-inline align-middle fw-bold">Profile</h1>
 					</div>
+
 					<div class="row">
 						<div class="col-md-4 col-xl-4">
 							<div class="card mb-3">
@@ -89,7 +90,7 @@ $url .= "/SMDC_JQB/pages/pages-sign-up.php?ref=";
 										</div>
 									</div>
 
-									<h1 class="h5 fw-bold mt-4 mb-2"><?php echo $fullname; ?></h1>
+									<h1 class="h5 fw-bold mt-4 mb-2"><?php echo $user_fullname; ?></h1>
 									<h1 class="h5 text-muted fw-bold mb-0"><?php echo $agent_role; ?></h1>
 								</div>
 

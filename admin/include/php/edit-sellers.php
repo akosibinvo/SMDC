@@ -11,10 +11,16 @@ if (isset($_POST['updateSellers'])) {
     $sellersRole = $_POST['sellersRole'];
 
     // Database update logic using prepared statements
-    $sql = "UPDATE users SET role = ? WHERE ID = ?";
+    $sql = "UPDATE users SET role = ?, team_id = CASE WHEN role = 'IMP' THEN ? ELSE team_id END WHERE ID = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $sellersRole, $update_id);
 
+    // If role is IMP, set team_id to the provided update_id, otherwise keep team_id unchanged
+    if ($sellersRole === 'IMP') {
+        $stmt->bind_param("sii", $sellersRole, $update_id, $update_id);
+    } else {
+        $stmt->bind_param("sii", $sellersRole, $update_id, $update_id);
+    }
+    
     if ($stmt->execute()) {
 
         $_SESSION['notification'] = array(

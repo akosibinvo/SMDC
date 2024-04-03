@@ -53,6 +53,16 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
                 </li>
 
                 <li class="sidebar-header">
+                    Teams
+                </li>
+
+                <li class="sidebar-item <?= $page == "pages-assign-team.php" ? 'active' : ''; ?>">
+                    <a class="sidebar-link" href="pages-assign-team.php">
+                        <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Assign Team</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-header">
                     Archives
                 </li>
 

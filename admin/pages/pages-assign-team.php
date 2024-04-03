@@ -1,8 +1,10 @@
 <?php
 session_start();
-
+//    include '../../php/session.php';
 include '../../php/connection.php';
 include '../include/php/modal.php';
+
+
 ?>
 
 <!DOCTYPE html>
@@ -15,52 +17,13 @@ include '../include/php/modal.php';
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
-    <title>Archives | SMDC JQB</title>
+    <link rel="shortcut icon" href="../../img/icons/logo-square.png" />
 
+    <title>Assign Team | SMDC JQB</title>
 
     <link href="../../css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
-
-    <style>
-        .popUp {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-
-        }
-
-        /* Pop-up Content */
-        .popUp-contents {
-            width: 1200px;
-            height: 600px;
-            z-index: 10000;
-
-        }
-
-        .closeBtn {
-            position: absolute;
-            top: 20px;
-            right: 50px;
-            font-size: 30px;
-            cursor: pointer;
-            color: white;
-            border-radius: 50%;
-            padding: 0;
-            z-index: 10001;
-        }
-
-        .closeBtn:hover {
-            color: red;
-        }
-    </style>
 
 
 </head>
@@ -104,50 +67,34 @@ include '../include/php/modal.php';
             <main class="content">
                 <div class="container-fluid p-0">
 
-                    <h1 class="h3 mb-3"><strong class="title-dashboard">Booking</strong> Archives</h1>
-
-                    <div class="container mb-4">
-                        <div class="row">
-                            <div class="col text-end">
-                                <button class="btn btn-danger clearAll"><i class="align-middle me-1" data-feather="trash-2"></i>Clear All</button>
-                            </div>
-                        </div>
-                    </div>
+                    <h1 class="h3 mb-3"><strong class="title-dashboard"> Assign </strong> Team </h1>
 
                     <div class="row">
                         <div class="col-12 col-md-12 d-flex">
                             <div class="card flex-fill">
                                 <div class="card-header">
-                                    <h5 class="card-title text-white mb-0">Archives List</h5>
+                                    <h5 class="card-title text-white mb-0">Assign Team</h5>
                                 </div>
                                 <table class="table table-hover my-0">
                                     <thead>
-
                                         <tr class="text-center">
-                                            <th>Name</th>
-                                            <th>Unit Code</th>
-                                            <th>Amount</th>
-                                            <th>RA</th>
-                                            <th>Holding</th>
-                                            <th>RF</th>
-                                            <th>ID</th>
-                                            <th>Date</th>
-                                            <th>Agent</th>
-                                            <th>Status</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>E-mail</th>
+                                            <th>Date Joined</th>
+                                            <th>Role</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
+
                                     <tbody>
                                         <?php
-                                        // Pagination configuration
-
-
                                         $results_per_page = 5;
-                                        $sql_restore = "SELECT * FROM archives_booking WHERE status = 'Removed' ";
-                                        $res_restore = mysqli_query($conn, $sql_restore);
+                                        $sql_assign = "SELECT * FROM users WHERE team_id = '0' AND role != 'IMP' ";
+                                        $res_assign = mysqli_query($conn, $sql_assign);
 
-                                        if ($res_restore == TRUE) {
-                                            $total_results = mysqli_num_rows($res_restore);
+                                        if ($res_assign == TRUE) {
+                                            $total_results = mysqli_num_rows($res_assign);
                                             $total_pages = ceil($total_results / $results_per_page);
 
                                             // Check current page and set offset
@@ -159,29 +106,33 @@ include '../include/php/modal.php';
                                             $offset = ($page - 1) * $results_per_page;
 
                                             // Fetch data for the current page
-                                            $sql_restore .= " LIMIT $offset, $results_per_page";
-                                            $res_restore = mysqli_query($conn, $sql_restore);
+                                            $sql_assign .= " LIMIT $offset, $results_per_page";
+                                            $res_assign = mysqli_query($conn, $sql_assign);
 
-                                            if ($res_restore && mysqli_num_rows($res_restore) > 0) {
+
+                                            if ($res_assign && mysqli_num_rows($res_assign) > 0) {
                                         ?>
-                                                <?php while ($rows_restore = mysqli_fetch_assoc($res_restore)) { ?>
+                                                <?php
 
+                                                while ($rows_assign = mysqli_fetch_assoc($res_assign)) {
+                                                    $assign_id = $rows_assign['ID'];
+                                                    $firstname = $rows_assign['firstName'];
+                                                    $lastname = $rows_assign['lastName'];
+                                                    $email = $rows_assign['email'];
+                                                    $role = $rows_assign['role'];
+                                                    $dateJoined = $rows_assign['dateJoined'];
+
+                                                ?>
                                                     <tr class="text-center">
-                                                        <td class="d-none"><?php echo $rows_restore['client_id']; ?></td>
-                                                        <td><?php echo $rows_restore['firstname']; ?></td>
-                                                        <td><?php echo $rows_restore['Unit_code']; ?></td>
-                                                        <td><?php echo '₱' . ' ' . number_format($rows_restore['Amount'], 0, '.', ','); ?></td>
-                                                        <td class="text-center"> <img src="../../img/documents/<?php echo $rows_restore['RA']; ?>" alt="RA Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $rows_restore['RA']; ?>')"></td>
-                                                        <td class="text-center"> <img src="../../img/documents/<?php echo $rows_restore['Holding']; ?>" alt="Holding Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $rows_restore['Holding']; ?>')"></td>
-                                                        <td class="text-center"> <img src="../../img/documents/<?php echo $rows_restore['RF']; ?>" alt="RF Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $rows_restore['RF']; ?>')"></td>
-                                                        <td class="text-center"> <img src="../../img/documents/<?php echo $rows_restore['ID']; ?>" alt="ID Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $rows_restore['ID']; ?>')"></td>
-                                                        <td><?php echo $rows_restore['Transaction_date']; ?></td>
-                                                        <td><?php echo $rows_restore['agent']; ?></td>
-                                                        <td><?php echo $rows_restore['status']; ?></td>
+                                                        <td class="d-none"> <?php echo $assign_id ?> </td>
+                                                        <td> <?php echo $firstname ?> </td>
+                                                        <td> <?php echo $lastname ?> </td>
+                                                        <td> <?php echo $email ?> </td>
 
+                                                        <td> <?php echo $dateJoined ?> </td>
+                                                        <td class="text-primary fw-bold"><?php echo $role ?></td>
                                                         <td>
-                                                            <button class="btn btn-primary restorebtn">Restore</button>
-                                                            <button class="btn btn-danger deletebtn">Delete</button>
+                                                            <button class="btn btn-primary assignbtn">Assign</button>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -189,7 +140,7 @@ include '../include/php/modal.php';
                             <?php
                                             } else {
                                                 echo "<tr class='text-center'>";
-                                                echo "<td colspan='12' style='cursor: default'>There is nothing on archives table.</td>";
+                                                echo "<td colspan='12' style='cursor: default'>There's nothing here.</td>";
                                                 echo "</tr>";
                                             }
                                         }
@@ -231,29 +182,6 @@ include '../include/php/modal.php';
 
         </div>
     </div>
-
-    <!-- Pop-up to display the expanded image -->
-    <div id="imageModal" class="popUp" style="display: none;">
-        <span class="closeBtn" onclick="closeModal()">&times;</span>
-        <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-            <img class="popUp-contents" id="expandedImage">
-        </div>
-    </div>
-
-    <script>
-        function enlargeImg(imgSrc) {
-            var modal = document.getElementById('imageModal');
-            var modalImg = document.getElementById('expandedImage');
-            modal.style.display = 'block';
-            modalImg.src = imgSrc;
-        }
-
-        document.getElementsByClassName('closeBtn')[0].onclick = function() {
-            document.getElementById('imageModal').style.display = 'none';
-        };
-    </script>
-
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
@@ -300,30 +228,9 @@ include '../include/php/modal.php';
     <script>
         $(document).ready(function() {
 
-            $('.deletebtn').on('click', function() {
+            $('.assignbtn').on('click', function() {
 
-                $('#deleteModal').modal('show');
-
-                $tr = $(this).closest('tr');
-
-                var data = $tr.children("td").map(function() {
-                    return $(this).text();
-                }).get();
-
-                console.log(data);
-
-                $('#delete_id').val(data[0]);
-
-            });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-
-            $('.restorebtn').on('click', function() {
-
-                $('#restoreModal').modal('show');
+                $('#assignTeamModal').modal('show');
 
                 $tr = $(this).closest('tr');
 
@@ -331,41 +238,12 @@ include '../include/php/modal.php';
                     return $(this).text();
                 }).get();
 
-                $('#restore_id').val(data[0]);
-                $('#firstname').val(data[1]);
-                $('#unitcode').val(data[2]);
-                $('#amount').val(data[3]);
-                $('#RA').val(data[4]);
-                $('#Holding').val(data[5]);
-                $('#RF').val(data[6]);
-                $('#ID').val(data[7]);
-                $('#Transaction_date').val(data[8]);
-                $('#agent').val(data[9]);
-                $('#status').val(data[10]);
-
+                $('#assign_id').val(data[0]);
 
             });
 
         });
     </script>
-
-    <script>
-        $(document).ready(function() {
-            $('.clearAll').on('click', function() {
-                $('#clearArchivesModal').modal('show');
-
-                $tr = $(this).closest('tr');
-
-                var data = $tr.children("td").map(function() {
-                    return $(this).text();
-                }).get();
-
-                $('#clear_all_id').val(notificationId);
-            });
-        });
-    </script>
-
-
 
 
 

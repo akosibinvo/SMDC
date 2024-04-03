@@ -11062,7 +11062,7 @@ footer.footer ul {
 .hamburger:after {
     bottom: -7.5px;
     position: absolute;
-    width: 16px
+    width: 24px
 }
 .sidebar-toggle:hover .hamburger, .sidebar-toggle:hover .hamburger:after, .sidebar-toggle:hover .hamburger:before {
     background: #3b7ddd
@@ -12479,7 +12479,68 @@ span.flatpickr-weekday {
     background: rgb(245, 245, 245);
 }
 
+.custom-ul {
+    padding: .5px 0;
+}
 
+.custom-ul a {
+    text-decoration: none;
+}
+
+.custom-li {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    justify-content: space-between;
+    list-style-type: none;
+    height: 50px;
+    background-color: #d5ecff;
+    border-radius: 5px;
+    border-left: 6px solid #0030ff;
+    color: #10319f;
+
+}
+
+.custom-li:hover {
+    background: #85bfff;
+    color: #fff;
+}
+
+
+.custom-li span {
+    text-align: center;
+    width: 100%;
+}
+
+.custom-scrollbar {
+    max-height: 355px;
+    overflow-y: auto;
+}
+
+.custom-graph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 355px;
+
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar {
+    display: block;
+}
+
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: .5rem;
+    background: #F0F0F0;
+    display: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(47, 108, 255, .8);
+    border-radius: 2em;
+
+}
 
 
 @media screen and (max-width: 1400px) {

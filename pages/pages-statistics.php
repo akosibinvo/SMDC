@@ -20,11 +20,7 @@ include "../admin/include/php/modal.php";
 
 	<link href="../css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-	<!-- Bootstrap Datepicker CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
-	<!-- Bootstrap Datepicker JS -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 	<!-- Simple Notify -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
 </head>
@@ -59,7 +55,7 @@ include "../admin/include/php/modal.php";
 					<h1 class="h3 mb-3"><strong class="title-dashboard">Statistics</strong> Dashboard</h1>
 
 					<div class="row mb-0">
-						<div class="col-8 col-md-8 d-flex">
+						<div class="col-12 col-md-8 col-xl-8 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
 									<h5 class="card-title mb-0 text-white">Revenue</h5>
@@ -70,7 +66,7 @@ include "../admin/include/php/modal.php";
 							</div>
 						</div>
 
-						<div class="col-4 col-md-4 d-flex">
+						<div class="col-12 col-md-4 col-xl-4 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
 
@@ -79,7 +75,7 @@ include "../admin/include/php/modal.php";
 
 								<div class="row p-3">
 
-									<div class="col-md-6">
+									<div class="col-md-6 mb-2">
 										<select class="form-select" name="start_date" id="start_date" required>
 											<option value="">Start Date</option>
 											<?php
@@ -101,7 +97,7 @@ include "../admin/include/php/modal.php";
 										</div>
 									</div>
 
-									<div class="col-md-6">
+									<div class="col-md-6 mb-2">
 										<select class="form-select" name="end_date" id="end_date" required>
 											<option value="">End Date</option>
 										</select>

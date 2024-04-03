@@ -22,7 +22,7 @@ include 'include/php/modal.php';
 
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
-	
+
 </head>
 
 <body>
@@ -69,11 +69,21 @@ include 'include/php/modal.php';
 					</li>
 
 					<li class="sidebar-header">
+						Teams
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages/pages-assign-team.php">
+							<i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Assign Team</span>
+						</a>
+					</li>
+
+					<li class="sidebar-header">
 						Archives
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages/pages-manage-sellers.php">
+						<a class="sidebar-link" href="pages/pages-archives.php">
 							<i class="align-middle" data-feather="trash-2"></i> <span class="align-middle">Archives Booking</span>
 						</a>
 					</li>
@@ -113,7 +123,7 @@ include 'include/php/modal.php';
 								<i class="align-middle" data-feather="settings"></i>
 							</a>
 
-							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+							<a class="nav-link dropdown-toggle d-sm-inline-block me-2" href="#" data-bs-toggle="dropdown">
 								<span class="text-dark">User</span>
 							</a>
 
@@ -256,6 +266,62 @@ include 'include/php/modal.php';
 						</div>
 					</div>
 
+					<div class="row mb-3">
+						<div class="col-12 col-md-7 col-xl-7 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
+									<h5 class="card-title text-white mb-0">Total Sales</h5>
+								</div>
+
+								<div class="card-body custom-graph">
+									<canvas class="p-2" id="myChart"></canvas>
+								</div>
+
+
+
+							</div>
+
+
+
+						</div>
+
+						<div class="col-12 col-md-5 col-md-5 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
+									<h5 class="card-title text-white mb-0">Pending List</h5>
+								</div>
+								<?php
+								$sql_pending = "SELECT * FROM transaction_booking WHERE status = 'Pending'";
+								$res_pending = mysqli_query($conn, $sql_pending);
+
+								if ($res_pending && mysqli_num_rows($res_pending) > 0) {
+								?>
+									<div class="card-body custom-scrollbar" id="DragDrop">
+										<?php
+										while ($row = mysqli_fetch_assoc($res_pending)) {
+										?>
+											<ul class="custom-ul">
+												<a href="pages/pages-booking-approval.php">
+													<li class="custom-li">
+														<span><?php echo $row['agent']; ?></span>
+														<span class="text-uppercase"><?php echo $row['Unit_code']; ?></span>
+														<span class="fw-bold" style="color: #0a1b5c;"><?php echo $row['status']; ?></span>
+													</li>
+												</a>
+											</ul>
+										<?php } ?>
+									</div>
+								<?php
+								} else {
+									echo "<div class='card-body d-flex align-items-center justify-content-center'>There's no pending booking.</div>";
+								}
+								?>
+							</div>
+						</div>
+
+					</div>
+
+
 					<div class="row mb-0">
 						<div class="col-12 col-md-12 d-flex">
 							<div class="card flex-fill">
@@ -352,7 +418,7 @@ include 'include/php/modal.php';
 
 					</div>
 
-					<div class="row mt-0">
+					<div class="row mt-n2 mb-3">
 						<div class="d-flex justify-content-end">
 
 							<nav aria-label="Page navigation example">
@@ -377,6 +443,8 @@ include 'include/php/modal.php';
 
 						</div>
 					</div>
+
+
 			</main>
 
 		</div>
@@ -385,6 +453,18 @@ include 'include/php/modal.php';
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="../js/app.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+	<script>
+		const dropItems = document.getElementById('DragDrop')
+		new Sortable(dropItems, {
+			animation: 250,
+			chosenClass: "sortable-chosen",
+			dragClass: "sortable-drag"
+		});
+	</script>
 
 	<script>
 		$(document).ready(function() {
@@ -486,6 +566,38 @@ include 'include/php/modal.php';
 				position: 'x-center top'
 			});
 		}
+	</script>
+
+	<script>
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var myChart = new Chart(ctx, {
+			type: 'pie',
+			data: {
+				labels: [
+					'Red',
+					'Blue',
+					'Yellow'
+				],
+				datasets: [{
+					label: 'My First Dataset',
+					data: [300, 50, 100],
+					backgroundColor: [
+						'#0a1b5c',
+						'#10319f',
+						'#0c3cff'
+					],
+					hoverOffset: 4
+				}]
+			},
+			options: {
+				plugins: {
+					title: {
+						display: true,
+						text: 'Total Sales'
+					}
+				}
+			}
+		});
 	</script>
 
 

@@ -180,7 +180,7 @@ include '../include/php/modal.php';
 					</div>
 
 
-					<div class="row mt-0">
+					<div class="row mt-n2">
 						<div class="d-flex justify-content-end">
 
 							<nav aria-label="Page navigation example">

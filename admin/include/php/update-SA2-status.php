@@ -8,7 +8,7 @@ require "../../../php/connection.php";
 if (isset($_POST['congrats_SA2'])) {
 
     $id = $_SESSION['user_id'];
-    $sql_update_status2 = "UPDATE users SET role = 'IMP' WHERE ID = '$id' ";
+    $sql_update_status2 = "UPDATE users SET role = 'IMP', team_id = '$id' WHERE ID = '$id' ";
 
     if (mysqli_query($conn, $sql_update_status2)) {
 

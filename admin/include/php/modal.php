@@ -282,10 +282,10 @@
                               if (!empty($profile_img_path)) {
                                  $profile_img_path = "../img/avatars/" . $profile_img_path;
                               } else {
-                                 $profile_img_path = "../img/avatars/default-profile-blue.png";
+                                 $profile_img_path = "../img/avatars/default/default-profile-blue.png";
                               }
                            } else {
-                              $profile_img_path = "../img/avatars/default-profile-blue.png";
+                              $profile_img_path = "../img/avatars/default/default-profile-blue.png";
                            }
                            ?>
                            <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle mb-3" id="imagePreview" width="205" height="205" />
@@ -561,7 +561,7 @@
             </div>
             <div class="modal-footer">
                <form action="php/logout.php" method="POST">
-                  <input type="hidden" name="logout_id" id="logout_id">
+                  <input type="hidden" name="index_logout_id" id="index_logout_id">
                   <button type="submit" name="logout" class="btn btn-primary"> Yes </button>
                </form>
                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> No </button>
@@ -724,6 +724,63 @@
                   <button type="submit" name="remove_info" class="btn btn-danger"> Remove </button>
                </form>
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- ======================================= ASSIGN TEAM MODAL ======================================= -->
+   <div class="modal fade" id="assignTeamModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Manage Sellers</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               </button>
+            </div>
+            <div class="modal-body">
+               <form action="../include/php/assign-team.php" method="post" enctype="multipart/form-data">
+
+                  <input type="hidden" name="assign_id" id="assign_id">
+
+                  <div class="row mb-3">
+
+                     <div class="form-group col-md-12 mb-2">
+                        <label class="form-label">List of IMPs</label>
+
+                        <select class="form-select" name="assignTeam" required>
+                           <option value=""> Select IMP </option>
+
+                           <?php
+                           $sql_imp = "SELECT * FROM users WHERE role = 'IMP' ";
+                           $res_imp = mysqli_query($conn, $sql_imp);
+
+                           if ($res_imp) {
+                              while ($row = mysqli_fetch_assoc($res_imp)) {
+                                 $fname = $row['firstName'];
+                                 $lname = $row['lastName'];
+                                 $team_id = $row['team_id'];
+                                 $imp_fullname = $fname . ' ' . $lname;
+                               
+                                 echo "<option value='$team_id'>$imp_fullname</option>";
+                              }
+                           }
+                           ?>
+
+                        </select>
+
+                     </div>
+
+                  </div>
+
+                  <div class="modal-footer">
+                     <div class="gap-2 mt-4">
+                        <button type="submit" name="assignTeambtn" class="btn btn-primary">Assign</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                     </div>
+                  </div>
+
+               </form>
             </div>
          </div>
       </div>

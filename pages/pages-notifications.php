@@ -52,7 +52,7 @@ include "../admin/include/php/modal.php";
             <main class="content">
                 <div class="container-fluid p-0">
 
-                    <h1 class="h3"><strong class="title-dashboard">Sales</strong> Dashboard</h1>
+                    <h1 class="h3"><strong class="title-dashboard">Notifications</strong> Dashboard</h1>
 
                     <div class="container mb-4">
                         <div class="row">
@@ -91,24 +91,23 @@ include "../admin/include/php/modal.php";
 
                                         ?>
                                                 <div class="<?php echo $listGroupClass; ?> mb-2 rounded-2 border-1" <?php echo $onClickAttr; ?> style="cursor: pointer;">
-                                                    <div class="row text-center">
-                                                        <div class="col-1">
+                                                    <div class="row text-center d-flex align-items-center justify-content-center">
+                                                        <div class="col-1 col-md-1 col-xl-1">
                                                             <i class="<?php echo $iconColor; ?>" data-feather="check-circle"></i>
                                                         </div>
-                                                        <div class="col-2">
+                                                        <div class="col-12 col-md-2 col-xl-2 d-none d-md-block d-xl-block">
                                                             <div class="<?php echo $textColor; ?>">Approved Booking</div>
-
                                                         </div>
 
-                                                        <div class="col-7">
+                                                        <div class="col-10 col-md-7 col-xl-7">
                                                             <div class="<?php echo $textColor; ?> small mt-1"><?php echo $row_notif['message']; ?></div>
                                                         </div>
 
-                                                        <div class="col-1">
+                                                        <div class="col-12 col-md-1 col-xl-1 d-none d-md-block d-xl-block">
                                                             <div class="<?php echo $textColor; ?> small mt-1"><?php echo $row_notif['time_only']; ?></div>
                                                         </div>
 
-                                                        <div class="col-1">
+                                                        <div class="col-1 col-md-1 col-xl-1">
                                                             <div class="<?php echo $textColor; ?> mt-1"><i class="align-middle me-1 trash-icon" data-feather="trash-2" data-bs-toggle="modal" data-bs-target="#deleteNotificationModal"></i></div>
                                                             <span class="notification-id" style="display: none;"><?php echo $row_notif['notification_id']; ?></span>
                                                         </div>

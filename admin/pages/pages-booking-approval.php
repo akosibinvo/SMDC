@@ -157,9 +157,9 @@ include '../include/php/modal.php';
 
 											if ($res_booking && mysqli_num_rows($res_booking) > 0) {
 										?>
-												<?php 
-												while ($rows_booking = mysqli_fetch_assoc($res_booking)) { 
-													?>
+												<?php
+												while ($rows_booking = mysqli_fetch_assoc($res_booking)) {
+												?>
 
 													<tr class="text-center">
 														<td class="d-none"><?php echo $rows_booking['client_id']; ?></td>
@@ -172,10 +172,10 @@ include '../include/php/modal.php';
 														<td class="text-center"> <img src="../../img/documents/<?php echo $rows_booking['ID']; ?>" alt="ID Image" style="width: 35px; height: 35px; cursor: pointer;" onclick="enlargeImg('../../img/documents/<?php echo $rows_booking['ID']; ?>')"></td>
 														<td><?php echo $rows_booking['Transaction_date']; ?></td>
 														<td><?php echo $rows_booking['agent']; ?></td>
-														<td class="text-warning fw-bold"><?php echo $rows_booking['status']; ?></td>
+														<td class="fw-bold text-warning"><?php echo $rows_booking['status']; ?></td>
 
 														<td>
-															<button class="btn btn-success bookbtn">Book</button>
+															<button class="btn btn-primary bookbtn">Book</button>
 															<button class="btn btn-danger rejectbtn">Remove</button>
 														</td>
 													</tr>
@@ -195,7 +195,7 @@ include '../include/php/modal.php';
 
 					</div>
 
-					<div class="row mt-0">
+					<div class="row mt-n2">
 						<div class="d-flex justify-content-end">
 
 							<nav aria-label="Page navigation example">
@@ -288,7 +288,7 @@ include '../include/php/modal.php';
 					return $(this).text();
 				}).get();
 
-				
+
 				$('#addprice_id').val(data[0]);
 				$('#firstname').val(data[1]);
 				$('#unitcode').val(data[2]);

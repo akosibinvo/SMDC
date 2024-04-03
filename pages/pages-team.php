@@ -76,6 +76,7 @@ include "../admin/include/php/modal.php";
                                         if (isset($_SESSION['user_id'])) {
                                             $team_id = $_SESSION['user_id'];
 
+                                            $results_per_page = 5;
                                             $sql = "SELECT * FROM users WHERE role != 'IMP' AND team_id = ?";
                                             $stmt = $conn->prepare($sql);
                                             $stmt->bind_param("i", $team_id);

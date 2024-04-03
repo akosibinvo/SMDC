@@ -7,8 +7,8 @@ require "../../../php/connection.php";
 $user_id = $_SESSION['user_id'];
 $agent_name = $_SESSION['agent'];
 $agent_lname = $_SESSION['lastName'];
-
-$fullname = $agent_name.$agent_lname;
+$agent_fullname = $agent_name.$agent_lname;
+$totalAmount = 0;
 
 
 // SQL query to get candidate votes
@@ -46,11 +46,11 @@ class CustomPDF extends TCPDF
     $pdf->AddPage();
 
     // Set the top margin
-    $pdf->SetMargins(7, 30, 7,);
+    $pdf->SetMargins(7, 30, 7);
 
     $html .= '<div style="text-align: center;">';
     $html .= '<h1>Sales Report</h1>';
-    $html .= '<p style="text-align: center; font-size: 10px;">Here is your sales report. <br> <br> </p> ';
+    $html .= '<p style="text-align: center; font-size: 10px;">This is your sales report, offering insights into the <br> company\'s sales performance. <br> <br> </p> ';
     $html .= '</div>';
 
     $html .= '<div>';
@@ -67,6 +67,7 @@ class CustomPDF extends TCPDF
         $unitcode = $row['Unit_code'];
         $amount = 'P ' . number_format($row['Amount'], 0, '.', ',');
         $commission = 'P ' . number_format($row['Commissions'], 0, '.', ',');
+        $totalAmount += $row['Amount'];
         $date = $row['Transaction_date'];
 
         // Add table row and data for each record
@@ -76,15 +77,21 @@ class CustomPDF extends TCPDF
         $html .= '<td style="border-bottom: .5px solid #ddd; text-align: center;">' . $commission . '</td>';
         $html .= '<td style="border-bottom: .5px solid #ddd; text-align: center;">' . $date . '</td>';
         $html .= '</tr>';
+
     }
 
     $html .= '</table>';
+
+    $html .= '<div style="text-align: right;"> <br> <br> <span style="font-weight: bold;"> Total Amount: </span> P ' . number_format($totalAmount, 0, '.', ',') . '</div>';
+
     $html .= '</div>';
+
+    
     // Write HTML to PDF
     $pdf->writeHTML($html, true, false, true, false, '');
 
     ob_clean();
-    $pdf->Output("sales-report-{$fullname}.pdf", 'D');
+    $pdf->Output("sales-report-{$agent_fullname}.pdf", 'D');
     ob_end_clean();
 } else {
     $_SESSION['notification'] = array(

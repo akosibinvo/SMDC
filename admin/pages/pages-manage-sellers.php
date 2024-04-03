@@ -132,13 +132,17 @@ include '../include/php/modal.php';
 														<td> <?php echo $dateJoined ?> </td>
 														<td class="text-primary fw-bold"><?php echo $role ?></td>
 														<td>
-															<button class="btn btn-success manageSellersbtn">Edit</button>
+															<button class="btn btn-primary manageSellersbtn">Edit</button>
 															<button class="btn btn-danger removeSellersbtn">Remove</button>
 														</td>
 													</tr>
 												<?php } ?>
 									</tbody>
 							<?php
+											} else {
+												echo "<tr class='text-center'>";
+												echo "<td colspan='12' style='cursor: default'>There's nothing here.</td>";
+												echo "</tr>";
 											}
 										}
 							?>
@@ -148,7 +152,7 @@ include '../include/php/modal.php';
 
 					</div>
 
-					<div class="row mt-0">
+					<div class="row mt-n2">
 						<div class="d-flex justify-content-end">
 
 							<nav aria-label="Page navigation example">

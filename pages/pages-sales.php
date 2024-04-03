@@ -76,7 +76,7 @@ include "../admin/include/php/modal.php";
 										</tr>
 									</thead>
 									<?php
-									$results_per_page = 5;
+									$results_per_page = 10;
 									$sql_sales = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
 									$res_sales = mysqli_query($conn, $sql_sales);
 

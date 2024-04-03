@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id'])) {
         while ($row = $result->fetch_assoc()) {
             $user_id = $row["ID"];
 
-            $fullname = $row["firstName"] . " " . $row["lastName"];
+            $user_fullname = $row["firstName"] . " " . $row["lastName"];
 
             $firstname = $row["firstName"];
             $lastname = $row["lastName"];
