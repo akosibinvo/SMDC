@@ -12370,6 +12370,11 @@ span.flatpickr-weekday {
     color: #0030ff;
 }
 
+.bg-blue {
+    background: rgb(47,108,255);
+    background: linear-gradient(90deg, rgba(47,108,255,1) 0%, rgba(12,60,255,1) 100%);
+}
+
 .background-blue {
     background: rgb(47,108,255);
     background: linear-gradient(90deg, rgba(47,108,255,1) 0%, rgba(12,60,255,1) 100%);
@@ -12507,7 +12512,6 @@ span.flatpickr-weekday {
     border-radius: 5px;
     border-left: 6px solid #0030ff;
     color: #10319f;
-
 }
 
 .custom-li:hover {
@@ -12531,7 +12535,6 @@ span.flatpickr-weekday {
     align-items: center;
     justify-content: center;
     max-height: 355px;
-
 }
 
 .custom-scrollbar:hover::-webkit-scrollbar {
@@ -12549,6 +12552,37 @@ span.flatpickr-weekday {
     background: rgba(47, 108, 255, .8);
     border-radius: 2em;
 
+}
+
+.team-information {
+    padding: 12px;
+    height: auto;
+    border-radius: 6px;
+    cursor: default;
+}
+
+.team-information:hover {
+    background-color: #d5ecff;
+    color: #10319f;    
+}
+
+.team-details {
+    padding: 4px 6px;
+    width: 100%;
+}
+
+.custom-remove {
+    border-radius: 4px;
+    padding: 4px 10px;
+    outline: none;
+    border: 1px solid #0a1b5c;
+    background: transparent;
+    color: #0a1b5c;
+}
+
+.custom-remove:hover {
+    border: 1px solid #dc3545;
+    color: #dc3545;
 }
 
 

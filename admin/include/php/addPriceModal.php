@@ -111,7 +111,7 @@ if (isset($_POST['addprice'])) {
                 } else {
 
                     $_SESSION['notification'] = array(
-                        'title' => 'Error!!',
+                        'title' => 'Error!',
                         'status' => 'error',
                         'description' => 'Error in booking.'
                     );

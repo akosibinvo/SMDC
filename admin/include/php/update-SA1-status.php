@@ -29,6 +29,7 @@ if (isset($_POST['congrats_SA1'])) {
             );
 
             header("Location: ../../../pages/pages-profile.php");
+            unset($_SESSION['sa1_target_sales_met']);
 
         } else if ($role === "IMP") {
 
@@ -39,6 +40,8 @@ if (isset($_POST['congrats_SA1'])) {
             );
 
             header("Location: ../../../pages/pages-profile-imp.php");
+            unset($_SESSION['sa1_target_sales_met']);
+
         } else {
             unset($_SESSION['notification']);
         }

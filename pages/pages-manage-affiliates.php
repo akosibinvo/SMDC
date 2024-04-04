@@ -76,7 +76,7 @@ include "../admin/include/php/modal.php";
 									<tbody>
 										<?php
 										$results_per_page = 5;
-										$sql_overcoms = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent_role != 'IMP' AND team_id = '$id' ";
+										$sql_overcoms = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent_role != 'IMP' AND team_id = '$id' AND user_id != '$user_id' ";
 										$res_overcoms = mysqli_query($conn, $sql_overcoms);
 
 										if ($res_overcoms == TRUE) {

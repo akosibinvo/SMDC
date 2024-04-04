@@ -127,11 +127,21 @@ if(isset($_POST['book'])){
         }
 
 
+
+        $sql_imp = "SELECT * FROM users WHERE ID = 'user_id' ";
+        $res_imp = mysqli_query($conn, $sql_imp);
+
+        if ($res_imp) {
+            while ($row = mysqli_fetch_assoc($res_imp)) {
+                $agent_role = $row['role'];
+            }
+        }
+
+
         $firstname = $_POST['firstname'];
         $unitcode = $_POST['unitCode'];
         $agent = $_SESSION['agent'];
         $lastname = $_SESSION['lastName'];
-        $agent_role = $_SESSION['role'];
         $fullname = $agent . " " . $lastname;
         $status = 'Pending';
 

@@ -28,7 +28,9 @@ if (isset($_POST['congrats_SA2'])) {
                 'description' => 'Congratulations, you are now a SA2.'
             );
 
-            header("Location: ../../../pages/pages-profile.php");
+            header("Location: ../../../pages/pages-booking.php");
+            unset($_SESSION['sa2_target_sales_met']);
+            
         } else if ($role === "IMP") {
 
             $_SESSION['notification'] = array(
@@ -37,7 +39,9 @@ if (isset($_POST['congrats_SA2'])) {
                 'description' => 'Congratulations, you are now a IMP.'
             );
 
-            header("Location: ../../../pages/pages-profile-imp.php");
+            header("Location: ../../../pages/pages-booking.php");
+            unset($_SESSION['sa2_target_sales_met']);
+
         } else {
             unset($_SESSION['notification']);
         }

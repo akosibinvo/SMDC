@@ -518,6 +518,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 											<th>Amount</th>
 											<th>Commission</th>
 											<th>Date</th>
+											<th>Role</th>
 											<th>Status</th>
 										</tr>
 									</thead>
@@ -554,6 +555,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 														<td><?php echo '₱' . ' ' . number_format($row['Amount'], 0, '.', ','); ?></td>
 														<td><?php echo '₱' . ' ' . number_format($row['Commissions'], 0, '.', ','); ?></td>
 														<td><?php echo $row['Transaction_date']; ?></td>
+														<td><?php echo $row['agent_role']; ?></td>
 														<td class="text-success fw-bold"><?php echo $row['status']; ?></td>
 													</tr>
 												<?php

@@ -11,7 +11,7 @@ if (isset($_POST['updateSellers'])) {
     $sellersRole = $_POST['sellersRole'];
 
     // Database update logic using prepared statements
-    $sql = "UPDATE users SET role = ?, team_id = CASE WHEN role = 'IMP' THEN ? ELSE team_id END WHERE ID = ?";
+    $sql = "UPDATE users SET role = ?, team_id = CASE WHEN role = 'IMP' THEN ? ELSE 0 END WHERE ID = ?";
     $stmt = $conn->prepare($sql);
 
     // If role is IMP, set team_id to the provided update_id, otherwise keep team_id unchanged

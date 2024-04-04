@@ -761,7 +761,7 @@
                                  $lname = $row['lastName'];
                                  $team_id = $row['team_id'];
                                  $imp_fullname = $fname . ' ' . $lname;
-                               
+
                                  echo "<option value='$team_id'>$imp_fullname</option>";
                               }
                            }
@@ -785,6 +785,60 @@
          </div>
       </div>
    </div>
+
+
+   <!--======================================= VIEW TEAMS MODAL ======================================= -->
+   <div class="modal fade border-0" id="teamModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+         <div class="modal-content border-0">
+            <div class="modal-header bg-blue">
+               <h5 class="modal-title text-white" id="exampleModalLabel">Team Members</h5>
+               <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button> -->
+            </div>
+            <div class="modal-body p-2">
+               <div class="team-content px-2">
+                  <input type="hidden" name="team_id" id="team_id">
+                  <div class="row mb-3 ">
+                     <div id="team_information">
+
+                     </div>
+                  </div>
+                  <div class="modal-footer mb-0">
+                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+   <!--======================================= REMOVE MEMBER CONFIRMATION MODAL ======================================= -->
+   <div class="modal fade" id="removeTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+               </button>
+            </div>
+            <div class="modal-body">
+               <p> Are you sure you want to remove the member? </p>
+            </div>
+            <div class="modal-footer">
+               <form action="../include/php/remove_member.php" method="POST">
+
+                  <input type="hidden" id="hiddenTeamMemberId" name="team_remove_id" value="">
+
+                  <button type="submit" name="team_remove" class="btn btn-primary"> Yes </button>
+               </form>
+               <button type="button" class="btn btn-danger" data-bs-target="#teamModal" data-bs-toggle="modal" data-bs-dismiss="modal"> No </button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
 
    <script>
       // Function to add commas to the input value for every three digits

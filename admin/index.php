@@ -74,7 +74,13 @@ include 'include/php/modal.php';
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages/pages-assign-team.php">
-							<i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Assign Team</span>
+							<i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Assign to Team</span>
+						</a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages/pages-team.php">
+							<i class="align-middle" data-feather="users"></i> <span class="align-middle">Manage Teams</span>
 						</a>
 					</li>
 

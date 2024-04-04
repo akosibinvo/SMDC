@@ -3,7 +3,114 @@ include "../php/session.php";
 require "../php/connection.php";
 include "../admin/include/php/modal.php";
 
+	if (isset($_SESSION['sa1_target_sales_met']) && $_SESSION['sa1_target_sales_met']) {
+		echo '
+        <script>
+            $(document).ready(function() {
+                $("#congratsSA1Modal").modal("show");
+                
+                $("#congratsSA1Modal").on("shown.bs.modal", function () {
+                    const count = 200,
+                    defaults = {
+                        origin: { y: 0.7 },
+                        zIndex: 1200,
+                    };
 
+
+                    function fire(particleRatio, opts) {
+                    confetti(
+                        Object.assign({}, defaults, opts, {
+                        particleCount: Math.floor(count * particleRatio),
+                        })
+                    );
+                    }
+
+                    fire(0.25, {
+                    spread: 26,
+                    startVelocity: 55,
+                    });
+
+                    fire(0.2, {
+                    spread: 60,
+                    });
+
+                    fire(0.35, {
+                    spread: 100,
+                    decay: 0.91,
+                    scalar: 0.8,
+                    });
+
+                    fire(0.1, {
+                    spread: 120,
+                    startVelocity: 25,
+                    decay: 0.92,
+                    scalar: 1.2,
+                    });
+
+                    fire(0.1, {
+                    spread: 120,
+                    startVelocity: 45,
+                    });
+                });
+
+            });
+        </script>';
+	}
+
+	if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met']) {
+
+		echo '
+        <script>
+            $(document).ready(function() {
+                $("#congratsSA2Modal").modal("show");
+                
+                $("#congratsSA2Modal").on("shown.bs.modal", function () {
+                    const count = 200,
+                    defaults = {
+                        origin: { y: 0.7 },
+                        zIndex: 1200,
+                    };
+
+
+                    function fire(particleRatio, opts) {
+                    confetti(
+                        Object.assign({}, defaults, opts, {
+                        particleCount: Math.floor(count * particleRatio),
+                        })
+                    );
+                    }
+
+                    fire(0.25, {
+                    spread: 26,
+                    startVelocity: 55,
+                    });
+
+                    fire(0.2, {
+                    spread: 60,
+                    });
+
+                    fire(0.35, {
+                    spread: 100,
+                    decay: 0.91,
+                    scalar: 0.8,
+                    });
+
+                    fire(0.1, {
+                    spread: 120,
+                    startVelocity: 25,
+                    decay: 0.92,
+                    scalar: 1.2,
+                    });
+
+                    fire(0.1, {
+                    spread: 120,
+                    startVelocity: 45,
+                    });
+                });
+
+            });
+        </script>';
+	}
 
 
 ?>
@@ -200,58 +307,13 @@ include "../admin/include/php/modal.php";
 										}
 
 										if ($agent_role == 'SA1' && $total_amount >= $sa1_target_sales) {
-											echo '
 
-												<script>
-													$(document).ready(function() {
-														$("#congratsSA1Modal").modal("show");
-														
-														$("#congratsSA1Modal").on("shown.bs.modal", function () {
-															const count = 200,
-															defaults = {
-																origin: { y: 0.7 },
-																zIndex: 1200,
-															};
-
-
-															function fire(particleRatio, opts) {
-															confetti(
-																Object.assign({}, defaults, opts, {
-																particleCount: Math.floor(count * particleRatio),
-																})
-															);
-															}
-
-															fire(0.25, {
-															spread: 26,
-															startVelocity: 55,
-															});
-
-															fire(0.2, {
-															spread: 60,
-															});
-
-															fire(0.35, {
-															spread: 100,
-															decay: 0.91,
-															scalar: 0.8,
-															});
-
-															fire(0.1, {
-															spread: 120,
-															startVelocity: 25,
-															decay: 0.92,
-															scalar: 1.2,
-															});
-
-															fire(0.1, {
-															spread: 120,
-															startVelocity: 45,
-															});
-														});
-
-													});
-												</script>';
+											if ($total_amount >= $sa1_target_sales) {
+												$_SESSION['sa1_target_sales_met'] = true;
+											} else {
+												
+											}
+											
 										}
 										?>
 
@@ -284,58 +346,14 @@ include "../admin/include/php/modal.php";
 											}
 
 											if ($agent_role == 'SA2' && $total_amount >= $sa2_target_sales) {
-												echo '
 
-												<script>
-													$(document).ready(function() {
-														$("#congratsSA2Modal").modal("show");
-														
-														$("#congratsSA2Modal").on("shown.bs.modal", function () {
-															const count = 200,
-															defaults = {
-																origin: { y: 0.7 },
-																zIndex: 1200,
-															};
+												if ($total_amount >= $sa2_target_sales) {
+													$_SESSION['sa2_target_sales_met'] = true;
+												} else {
+													
+												}
+												
 
-
-															function fire(particleRatio, opts) {
-															confetti(
-																Object.assign({}, defaults, opts, {
-																particleCount: Math.floor(count * particleRatio),
-																})
-															);
-															}
-
-															fire(0.25, {
-															spread: 26,
-															startVelocity: 55,
-															});
-
-															fire(0.2, {
-															spread: 60,
-															});
-
-															fire(0.35, {
-															spread: 100,
-															decay: 0.91,
-															scalar: 0.8,
-															});
-
-															fire(0.1, {
-															spread: 120,
-															startVelocity: 25,
-															decay: 0.92,
-															scalar: 1.2,
-															});
-
-															fire(0.1, {
-															spread: 120,
-															startVelocity: 45,
-															});
-														});
-
-													});
-												</script>';
 											}
 
 											?>

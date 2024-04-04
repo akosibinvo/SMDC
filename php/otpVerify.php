@@ -41,7 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['submit-otp-validate-email'])) {
         $userOTP = $_POST['userOtp-signup-validation'];
 
-        if (verifyOTP($userOTP)) {
+        $testOTP = verifyOTP($userOTP);
+
+        if ($testOTP) {
             // Check if signup data is set in session
             if (isset($_SESSION['signup_data'])) {
                 // Get signup data
@@ -78,7 +80,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Redirect to dashboard or desired page
             header('Location: ../pages/pages-sign-in.php');
-            exit;
+            exit; 
+        } else {
+            $_SESSION['notification'] = array(
+                'title' => 'OTP code doesn\'t match.',
+                'status' => 'error',
+                'description' => 'OTP verification error. Please check your E-mail.',
+            );
+            header('Location: ../pages/pages-validate-email.php');
         }
-    }
+        
+    } 
 }
