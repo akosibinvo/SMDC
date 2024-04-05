@@ -109,7 +109,7 @@ include '../include/php/modal.php';
                     <div class="container mb-4">
                         <div class="row">
                             <div class="col text-end">
-                                <button class="btn btn-danger clearAll"><i class="align-middle me-1" data-feather="trash-2"></i>Clear All</button>
+                                <button class="btn btn-danger clearAll"><i class="align-middle me-1" data-feather="trash-2"></i>Empty Archives</button>
                             </div>
                         </div>
                     </div>
@@ -167,7 +167,7 @@ include '../include/php/modal.php';
                                                 <?php while ($rows_restore = mysqli_fetch_assoc($res_restore)) { ?>
 
                                                     <tr class="text-center">
-                                                        <td class="d-none"><?php echo $rows_restore['client_id']; ?></td>
+                                                        <td class="d-none"><?php echo $rows_restore['transaction_id']; ?></td>
                                                         <td><?php echo $rows_restore['firstname']; ?></td>
                                                         <td><?php echo $rows_restore['Unit_code']; ?></td>
                                                         <td><?php echo '₱' . ' ' . number_format($rows_restore['Amount'], 0, '.', ','); ?></td>

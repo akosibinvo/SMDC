@@ -162,7 +162,7 @@ include '../include/php/modal.php';
 												?>
 
 													<tr class="text-center">
-														<td class="d-none"><?php echo $rows_booking['client_id']; ?></td>
+														<td class="d-none"><?php echo $rows_booking['transaction_id']; ?></td>
 														<td><?php echo $rows_booking['firstname']; ?></td>
 														<td><?php echo $rows_booking['Unit_code']; ?></td>
 														<td><?php echo '₱' . ' ' . number_format($rows_booking['Amount'], 0, '.', ','); ?></td>

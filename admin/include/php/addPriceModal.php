@@ -12,7 +12,7 @@ if (isset($_POST['addprice'])) {
         $listPriceWithPeso = $_POST['amount'];
         $inputDiscount = $_POST['discount'];
 
-        $sql_booking = "SELECT agent_role FROM transaction_booking WHERE client_id = $addprice_id ";
+        $sql_booking = "SELECT agent_role FROM transaction_booking WHERE transaction_id = $addprice_id ";
         $res_booking = mysqli_query($conn, $sql_booking);
 
         if ($res_booking) {
@@ -65,11 +65,11 @@ if (isset($_POST['addprice'])) {
         $total_coms = $coms - $coms_vat;
 
         // Updating transaction booking amount and commissions
-        $query = "UPDATE transaction_booking SET Amount=?, Commissions=?, `status` = 'Booked' WHERE client_id=?";
+        $query = "UPDATE transaction_booking SET Amount=?, Commissions=?, `status` = 'Booked' WHERE transaction_id = ?";
         $stmt = mysqli_prepare($conn, $query);
 
         // Inserting into notifications table
-        $notif = "SELECT * FROM transaction_booking WHERE client_id = $addprice_id ";
+        $notif = "SELECT * FROM transaction_booking WHERE transaction_id = $addprice_id ";
         $res_notif = mysqli_query($conn, $notif);
 
         if ($res_notif) {

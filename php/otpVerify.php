@@ -5,6 +5,7 @@ include 'functions.php';
 // Include database connection
 require_once 'connection.php';
 
+
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //OTP verification for forgot password
@@ -65,22 +66,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt = $conn->prepare("INSERT INTO users (firstName, lastName, email, password, contactNo, role , team_id) VALUES (?, ? ,?, ?, ?, ?, ?)");
                 $stmt->bind_param("sssssss", $firstName, $lastName, $email, $password, $contactNo, $role, $referrer_id);
                 $stmt->execute();
+                
+                if($stmt -> affected_rows > 0) {
+                    $_SESSION['notification'] = array(
+                        'title' => 'OTP code validated',
+                        'status' => 'success',
+                        'description' => 'OTP verification success. Please sign in your account.',
+                    );
+
+                    //unset otp and email session
+                    unset($_SESSION['otp']);
+                    unset($_SESSION['email-verify']);
+
+                    $_SESSION['new_user'] = true;
+
+                    // Redirect to dashboard or desired page
+                    
+                   
+                }
+
+
                 $stmt->close();
+                header('Location: ../pages/pages-sign-in.php');
+                exit; 
             }
 
-            $_SESSION['notification'] = array(
-                'title' => 'OTP code validated',
-                'status' => 'success',
-                'description' => 'OTP verification success. Please sign in your account.',
-            );
-
-            //unset otp and email session
-            unset($_SESSION['otp']);
-            unset($_SESSION['email-verify']);
-
-            // Redirect to dashboard or desired page
-            header('Location: ../pages/pages-sign-in.php');
-            exit; 
+           
         } else {
             $_SESSION['notification'] = array(
                 'title' => 'OTP code doesn\'t match.',

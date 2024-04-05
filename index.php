@@ -46,7 +46,6 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 	$profile_img_path = "img/avatars/default/default-profile-blue.png"; // Set default profile image path
 }
 
-
 ?>
 
 
@@ -335,6 +334,122 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 							</div>
 						</div>
 
+						<?php
+
+						if ($role == 'IMP') {
+						?>
+							<div class="col-md-6 col-lg-3 mx-auto mb-4">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col mt-0">
+												<h5 class="card-title">Override Commissions</h5>
+											</div>
+
+											<div class="col-auto">
+												<div class="stat text-primary">
+													<i class="align-middle" data-feather="percent"></i>
+												</div>
+											</div>
+										</div>
+
+										<?php
+
+										$sql_overridecoms = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent_role != 'IMP' AND team_id = '$id'";
+										$res_overridecoms = mysqli_query($conn, $sql_overridecoms);
+
+										if ($res_overridecoms) {
+											// Initialize total commission variable
+											$total_overridecoms_coms = 0;
+
+											while ($rows_overridecoms = mysqli_fetch_assoc($res_overridecoms)) {
+												$overridecoms_role = $rows_overridecoms['agent_role'];
+												$overridecoms_amount = $rows_overridecoms['Amount'];
+												$overridecoms_date = $rows_overridecoms['Transaction_date'];
+
+												// Define commission rates
+												$overridecoms_rates = [
+													'SA1' => 0.015,
+													'SA2' => 0.01
+												];
+
+												if (array_key_exists($overridecoms_role, $overridecoms_rates)) {
+													$overridecoms_rate = $overridecoms_rates[$overridecoms_role];
+												} else {
+													exit("Error: Commission rate for role '$overridecoms_role' is not defined");
+												}
+
+												// Calculate individual commission
+												$overridecoms_vat = 0.12;
+
+												$overridecoms_coms = $overridecoms_amount * $overridecoms_rate;
+												$deducted_overridecoms =  $overridecoms_coms * $overridecoms_vat;
+
+												$accumulated_overcoms = $overridecoms_coms - $deducted_overridecoms;
+
+
+												// Accumulate individual commission to total commission
+												$total_overridecoms_coms += $accumulated_overcoms;
+											}
+										} else {
+											// Handle query error
+											echo "Error in fetching data from database.";
+										}
+
+										?>
+
+										<h2 class="mt-3 mb-3 fw-bold"><strong class="title-dashboard">₱</strong><?php echo number_format($total_overridecoms_coms) ?></h2>
+
+										<div class="mb-0">
+											<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
+											<span class="text-muted" style="font-size: .85em;">VAT included</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						<?php
+
+						} else {
+
+						?>
+							<div class="col-md-6 col-lg-3 mx-auto mb-4">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col mt-0">
+												<h5 class="card-title">Unit Sold</h5>
+											</div>
+
+											<div class="col-auto">
+												<div class="stat text-primary">
+													<i class="align-middle" data-feather="home"></i>
+												</div>
+											</div>
+										</div>
+
+										<?php
+										$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+										$res_booked = mysqli_query($conn, $sql_booked);
+										$count_booked = mysqli_num_rows($res_booked);
+										?>
+
+										<h2 class="mt-3 mb-3 fw-bold"> <?php echo $count_booked ?> </h2>
+
+										<div class="mb-0">
+											<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
+											<span class="text-muted" style="font-size: .85em; opacity: 0;">Last 24 hours </span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						<?php
+						}
+
+
+
+						?>
+
 						<div class="col-md-6 col-lg-3 mx-auto mb-4">
 							<div class="card">
 								<div class="card-body">
@@ -365,51 +480,12 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 							</div>
 						</div>
 
-						<div class="col-md-6 col-lg-3 mx-auto mb-4">
-							<div class="card">
-								<div class="card-body">
-									<div class="row">
-										<div class="col mt-0">
-											<h5 class="card-title">Unit Sold</h5>
-										</div>
 
-										<div class="col-auto">
-											<div class="stat text-primary">
-												<i class="align-middle" data-feather="home"></i>
-											</div>
-										</div>
-									</div>
-
-									<?php
-									$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
-									$res_booked = mysqli_query($conn, $sql_booked);
-									$count_booked = mysqli_num_rows($res_booked);
-									?>
-
-									<h2 class="mt-3 mb-3 fw-bold"> <?php echo $count_booked ?> </h2>
-
-									<div class="mb-0">
-										<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
-										<span class="text-muted" style="font-size: .85em; opacity: 0;">Last 24 hours </span>
-									</div>
-								</div>
-							</div>
-						</div>
 
 
 					</div>
 
-					<!-- <div class="row">
-						<div class="col-12 col-md-12 d-flex ">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
 
-									<h5 class="card-title mb-0">Summary of sales</h5>
-								</div>
-
-							</div>
-						</div>
-					</div> -->
 
 					<div class="row mb-0">
 						<div class="col-12 col-md-12 d-flex">
@@ -432,11 +508,11 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 									<tbody>
 										<?php
 										$results_per_page = 5;
-										$sql_booking = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND user_id = '$id' ";
-										$res_booking = mysqli_query($conn, $sql_booking);
+										$sql_pending = "SELECT * FROM transaction_booking WHERE status = 'Pending' AND user_id = '$id' ";
+										$res_pending = mysqli_query($conn, $sql_pending);
 
-										if ($res_booking == TRUE) {
-											$total_results = mysqli_num_rows($res_booking);
+										if ($res_pending == TRUE) {
+											$total_results = mysqli_num_rows($res_pending);
 											$total_pages = ceil($total_results / $results_per_page);
 
 											// Check current page and set offset
@@ -448,13 +524,13 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 											$offset = ($page - 1) * $results_per_page;
 
 											// Fetch data for the current page
-											$sql_booking .= " LIMIT $offset, $results_per_page";
-											$res_booking = mysqli_query($conn, $sql_booking);
+											$sql_pending .= " LIMIT $offset, $results_per_page";
+											$res_pending = mysqli_query($conn, $sql_pending);
 
-											if ($res_booking) {
+											if ($res_pending && mysqli_num_rows($res_pending) > 0) {
 										?>
 												<?php
-												while ($row = mysqli_fetch_assoc($res_booking)) {
+												while ($row = mysqli_fetch_assoc($res_pending)) {
 												?>
 													<tr class="text-center">
 														<td> <?php echo $row['firstname']; ?> </td>
@@ -464,12 +540,19 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 														<td class="text-warning fw-bold"><?php echo $row['status']; ?></td>
 													</tr>
 
-												<?php } ?>
-									</tbody>
-							<?php
+												<?php
+												}
+												?>
+										<?php
+											} else {
+												echo "<tr class='text-center'>";
+												echo "<td colspan='12' style='cursor: default'>You don't have any pending booking yet. Start booking now!</td>";
+												echo "</tr>";
 											}
 										}
-							?>
+										?>
+									</tbody>
+
 								</table>
 
 							</div>
@@ -543,7 +626,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 										$sql_booking .= " LIMIT $offset, $results_per_page";
 										$res_booking = mysqli_query($conn, $sql_booking);
 
-										if ($res_booking) {
+										if ($res_booking && mysqli_num_rows($res_booking) > 0) {
 									?>
 											<?php
 											while ($row = mysqli_fetch_assoc($res_booking)) {
@@ -561,12 +644,18 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 												<?php
 											}
 												?>
-												</tbody>
-								</table>
-						<?php
+
+										<?php
+										} else {
+											echo "<tr class='text-center'>";
+											echo "<td colspan='12' style='cursor: default'>You don't have any approved booking yet. Start booking now!</td>";
+											echo "</tr>";
 										}
 									}
-						?>
+										?>
+												</tbody>
+								</table>
+
 							</div>
 						</div>
 
@@ -607,6 +696,8 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 	<script src="js/app.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
 
+
+
 	<script>
 		function markAsRead(notificationId) {
 			// Send AJAX request to mark notification as read
@@ -627,6 +718,22 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 
 	<script>
 		<?php
+		if (isset($_SESSION['new_user'])) {
+			$new_user = $_SESSION['new_user'];
+		?>
+			$(document).ready(function() {
+				$("#getStartedModal").modal("show");
+			});
+
+		<?php
+			unset($_SESSION['notification']);
+		}
+		?>
+	</script>
+
+	<script>
+		<?php
+
 		// Check if there is a notification in the session
 		if (isset($_SESSION['notification'])) {
 			// Get notification details

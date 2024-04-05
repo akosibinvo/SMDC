@@ -6,7 +6,7 @@ if(isset($_POST['delete']))
 {
     $id = $_POST['delete_id'];
 
-    $query = "DELETE FROM archives_booking WHERE client_id='$id'";
+    $query = "DELETE FROM archives_booking WHERE transaction_id='$id'";
     
     $query_run = mysqli_query($conn, $query);
 

@@ -17,6 +17,9 @@
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
 
+   <!-- Include Bootstrap Carousel JavaScript -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
@@ -592,7 +595,7 @@
       </div>
    </div>
 
-   <!--======================================= CONGRATULATIONS SA1 MODAL ======================================= -->
+   <!--======================================= CONGRATULATIONS SA2 MODAL ======================================= -->
    <div class="modal fade" id="congratsSA2Modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
@@ -659,7 +662,7 @@
       </div>
    </div>
 
-   <!--======================================= CONFIRMATION MODAL ======================================= -->
+   <!--======================================= RESTORE CONFIRMATION MODAL ======================================= -->
    <div class="modal fade" id="restoreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
          <div class="modal-content">
@@ -820,7 +823,6 @@
          <div class="modal-content">
             <div class="modal-header">
                <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-               </button>
             </div>
             <div class="modal-body">
                <p> Are you sure you want to remove the member? </p>
@@ -837,6 +839,149 @@
          </div>
       </div>
    </div>
+
+   <!--======================================= GET STARTED MODAL ======================================= -->
+   <div class="modal fade" id="getStartedModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content p-2">
+            <div class="modal-header border-0 m-0">
+               <h4 class="modal-title fw-bold mb-3">Welcome to SMDC JQB</h4>
+            </div>
+            <form action="admin/include/php/unset-get-started.php" method="POST">
+               <div class="modal-body mt-0">
+
+                  <div class="modal-image mt-n3 mb-3">
+                     <img src="img/bg/welcomes.png" alt="Modal Image">
+                  </div>
+
+                  <p class="mb-0"> Feel like getting started in 15 minutes or less? We've put together a step-by-step guide, which covers everything you need to get going! </p>
+
+               </div>
+               <div class="modal-footer border-0 mt-0">
+
+                  <button type="submit" class="btn custom-no-border" name="unset_get_started"> No, thanks </button>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#steps"> Get started </button>
+
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+   </div>
+
+   <!--======================================= STEPS MODAL ======================================= -->
+   <div class="modal fade" id="steps" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content p-2">
+            <form action="admin/include/php/unset-get-started.php">
+               <div class="carousel slide p-2" data-bs-ride="false" id="carouselExampleIndicators">
+
+                  <div class="modal-body mt-0 p-0" style="height: 330px">
+                     <div class="carousel-inner">
+
+                        <div class="carousel-item active">
+                           <div class="modal-header border-0 p-0">
+                              <h4 class="modal-title fw-bold mb-3">Dashboard Overview</h4>
+                           </div>
+
+                           <div class="modal-image mb-3">
+                              <img src="img/bg/dash.png" alt="Modal Image" class="d-block">
+                           </div>
+                           <p class="mb-0"> This is your central hub for managing all aspects of your condominium bookings. From here, you'll get an overview of your current bookings, availability, and any upcoming events or promotions. </p>
+                        </div>
+
+                        <div class="carousel-item">
+                           <div class="modal-header border-0 p-0">
+                              <h4 class="modal-title fw-bold mb-3">Statistics</h4>
+                           </div>
+
+                           <div class="modal-image mb-3">
+                              <img src="img/bg/stats.png" alt="Modal Image" class="d-block">
+                           </div>
+                           <p class="mb-0"> Dive into detailed statistics and insights about your bookings and sales performance. Track your revenue, occupancy rates, and popular booking trends to optimize your sales strategy.</p>
+                        </div>
+
+                        <div class="carousel-item">
+                           <div class="modal-header border-0 p-0">
+                              <h4 class="modal-title fw-bold mb-3">Notifications</h4>
+                           </div>
+
+                           <div class="modal-image mb-3">
+                              <img src="img/bg/notif.png" alt="Modal Image" class="d-block">
+                           </div>
+                           <p class="mb-0"> Stay informed about approved bookings from admin. Notifications will appear here, ensuring you never miss a beat. </p>
+                        </div>
+
+                        <div class="carousel-item">
+                           <div class="modal-header border-0 p-0">
+                              <h4 class="modal-title fw-bold mb-3">Sales</h4>
+                           </div>
+
+                           <div class="modal-image mb-3">
+                              <img src="img/bg/sale.png" alt="Modal Image" class="d-block">
+                           </div>
+                           <p class="mb-0"> Manage your bookings efficiently with our Sales page. Here, you can view and update booking details, confirm reservations, and generate invoices for clients. </p>
+                        </div>
+
+                        <div class="carousel-item">
+                           <div class="modal-header border-0 p-0">
+                              <h4 class="modal-title fw-bold mb-3">Profile</h4>
+                           </div>
+
+                           <div class="modal-image mb-3">
+                              <img src="img/bg/prof.png" alt="Modal Image" class="d-block">
+                           </div>
+                           <p class="mb-0"> Your Profile page is where you can manage your personal information, including contact details, payment preferences, and profile picture. Keeping your profile up-to-date ensures smooth communication with clients. </p>
+                        </div>
+
+                     </div>
+
+
+                  </div>
+
+                  <div class="carousel-indicators" style="bottom: -15%; position: absolute;">
+                     <button style="background-color: #0030ff" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                     <button style="background-color: #0030ff;" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                     <button style="background-color: #0030ff;" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                     <button style="background-color: #0030ff;" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                     <button style="background-color: #0030ff;" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                  </div>
+
+
+               </div>
+
+               <div class="modal-footer border-0 mt-4">
+                  <button type="button" class="btn custom-no-border" name="unset_get_started"> Skip </button>
+                  <button type="button" class="btn btn-primary" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" id="nextButton"> Next </button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+
+
+   <script>
+      $(document).ready(function() {
+         $('#steps').on('slid.bs.carousel', function() {
+            var currentIndex = $('div.active').index();
+            var totalItems = $('.carousel-inner').children().length;
+
+            if (currentIndex === totalItems - 1) {
+               $('#nextButton').text('Finish')
+               .removeAttr('data-bs-target')
+               .removeAttr('data-bs-slide')
+               .attr('data-bs-dismiss', 'modal')
+               .attr('name', 'unset_get_started')
+               .attr('type', 'submit');
+               
+            } else {
+               $('#nextButton').text('Next')
+               .attr('data-bs-target', '#carouselExampleIndicators')
+               .attr('data-bs-slide', 'next');
+            }
+         });
+      });
+   </script>
 
 
 

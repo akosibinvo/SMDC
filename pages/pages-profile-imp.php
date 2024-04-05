@@ -165,56 +165,18 @@ $url .= "/SMDC_JQB/pages/pages-sign-up.php?ref=";
 												<div class="card-body unit-bg">
 													<div class="row">
 														<div class="col mt-0 mb-3">
-															<h5 class="card-title text-white" style="font-size: .9em;">Override Commissions</h5>
+															<h5 class="card-title text-white" style="font-size: .9em;">Unit Sold</h5>
 														</div>
 													</div>
 
 													<?php
-
-													$sql_overcoms = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND agent_role != 'IMP' AND team_id = '$id'";
-													$res_overcoms = mysqli_query($conn, $sql_overcoms);
-
-													if ($res_overcoms) {
-														// Initialize total commission variable
-														$total_overcoms_coms = 0;
-
-														while ($rows_overcoms = mysqli_fetch_assoc($res_overcoms)) {
-															$overcoms_role = $rows_overcoms['agent_role'];
-															$overcoms_amount = $rows_overcoms['Amount'];
-															$overcoms_date = $rows_overcoms['Transaction_date'];
-
-															// Define commission rates
-															$overcoms_rates = [
-																'SA1' => 0.015,
-																'SA2' => 0.01
-															];
-
-															if (array_key_exists($overcoms_role, $overcoms_rates)) {
-																$overcoms_rate = $overcoms_rates[$overcoms_role];
-															} else {
-																exit("Error: Commission rate for role '$overcoms_role' is not defined");
-															}
-
-															// Calculate individual commission
-															$overcoms_vat = 0.12;
-
-															$overcoms_coms = $overcoms_amount * $overcoms_rate;
-															$deducted_overcoms =  $overcoms_coms * $overcoms_vat;
-
-															$accumulated_overcoms = $overcoms_coms - $deducted_overcoms;
-
-
-															// Accumulate individual commission to total commission
-															$total_overcoms_coms += $accumulated_overcoms;
-														}
-													} else {
-														// Handle query error
-														echo "Error in fetching data from database.";
-													}
-
+													$sql_booked = "SELECT * FROM transaction_booking WHERE status = 'Booked' AND user_id = '$id' ";
+													$res_booked = mysqli_query($conn, $sql_booked);
+													$count_booked = mysqli_num_rows($res_booked);
 													?>
 
-													<h1 class="mt-1 mb-3 text-center text-white" style="font-weight: bold;">₱ <?php echo number_format($total_overcoms_coms) ?></h1>
+
+													<h1 class="mt-1 mb-3 text-center text-white" style="font-weight: bold;"> <?php echo $count_booked ?> </h1>
 												</div>
 											</div>
 										</div>

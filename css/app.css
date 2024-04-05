@@ -12585,6 +12585,43 @@ span.flatpickr-weekday {
     color: #dc3545;
 }
 
+.modal-image {
+    width: 100%;
+    height: 200px;
+}
+
+.modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.custom-no-border {
+    color: #10319f;
+}
+
+.custom-no-border:hover {
+    border: 1px solid #10319f;
+    color: #10319f;
+}
+
+.custom-indicators {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 30px;
+    border: 1px solid red;
+
+}
+
+.custom-indicators li {
+    width: 40px;
+    height: 4px;
+    background-color: red;
+}
+
+
 
 @media screen and (max-width: 1400px) {
     .referral-img {

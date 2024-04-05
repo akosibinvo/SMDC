@@ -107,8 +107,8 @@ $referrer_id = $_GET['ref'] ?? 0;
 											<div class="col-xl-6">
 												<label class="form-label">Password</label>
 												<div class="input-group has-validation">
-													<input id="passwordUser" type="password" class="form-control form-control-lg" name="password" placeholder="Enter your Password" aria-label="password" required>
-													<button type="button" class="btn btn-primary" id="togglePassword">
+													<input id="passwordUser" type="password" class="form-control form-control-lg border border-end-0" name="password" placeholder="Enter your Password" aria-label="password" required>
+													<button type="button" class="btn border border-start-0" id="togglePassword">
 														<i class="fa-regular fa-eye"></i>
 													</button>
 													<div id="validationPass" class="invalid-feedback">
@@ -119,8 +119,8 @@ $referrer_id = $_GET['ref'] ?? 0;
 											<div class="col-xl-6">
 												<label class="form-label">Confirm Password</label>
 												<div class="input-group has-validation">
-													<input id="confirmPasswordUser" type="password" class="form-control form-control-lg" name="confirm-password" placeholder="Confirm Password" aria-label="Confirm Password" required>
-													<button type="button" class="btn btn-primary" id="toggleConfirmPassword">
+													<input id="confirmPasswordUser" type="password" class="form-control form-control-lg border border-end-0" name="confirm-password" placeholder="Confirm Password" aria-label="Confirm Password" required>
+													<button type="button" class="btn border border-start-0" id="toggleConfirmPassword">
 														<i class="fa-regular fa-eye"></i>
 													</button>
 													<div id="validationCPass" class="invalid-feedback">
@@ -167,7 +167,7 @@ $referrer_id = $_GET['ref'] ?? 0;
 										</div>
 
 										<div class="d-grid gap-2 mt-3">
-											<button type="submit" class="btn btn-lg btn-primary" id="register" style="cursor: pointer;" >Register</button>
+											<button type="submit" class="btn btn-lg btn-primary" id="register" style="cursor: pointer;">Register</button>
 										</div>
 
 										<div class="row d-flex justify-content-start mt-4">

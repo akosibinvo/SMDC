@@ -3,8 +3,8 @@ include "../php/session.php";
 require "../php/connection.php";
 include "../admin/include/php/modal.php";
 
-	if (isset($_SESSION['sa1_target_sales_met']) && $_SESSION['sa1_target_sales_met']) {
-		echo '
+if (isset($_SESSION['sa1_target_sales_met']) && $_SESSION['sa1_target_sales_met']) {
+	echo '
         <script>
             $(document).ready(function() {
                 $("#congratsSA1Modal").modal("show");
@@ -55,11 +55,11 @@ include "../admin/include/php/modal.php";
 
             });
         </script>';
-	}
+}
 
-	if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met']) {
+if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met']) {
 
-		echo '
+	echo '
         <script>
             $(document).ready(function() {
                 $("#congratsSA2Modal").modal("show");
@@ -110,7 +110,7 @@ include "../admin/include/php/modal.php";
 
             });
         </script>';
-	}
+}
 
 
 ?>
@@ -188,19 +188,16 @@ include "../admin/include/php/modal.php";
 											</label>
 										</div>
 									</div>
-
-
 									<h1 class="h5 fw-bold mt-4 mb-2"><?php echo $user_fullname; ?></h1>
 									<h1 class="h5 text-muted fw-bold mb-0"><?php echo $agent_role; ?></h1>
-
 								</div>
-
 							</div>
+
 
 							<div class="card mb-3">
 								<div class="card-header bg-white d-flex justify-content-between mb-0">
 									<h5 class="card-title mb-0">Account Details</h5>
-									<h5 class="mb-0" title="Edit Account Details"><span data-feather="edit-3" class="feather-sm" style="color: #0030ff; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#editAccountDetails"></span></h5>
+									<h5 class="mb-0" title="Edit Account Details"><span data-feather="edit-3" class="feather-sm" style="color: #0030ff; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#getStartedModal"></span></h5>
 								</div>
 								<div class="card-body">
 									<ul class="list-unstyled mb-0">
@@ -311,9 +308,7 @@ include "../admin/include/php/modal.php";
 											if ($total_amount >= $sa1_target_sales) {
 												$_SESSION['sa1_target_sales_met'] = true;
 											} else {
-												
 											}
-											
 										}
 										?>
 
@@ -350,10 +345,7 @@ include "../admin/include/php/modal.php";
 												if ($total_amount >= $sa2_target_sales) {
 													$_SESSION['sa2_target_sales_met'] = true;
 												} else {
-													
 												}
-												
-
 											}
 
 											?>
@@ -423,7 +415,7 @@ include "../admin/include/php/modal.php";
 												$sql_profile .= " LIMIT $offset, $results_per_page";
 												$res_profile = mysqli_query($conn, $sql_profile);
 
-												if ($res_profile) {
+												if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 											?>
 
 													<?php
@@ -441,12 +433,18 @@ include "../admin/include/php/modal.php";
 														<?php
 													}
 														?>
-														</tbody>
-										</table>
-								<?php
+
+												<?php
+												} else {
+													echo "<tr class='text-center'>";
+													echo "<td colspan='12' style='cursor: default'>You have no transactions yet. Start booking now!</td>";
+													echo "</tr>";
 												}
 											}
-								?>
+												?>
+														</tbody>
+										</table>
+
 									</div>
 								</div>
 							</div>

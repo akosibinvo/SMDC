@@ -56,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             setcookie('remember_me_cookie', '', time() - 3600, '/');
         }
 
+
         $_SESSION['user_id'] = $user_id;
         $_SESSION['email'] = $email;
         $_SESSION['lastName'] = $lastname;
