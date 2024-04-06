@@ -1,6 +1,14 @@
 <?php
 include "../../php/session.php";
 require "../../php/connection.php";
+
+if (isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+} else {
+    header("Location: ../../pages/pages-sign-in.php");
+    exit;
+}
+
 include "../../admin/include/php/modal.php";
 
 ?>
