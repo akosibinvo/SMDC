@@ -10,7 +10,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
     // Check if profile image path is not empty
     if (!empty($profile_img_path)) {
         // Concatenate the filename to the path
-        $profile_img_path = "../img/avatars/" . $profile_img_path;
+        $profile_img_path = "../img/avatars/users/" . $profile_img_path;
     } else {
         // Set default profile image path
         $profile_img_path = "../img/avatars/default/default-profile-blue.png"; // Adjust the path to include the 'avatars' folder

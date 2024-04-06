@@ -1,6 +1,7 @@
 <?php
-    session_start();
-    include "../php/connection.php";
+session_start();
+include "../php/connection.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="../img/icons/logo-square.png" />
+    <link rel="shortcut icon" href="../img/icons/logo-square.png" />
 
     <title>Sign In | SDMC JQB</title>
 
@@ -20,6 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://kit.fontawesome.com/ca3839150d.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -51,21 +53,26 @@
                                         <div class="mb-3">
                                             <label class="form-label">Email</label>
                                             <input class="form-control form-control-lg" type="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>" placeholder="Enter your email" required>
-											<div id="validationLastName" class="invalid-feedback">
-													Enter your E-mail
-											</div>
+                                            <div id="validationLastName" class="invalid-feedback">
+                                                Enter your E-mail
+                                            </div>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Password</label>
-                                            <input class="form-control form-control-lg <?php echo isset($errors) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Enter your password" required>
-											<div id="validationLastName" class="invalid-feedback">
-													Enter your Password
-											</div>
-                                            <?php if (isset($errors)) : ?>
-                                                <div class="invalid-feedback">
-                                                    <?php echo $errors[0]; ?>
+                                            <div class="input-group has-validation">
+                                                <input id="signinPasswordUser" class="form-control form-control-lg border border-end-0" <?php echo isset($errors) ? 'is-invalid' : ''; ?>" type="password" name="password" placeholder="Enter your password" required>
+                                                <button type="button" class="btn border border-start-0" id="toggleSigninPassword">
+                                                    <i class="fa-regular fa-eye"></i>
+                                                </button>
+                                                <div id="validationLastName" class="invalid-feedback">
+                                                    Enter your Password
                                                 </div>
-                                            <?php endif; ?>
+                                                <?php if (isset($errors)) : ?>
+                                                    <div class="invalid-feedback">
+                                                        <?php echo $errors[0]; ?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
                                         </div>
 
                                         <div class="row d-flex justify-content-between px-3">
@@ -101,21 +108,21 @@
             </div>
         </div>
     </main>
-    
+
 
     <script src="../js/app.js"></script>
     <!-- Simple Notify -->
     <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
     <?php
-        // Check if there is a notification in the session
-        if (isset($_SESSION['notification'])) {
-            // Get notification details
-            $title = $_SESSION['notification']['title'];
-            $status = $_SESSION['notification']['status'];
-            $description = $_SESSION['notification']['description'];
-            // Clear the notification from the session
-            unset($_SESSION['notification']);
-        }
+    // Check if there is a notification in the session
+    if (isset($_SESSION['notification'])) {
+        // Get notification details
+        $title = $_SESSION['notification']['title'];
+        $status = $_SESSION['notification']['status'];
+        $description = $_SESSION['notification']['description'];
+        // Clear the notification from the session
+        unset($_SESSION['notification']);
+    }
     ?>
 
     <script>
@@ -142,6 +149,16 @@
         }
     </script>
     <script>
+        const toggleSigninPassword = document.getElementById('toggleSigninPassword');
+        const signinPasswordInput = document.getElementById('signinPasswordUser');
+
+        toggleSigninPassword.addEventListener('click', function() {
+            const type = signinPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            signinPasswordInput.setAttribute('type', type);
+            this.innerHTML = type === 'password' ? '<i class="fa-regular fa-eye"></i>' : '<i class="fa-regular fa-eye-slash"></i>';
+        });
+    </script>
+    <script>
         (() => {
             'use strict'
 
@@ -161,7 +178,7 @@
             })
         })()
     </script>
-    
+
 </body>
 
 </html>

@@ -4,11 +4,11 @@ require "../../../php/connection.php";
 
 
 if (isset($_POST['update'])) {
-    $target_directory = '../../../img/avatars/';
+    $target_directory = '../../../img/avatars/users/';
 
     // Retrieve the agent from session
     $agent = $_SESSION['agent'];
-    $id = $_SESSION['user_id'];
+    $user_id = $_SESSION['user_id'];
     
 
     // Check if 'profilePic' file is uploaded
@@ -39,7 +39,7 @@ if (isset($_POST['update'])) {
     // Database update logic using prepared statements
     $sql = "UPDATE users SET img = ? WHERE ID = ? ";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $unique_filename, $id);
+    $stmt->bind_param("ss", $unique_filename, $user_id);
 
     if ($stmt->execute()) {
 

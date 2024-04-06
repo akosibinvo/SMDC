@@ -42,7 +42,7 @@ $url .= "/SMDC_JQB/pages/pages-sign-up.php?ref=";
 	<div class="wrapper">
 
 		<?php
-		include "sidebar.php";
+			include "sidebar.php";
 		?>
 
 		<div class="main">
@@ -56,7 +56,7 @@ $url .= "/SMDC_JQB/pages/pages-sign-up.php?ref=";
 
 
 						<?php
-						include "navbar.php";
+							include "navbar.php";
 						?>
 
 					</ul>

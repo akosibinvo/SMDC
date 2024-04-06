@@ -1,15 +1,12 @@
 <?php
 session_start();
+require "php/connection.php";
 
 if (isset($_SESSION['email'])) {
 	$email = $_SESSION['email'];
 } else {
 	header("Location: pages/pages-sign-in.php");
 }
-
-require "php/connection.php";
-include "admin/include/php/modal.php";
-
 
 
 if (isset($_SESSION['user_id'])) {
@@ -23,8 +20,12 @@ if (isset($_SESSION['user_id'])) {
 			$firstname = $row["firstName"];
 			$fullname = $row["firstName"] . " " . $row["lastName"];
 		}
+	} else if ($result->num_rows ==  0) {
+		header("Location: pages/pages-sign-in.php");
 	}
 }
+
+include "admin/include/php/modal.php";
 
 $sql_profile = "SELECT img FROM users WHERE firstName = '$firstname'";
 $res_profile = mysqli_query($conn, $sql_profile);
@@ -36,7 +37,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 	// Check if profile image path is not empty
 	if (!empty($profile_img_path)) {
 		// Concatenate the filename to the path
-		$profile_img_path = "img/avatars/" . $profile_img_path;
+		$profile_img_path = "img/avatars/users/" . $profile_img_path;
 	} else {
 		// Set default profile image path
 		$profile_img_path = "img/avatars/default/default-profile-blue.png"; // Adjust the path to include the 'avatars' folder
@@ -45,6 +46,9 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 	// Handle case when no image is found
 	$profile_img_path = "img/avatars/default/default-profile-blue.png"; // Set default profile image path
 }
+
+
+
 
 ?>
 
@@ -69,6 +73,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 
 <body>
 	<div class="wrapper">
+
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.php">
@@ -131,7 +136,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 
 						<li class="sidebar-item <?= $page == "pages-manage-affiliates.php" ? 'active' : ''; ?>">
 							<a class="sidebar-link" href="pages/pages-manage-affiliates.php">
-								<i class="align-middle" data-feather="users"></i> <span class="align-middle">Manage Affiliates</span>
+								<i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Manage Affiliates</span>
 							</a>
 						</li>
 					<?php

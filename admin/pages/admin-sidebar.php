@@ -83,14 +83,14 @@ $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/") + 
                     Settings
                 </li>
 
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="#">
+                <li class="sidebar-item <?= $page == "pages-admin-profile.php" ? 'active' : ''; ?>">
+                    <a class="sidebar-link" href="pages-admin-profile.php">
                         <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="#">
+                <li class="sidebar-item <?= $page == "pages-admin-settings.php" ? 'active' : ''; ?>">
+                    <a class="sidebar-link" href="pages-admin-settings.php">
                         <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
                     </a>
                 </li>

@@ -277,13 +277,13 @@
                      <div class="col-sm-12 col-md-12">
                         <div class="form-group text-center mb-0 p-4">
                            <?php
-                           $sql_profile = "SELECT img FROM users WHERE firstName = '$firstname'";
+                           $sql_profile = "SELECT img FROM users WHERE ID = '$user_id'";
                            $res_profile = mysqli_query($conn, $sql_profile);
                            if ($res_profile && mysqli_num_rows($res_profile) > 0) {
                               $row = mysqli_fetch_assoc($res_profile);
                               $profile_img_path = $row['img'];
                               if (!empty($profile_img_path)) {
-                                 $profile_img_path = "../img/avatars/" . $profile_img_path;
+                                 $profile_img_path = "../img/avatars/users/" . $profile_img_path;
                               } else {
                                  $profile_img_path = "../img/avatars/default/default-profile-blue.png";
                               }
@@ -291,12 +291,12 @@
                               $profile_img_path = "../img/avatars/default/default-profile-blue.png";
                            }
                            ?>
-                           <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle mb-3" id="imagePreview" width="205" height="205" />
+                           <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle mb-3" id="userimagePreview" width="205" height="205" />
                         </div>
 
                         <div class="form-group text-center mt-0 mb-3 d-flex align-items-center justify-content-center">
-                           <input type="file" name="profilePic" id="fileInput" style="display: none;" accept=".png, .jpg, .jpeg" onchange="checkFile()">
-                           <label for="fileInput" class="upload_photo btn btn-primary p-2 mb-4" title="Add Photo">
+                           <input type="file" name="profilePic" id="userfileInput" style="display: none;" accept=".png, .jpg, .jpeg" onchange="checkFile()">
+                           <label for="userfileInput" class="upload_photo btn btn-primary p-2 mb-4" title="Add Photo">
                               <i class="align-middle" data-feather="plus"></i>
                               Upload Photo
                            </label>
@@ -306,7 +306,7 @@
                   </div>
                   <div class="modal-footer">
                      <div class="mt-3">
-                        <button type="submit" name="update" id="updateButton" class="btn btn-primary" disabled>Save</button>
+                        <button type="submit" name="update" id="userupdateButton" class="btn btn-primary" disabled>Save</button>
                      </div>
                   </div>
                </form>
@@ -445,8 +445,8 @@
                   </div>
 
 
-                  <div class="modal-footer">
-                     <div class="gap-2 mt-4">
+                  <div class="modal-footer mt-4 mb-n2">
+                     <div class="gap-2">
                         <button type="submit" name="updateSellers" class="btn btn-primary">Update</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                      </div>
@@ -527,7 +527,7 @@
       </div>
    </div>
 
-   <!--======================================= CONFIRMATION MODAL ======================================= -->
+   <!--======================================= NAVBAR LOGOUT MODAL ======================================= -->
    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
          <div class="modal-content">
@@ -550,7 +550,7 @@
       </div>
    </div>
 
-   <!--======================================= INDEX CONFIRMATION MODAL ======================================= -->
+   <!--======================================= INDEX LOGOUT MODAL ======================================= -->
    <div class="modal fade" id="indexlogoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
          <div class="modal-content">
@@ -565,6 +565,52 @@
             <div class="modal-footer">
                <form action="php/logout.php" method="POST">
                   <input type="hidden" name="index_logout_id" id="index_logout_id">
+                  <button type="submit" name="logout" class="btn btn-primary"> Yes </button>
+               </form>
+               <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> No </button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!--======================================= ADMIN INDEX LOGOUT MODAL ======================================= -->
+   <div class="modal fade" id="adminlogoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               </button>
+            </div>
+            <div class="modal-body">
+               <p> Are you sure you want to log out? </p>
+            </div>
+            <div class="modal-footer">
+               <form action="../php/logout.php" method="POST">
+                  <input type="hidden" name="index_logout_id" id="index_logout_id">
+                  <button type="submit" name="logout" class="btn btn-primary"> Yes </button>
+               </form>
+               <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> No </button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!--======================================= ADMIN NAVBAR LOGOUT MODAL ======================================= -->
+   <div class="modal fade" id="adminNavlogoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               </button>
+            </div>
+            <div class="modal-body">
+               <p> Are you sure you want to log out? </p>
+            </div>
+            <div class="modal-footer">
+               <form action="../../php/logout.php" method="POST">
+                  <input type="hidden" name="logout_id" id="logout_id">
                   <button type="submit" name="logout" class="btn btn-primary"> Yes </button>
                </form>
                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> No </button>
@@ -685,7 +731,6 @@
       </div>
    </div>
 
-
    <!--======================================= REMOVE SELLERS MODAL ======================================= -->
    <div class="modal fade" id="removeSellersModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -776,8 +821,8 @@
 
                   </div>
 
-                  <div class="modal-footer">
-                     <div class="gap-2 mt-4">
+                  <div class="modal-footer mt-4 mb-n2">
+                     <div class="gap-2">
                         <button type="submit" name="assignTeambtn" class="btn btn-primary">Assign</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                      </div>
@@ -806,7 +851,7 @@
 
                      </div>
                   </div>
-                  <div class="modal-footer mb-0">
+                  <div class="modal-footer mt-n2 mb-n2">
                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                   </div>
                </div>
@@ -873,7 +918,7 @@
    <div class="modal fade" id="steps" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content p-2">
-            <form action="admin/include/php/unset-get-started.php">
+            <form action="admin/include/php/unset-get-started.php" method="POST">
                <div class="carousel slide p-2" data-bs-ride="false" id="carouselExampleIndicators">
 
                   <div class="modal-body mt-0 p-0" style="height: 330px">
@@ -951,10 +996,63 @@
                </div>
 
                <div class="modal-footer border-0 mt-4">
-                  <button type="button" class="btn custom-no-border" name="unset_get_started"> Skip </button>
-                  <button type="button" class="btn btn-primary" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" id="nextButton"> Next </button>
+                  <button type="submit" class="btn custom-no-border" name="unset_get_started"> Skip </button>
+                  <button type="submit" class="btn btn-primary" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" id="nextButton"> Next </button>
                </div>
             </form>
+         </div>
+      </div>
+   </div>
+
+   <!-- ======================================= EDIT ADMIN PROFILE MODAL ======================================= -->
+   <div class="modal fade" id="editAdminProfileDetails" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Add Photo</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <form action="../include/php/edit-admin-profile.php" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="admin_update_id" id="admin_update_id">
+                  <div class="row">
+                     <div class="col-sm-12 col-md-12">
+                        <div class="form-group text-center mb-0 p-4">
+                           <?php
+                           $sql_profile = "SELECT img FROM admin_account WHERE admin_id = '$admin_id'";
+                           $res_profile = mysqli_query($conn, $sql_profile);
+                           if ($res_profile && mysqli_num_rows($res_profile) > 0) {
+                              $row = mysqli_fetch_assoc($res_profile);
+                              $profile_img_path = $row['img'];
+                              if (!empty($profile_img_path)) {
+                                 $profile_img_path = "../../img/avatars/admin/" . $profile_img_path;
+                              } else {
+                                 $profile_img_path = "../../img/avatars/default/default-profile-blue.png";
+                              }
+                           } else {
+                              $profile_img_path = "../../img/avatars/default/default-profile-blue.png";
+                           }
+                           ?>
+                           <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle mb-3" id="adminImagePreview" width="205" height="205" />
+                        </div>
+
+                        <div class="form-group text-center mt-0 mb-3 d-flex align-items-center justify-content-center">
+                           <input type="file" name="profilePic" id="AdminfileInput" style="display: none;" accept=".png, .jpg, .jpeg" onchange="admincheckFile()">
+                           <label for="AdminfileInput" class="upload_photo btn btn-primary p-2 mb-4" title="Add Photo">
+                              <i class="align-middle" data-feather="plus"></i>
+                              Upload Photo
+                           </label>
+
+                        </div>
+                     </div>
+                  </div>
+                  <div class="modal-footer">
+                     <div class="mt-3">
+                        <button type="submit" name="admin_update" id="updateAdminButton" class="btn btn-primary" disabled>Save</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
          </div>
       </div>
    </div>
@@ -968,22 +1066,18 @@
 
             if (currentIndex === totalItems - 1) {
                $('#nextButton').text('Finish')
-               .removeAttr('data-bs-target')
-               .removeAttr('data-bs-slide')
-               .attr('data-bs-dismiss', 'modal')
-               .attr('name', 'unset_get_started')
-               .attr('type', 'submit');
-               
+                  .removeAttr('data-bs-target')
+                  .removeAttr('data-bs-slide')
+                  .attr('name', 'unset_get_started')
+
             } else {
                $('#nextButton').text('Next')
-               .attr('data-bs-target', '#carouselExampleIndicators')
-               .attr('data-bs-slide', 'next');
+                  .attr('data-bs-target', '#carouselExampleIndicators')
+                  .attr('data-bs-slide', 'next');
             }
          });
       });
    </script>
-
-
 
    <script>
       // Function to add commas to the input value for every three digits
@@ -1036,9 +1130,10 @@
       })()
    </script>
 
+   <!-- EDIT PROFILE FOR USERS -->
    <script>
-      const fileInput = document.getElementById('fileInput');
-      const imagePreview = document.getElementById('imagePreview');
+      const fileInput = document.getElementById('userfileInput');
+      const imagePreview = document.getElementById('userimagePreview');
 
       fileInput.addEventListener('change', function(event) {
          const file = event.target.files[0];
@@ -1054,12 +1149,42 @@
 
    <script>
       function checkFile() {
-         var fileInput = document.getElementById('fileInput');
-         var updateButton = document.getElementById('updateButton');
+         var fileInput = document.getElementById('userfileInput');
+         var updateButton = document.getElementById('userupdateButton');
          if (fileInput.files.length > 0) {
             updateButton.disabled = false;
          } else {
             updateButton.disabled = true;
+         }
+      }
+   </script>
+
+
+   <!-- EDIT PROFILE FOR ADMIN -->
+   <script>
+      const adminfileInput = document.getElementById('AdminfileInput');
+      const adminImagePreview = document.getElementById('adminImagePreview');
+
+      adminfileInput.addEventListener('change', function(event) {
+         const file = event.target.files[0];
+         const reader = new FileReader();
+
+         reader.onload = function(e) {
+            adminImagePreview.src = e.target.result;
+         };
+
+         reader.readAsDataURL(file);
+      });
+   </script>
+
+   <script>
+      function admincheckFile() {
+         var fileInput = document.getElementById('AdminfileInput');
+         var updateAdminButton = document.getElementById('updateAdminButton');
+         if (fileInput.files.length > 0) {
+            updateAdminButton.disabled = false;
+         } else {
+            updateAdminButton.disabled = true;
          }
       }
    </script>

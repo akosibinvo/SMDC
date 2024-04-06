@@ -143,7 +143,7 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
 	<div class="wrapper">
 
 		<?php
-		include "sidebar.php";
+			include "sidebar.php";
 		?>
 
 		<div class="main">
@@ -180,7 +180,7 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
 								<div class="card-body text-center">
 
 									<div class="profile-pic-img">
-										<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle" width="160" height="160" />
+										<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle" />
 
 										<div class="camera-input-hide">
 											<label class="camera-icon-hide" style="cursor: pointer;" title="Add Photo" data-bs-toggle="modal" data-bs-target="#editProfileDetails">
@@ -188,6 +188,7 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
 											</label>
 										</div>
 									</div>
+									
 									<h1 class="h5 fw-bold mt-4 mb-2"><?php echo $user_fullname; ?></h1>
 									<h1 class="h5 text-muted fw-bold mb-0"><?php echo $agent_role; ?></h1>
 								</div>
@@ -197,7 +198,7 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
 							<div class="card mb-3">
 								<div class="card-header bg-white d-flex justify-content-between mb-0">
 									<h5 class="card-title mb-0">Account Details</h5>
-									<h5 class="mb-0" title="Edit Account Details"><span data-feather="edit-3" class="feather-sm" style="color: #0030ff; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#getStartedModal"></span></h5>
+									<h5 class="mb-0" title="Edit Account Details"><span data-feather="edit-3" class="feather-sm" style="color: #0030ff; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#editAccountDetails"></span></h5>
 								</div>
 								<div class="card-body">
 									<ul class="list-unstyled mb-0">
