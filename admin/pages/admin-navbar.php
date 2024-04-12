@@ -52,7 +52,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
         <div class="dropdown-menu dropdown-menu-end">
             <a class="dropdown-item" href="pages-admin-profile.php"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="pages-settings.php"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
+            <a class="dropdown-item" href="pages-admin-settings.php"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#adminNavlogoutModal">Log out</a>
 

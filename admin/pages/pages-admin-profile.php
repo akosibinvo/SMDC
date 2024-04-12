@@ -268,7 +268,7 @@ include "../../admin/include/php/modal.php";
                                                 <?php
                                                 } else {
                                                     echo "<tr class='text-center'>";
-                                                    echo "<td colspan='12' style='cursor: default'>You have no transactions yet. Start booking now!</td>";
+                                                    echo "<td colspan='12' style='cursor: default'>There's no transaction yet.</td>";
                                                     echo "</tr>";
                                                 }
                                             }

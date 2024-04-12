@@ -291,7 +291,7 @@
                               $profile_img_path = "../img/avatars/default/default-profile-blue.png";
                            }
                            ?>
-                           <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle mb-3" id="userimagePreview" width="205" height="205" />
+                           <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle mb-3" id="userimagePreview" width="205" height="205" loading="lazy" />
                         </div>
 
                         <div class="form-group text-center mt-0 mb-3 d-flex align-items-center justify-content-center">
@@ -625,7 +625,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
             <div class="modal-body text-center border-0">
-               <img src="../img/icons/congrats.png" alt="Congratulation Image" width="150" height="150">
+               <img src="../img/icons/congrats.png" alt="Congratulation Image" width="150" height="150" loading="lazy">
                <p class="fs-3 fw-bold mb-2"> Congratulations on achieving S2 status! </p>
                <p class="mb-0"> Keep up the exceptional work, and may this milestone be just the beginning of even greater achievements ahead. Well done! </p>
 
@@ -646,7 +646,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
             <div class="modal-body text-center border-0">
-               <img src="../img/icons/congrats.png" alt="Congratulation Image" width="150" height="150">
+               <img src="../img/icons/congrats.png" alt="Congratulation Image" width="150" height="150" loading="lazy">
                <p class="fs-3 fw-bold mb-2"> Congratulations on achieving IMP status! </p>
                <p class="mb-0"> Keep up the exceptional work, and may this milestone be just the beginning of even greater achievements ahead. Well done! </p>
 
@@ -896,7 +896,7 @@
                <div class="modal-body mt-0">
 
                   <div class="modal-image mt-n3 mb-3">
-                     <img src="img/bg/welcomes.png" alt="Modal Image">
+                     <img src="img/bg/welcomes.png" alt="Modal Image" loading="lazy">
                   </div>
 
                   <p class="mb-0"> Feel like getting started in 15 minutes or less? We've put together a step-by-step guide, which covers everything you need to get going! </p>
@@ -930,7 +930,7 @@
                            </div>
 
                            <div class="modal-image mb-3">
-                              <img src="img/bg/dash.png" alt="Modal Image" class="d-block">
+                              <img src="img/bg/dash.png" alt="Modal Image" class="d-block" loading="lazy">
                            </div>
                            <p class="mb-0"> This is your central hub for managing all aspects of your condominium bookings. From here, you'll get an overview of your current bookings, availability, and any upcoming events or promotions. </p>
                         </div>
@@ -941,7 +941,7 @@
                            </div>
 
                            <div class="modal-image mb-3">
-                              <img src="img/bg/stats.png" alt="Modal Image" class="d-block">
+                              <img src="img/bg/stats.png" alt="Modal Image" class="d-block" loading="lazy">
                            </div>
                            <p class="mb-0"> Dive into detailed statistics and insights about your bookings and sales performance. Track your revenue, occupancy rates, and popular booking trends to optimize your sales strategy.</p>
                         </div>
@@ -952,7 +952,7 @@
                            </div>
 
                            <div class="modal-image mb-3">
-                              <img src="img/bg/notif.png" alt="Modal Image" class="d-block">
+                              <img src="img/bg/notif.png" alt="Modal Image" class="d-block" loading="lazy">
                            </div>
                            <p class="mb-0"> Stay informed about approved bookings from admin. Notifications will appear here, ensuring you never miss a beat. </p>
                         </div>
@@ -963,7 +963,7 @@
                            </div>
 
                            <div class="modal-image mb-3">
-                              <img src="img/bg/sale.png" alt="Modal Image" class="d-block">
+                              <img src="img/bg/sale.png" alt="Modal Image" class="d-block" loading="lazy">
                            </div>
                            <p class="mb-0"> Manage your bookings efficiently with our Sales page. Here, you can view and update booking details, confirm reservations, and generate invoices for clients. </p>
                         </div>
@@ -974,7 +974,7 @@
                            </div>
 
                            <div class="modal-image mb-3">
-                              <img src="img/bg/prof.png" alt="Modal Image" class="d-block">
+                              <img src="img/bg/prof.png" alt="Modal Image" class="d-block" loading="lazy">
                            </div>
                            <p class="mb-0"> Your Profile page is where you can manage your personal information, including contact details, payment preferences, and profile picture. Keeping your profile up-to-date ensures smooth communication with clients. </p>
                         </div>
@@ -1033,7 +1033,7 @@
                               $profile_img_path = "../../img/avatars/default/default-profile-blue.png";
                            }
                            ?>
-                           <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle mb-3" id="adminImagePreview" width="205" height="205" />
+                           <img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle mb-3" id="adminImagePreview" width="205" height="205" loading="lazy" />
                         </div>
 
                         <div class="form-group text-center mt-0 mb-3 d-flex align-items-center justify-content-center">

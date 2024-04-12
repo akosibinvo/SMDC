@@ -143,7 +143,7 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
 	<div class="wrapper">
 
 		<?php
-			include "sidebar.php";
+		include "sidebar.php";
 		?>
 
 		<div class="main">
@@ -180,7 +180,7 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
 								<div class="card-body text-center">
 
 									<div class="profile-pic-img">
-										<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle" />
+										<img src="<?php echo $profile_img_path; ?>" alt="Default Profile" class="object-fit-cover rounded-circle" loading="lazy" />
 
 										<div class="camera-input-hide">
 											<label class="camera-icon-hide" style="cursor: pointer;" title="Add Photo" data-bs-toggle="modal" data-bs-target="#editProfileDetails">
@@ -188,7 +188,7 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
 											</label>
 										</div>
 									</div>
-									
+
 									<h1 class="h5 fw-bold mt-4 mb-2"><?php echo $user_fullname; ?></h1>
 									<h1 class="h5 text-muted fw-bold mb-0"><?php echo $agent_role; ?></h1>
 								</div>

@@ -25,10 +25,48 @@ if(isset($_POST['book'])){
     $workAddress = $_POST['workAddress'];
 
     $sql = "INSERT INTO client_info (FirstName, MiddleName, LastName, Date_of_birth, Place_of_birth, Tin_no, Gender, Civil_status, Citizenship, Email, Phone_no, Passport_no, Present_address, Permanent_address, Employer_name, Work_address) 
-    VALUES ('$firstname', '$middlename', ' $lastname', '$birthdate', '$birthplace', '$tinNo', '$gender', '$civilstatus', '$citizenship', '$email', '$phonenumber', '$passportnumber', '$presentAddress', '$permanentAddress', '$employerName', '$workAddress')";
-    
-    $res = mysqli_query ($conn, $sql);
-   
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    // Prepare the statement
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if ($stmt) {
+        // Bind parameters to the prepared statement
+        mysqli_stmt_bind_param(
+            $stmt,
+            "ssssssssssssssss",
+            $firstname,
+            $middlename,
+            $lastname,
+            $birthdate,
+            $birthplace,
+            $tinNo,
+            $gender,
+            $civilstatus,
+            $citizenship,
+            $email,
+            $phonenumber,
+            $passportnumber,
+            $presentAddress,
+            $permanentAddress,
+            $employerName,
+            $workAddress
+        );
+
+        // Execute the prepared statement
+        $res = mysqli_stmt_execute($stmt);
+
+        if ($res) {
+            echo "Record inserted successfully.";
+        } else {
+            echo "Error: " . mysqli_stmt_error($stmt);
+        }
+
+        // Close the statement
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Error: Unable to prepare statement.";
+    }
     }
 
     

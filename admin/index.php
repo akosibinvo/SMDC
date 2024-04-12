@@ -8,6 +8,7 @@ if (isset($_SESSION['email'])) {
 	$email = $_SESSION['email'];
 } else {
 	header("Location: ../pages/pages-sign-in.php");
+	exit;
 }
 
 
@@ -157,7 +158,7 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 							<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
 						</a>
 					</li>
-					
+
 
 				</ul>
 			</div>
@@ -184,8 +185,8 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 							</a>
 
 							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
+								<a class="dropdown-item" href="pages/pages-admin-profile.php"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+								<a class="dropdown-item" href="pages/pages-admin-settings.php"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#adminlogoutModal">Log out</a>
@@ -507,6 +508,43 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 		</div>
 	</div>
 
+	<?php
+	$query = "	SELECT 
+				MONTH(Transaction_date) AS month, 
+				SUM(Amount) AS total_sales
+				FROM transaction_booking 
+				WHERE status = 'Booked'
+				GROUP BY MONTH(Transaction_date)
+				";
+
+
+	$result = mysqli_query($conn, $query);
+
+	$dataPie = array();
+
+	$monthSales = array();
+
+
+	// Fetch data from the database and update monthSales with actual total sales
+	while ($row = mysqli_fetch_assoc($result)) {
+		$monthSales[$monthName] = $row['total_sales'];
+
+		$month = date("F", mktime(0, 0, 0, $row['month'], 1));
+
+		$total_sales = $row['total_sales'];
+
+		$dataPie[] = array(
+			'month' => $month,
+			'total_sales' => $total_sales,
+		);
+	}
+
+	// Encode the data array as JSON
+	$dataSalesPie = array('data' => $dataPie);
+	$data_json_Pie = json_encode($dataSalesPie);
+
+	?>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="../js/app.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
@@ -626,21 +664,30 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 	</script>
 
 	<script>
+		var salesDataJson = <?php echo $data_json_Pie; ?>;
+
+		var labels = salesDataJson.data.map(item => item.month);
+		var totalSales = salesDataJson.data.map(item => parseFloat(item.total_sales));
+
 		var ctx = document.getElementById('myChart').getContext('2d');
 		var myChart = new Chart(ctx, {
 			type: 'pie',
 			data: {
-				labels: [
-					'Red',
-					'Blue',
-					'Yellow'
-				],
+				labels: labels,
 				datasets: [{
-					label: 'My First Dataset',
-					data: [300, 50, 100],
+					data: totalSales,
 					backgroundColor: [
+						'#5696ff',
 						'#0a1b5c',
+						'#2f6cff',
+						'#d5ecff',
+						'#d5ecff',
 						'#10319f',
+						'#b3daff',
+						'#062ecd',
+						'#85bfff',
+						'#0030ff',
+						'#e8f5ff',
 						'#0c3cff'
 					],
 					hoverOffset: 4
@@ -651,6 +698,26 @@ if ($res_profile && mysqli_num_rows($res_profile) > 0) {
 					title: {
 						display: true,
 						text: 'Total Sales'
+					},
+					tooltip: {
+						callbacks: {
+							label: function(context) {
+								var label = context.label || '';
+								var value = context.parsed || 0; // If context.parsed is undefined, default to 0
+
+								// Convert value to string and split into integer and fractional parts
+								var parts = value.toString().split('.');
+								var integerPart = parts[0];
+								var fractionalPart = parts.length > 1 ? '.' + parts[1] : '';
+
+								// Add space every three digits to integer part
+								integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+								// Concatenate integer and fractional parts with appropriate currency symbol
+								label += ': ₱ ' + integerPart + fractionalPart;
+								return label;
+							}
+						}
 					}
 				}
 			}

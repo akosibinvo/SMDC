@@ -222,17 +222,15 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Place of Birth</label>
-                                                <input class="form-control" type="text" name="birthplace" placeholder="Enter place of birth" required>
-                                                <div class="invalid-feedback">
-                                                    Please enter Place of Birth.
-                                                </div>
+                                                <input class="form-control" type="text" name="birthplace" placeholder="Enter place of birth" pattern="^[^'&quot;?><*`!@#%&$]*$" required>
+                                                <div class="invalid-feedback"> Please enter Place of Birth. </div>
                                             </div>
                                         </div>
 
                                         <div class="row mb-4">
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">TIN No: </label>
-                                                <input class="form-control" type="text" name="tinNo" placeholder="Enter your TIN number" required>
+                                                <input class="form-control" type="text" name="tinNo" placeholder="Enter your TIN number" pattern="^[^'&quot;?><*`!@#%&$]*$" required>
                                                 <div class="invalid-feedback">
                                                     Please enter TIN Number.
                                                 </div>
@@ -307,7 +305,7 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
                                         <div class="row mb-3">
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Present Address</label>
-                                                <textarea class="form-control" id="presentAddress" name="presentAddress" rows="3" required></textarea>
+                                                <textarea class="form-control" id="presentAddress" name="presentAddress" pattern="^[^'&quot;?><*`!@#%&$]*$" rows="3" required></textarea>
                                                 <div class="invalid-feedback">
                                                     Please enter Present Address.
                                                 </div>
@@ -315,7 +313,7 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Permanent Address</label>
-                                                <textarea class="form-control" id="permanentAddress" name="permanentAddress" rows="3" required></textarea>
+                                                <textarea class="form-control" id="permanentAddress" name="permanentAddress" pattern="^[^'&quot;?><*`!@#%&$]*$" rows="3" required></textarea>
                                                 <div class="invalid-feedback">
                                                     Please enter Permanent Address.
                                                 </div>
@@ -334,7 +332,7 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Work Address</label>
-                                                <textarea class="form-control" id="presentAddress" name="workAddress" rows="1" required></textarea>
+                                                <textarea class="form-control" id="presentAddress" name="workAddress" rows="1" pattern="^[^'&quot;?><*`!@#%&$]*$" required></textarea>
                                                 <div class="invalid-feedback">
                                                     Please enter Work Address.
                                                 </div>
@@ -361,7 +359,7 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
 
                                             <label for="inputPassword" class="col-sm-2 col-form-label">Project Name</label>
                                             <div class="col-md-4">
-                                                <input class="form-control" type="text" name="projectName" placeholder="Enter project name" required>
+                                                <input class="form-control" type="text" name="projectName" placeholder="Enter project name" pattern="^[^'&quot;?><*`!@#%&$]*$" required>
                                                 <div class="invalid-feedback">
                                                     Please enter a valid Project Name.
                                                 </div>
@@ -369,7 +367,7 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
 
                                             <label for="inputPassword" class="col-sm-2 col-form-label">Unit Code</label>
                                             <div class="col-md-4">
-                                                <input class="form-control" type="text" name="unitCode" placeholder="Enter unit code" required>
+                                                <input class="form-control" type="text" name="unitCode" placeholder="Enter unit code" pattern="^[^'&quot;?><*`!@#%&$]*$" required>
                                                 <div class="invalid-feedback">
                                                     Please enter a valid Unit Code.
                                                 </div>
