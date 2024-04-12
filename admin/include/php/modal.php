@@ -113,7 +113,7 @@
 
                   <div class="row mb-4">
                      <div class="form-group col-md-6">
-                        <label class="form-label">Price</label>
+                        <label class="form-label">List Price</label>
                         <input class="form-control" type="text" name="amount" id="amount" placeholder="Enter numbers only" required>
                         <div class="invalid-feedback">
                            Invalid price format. Please enter a valid price without spaces.

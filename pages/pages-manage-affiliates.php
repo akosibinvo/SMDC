@@ -65,10 +65,12 @@ include "../admin/include/php/modal.php";
 								<table class="table table-hover my-0">
 									<thead>
 										<tr class="text-center">
-											<th>Name</th>
+											<th>Agent Name</th>
+											<th>Client Name</th>
 											<th>Unit Code</th>
 											<th>Amount</th>
 											<th>Role</th>
+											<th>Percentage</th>
 											<th>Date</th>
 											<th>Override Commission</th>
 										</tr>
@@ -98,6 +100,7 @@ include "../admin/include/php/modal.php";
 
 												while ($rows_overcoms = mysqli_fetch_assoc($res_overcoms)) {
 													$overcoms_name = $rows_overcoms['agent'];
+													$overcoms_fname = $rows_overcoms['firstname'];
 													$overcoms_ucode = $rows_overcoms['Unit_code'];
 													$overcoms_amount = $rows_overcoms['Amount'];
 													$overcoms_role = $rows_overcoms['agent_role'];
@@ -122,12 +125,16 @@ include "../admin/include/php/modal.php";
 
 													$accumulated_overcoms = $overcoms_coms - $deducted_overcoms;
 
+													$overcoms_percent = $overcoms_rate * 100;
+
 										?>
 													<tr class="text-center">
 														<td><?php echo $overcoms_name; ?></td>
+														<td><?php echo $overcoms_fname; ?></td>
 														<td><?php echo $overcoms_ucode; ?></td>
 														<td><?php echo '₱' . ' ' . number_format($overcoms_amount, 0, '.', ','); ?></td>
 														<td><?php echo $overcoms_role; ?></td>
+														<td><?php echo $overcoms_percent; ?> %</td>
 														<td><?php echo $overcoms_date; ?></td>
 														<td><?php echo '₱' . ' ' . number_format($accumulated_overcoms, 0, '.', ','); ?></td>
 													</tr>
@@ -135,7 +142,7 @@ include "../admin/include/php/modal.php";
 												}
 											} else {
 												echo "<tr class='text-center'>";
-												echo "<td colspan='6' style='cursor: default'>You don't have any affiliates yet. Start referring now!</td>";
+												echo "<td colspan='12' style='cursor: default'>You don't have any affiliates yet. Start referring now!</td>";
 												echo "</tr>";
 											}
 										}

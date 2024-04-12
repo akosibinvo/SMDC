@@ -300,7 +300,7 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
 											$row = mysqli_fetch_assoc($res_total_sales);
 											$total_amount = $row['total_amount'];
 
-											$sa1_target_sales = 500000000;
+											$sa1_target_sales = 100000000;
 											$sa1_progress_percentage = ($total_amount / $sa1_target_sales) * 100;
 										}
 
@@ -337,7 +337,7 @@ if (isset($_SESSION['sa2_target_sales_met']) && $_SESSION['sa2_target_sales_met'
 												$row = mysqli_fetch_assoc($res_total_sales);
 												$total_amount = $row['total_amount'];
 
-												$sa2_target_sales = 1000000000;
+												$sa2_target_sales = 300000000;
 												$sa2_progress_percentage = ($total_amount / $sa2_target_sales) * 100;
 											}
 

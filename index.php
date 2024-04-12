@@ -27,7 +27,7 @@ if (isset($_SESSION['user_id'])) {
 
 include "admin/include/php/modal.php";
 
-$sql_profile = "SELECT img FROM users WHERE firstName = '$firstname'";
+$sql_profile = "SELECT img FROM users WHERE ID = '$id'";
 $res_profile = mysqli_query($conn, $sql_profile);
 
 if ($res_profile && mysqli_num_rows($res_profile) > 0) {
